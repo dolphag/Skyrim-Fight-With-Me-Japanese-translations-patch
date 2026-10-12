@@ -8,7 +8,8 @@ from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import *
 from fwm_trans1 import T1
 from fwm_trans2 import T2
-T = {**T1, **T2}
+from fwm_trans3 import T3
+T = {**T1, **T2, **T3}
 O, N = sys.argv[1:3]
 a, b = open(O, 'rb').read(), open(N, 'rb').read()
 pe = pefile.PE(N); IB = pe.OPTIONAL_HEADER.ImageBase
@@ -21,6 +22,8 @@ def fail(*m):
 jb = b[j.PointerToRawData:j.PointerToRawData + j.Misc_VirtualSize]
 ja2en = collections.defaultdict(list)
 for en, ja in T.items(): ja2en[ja.encode()].append(en)
+import fwm_cfg as C
+for en_, *_r, ja_ in C.IMM_REGIONS: ja2en[ja_.encode()].append(en_)   # 即値から組み立てられる文字列
 code = b[tx.PointerToRawData:tx.PointerToRawData + tx.Misc_VirtualSize]
 ins = []; p = 0
 while p < len(code):

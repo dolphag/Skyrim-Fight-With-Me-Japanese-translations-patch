@@ -20,10 +20,11 @@ from capstone.x86 import *
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fwm_trans1 import T1
 from fwm_trans2 import T2
+from fwm_trans3 import T3
 import fwm_cfg as C
 
 SRC, OUT, REP = sys.argv[1:4]
-T = {**T1, **T2}
+T = {**T1, **T2, **T3}
 raw = open(SRC, 'rb').read()
 data = bytearray(raw)
 pe = pefile.PE(SRC)
@@ -102,7 +103,8 @@ for blk in pe.DIRECTORY_ENTRY_BASERELOC:
         if e.type: reloc.add(e.rva)
 
 # ---- 長さ即値の検出 -------------------------------------------------------
-REG32 = {X86_REG_EAX, X86_REG_ECX, X86_REG_EDX, X86_REG_R8D, X86_REG_R9D, X86_REG_R10D, X86_REG_R11D}
+REG32 = {X86_REG_EAX, X86_REG_ECX, X86_REG_EDX, X86_REG_R8D, X86_REG_R9D, X86_REG_R10D, X86_REG_R11D,
+         X86_REG_EBX, X86_REG_ESI, X86_REG_EDI, X86_REG_R12D, X86_REG_R13D, X86_REG_R14D, X86_REG_R15D}   # 0.1.5: 退避レジスタ経由の長さもある(後続の使用を要確認)
 def imm32_form(x, L):
     """この命令が『長さLを32bit即値(命令末尾4バイト)で持つ mov』なら True"""
     if x.mnemonic != 'mov' or len(x.operands) != 2: return False
@@ -155,6 +157,8 @@ for en, ja, va in targets:
                 d, lx = hit; la = lx.address - IB
                 assert la not in claimed, ('長さ即値の二重取り', hex(la), hex(a), hex(claimed[la]))
                 claimed[la] = a; rec['len_at'] = la; rec['len_d'] = d
+                if lx.operands[0].type == X86_OP_REG and lx.operands[0].reg in (X86_REG_EBX, X86_REG_ESI, X86_REG_EDI, X86_REG_R12D, X86_REG_R13D, X86_REG_R14D, X86_REG_R15D):
+                    log.append(('calleesaved-len', hex(la), hex(a), en[:40]))
             elif '{' in en:
                 raise SystemExit('書式文字列なのに長さ即値が無い: %r @%x' % (en[:40], a))
             sites.append(rec)
@@ -255,6 +259,7 @@ def rw(x):
     r, w = x.regs_access()
     f = lambda s: {FAM.get(md.reg_name(q)) for q in s} - {None}
     return f(r), f(w)
+CALLEE = {q for r_ in ('bx','si','di') for q in ('r'+r_,'e'+r_,r_,r_[0]+'l' if r_=='bx' else r_+'l')} | {q for n_ in range(12,16) for q in ('r%d'%n_,'r%dd'%n_,'r%dw'%n_,'r%db'%n_)}
 CLOB = {'rax', 'rcx', 'rdx', 'r8', 'r9', 'r10', 'r11', 'xmm0', 'xmm1', 'xmm2', 'xmm3', 'xmm4', 'xmm5', 'flags'}
 def live_out(f, re_, regs):
     ins, idx = decode(f); res = {}
@@ -344,6 +349,55 @@ def sso_region(site):
     assert any(x.operands[0].mem.disp == d0 + L and x.operands[0].size == 1 for x in stores), ('NUL終端ストアが無い', en)
     return dict(en=en, ja=ja, rs=rs, re=re_, base=base, d0=d0, vec=vec_xmm, f=f, L=L)
 
+
+def heap_detect(site):
+    """16バイト超の定数 std::string がその場で展開された領域を自動検出する(0.1.5向け)。
+    形: (std::string の先頭16バイトのゼロ詰め) / mov ecx,N / call ALLOC / mov [base+d],rax (確保したポインタ) /
+        size・cap の設定 / 文字列のコピー / mov byte [ptr+L],(0 か 0 を持つレジスタ)
+    領域 = ゼロ詰めの先頭 〜 終端NULの書き込み。基準(base,d)は確保ポインタの格納先 = std::string オブジェクト。
+    戻り値: (領域開始, 領域終了(排他), 基準レジスタ名, 変位) または None"""
+    en, a = site['en'], site['addr']
+    L = len(en.encode()); f = func_of(a); ins, idx = decode(f); k = idx[a]; bt = branch_targets(f)
+    call_i = None
+    for j in range(k - 1, max(-1, k - 14), -1):
+        x = ins[j]
+        if x.mnemonic == 'call' and x.operands[0].type == X86_OP_IMM and x.operands[0].imm - IB == C.ALLOC:
+            call_i = j; break
+    if call_i is None: return None
+    st = None
+    for j in range(call_i + 1, min(k, call_i + 5)):
+        x = ins[j]
+        if x.mnemonic == 'mov' and x.operands[0].type == X86_OP_MEM and x.operands[1].type == X86_OP_REG and x.operands[1].reg == X86_REG_RAX \
+           and x.operands[0].mem.base not in (0, X86_REG_RIP) and x.operands[0].size == 8:
+            st = x; break
+    if st is None: return None
+    base_reg = st.operands[0].mem.base; base = md.reg_name(base_reg); d0 = st.operands[0].mem.disp
+    rs_i = None; j = call_i - 1
+    while j >= 0 and call_i - j <= 12:
+        x = ins[j]
+        if x.mnemonic == 'mov' and x.operands[0].type == X86_OP_REG and x.operands[1].type == X86_OP_IMM and md.reg_name(x.operands[0].reg) == 'ecx': pass
+        elif x.mnemonic in ('movups', 'mov') and x.operands[0].type == X86_OP_MEM and x.operands[0].mem.base == base_reg and d0 <= x.operands[0].mem.disp < d0 + 0x10:
+            rs_i = j       # 先頭16バイトへのゼロ詰めストア
+        elif x.mnemonic == 'mov' and x.operands[0].type == X86_OP_MEM: pass
+        elif x.mnemonic in ('xorps', 'xor'): pass
+        else: break
+        if ins[j].address - IB in bt: break
+        j -= 1
+    if rs_i is None:        # 先頭のゼロ詰めが無い形: mov ecx,N の直前から
+        x = ins[call_i - 1]
+        if x.mnemonic == 'mov' and x.operands[0].type == X86_OP_REG and md.reg_name(x.operands[0].reg) == 'ecx' and x.operands[1].type == X86_OP_IMM:
+            rs_i = call_i - 1
+    if rs_i is None: return None
+    for t in range(rs_i + 1, call_i + 1):
+        if ins[t].address - IB in bt: return None
+    for j in range(k, min(len(ins) - 1, k + 22)):
+        x = ins[j]
+        if x.mnemonic == 'mov' and x.operands[0].type == X86_OP_MEM and x.operands[0].size == 1 and x.operands[0].mem.disp == L \
+           and x.operands[0].mem.base not in (0, X86_REG_RIP, X86_REG_RSP, X86_REG_RBP):
+            if x.operands[1].type == X86_OP_IMM and x.operands[1].imm != 0: return None
+            return (ins[rs_i].address - IB, ins[j + 1].address - IB, base, d0)
+    return None
+
 # 対象サイトを領域単位にまとめる
 regions = {}
 for s in inline_sites:
@@ -356,11 +410,13 @@ for (en, va), ss in regions.items():
         if s['mn'] not in ('mov', 'movsd', 'movups', 'movaps', 'movzx'): raise SystemExit('未知の参照形態 %s %r' % (s['mn'], en))
         L = len(en.encode())
         if L <= 15:
-            REG_LIST.append(sso_region(s))
+            try: REG_LIST.append(sso_region(s))
+            except AssertionError as e_: print('  INLINE NG', hex(s['addr']), e_.args)
         else:
             REG_LIST.append(dict(en=en, ja=s['ja'], heap=True, addr=s['addr']))
 print('inline regions:', len(inline_sites))
 # ---- 領域の確定 -----------------------------------------------------------------
+UNRESOLVED = []
 regions = {}
 for s in inline_sites:
     if s['en'] in C.NOT_TRANSLATED: continue
@@ -369,22 +425,39 @@ REG_LIST = []
 for (en, va), ss in regions.items():
     for s in ss:
         L = len(en.encode())
+        if s['addr'] not in C.HEAP_REGIONS and L > 15:
+            hr = heap_detect(s)
+            if hr: C.HEAP_REGIONS[s['addr']] = hr
         if s['addr'] in C.HEAP_REGIONS:
             rs, re_, base, d0 = C.HEAP_REGIONS[s['addr']]
             f = func_of(rs); ins, idx = decode(f); bt = branch_targets(f)
             assert not any(rs < t < re_ for t in bt), ('領域内へ分岐', hex(rs))
             vec = {}
             for x in ins[idx[rs]:idx[re_]]:
-                ok = x.mnemonic in ('movups', 'movaps', 'movdqu', 'movdqa', 'movzx', 'mov', 'xorps', 'movsd') or (x.mnemonic == 'call' and x.op_str == '0x%x' % (IB + 0x1be90))
+                ok = x.mnemonic in ('movups', 'movaps', 'movdqu', 'movdqa', 'movzx', 'mov', 'xorps', 'movsd', 'xor', 'movss', 'movq', 'movd') or (x.mnemonic == 'call' and x.op_str == '0x%x' % (IB + C.ALLOC))
                 assert ok, ('ヒープ領域内に想定外の命令', hex(x.address - IB), x.mnemonic, x.op_str)
                 if x.mnemonic == 'movdqa' and ripref(x) is not None:
                     vec[md.reg_name(x.operands[0].reg)] = struct.unpack_from('<QQ', raw, off(ripref(x)))
             REG_LIST.append(dict(en=en, ja=s['ja'], rs=rs, re=re_, base=base, d0=d0, vec=vec, f=f, L=L, heap=True))
         else:
-            assert s['mn'] in ('mov', 'movsd', 'movups', 'movaps', 'movzx'), (s['mn'], en)
-            assert L <= 15, ('SSO以外でHEAP_REGIONS未指定', en, hex(s['addr']))
-            g = sso_region(s); g['heap'] = False; REG_LIST.append(g)
+            try:
+                assert s['mn'] in ('mov', 'movsd', 'movups', 'movaps', 'movzx'), (s['mn'], en)
+                assert L <= 15, ('SSO以外でHEAP_REGIONS未指定', en, hex(s['addr']))
+                g = sso_region(s); g['heap'] = False; REG_LIST.append(g)
+            except AssertionError as e_:
+                UNRESOLVED.append((hex(s['addr']), en, e_.args))
 
+# rdata に文字列が無く、命令の即値(4文字や8文字)から組み立てられる短い std::string (SSO)
+for en_, rs_, re__, base_, d0_, ja_ in C.IMM_REGIONS:
+    f_ = func_of(rs_); ins_, idx_ = decode(f_); bt_ = branch_targets(f_); vec_ = {}
+    assert not any(rs_ < t < re__ for t in bt_), ('領域内へ分岐', hex(rs_))
+    for x in ins_[idx_[rs_]:idx_[re__]]:
+        if x.mnemonic == 'movdqa' and ripref(x) is not None:
+            vec_[md.reg_name(x.operands[0].reg)] = struct.unpack_from('<QQ', raw, off(ripref(x)))
+    REG_LIST.append(dict(en=en_, ja=ja_, rs=rs_, re=re__, base=base_, d0=d0_, vec=vec_, f=f_, L=len(en_.encode()), heap=False))
+if UNRESOLVED:
+    for u in UNRESOLVED: print('  UNRESOLVED', u)
+    raise SystemExit('未解決のインライン領域: %d' % len(UNRESOLVED))
 # ---- 領域置換コードの生成 -----------------------------------------------------------
 n_reg = 0
 for g in REG_LIST:
@@ -414,6 +487,14 @@ for g in REG_LIST:
         o_ = off(src); x_ = next(md.disasm(raw[o_:o_ + 15], IB + src))
         assert x_.mnemonic + ' ' + x_.op_str == text and bytes(x_.bytes) == pb, ('POSTFIX元命令が一致しない', hex(src))
         code += pb
+    # 領域内で退避レジスタ(rbx/rsi/rdi/r12-r15)へ書かれた値(xor r,r / mov r,imm)は領域後も使われうるので、そのまま書き直す
+    ins_, idx_ = decode(g['f'])
+    for x in ins_[idx_[rs]:idx_[re_]]:
+        if x.mnemonic not in ('xor', 'mov') or any(op.type == X86_OP_MEM for op in x.operands): continue
+        _, w_ = x.regs_access()
+        if {md.reg_name(q) for q in w_} & CALLEE:
+            assert x.mnemonic == 'xor' and x.operands[0].reg == x.operands[1].reg or x.operands[1].type == X86_OP_IMM, ('退避レジスタ書き込みが単純でない', hex(x.address - IB))
+            code += bytes(x.bytes); log.append(('reemit', hex(x.address - IB), x.mnemonic + ' ' + x.op_str))
     size = re_ - rs
     assert len(code) <= size, ('置換コードが領域に収まらない', en, len(code), size)
     code += b'\x90' * (size - len(code))

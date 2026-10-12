@@ -6,7 +6,7 @@ from unicorn import *
 from unicorn.x86_const import *
 N, R = sys.argv[1:3]
 r = json.load(open(R)); pe = pefile.PE(N); IB = pe.OPTIONAL_HEADER.ImageBase; raw = open(N, 'rb').read()
-LABEL, LW, TEXT, TS, PARA = 0xa3b10, 0xa38c0, 0xa40f0, 0xa4230, 0xa3c70
+LABEL, LW, TEXT, TS, PARA = 0xbcd80, 0xbcb30, 0xbd360, 0xbd4a0, 0xbcee0
 SC = r['font_scale']
 def f32(x): return struct.unpack('<I', struct.pack('<f', x))[0]
 def run(stub, kind, sv):

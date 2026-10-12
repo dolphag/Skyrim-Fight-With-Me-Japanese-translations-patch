@@ -4,7 +4,8 @@ import re, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fwm_trans1 import T1
 from fwm_trans2 import T2
-T = {**T1, **T2}
+from fwm_trans3 import T3
+T = {**T1, **T2, **T3}
 F = re.compile(r'\{\{|\}\}|\{([0-9]*)(:[^{}]*)?\}')
 def fields(s):
     out = []

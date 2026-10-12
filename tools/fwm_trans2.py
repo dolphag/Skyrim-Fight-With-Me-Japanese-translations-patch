@@ -178,7 +178,6 @@ T2 = {
 'LB + Right-stick click': 'LB + 右スティック押し込み',
 'CONTROLS': '操作',
 'KEY BINDINGS': 'キー割り当て',
-'Select the binding, then press a key. Esc cancels; Delete clears.': '割り当てを選んでからキーを押します。Escで取り消し、Deleteで解除します。',
 'Action': '動作',
 'Key': 'キー',
 'Press a key...': 'キーを押してください...',
