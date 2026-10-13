@@ -38,6 +38,13 @@ EXTRA_LEN = [
     # 'Potions' の見出し: std::string のサイズ欄(imm32)と、終端NULの書き込み位置(disp8)に長さが埋め込まれている (訳は15バイトで SSO に収まる)
     ('Potions', 0xae3cb, 'imm32'),   # mov qword [rbp+0x118], 7
     ('Potions', 0xae3eb, 'byte'),    # mov byte [rbx+7], r13b
+    # ポインタを退避レジスタに持ち回り、2回目以降の使用では lea が無く長さ即値だけが残る箇所 (0.1.5-2 で発見)
+    ('AUTO',  0xad640, 'imm32'),     # スキル欄の「自動」: 1回目(TextSize)は lea 直後で自動検出、2回目(Text)は rsi を使い回す
+    ('LEVEL', 0xa996e, 'imm32'),     # 従者パネルの「レベル」: ポインタは rbx、長さはその場の mov
+    # 役職が選べない理由 (0xbfe20 の2つ目の switch。1つ目は MANUAL_LEN)
+    ('Knows no attack spell and carries no staff.', 0xc0168, 'imm32'),
+    ('Carries no bow or crossbow.',                 0xc0176, 'imm32'),
+    ('Carries no melee weapon.',                    0xc0184, 'imm32'),
 ]
 
 # 長文(16バイト超)のstd::stringがヒープ確保+コピーで展開されている領域: サイトアドレス -> (領域開始, 領域終了, 基準レジスタ, 変位)
