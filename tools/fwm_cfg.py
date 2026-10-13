@@ -51,7 +51,9 @@ POSTFIX = {}
 PARAGRAPH = 0xbcee0    # Paragraph(draw,pos,color,size,string_view*,width)
 
 # 日本語の文字だけ拡大する倍率(題字は除く)。日本語は同じpxでも英字より小さく見えるため。
-FONT_SCALE = 1.2
+FONT_SCALE = 1.4
+# DrawTip(ツールチップ)の拡大倍率。ツールチップは元から大きめ(15px)なので画面本体より控えめにする。
+TIP_SCALE = 1.2
 # 題字を描く Label/LabelWidth 呼び出し(YOUR PARTY / BATTLE PLAN)。拡大しない。
 TITLE_CALLS = {0x9ff69, 0xa0120}
 
@@ -59,8 +61,24 @@ TITLE_CALLS = {0x9ff69, 0xa0120}
 # そこで DrawTip 内の size(15.0*s) と width(300.0*s) の係数を同じ倍率で拡大する(命令アドレス, 元の係数)。
 TIP_CONSTS = [(0xa131f, 15.0), (0xa1328, 300.0)]
 
+# 文字を拡大すると隣の部品と重なる箇所の間隔(命令アドレス, 元の係数, 新しい係数)。mulss xmm,[rip+定数] の定数を付け替える。
+# 0xaa02c: 「耐性」見出しの下から属性ひし形の中心までの距離(34.0*s)。見出しが大きくなると、ひし形(半径19*s)の上端と重なるため広げる。
+SPACING_CONSTS = [(0xaa02c, 34.0, 42.0)]
+
+# 書式文字列を組み立てる断片のうち、同じ文字列が他でも使われるため、特定の参照箇所だけ訳すもの: (原文, lea アドレス, 訳)
+# 0xc28cb: ポーション調合通知の末尾に付ける「.」(別の箇所 0xc164a でも同じ「.」を使う)
+SITE_STR = [('.', 0xc28cb, '。')]
+
 # rdata に文字列が無い (命令の即値から組み立てられる) 表示文字列: (原文, 領域開始, 領域終了(排他), 基準レジスタ, 変位, 訳)
 IMM_REGIONS = [
     ('none',     0xae550, 0xae578, 'rbp', 0x1e0, 'なし'),   # ポーション欄のツールチップ「Potions: none」
     ('everyone', 0x7a11b, 0x7a14a, 'rbp', 0x90,  '全員'),   # 「Taunted, but everyone shrugged it off.」
+]
+
+# rdata への参照が rip 相対ではなく「lea rax,[rip-自身]; lea rax,[rax+RVA]」(イメージベース経由)で作られるため、自動検出に掛からない長文 std::string:
+# (原文, 領域開始, 領域終了(排他), 基準レジスタ, 変位)。領域 = mov ecx,サイズ(ALLOC引数) から 終端NULの書き込みまで。
+EXTRA_HEAP = [
+    # 上空視点タブのツールチップ「The whole fight from above: …」 (std::string は [rsp+0x50])
+    ("The whole fight from above: blue rings for the party, red for enemies, white for you. Indoors the ceiling is cut away above everyone's heads. Click an enemy to send someone after them.",
+     0xa54e3, 0xa559d, 'rsp', 0x50),
 ]

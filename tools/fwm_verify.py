@@ -24,6 +24,7 @@ ja2en = collections.defaultdict(list)
 for en, ja in T.items(): ja2en[ja.encode()].append(en)
 import fwm_cfg as C
 for en_, *_r, ja_ in C.IMM_REGIONS: ja2en[ja_.encode()].append(en_)   # 即値から組み立てられる文字列
+for en_, _a, ja_ in C.SITE_STR: ja2en[ja_.encode()].append(en_)   # 特定の参照箇所だけ訳す文字列
 code = b[tx.PointerToRawData:tx.PointerToRawData + tx.Misc_VirtualSize]
 ins = []; p = 0
 while p < len(code):
@@ -76,5 +77,6 @@ for s in (S['.rdata'], S['.data']):
             fail('再配置なしのスロット', hex(s.VirtualAddress + o))
 # 全訳語が.jpnに存在するか
 miss = [en for en, ja in T.items() if ja.encode() + b'\0' not in jb]
+miss += [en for en, _a, ja in C.SITE_STR if ja.encode() + b'\0' not in jb]
 print('翻訳表に対し.jpnに無い語:', len(miss), miss[:5])
 print('結果:', 'OK' if ok else 'NG')

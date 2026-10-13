@@ -12,7 +12,7 @@ following the permissions on the original page. **This repository contains no DL
 only the scripts that patch a DLL you own, and the English → Japanese table (507 pairs).
 
 - Original DLL SHA-256: `22a2f1e910d9cf38658153abf24546d2bb1411bb8cae72fa577236a28bf5bd3e`
-- Expected output SHA-256: `9e4f46d4878af48d0c34c93f47136a0b060979c44b6eb0c2dbc5f4322befdae7`
+- Expected output SHA-256: `b6a708a8fc6404a3c637ed15caa7777a629da35c221658d9d88574995c111511`
 - Original source (for reference): <https://github.com/fatalCMD/fight-with-me> (commit `be5808f`, "Fight With Me 0.1.5")
 
 ## How it works (short)
@@ -20,8 +20,9 @@ A new section (`.jpn`, read+execute) holds the Japanese strings and a few stubs.
 `.rdata` pointer slots (relocation-checked) and fmt length immediates are retargeted; inline-expanded
 `std::string` constructions are replaced by a call to the string constructor (register liveness is checked).
 Label/LabelWidth draw one byte at a time and break UTF-8, so calls are redirected to stubs that use Text/TextSize
-when the string contains non-ASCII bytes; Japanese text is enlarged by `FONT_SCALE` (1.2) except for the title,
-and the tooltip's size/width constants are scaled together so its box fits.
+when the string contains non-ASCII bytes; Japanese text is enlarged by `FONT_SCALE` (1.4) except for the title,
+the tooltip's size/width constants are scaled together (`TIP_SCALE`, 1.2) so its box fits, and the spacing under the RESISTANCE heading is widened.
+The build fails if a translation uses a kanji outside the font range (`tools/jp_kanji.txt`; such kanji would show as "?").
 
 ## Reproduce (Python 3.11+, `pip install pefile capstone unicorn`)
 ```
@@ -46,4 +47,4 @@ Nexus Mods のページ: <https://www.nexusmods.com/skyrimspecialedition/mods/19
 パッチ済みの `FightWithMe.dll` は、原MODページの権限表示に従い、**Nexus Mods(原MODの翻訳ページ)でのみ**配布します。
 **このリポジトリには、DLLも Fight With Me のコードも含みません**。手元のDLLにパッチを当てるスクリプトと、英日対応表(507組)だけです。
 再現手順は上の英語の節を参照してください。元DLLの SHA-256 は `22a2f1e910d9cf38658153abf24546d2bb1411bb8cae72fa577236a28bf5bd3e`、
-出力DLLは `9e4f46d4878af48d0c34c93f47136a0b060979c44b6eb0c2dbc5f4322befdae7` になります。
+出力DLLは `b6a708a8fc6404a3c637ed15caa7777a629da35c221658d9d88574995c111511` になります。

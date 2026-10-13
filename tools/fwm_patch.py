@@ -25,6 +25,21 @@ import fwm_cfg as C
 
 SRC, OUT, REP = sys.argv[1:4]
 T = {**T1, **T2, **T3}
+
+# ---- 表示可能な漢字の検査 ----------------------------------------------------------------
+# SKSE Menu Framework 3 (ImGui) は GetGlyphRangesJapanese の漢字2999字しか描画できず、範囲外は「?」になる。
+# 訳文に範囲外の漢字があればビルドを止める。許可字表は tools/jp_kanji.txt (1行に全字、ImGui 1.91.9 の範囲)。
+_kj = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'jp_kanji.txt'), encoding='utf-8').read().strip()
+_ok = set(_kj)
+_bad = {}
+for _en, _ja in T.items():
+    for _ch in _ja:
+        if '\u4e00' <= _ch <= '\u9fff' and _ch not in _ok: _bad.setdefault(_ch, []).append(_en[:40])
+for _ja in [r_[5] for r_ in C.IMM_REGIONS] + [r_[2] for r_ in C.SITE_STR]:
+    for _ch in _ja:
+        if '\u4e00' <= _ch <= '\u9fff' and _ch not in _ok: _bad.setdefault(_ch, []).append(_ja)
+if _bad:
+    raise SystemExit('描画できない漢字(「?」になる): ' + ', '.join('%s=%s' % (k_, v_[:2]) for k_, v_ in _bad.items()))
 raw = open(SRC, 'rb').read()
 data = bytearray(raw)
 pe = pefile.PE(SRC)
@@ -164,6 +179,21 @@ for en, ja, va in targets:
             sites.append(rec)
         else:
             inline_sites.append(dict(en=en, ja=ja, va=va, addr=a, mn=x.mnemonic))
+
+# 特定の参照箇所だけを訳す文字列(同じ文字列が他の用途でも共有されているもの)
+for en, a_, ja in C.SITE_STR:
+    L_ = len(en.encode('utf-8'))
+    vas_ = [v for v in rev.get(en.encode('utf-8'), []) if any(r_[0] == a_ for r_ in refs.get(v, []))]
+    assert len(vas_) == 1, ('SITE_STRの参照が見つからない', en, hex(a_))
+    va_ = vas_[0]; r_ = next(r_ for r_ in refs[va_] if r_[0] == a_); x_, f_ = r_[1], r_[2]
+    assert x_.mnemonic == 'lea' and x_.size == 7 and x_.disp_offset == 3
+    hit_ = find_len(f_, decode(f_)[1][a_], L_)
+    assert hit_, ('SITE_STRの長さ即値が無い', en, hex(a_))
+    la_ = hit_[1].address - IB
+    assert la_ not in claimed, ('長さ即値の二重取り', hex(la_))
+    claimed[la_] = a_
+    sites.append(dict(kind='lea', en=en, ja=ja, va=va_, addr=a_, len_at=la_, len_d=hit_[0]))
+    log.append(('site-str', en, hex(a_), hex(la_), ja))
 
 # ---- ポインタ表スロット -----------------------------------------------------
 want = {IB + va: (en, ja, va) for en, ja, va in targets}
@@ -455,6 +485,14 @@ for en_, rs_, re__, base_, d0_, ja_ in C.IMM_REGIONS:
         if x.mnemonic == 'movdqa' and ripref(x) is not None:
             vec_[md.reg_name(x.operands[0].reg)] = struct.unpack_from('<QQ', raw, off(ripref(x)))
     REG_LIST.append(dict(en=en_, ja=ja_, rs=rs_, re=re__, base=base_, d0=d0_, vec=vec_, f=f_, L=len(en_.encode()), heap=False))
+for en_, rs_, re__, base_, d0_ in C.EXTRA_HEAP:
+    f_ = func_of(rs_); ins_, idx_ = decode(f_); bt_ = branch_targets(f_)
+    assert not any(rs_ < t < re__ for t in bt_), ('領域内へ分岐', hex(rs_))
+    assert ins_[idx_[rs_]].mnemonic == 'mov' and ins_[idx_[rs_]].op_str == 'ecx, %s' % hex(al(len(en_.encode()) + 1, 16)), ('領域の先頭が mov ecx,サイズ でない', hex(rs_))
+    assert any(x.mnemonic == 'call' and x.operands[0].imm - IB == C.ALLOC for x in ins_[idx_[rs_]:idx_[re__]]), 'ALLOC 呼び出しが領域に無い'
+    assert any(x.mnemonic == 'mov' and x.operands[0].type == X86_OP_MEM and x.operands[0].size == 1 and x.operands[0].mem.disp == len(en_.encode()) for x in ins_[idx_[rs_]:idx_[re__]]), 'NUL終端が領域に無い'
+    assert not any(x.mnemonic in ('ret', 'jmp') or x.mnemonic.startswith('j') for x in ins_[idx_[rs_]:idx_[re__]]), '領域内に分岐'
+    REG_LIST.append(dict(en=en_, ja=T[en_], rs=rs_, re=re__, base=base_, d0=d0_, vec={}, f=f_, L=len(en_.encode()), heap=True))
 if UNRESOLVED:
     for u in UNRESOLVED: print('  UNRESOLVED', u)
     raise SystemExit('未解決のインライン領域: %d' % len(UNRESOLVED))
@@ -509,9 +547,20 @@ for a_, v_ in C.TIP_CONSTS:
     t_ = a_ + 9 + [op for op in x_.operands if op.type == X86_OP_MEM][0].mem.disp
     assert struct.unpack_from('<f', raw, off(t_))[0] == v_, ('DrawTip係数が想定と違う', hex(a_))
     assert sec_of(a_) is tx and func_of(a_) is not None
-    po_ = add(struct.pack('<f', v_ * C.FONT_SCALE))
+    po_ = add(struct.pack('<f', v_ * C.TIP_SCALE))
     data[o_ + 5:o_ + 9] = struct.pack('<i', jva(po_) - (a_ + 9)); changes.append((o_ + 5, 4, 'tip@%x' % a_))
-    log.append(('tip', hex(a_), v_, round(v_ * C.FONT_SCALE, 3)))
+    log.append(('tip', hex(a_), v_, round(v_ * C.TIP_SCALE, 3)))
+
+# ---- 文字拡大で重なる箇所の間隔(mulss xmm,[rip+定数]) ---------------------------------------
+for a_, v_, nv_ in C.SPACING_CONSTS:
+    o_ = off(a_); x_ = next(md.disasm(raw[o_:o_ + 15], IB + a_))
+    assert x_.mnemonic == 'mulss' and x_.size == 9 and x_.disp_offset == 5, (hex(a_), x_.op_str)
+    t_ = a_ + 9 + [op for op in x_.operands if op.type == X86_OP_MEM][0].mem.disp
+    assert struct.unpack_from('<f', raw, off(t_))[0] == v_, ('間隔の係数が想定と違う', hex(a_))
+    assert sec_of(a_) is tx and func_of(a_) is not None
+    po_ = add(struct.pack('<f', nv_))
+    data[o_ + 5:o_ + 9] = struct.pack('<i', jva(po_) - (a_ + 9)); changes.append((o_ + 5, 4, 'space@%x' % a_))
+    log.append(('space', hex(a_), v_, nv_))
 
 # ---- Label / LabelWidth / Text / TextSize / Paragraph スタブ ---------------------------------
 # 非ASCIIを含む文字列のときだけ Text / TextSize へ振り分け(Label/LabelWidth)、
