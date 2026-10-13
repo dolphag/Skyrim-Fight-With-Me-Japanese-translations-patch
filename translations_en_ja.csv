@@ -454,6 +454,7 @@ Click to switch {}.","ポーション：{}{}
 {} heard you...,{}が聞き入れました...
 COMPANION,従者
 OVERHEAD,上空
+YOU,あなた
 "The overhead view moves the camera, so it needs Glide to the companion on (Battle plan settings, Camera).",上空視点ではカメラが動くため、「従者へカメラを寄せる」をオンにする必要があります（バトルプラン設定の「カメラ」）。
 "The whole fight from above: blue rings for the party, red for enemies, white for you. Indoors the ceiling is cut away above everyone's heads. Click an enemy to send someone after them.",戦闘全体を上空から見ます。青い輪が味方、赤が敵、白があなたです。屋内では全員の頭上にある天井を取り除きます。敵をクリックすると、誰かをその敵に向かわせます。
 The camera on the companion you are commanding.,指揮中の従者にカメラを合わせます。

@@ -89,3 +89,9 @@ EXTRA_HEAP = [
     ("The whole fight from above: blue rings for the party, red for enemies, white for you. Indoors the ceiling is cut away above everyone's heads. Click an enemy to send someone after them.",
      0xa54e3, 0xa559d, 'rsp', 0x50),
 ]
+
+# 上空視点で自キャラの頭上に出す「あなた」(原文 YOU) のラベルを、輪と重ならないよう上へずらす。
+# TextOnWorld(draw, pos(packed xy), color, size, string_view*, alpha) の呼び出し箇所ごとに、y から size*係数 を引く中継スタブへ向ける。
+# (呼び出しアドレス, 係数)。係数は「文字サイズ(14*s)の何倍上へ」。輪の半径が約24px(s=1)なので 3.0 (=42px)。
+TEXTONWORLD = 0xbd0a0
+WORLD_LABEL_LIFT = [(0xa60d6, 3.0)]

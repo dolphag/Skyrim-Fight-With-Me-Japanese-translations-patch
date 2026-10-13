@@ -622,6 +622,25 @@ st_lw_s = make_stub(LOAD_RDX, T_(C.LABELWIDTH), ('ts',), 0)
 st_text_s = make_stub(LOAD_STACK5, T_(C.TEXT), ('jmp', T_(C.TEXT)), 3)
 st_para_s = 0
 st_ts_s = make_stub(LOAD_RDX, T_(C.TEXTSIZE), ('jmp', T_(C.TEXTSIZE)), 0)
+# 世界座標ラベル(TextOnWorld)の y を size*係数 だけ上へずらす中継スタブ: rdx=pos(x低32bit,y高32bit), xmm3=size。rsp は変えず jmp で原関数へ。
+world_stubs = {}
+for call_a, lift in C.WORLD_LABEL_LIFT:
+    while len(sb) % 16: sb.append(0xcc)
+    k_va = sva(); sb += struct.pack('<f', lift)
+    while len(sb) % 16: sb.append(0xcc)
+    st = sva()
+    sb += b'\x48\x89\xd0'                       # mov rax, rdx
+    sb += b'\x48\xc1\xe8\x20'                   # shr rax, 32      (y のビット列)
+    sb += b'\x66\x0f\x6e\xe0'                   # movd xmm4, eax
+    sb += b'\x0f\x28\xeb'                       # movaps xmm5, xmm3
+    sb += b'\xf3\x0f\x59\x2d' + rel32(sva() + 8, k_va)   # mulss xmm5, [rip+k]
+    sb += b'\xf3\x0f\x5c\xe5'                   # subss xmm4, xmm5
+    sb += b'\x66\x0f\x7e\xe0'                   # movd eax, xmm4
+    sb += b'\x48\xc1\xe0\x20'                   # shl rax, 32
+    sb += b'\x89\xd2'                           # mov edx, edx     (上位を0に)
+    sb += b'\x48\x09\xc2'                       # or rdx, rax
+    sb += b'\xe9' + rel32(sva() + 5, C.TEXTONWORLD)   # jmp TextOnWorld
+    world_stubs[call_a] = st
 pool.extend(sb)
 
 # 題字(YOUR PARTY / BATTLE PLAN)を描く Label/LabelWidth 呼び出しは拡大しない。題字を持つ関数であることを確認する。
@@ -646,6 +665,11 @@ n_cl = retarget_calls(C.LABEL, st_label_plain, st_label_s, 'callLabel')
 n_cw = retarget_calls(C.LABELWIDTH, st_lw_plain, st_lw_s, 'callLabelWidth')
 n_ct = retarget_calls(C.TEXT, None, st_text_s, 'callText')
 n_cs = retarget_calls(C.TEXTSIZE, None, st_ts_s, 'callTextSize')
+for call_a, st in world_stubs.items():
+    o = off(call_a); assert raw[o] == 0xe8, hex(call_a)
+    tgt_ = call_a + 5 + struct.unpack_from('<i', raw, o + 1)[0]
+    assert tgt_ == C.TEXTONWORLD, ('TextOnWorld呼び出しでない', hex(call_a), hex(tgt_))
+    data[o + 1:o + 5] = rel32(call_a + 5, st); changes.append((o + 1, 4, 'callWorldLabel@%x' % call_a))
 n_cp = 0   # Paragraph は DrawTip からのみ呼ばれ、DrawTip の係数側で拡大済み
 print('calls retargeted: Label %d LabelWidth %d Text %d TextSize %d Paragraph %d' % (n_cl, n_cw, n_ct, n_cs, n_cp))
 stub_label_va, stub_lw_va = st_label_plain, st_lw_plain
