@@ -40,6 +40,7 @@ EXTRA_LEN = [
     ('Potions', 0xae3eb, 'byte'),    # mov byte [rbx+7], r13b
     # ポインタを退避レジスタに持ち回り、2回目以降の使用では lea が無く長さ即値だけが残る箇所 (0.1.5-2 で発見)
     ('AUTO',  0xad640, 'imm32'),     # スキル欄の「自動」: 1回目(TextSize)は lea 直後で自動検出、2回目(Text)は rsi を使い回す
+    ('Move',  0xa1897, 'imm32'),     # 上空視点の操作ヒント「LS 移動」: 構造体の長さ欄が分岐の前でまとめて書かれ、lea (0xa18d0) の近くに無い (0.1.5-4)
     ('LEVEL', 0xa996e, 'imm32'),     # 従者パネルの「レベル」: ポインタは rbx、長さはその場の mov
     # 役職が選べない理由 (0xbfe20 の2つ目の switch。1つ目は MANUAL_LEN)
     ('Knows no attack spell and carries no staff.', 0xc0168, 'imm32'),

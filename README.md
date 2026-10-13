@@ -12,7 +12,7 @@ following the permissions on the original page. **This repository contains no DL
 only the scripts that patch a DLL you own, and the English → Japanese table (507 pairs).
 
 - Original DLL SHA-256: `22a2f1e910d9cf38658153abf24546d2bb1411bb8cae72fa577236a28bf5bd3e`
-- Expected output SHA-256: `a7aa64775687ab2ae24b8ee136ea228607de4fbf8511b44d0b0b0990231c228e`
+- Expected output SHA-256: `923b7051b8ba0608e5885d761f07403477f59ff82c6c0e3c694b50a97ee0a6cc`
 - Original source (for reference): <https://github.com/fatalCMD/fight-with-me> (commit `be5808f`, "Fight With Me 0.1.5")
 
 ## How it works (short)
@@ -47,4 +47,4 @@ Nexus Mods のページ: <https://www.nexusmods.com/skyrimspecialedition/mods/19
 パッチ済みの `FightWithMe.dll` は、原MODページの権限表示に従い、**Nexus Mods(原MODの翻訳ページ)でのみ**配布します。
 **このリポジトリには、DLLも Fight With Me のコードも含みません**。手元のDLLにパッチを当てるスクリプトと、英日対応表(507組)だけです。
 再現手順は上の英語の節を参照してください。元DLLの SHA-256 は `22a2f1e910d9cf38658153abf24546d2bb1411bb8cae72fa577236a28bf5bd3e`、
-出力DLLは `a7aa64775687ab2ae24b8ee136ea228607de4fbf8511b44d0b0b0990231c228e` になります。
+出力DLLは `923b7051b8ba0608e5885d761f07403477f59ff82c6c0e3c694b50a97ee0a6cc` になります。
