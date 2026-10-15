@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-# Fight With Me 0.2.0 日本語訳 (0.2.0 で追加・変更された表示文字列: 回復/マジカ活性/魔法選択/身構え/通知)
+# Fight With Me 0.2.0 日本語訳 (0.2.0 で追加・変更された表示文字列: 回復/マジカ回復強化/魔法選択/身構え/通知)
 T4 = {
-# 挑発の身構え・回復・マジカ活性の通知
+# 挑発の身構え・回復・マジカ回復強化の通知
 ' Braced: +{:.0f} armor.': '身構え：防御力+{:.0f}。',
 '{} of the party': 'パーティの{}人',
 'the party': 'パーティ全員',
 '{} heals {}: +{:.0f} health.': '{}が{}を回復した：体力+{:.0f}。',
 ', as ordered': '（指示による）',
 'Healed {}: +{:.0f} health each.': '{}を回復：体力+{:.0f}ずつ。',
-'Rejuvenate is switched off (Healers settings).': 'マジカ活性は無効です（ヒーラーの設定）。',
+'Rejuvenate is switched off (Healers settings).': 'マジカ回復強化は無効です（ヒーラーの設定）。',
 "Everyone's magicka is full.": '全員のマジカが満タンです。',
-'{} rejuvenates you and the party: magicka {:.0f}% faster for {:.0f} s.': '{}があなたとパーティのマジカを活性化：回復が{:.0f}%速くなります（{:.0f}秒間）。',
+'{} rejuvenates you and the party: magicka {:.0f}% faster for {:.0f} s.': '{}があなたとパーティのマジカ回復を強化：{:.0f}%速くなります（{:.0f}秒間）。',
 ' ({} ran low)': '（{}が不足）',
-'Rejuvenated: magicka {:.0f}% faster for {:.0f} s.': 'マジカ活性：回復が{:.0f}%速くなります（{:.0f}秒間）。',
+'Rejuvenated: magicka {:.0f}% faster for {:.0f} s.': 'マジカ回復強化：{:.0f}%速くなります（{:.0f}秒間）。',
 'The fight is over.': '戦闘が終わったため。',
 "Stays back, heals the whole party at once and quickens everyone's magicka.": '後方に控え、パーティ全員を一度に回復し、全員のマジカの回復を速めます。',
 '{} lets {} go: {}.': '{}は{}への対応をやめた：{}。',
@@ -24,7 +24,7 @@ T4 = {
 # 従者の状態表示
 'Braced': '身構え',
 '+{:.0f} armor from their taunt': '挑発による防御力+{:.0f}',
-'Rejuvenated': 'マジカ活性',
+'Rejuvenated': 'マジカ回復強化',
 'Magicka comes back {:.0f}% faster': 'マジカの回復が{:.0f}%速い',
 'Guarding you': '護衛中',
 'At your side, taking on whoever is on you': 'あなたのそばで、あなたを狙う敵を引き受けています',
@@ -53,9 +53,9 @@ T4 = {
 '\nBraces them: +{:.0f} armor for as long as it holds, more as they rise in level.': '\n身構え：敵を引きつけている間、防御力+{:.0f}。レベルが上がるほど増えます。',
 'Heal now\nYou and the whole party: +{:.0f} health each, more as they rise in level. No magicka needed.\nReady again {:.0f} s after use.': '今すぐ回復\nあなたとパーティ全員：体力+{:.0f}ずつ。レベルが上がるほど増えます。マジカは不要です。\n使用後{:.0f}秒で再使用できます。',
 'AUTO on: they heal by themselves when anyone is down or drops below the line.\nOff: only when you press Heal.': '自動オン：誰かが倒れたり基準を下回ったりしたら、自分で回復します。\nオフ：「回復」を押したときだけ回復します。',
-'Rejuvenate': 'マジカ活性',
-"Rejuvenate now\nYour magicka and every companion's comes back {:.0f}% faster for {:.0f} s, longer as they rise in level.\nReady again {:.0f} s after use.{}": '今すぐマジカ活性\nあなたと全従者のマジカの回復が{:.0f}%速くなります（{:.0f}秒間。レベルが上がるほど長くなります）。\n使用後{:.0f}秒で再使用できます。{}',
-'AUTO on: they rejuvenate by themselves when you, a mage or a healer runs out of magicka or nearly does.\nOff: only when you press Rejuvenate.': '自動オン：あなた、メイジ、ヒーラーのマジカが尽きたり尽きかけたりしたら、自分で発動します。\nオフ：「マジカ活性」を押したときだけ発動します。',
+'Rejuvenate': 'マジカ回復強化',
+"Rejuvenate now\nYour magicka and every companion's comes back {:.0f}% faster for {:.0f} s, longer as they rise in level.\nReady again {:.0f} s after use.{}": '今すぐマジカ回復強化\nあなたと全従者のマジカの回復が{:.0f}%速くなります（{:.0f}秒間。レベルが上がるほど長くなります）。\n使用後{:.0f}秒で再使用できます。{}',
+'AUTO on: they rejuvenate by themselves when you, a mage or a healer runs out of magicka or nearly does.\nOff: only when you press Rejuvenate.': '自動オン：あなた、メイジ、ヒーラーのマジカが尽きたり尽きかけたりしたら、自分で発動します。\nオフ：「マジカ回復強化」を押したときだけ発動します。',
 'SPELLS': '魔法',
 'Their own choice': '本人に任せる',
 '  ·  both hands': '  ·  両手',
@@ -116,7 +116,7 @@ T4 = {
 'Everyone in the party this close to the healer is healed.': 'ヒーラーからこの距離以内にいるパーティ全員が回復します。',
 'A level 10 healer heals everyone for {:.0f}, level 30 for {:.0f}, level 60 for {:.0f}, every {:.0f} s.': 'レベル10のヒーラーは全員を{:.0f}、レベル30は{:.0f}、レベル60は{:.0f}回復します（{:.0f}秒ごと）。',
 "A healer quickens your magicka and every companion's for a while. Ready again after twice as long as it lasts.": 'ヒーラーが、あなたと全従者のマジカの回復をしばらく速めます。効果時間の2倍が経つと再使用できます。',
-'Allow Rejuvenate': 'マジカ活性を許可',
+'Allow Rejuvenate': 'マジカ回復強化を許可',
 'How much faster magicka comes back while it lasts. 100% is twice as fast.': '効果中にマジカの回復がどれだけ速くなるか。100%で2倍の速さです。',
 'Faster by': '回復速度の上昇',
 'How long it lasts, before level 30.': 'レベル30未満での効果時間。',
@@ -124,10 +124,10 @@ T4 = {
 'How long it lasts once the healer reaches level 30.': 'ヒーラーがレベル30に達したときの効果時間。',
 'How long it lasts once the healer reaches level 60.': 'ヒーラーがレベル60に達したときの効果時間。',
 'Lasts {:.0f} s (ready again after {:.0f} s), {:.0f} s from level 30 ({:.0f} s), {:.0f} s from level 60 ({:.0f} s).': '効果は{:.0f}秒間（{:.0f}秒後に再使用可）。レベル30以降は{:.0f}秒間（{:.0f}秒後）、レベル60以降は{:.0f}秒間（{:.0f}秒後）。',
-"Each healer's line for the party, and whether they heal and rejuvenate on their own, is set per companion in the battle plan.": 'パーティに対する各ヒーラーの回復基準と、自動で回復・マジカ活性するかどうかは、バトルプランで従者ごとに設定します。',
+"Each healer's line for the party, and whether they heal and rejuvenate on their own, is set per companion in the battle plan.": 'パーティに対する各ヒーラーの回復基準と、自動で回復・マジカ回復強化を行うかどうかは、バトルプランで従者ごとに設定します。',
 'Every healer setting on this page back to its default.': 'このページのヒーラーに関する設定をすべて初期値に戻します。',
 # 設定画面: 演出・ポーション
-'What each ability looks like in the world: a red glow on the enemies a taunt holds and gold on the tank while braced, the healing light of a heal and the pale blue of Rejuvenate, and a short flash for a volley and its target, a war cry, a ward, a disarm and a bodyguard.': 'ゲーム内での各スキルの見た目：挑発が引きつけた敵への赤い光、身構え中のタンクへの金色の光、回復の癒やしの光、マジカ活性の淡い青、そして一斉射撃とその標的、ウォークライ、防護、武装解除、ボディガードの短い閃光。',
+'What each ability looks like in the world: a red glow on the enemies a taunt holds and gold on the tank while braced, the healing light of a heal and the pale blue of Rejuvenate, and a short flash for a volley and its target, a war cry, a ward, a disarm and a bodyguard.': 'ゲーム内での各スキルの見た目：挑発が引きつけた敵への赤い光、身構え中のタンクへの金色の光、回復の癒やしの光、マジカ回復強化の淡い青、そして一斉射撃とその標的、ウォークライ、防護、武装解除、ボディガードの短い閃光。',
 'Ability effects': 'スキルの演出効果',
 "Companions drink their own potions when hurt or drained, the smallest that will do; a fortify they can use against a boss, and a resist against the element a caster throws at them. Each companion's Potions switch can still turn it off.": '従者は、傷ついたり消耗したりすると、足りる範囲で最も小さいポーションを自分で飲みます。ボス戦では強化ポーション、術者が放つ属性には耐性ポーションを使うこともあります。各従者の「ポーション」スイッチで無効にもできます。',
 'They look over the mix in their hands while they brew, when no alchemy table is to hand.': '近くに錬金台がないとき、調合中に手元の調合物を見つめます。',

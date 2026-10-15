@@ -541,6 +541,7 @@ for g in REG_LIST:
     code += b'\x48\x8d\x15' + struct.pack('<i', jva(po) - (rs + len(code) + 7))
     code += b'\x41\xb8' + struct.pack('<I', len(jb))
     code += b'\xe8' + struct.pack('<i', C.STRCTOR - (rs + len(code) + 5))
+    head0 = code
     # 領域内で書かれ、領域後に読まれるレジスタの復元
     for R, why in sorted(lo.items()):
         if R in g['vec'] and R.startswith('xmm'):
@@ -557,6 +558,23 @@ for g in REG_LIST:
             pass          # 下で rax = 新しい std::string のデータポインタ に直す
         else:
             unrestorable.append((R, why))
+    spill = [R_ for R_, w_ in unrestorable if R_.startswith('xmm')]
+    if unrestorable and len(jb) > 15 and len(spill) == len(unrestorable) and base == 'rsp':
+        # 長い訳文(ヒープ確保あり)で xmm だけが領域後も生きている: 呼び出しの前後で [rsp+0x20+4k](送出引数領域=この時点では空き)へ退避・復元する
+        assert d0 >= 0x20 + 4 * len(spill), ('退避先が文字列と重なる', en)
+        pre = b''; post = b''
+        for k_, R_ in enumerate(sorted(spill)):
+            n_ = int(R_[3:]); assert n_ < 8
+            pre += bytes([0xf3, 0x0f, 0x11, 0x44 | (n_ << 3), 0x24, 0x20 + 4 * k_])
+            post += bytes([0xf3, 0x0f, 0x10, 0x44 | (n_ << 3), 0x24, 0x20 + 4 * k_])
+        rest = code[len(head0):]
+        head1 = enc_lea_rcx(base, d0)
+        head1 += b'\x48\x8d\x15' + struct.pack('<i', jva(po) - (rs + len(pre) + len(head1) + 7))
+        head1 += b'\x41\xb8' + struct.pack('<I', len(jb))
+        head1 += b'\xe8' + struct.pack('<i', C.STRCTOR - (rs + len(pre) + len(head1) + 5))
+        code = pre + head1 + post + rest
+        log.append(('spill', en, hex(rs), ','.join(sorted(spill))))
+        unrestorable = []
     if unrestorable:
         # 0.2.0: 呼び出しで壊れる xmm 等が領域の後でも生きている → 呼び出しを使わず、15バイト以下の訳文をその場で直接書き込む
         if len(jb) > 15:
