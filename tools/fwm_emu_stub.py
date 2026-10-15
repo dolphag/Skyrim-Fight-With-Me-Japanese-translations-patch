@@ -6,7 +6,9 @@ from unicorn import *
 from unicorn.x86_const import *
 N, R = sys.argv[1:3]
 r = json.load(open(R)); pe = pefile.PE(N); IB = pe.OPTIONAL_HEADER.ImageBase; raw = open(N, 'rb').read()
-LABEL, LW, TEXT, TS, PARA = 0xbcd80, 0xbcb30, 0xbd360, 0xbd4a0, 0xbcee0
+import os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import fwm_cfg as C
+LABEL, LW, TEXT, TS, PARA = C.LABEL, C.LABELWIDTH, C.TEXT, C.TEXTSIZE, C.PARAGRAPH
 SC = r['font_scale']
 def f32(x): return struct.unpack('<I', struct.pack('<f', x))[0]
 def run(stub, kind, sv):

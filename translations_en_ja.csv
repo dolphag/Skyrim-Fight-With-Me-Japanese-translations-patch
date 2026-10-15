@@ -32,8 +32,6 @@ POSITION,位置取り
 {}"
 Needs Walk With Me.,Walk With Meが必要です。
 "  ·  for now, {}",  ·  現在は{}
- (borrowed),（借用）
-Knows no heal for others; they will fight instead.,他者を回復する術を知らないため、代わりに戦います。
 Heal below {}%,{}%未満で回復
 Companion,従者
 LEVEL,レベル
@@ -45,7 +43,6 @@ ARMOR,防御力
 DAMAGE,ダメージ
 IN HAND,手持ち
 Empty,なし
-No arrows,矢がない
 BEST AT,得意分野
 "{}{}
 Replaces every companion's own orders.","{}{}
@@ -76,7 +73,6 @@ Balanced melee. Flanks and presses whoever the fight puts in front of them.,バ�
 Tank,タンク
 "Holds the line. Blocks, bashes and taunts enemies off the rest of the party.",前線を支える職。防御やシールドバッシュ、挑発で、敵を仲間から引き離します。
 Healer,ヒーラー
-Stays back and keeps everyone standing with healing magic.,後方に控え、回復魔法で全員を立たせ続けます。
 Bruiser,ブルーザー
 Heavy hitter. Power attacks and bashes to stagger the big ones.,重い一撃を狙う職。強攻撃とシールドバッシュで、大型の敵をひるませます。
 Archer,アーチャー
@@ -127,7 +123,6 @@ As you were,通常行動
 Carries no melee weapon.,近接武器を持っていません。
 Carries no bow or crossbow.,弓もクロスボウも持っていません。
 Knows no attack spell and carries no staff.,攻撃魔法を知らず、杖も持っていません。
-Knows no spell that heals others.,他者を回復する魔法を知りません。
 One-Handed,片手武器
 Two-Handed,両手武器
 Archery,弓術
@@ -155,8 +150,6 @@ turn on them,が向かってくる
  {} shrugs it off., {}には効かなかった。
 themselves,自分自身
 you,あなた
-{} heals {}.,{}が{}を回復した。
-{} runs to {}.,{}が{}のもとへ走る。
 {} has no arrows for {}.,{}は{}用の矢を持っていない。
 {} cannot be a {}: {} Now a {}.,{}は{}になれません：{} 今は{}です。
 Setting,設定
@@ -215,8 +208,6 @@ Shorter per level,レベルごとの短縮
 Seconds taken off the cooldown for each level of the tank.,タンクのレベル1ごとにクールダウンから差し引く秒数。
 Shortest cooldown,最短クールダウン
 The cooldown never drops below this.,クールダウンはこの値より短くなりません。
-Glow,発光
-How long the red glow shows on a taunting tank. 0 turns it off.,挑発したタンクに赤い光を表示する時間。0で無効になります。
 Who a taunt holds,挑発が効く相手
 Level reach,レベル範囲
 level / %.1f,レベル / %.1f
@@ -234,9 +225,6 @@ Enemies this far below the tank stay held longer.,タンクよりこれだけレ
 Cowed hold,ひるんだ敵の拘束
 How much longer a cowed enemy stays held.,ひるんだ敵が引きつけられている時間が、どれだけ長くなるか。
 Hold time,拘束時間
-"Seconds an enemy stays on the tank, before level.",レベルによる加算前に、敵がタンクを狙い続ける秒数。
-Longer per level,レベルごとの延長
-Seconds added to the hold for each level of the tank.,タンクのレベル1ごとに拘束時間へ加える秒数。
 Example tank level,例のタンクレベル
 Only for the example below; nothing is saved.,下の例にだけ使われます。保存はされません。
 "A level {} tank holds anything up to level {} for certain, {:.0f}% of level {}, and nothing from level {}. Bosses and dragons count {} higher. An enemy stays on them for {:.1f} s; the next taunt is ready after {:.1f} s.",レベル{0}のタンクは、レベル{1}までの敵を確実に、レベル{3}の敵を{2:.0f}%の確率で引きつけ、レベル{4}以上の敵は引きつけられません。ボスとドラゴンは{5}レベル高いものとして扱われます。敵は{6:.1f}秒間タンクを狙い続け、次の挑発は{7:.1f}秒後に使えます。
@@ -254,26 +242,10 @@ A held enemy is let go when the tank gets this far away.,タンクがこれだ�
 Draw fire from,攻撃を引きつける距離
 "An archer or caster shooting at you can be taunted from this far, so their arrows and spells go to the tank instead of you.",あなたを狙う弓兵や術者を、これだけ離れた位置から挑発でき、矢や魔法があなたではなくタンクに向かいます。
 With 50 Block: {:.0f} units. With 100: {:.0f}.,防御50で{:.0f}ユニット、100で{:.0f}ユニット。
-"The glow, sound and animations are forms named in FightWithMe.ini.",発光、音、アニメーションは、FightWithMe.iniで指定したフォームです。
 Every taunt setting on this page back to its default.,このページの挑発に関する設定をすべて初期値に戻します。
 HEALERS,ヒーラー
-Healing,回復
 Allow heals,回復を許可
-Healers watch the party and heal whoever is in the most trouble.,ヒーラーはパーティを見守り、最も危ない人を回復します。
-Lend Healing Hands,治癒の手を貸す
-"Let a companion with no heal of their own be a Healer, borrowing Healing Hands scaled by their Restoration skill. Off: Healer is only offered to companions who know a heal for others.",自前の回復手段がない従者もヒーラーにでき、回復技能に応じた強さで治癒の手を借りて使います。オフ：ヒーラーを選べるのは、他者を回復する術を知っている従者だけです。
-Heal themselves under,自分を回復する基準
-"A healer tends to their own wounds only below this, whatever the line set for allies.",ヒーラーは、味方向けの基準にかかわらず、自分の体力がこの値を下回ったときだけ自分を回復します。
 Between heals,回復の間隔
-"Seconds a healer waits after each heal. At least 10, so heals are an event, not a stream.",回復のたびにヒーラーが待つ秒数。回復が連発されないよう、10秒以上です。
-Heal from,回復できる距離
-Heals are cast from where the healer stands on allies up to this far.,ヒーラーは、立っている場所からこの距離までの味方を回復します。
-Go to the downed from,倒れた味方へ向かう距離
-A companion who is down is walked to from up to this far and healed up close. You always come first.,倒れた従者には、この距離以内から歩いて近づき、間近で回復します。あなたが常に最優先です。
-Channel time,詠唱時間
-"A concentration spell such as Healing Hands counts as this many seconds of channelling: more healing, more magicka.",治癒の手のような持続型の魔法は、この秒数だけ詠唱したものとして扱われます。長いほど回復量もマジカ消費も増えます。
-Each healer's line for allies is set per companion in the battle plan.,味方に対する各ヒーラーの回復基準は、バトルプランで従者ごとに設定します。
-Every healing setting on this page back to its default.,このページの回復に関する設定をすべて初期値に戻します。
 TARGETING,ターゲット
 Choosing a target,標的の選び方
 Nearer counts up to,近さを考慮する距離
@@ -381,15 +353,7 @@ Taunted: {} turned on them.,挑発しました：{}が向かってきます。
 "Taunted, but {} shrugged it off.",挑発しましたが、{}には効きませんでした。
 Healing is switched off (Healers settings).,回復は無効です（ヒーラーの設定）。
 Down themselves.,本人が倒れています。
-Could not break off to heal.,戦闘の手を止められず、回復できませんでした。
-Already on the way to {}.,すでに{}のもとへ向かっています。
 Nobody within {:.0f} needs healing.,{:.0f}以内に回復が必要な者はいません。
-Not enough magicka: {} takes {:.0f}.,マジカ不足：{}には{:.0f}必要です。
-Knows no heal for them.,相手を回復する術がありません。
-"Running to {}, who is down.",倒れている{}のもとへ走っています。
-{} is too far to heal ({:.0f} away).,{}は遠すぎて回復できません（距離{:.0f}）。
-Healing {}.,{}を回復中。
-Knows no heal for {}.,{}を回復する術がありません。
 {} can't reach {}: {} instead.,{}は{}に届きません：代わりに{}。
 {} can't reach {}.,{}は{}に届きません。
 shooting,射撃で攻撃
@@ -407,7 +371,6 @@ Ward,防護
 "Hardens your skin with alteration: Oakflesh, then Stone, Iron and Ebony as they rise in level.",変性魔法であなたの肌を硬くします。オークフレッシュから始まり、レベルが上がるとストーン、アイアン、エボニーへ強化されます。
 "When enemies are on you or your health falls, and no ward of theirs is on you.",敵に迫られている、またはあなたの体力が減っていて、本人の防護がかかっていないとき
 Disarm,武装解除
-"Knocks the weapon out of their opponent's hands and onto the ground, up to ten levels above their own.",相手の手から武器を払い落とします。自分より10レベル上の相手まで有効です。
 "When they meet a boss, a two-handed weapon, or someone at or above their level.",ボス、両手武器の相手、または自分以上のレベルの相手に遭遇したとき
 None,なし
 AUTO,自動
@@ -416,18 +379,12 @@ Heal,回復
 "Taunt now
 Holds level {} and below  ·  {:.0f} reach  ·  {:.0f} s  ·  {:.0f} stamina","今すぐ挑発
 レベル{}以下を確実に引きつける  ·  射程{:.0f}  ·  {:.0f}秒  ·  スタミナ{:.0f}"
-"Heal now
-{}{}: about {:.0f} health for {:.0f} magicka","今すぐ回復
-{}{}：体力およそ{:.0f}回復／マジカ{:.0f}消費"
 "
 In a fight only.","
 戦闘中のみ。"
 "AUTO on: they taunt by themselves when it is ready and worth it.
 Off: only when you press Taunt.","自動オン：使えて効果が見込めるときに、自分で挑発します。
 オフ：「挑発」を押したときだけ挑発します。"
-"AUTO on: they heal by themselves when someone drops below the line.
-Off: only when you press Heal.","自動オン：誰かが基準を下回ったら、自分で回復します。
-オフ：「回復」を押したときだけ回復します。"
 "{} now
 {}
 Ready again {:.0f} s after use.{}","今すぐ{}
@@ -482,11 +439,9 @@ Cut above heads,切り取る高さ
 Abilities and potions,スキルとポーション
 "Bodyguard (tank), Volley (archer), War cry (bruiser), Ward (mage, healer) and Disarm (fighter): a button in the plan, and on their own where each companion's switch allows.",ボディガード（タンク）、一斉射撃（アーチャー）、ウォークライ（ブルーザー）、防護（メイジ、ヒーラー）、武装解除（ファイター）：プラン内のボタンで使えるほか、従者ごとのスイッチが許す範囲で自動でも使います。
 Role specials,役割ごとの特技
-"Companions drink their own potions when hurt or drained, a fortify against a boss and a resist against a caster. Each companion's Potions switch can still turn it off.",従者は、傷ついたり消耗したりすると自分のポーションを飲みます。ボス相手には強化系、術者相手には耐性系を使います。従者ごとのポーションのスイッチで無効にもできます。
 Drink potions in a fight,戦闘中にポーションを飲む
 "Standing about out of a fight, a companion short of potions now and then brews some: better grades and rarer kinds as they rise in level.",戦闘外で手持ちぶさたなとき、ポーションが足りない従者は時々調合します。レベルが上がるほど、高品質で希少な種類も作ります。
 Brew potions at rest,休息中にポーションを調合する
-"Play the alchemy animation while they brew, when no alchemy table is to hand.",近くに錬金台がないとき、調合中に錬金のアニメーションを再生します。
 Mix them by hand,手で調合する
 Their health when they reach for a healing potion.,回復ポーションに手を伸ばす体力の基準。
 Drink a healing potion below,回復ポーションを飲む基準
@@ -539,3 +494,171 @@ Only in a fight.,戦闘中のみ使えます。
 Specials are switched off (Battle plan settings).,特技は無効です（バトルプランの設定）。
 Knocked about; could not.,体勢を崩されていて使えません。
 Nothing to do right now.,今は使う場面がありません。
+ Braced: +{:.0f} armor.,身構え：防御力+{:.0f}。
+{} of the party,パーティの{}人
+the party,パーティ全員
+{} heals {}: +{:.0f} health.,{}が{}を回復した：体力+{:.0f}。
+", as ordered",（指示による）
+Healed {}: +{:.0f} health each.,{}を回復：体力+{:.0f}ずつ。
+Rejuvenate is switched off (Healers settings).,マジカ活性は無効です（ヒーラーの設定）。
+Everyone's magicka is full.,全員のマジカが満タンです。
+{} rejuvenates you and the party: magicka {:.0f}% faster for {:.0f} s.,{}があなたとパーティのマジカを活性化：回復が{:.0f}%速くなります（{:.0f}秒間）。
+ ({} ran low),（{}が不足）
+Rejuvenated: magicka {:.0f}% faster for {:.0f} s.,マジカ活性：回復が{:.0f}%速くなります（{:.0f}秒間）。
+The fight is over.,戦闘が終わったため。
+"Stays back, heals the whole party at once and quickens everyone's magicka.",後方に控え、パーティ全員を一度に回復し、全員のマジカの回復を速めます。
+{} lets {} go: {}.,{}は{}への対応をやめた：{}。
+the combat AI would not take them on,戦闘AIが相手にしなかったため
+{} is out of magicka and falls back to recover.,{}はマジカが尽き、回復のため後退します。
+they are too far away,遠すぎるため
+Only mages and healers have spells chosen for them.,魔法を選べるのは、メイジとヒーラーだけです。
+Spells can only be changed out of a fight.,魔法の変更は、戦闘外でのみ行えます。
+Braced,身構え
++{:.0f} armor from their taunt,挑発による防御力+{:.0f}
+Rejuvenated,マジカ活性
+Magicka comes back {:.0f}% faster,マジカの回復が{:.0f}%速い
+Guarding you,護衛中
+"At your side, taking on whoever is on you",あなたのそばで、あなたを狙う敵を引き受けています
+Out of magicka,マジカ切れ
+Falling back until it comes back,マジカが戻るまで後退中
+Novice,ノービス
+Apprentice,アプレンティス
+Adept,アデプト
+Expert,エキスパート
+Master,マスター
+Other,その他
+RIGHT HAND,右手
+LEFT HAND,左手
+A Mage holds any spell but a heal.,メイジは、回復以外のどんな魔法でも手に持てます。
+A Healer holds any spell (Healers settings).,ヒーラーは、どんな魔法でも手に持てます（ヒーラーの設定）。
+"A Healer holds any heal, and other spells up to {}",ヒーラーは、すべての回復魔法と、{}までのその他の魔法を手に持てます
+ (Apprentice from level 10),（レベル10からアプレンティス）
+ (Adept from level 25),（レベル25からアデプト）
+"
+Health {:.0f} / {:.0f}  ·  Magicka {:.0f} / {:.0f}  ·  Stamina {:.0f} / {:.0f}","
+体力 {:.0f} / {:.0f}  ·  マジカ {:.0f} / {:.0f}  ·  スタミナ {:.0f} / {:.0f}"
+{}:{:02} left,残り{}:{:02}
+{} s left,残り{}秒
+"
+{:.0f}% of the way back","
+復帰への進み具合：{:.0f}%"
+"  ·  out of magicka, falling back",  ·  マジカ切れ、後退中
+"
+Braces them: +{:.0f} armor for as long as it holds, more as they rise in level.","
+身構え：敵を引きつけている間、防御力+{:.0f}。レベルが上がるほど増えます。"
+"Heal now
+You and the whole party: +{:.0f} health each, more as they rise in level. No magicka needed.
+Ready again {:.0f} s after use.","今すぐ回復
+あなたとパーティ全員：体力+{:.0f}ずつ。レベルが上がるほど増えます。マジカは不要です。
+使用後{:.0f}秒で再使用できます。"
+"AUTO on: they heal by themselves when anyone is down or drops below the line.
+Off: only when you press Heal.","自動オン：誰かが倒れたり基準を下回ったりしたら、自分で回復します。
+オフ：「回復」を押したときだけ回復します。"
+Rejuvenate,マジカ活性
+"Rejuvenate now
+Your magicka and every companion's comes back {:.0f}% faster for {:.0f} s, longer as they rise in level.
+Ready again {:.0f} s after use.{}","今すぐマジカ活性
+あなたと全従者のマジカの回復が{:.0f}%速くなります（{:.0f}秒間。レベルが上がるほど長くなります）。
+使用後{:.0f}秒で再使用できます。{}"
+"AUTO on: they rejuvenate by themselves when you, a mage or a healer runs out of magicka or nearly does.
+Off: only when you press Rejuvenate.","自動オン：あなた、メイジ、ヒーラーのマジカが尽きたり尽きかけたりしたら、自分で発動します。
+オフ：「マジカ活性」を押したときだけ発動します。"
+SPELLS,魔法
+Their own choice,本人に任せる
+  ·  both hands,  ·  両手
+Empty-handed now,今は素手
+Holding {} now,今は{}を持っています
+"They hold {} here in a fight, and no other spell.",戦闘中、この手には{}だけを持ちます。
+Left to them: they use whatever they think best.,本人任せ：最善と思う魔法を使います。
+Right hand,右手
+Left hand,左手
+"{}
+{}
+Choose to see every spell for this hand.","{}
+{}
+選ぶと、この手で使える魔法がすべて表示されます。"
+Every school,すべての系統
+spell,種
+spells,種
+{}  ·  {} {},{}  ·  {}{}
+THEY KNOW,習得済みの魔法
+YOU CAN TEACH THEM,教えられる魔法
+TEACH,教える
+BOTH HANDS,両手
+"Their own choice
+They use whatever they think best in this hand.","本人に任せる
+この手には、最善と思う魔法を使います。"
+"
+One of yours: choosing it teaches them, and they keep it.","
+あなたの魔法：選ぶと教えることになり、本人は覚えたままになります。"
+  ·  takes both hands,  ·  両手がふさがる
+"{}
+{} {}  ·  {:.0f} magicka{}{}","{}
+{} {}  ·  マジカ{:.0f}{}{}"
+Nothing else for this hand.,この手に使える魔法は他にありません。
+Back,戻る
+Spell,魔法
+Left / Right,左 / 右
+School,系統
+Scroll,巻物
+How long the gold flash shows on a tank as they taunt. 0 turns it off.,挑発したタンクに金色の光を表示する時間。0で無効になります。
+Flash,閃光
+Bracing,身構え
+Each taunt braces the tank with extra armor for as long as it holds the enemies it turned.,挑発のたびに、引きつけた敵を足止めしている間、タンクの防御力が上がります。
+Brace on taunt,挑発時に身構える
+Armor a taunt adds before the tank's level.,タンクのレベルによる加算前に、挑発が加える防御力。
+Armor,防御力
+Armor added for each level of the tank.,タンクのレベル1ごとに加わる防御力。
+More per level,レベルごとの加算
+A taunt never adds more than this.,挑発が加える防御力は、これを超えません。
+Most armor,防御力の上限
+"A taunt braces a level 10 tank with +{:.0f} armor for {:.0f} s, level 30 with +{:.0f} for {:.0f} s, level 60 with +{:.0f} for {:.0f} s.",挑発により、レベル10のタンクは防御力+{:.0f}を{:.0f}秒間、レベル30は+{:.0f}を{:.0f}秒間、レベル60は+{:.0f}を{:.0f}秒間得ます。
+"Seconds an enemy stays on the tank, whatever else their own AI would rather do.",敵が自身のAIの意向にかかわらず、タンクを狙い続ける秒数。
+The hold once the tank reaches level 30.,タンクがレベル30に達したときの拘束時間。
+From level 30,レベル30以降
+The hold once the tank reaches level 60.,タンクがレベル60に達したときの拘束時間。
+From level 60,レベル60以降
+The sound and animations are forms named in FightWithMe.ini.,音とアニメーションは、FightWithMe.iniで名前を指定したフォームです。
+"A healer's own gift, not a spell: you and everyone in the party within reach healed at once, no magicka spent. Anyone can be a Healer.",ヒーラー固有の力であり、魔法ではありません。射程内のあなたとパーティ全員を一度に回復し、マジカは消費しません。誰でもヒーラーになれます。
+"The spells you can give a healer's hands on their sheet: every heal, and other spells up to Novice, then Apprentice from level 10 and Adept from 25, never Expert or Master. On: any spell at all.",ヒーラーの手に持たせられる魔法：すべての回復魔法と、ノービスまでのその他の魔法（レベル10からアプレンティス、25からアデプト）。エキスパートとマスターは不可。オンにすると、どんな魔法でも持たせられます。
+Any spell in their hands,手にどんな魔法でも
+"Health each heal gives everyone it reaches, before the healer's level.",ヒーラーのレベルによる加算前に、1回の回復が届いた全員に与える体力。
+Health,体力
+Health added for each level of the healer.,ヒーラーのレベル1ごとに加わる体力。
+A heal never gives more than this.,1回の回復量は、これを超えません。
+Most health,回復量の上限
+Seconds a healer waits after each heal.,回復のたびにヒーラーが待つ秒数。
+Everyone in the party this close to the healer is healed.,ヒーラーからこの距離以内にいるパーティ全員が回復します。
+"A level 10 healer heals everyone for {:.0f}, level 30 for {:.0f}, level 60 for {:.0f}, every {:.0f} s.",レベル10のヒーラーは全員を{:.0f}、レベル30は{:.0f}、レベル60は{:.0f}回復します（{:.0f}秒ごと）。
+A healer quickens your magicka and every companion's for a while. Ready again after twice as long as it lasts.,ヒーラーが、あなたと全従者のマジカの回復をしばらく速めます。効果時間の2倍が経つと再使用できます。
+Allow Rejuvenate,マジカ活性を許可
+How much faster magicka comes back while it lasts. 100% is twice as fast.,効果中にマジカの回復がどれだけ速くなるか。100%で2倍の速さです。
+Faster by,回復速度の上昇
+"How long it lasts, before level 30.",レベル30未満での効果時間。
+Lasts,効果時間
+How long it lasts once the healer reaches level 30.,ヒーラーがレベル30に達したときの効果時間。
+How long it lasts once the healer reaches level 60.,ヒーラーがレベル60に達したときの効果時間。
+"Lasts {:.0f} s (ready again after {:.0f} s), {:.0f} s from level 30 ({:.0f} s), {:.0f} s from level 60 ({:.0f} s).",効果は{:.0f}秒間（{:.0f}秒後に再使用可）。レベル30以降は{:.0f}秒間（{:.0f}秒後）、レベル60以降は{:.0f}秒間（{:.0f}秒後）。
+"Each healer's line for the party, and whether they heal and rejuvenate on their own, is set per companion in the battle plan.",パーティに対する各ヒーラーの回復基準と、自動で回復・マジカ活性するかどうかは、バトルプランで従者ごとに設定します。
+Every healer setting on this page back to its default.,このページのヒーラーに関する設定をすべて初期値に戻します。
+"What each ability looks like in the world: a red glow on the enemies a taunt holds and gold on the tank while braced, the healing light of a heal and the pale blue of Rejuvenate, and a short flash for a volley and its target, a war cry, a ward, a disarm and a bodyguard.",ゲーム内での各スキルの見た目：挑発が引きつけた敵への赤い光、身構え中のタンクへの金色の光、回復の癒やしの光、マジカ活性の淡い青、そして一斉射撃とその標的、ウォークライ、防護、武装解除、ボディガードの短い閃光。
+Ability effects,スキルの演出効果
+"Companions drink their own potions when hurt or drained, the smallest that will do; a fortify they can use against a boss, and a resist against the element a caster throws at them. Each companion's Potions switch can still turn it off.",従者は、傷ついたり消耗したりすると、足りる範囲で最も小さいポーションを自分で飲みます。ボス戦では強化ポーション、術者が放つ属性には耐性ポーションを使うこともあります。各従者の「ポーション」スイッチで無効にもできます。
+"They look over the mix in their hands while they brew, when no alchemy table is to hand.",近くに錬金台がないとき、調合中に手元の調合物を見つめます。
+"Staggers their opponent and knocks the weapon out of their hands, as the Disarm shout does, up to ten levels above their own.",相手をよろめかせ、武装解除の叫びのように武器を手から払い落とします。自分より10レベル上の相手まで有効です。
+Could not disarm right now.,今は武装解除できません。
+{} kept their feet and the {}.,{}は踏みとどまり、{}も手放さなかった。
+right hand,右手 
+left hand,左手
+Their {} is theirs to choose again.,{}は、再び本人が選ぶようになりました。
+That is not a spell for the hands.,それは手に持つ魔法ではありません。
+A Mage leaves {} to a healer.,メイジは{}をヒーラーに任せます。
+{} is beyond a Healer of level {}.,{}は、レベル{}のヒーラーには扱えません。
+{} is cast from the {} only.,{}は{}でしか使えません。
+Could not teach {} {}.,{}に{}を教えられませんでした。
+You teach {} {}.,{}に{}を教えました。
+both hands,両手
+hands,両手
+Taught {}; it is in their {} now.,{}を教えました。今は本人の{}にあります。
+{} in their {}.,{0}（本人の{1}）
+a spell,魔法

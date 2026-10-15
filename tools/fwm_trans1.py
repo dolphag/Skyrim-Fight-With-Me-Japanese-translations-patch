@@ -27,8 +27,6 @@ T1 = {
 '{} is not on offer.\n{}': '{}は選べません。\n{}',
 'Needs Walk With Me.': 'Walk With Meが必要です。',
 '  ·  for now, {}': '  ·  現在は{}',
-' (borrowed)': '（借用）',
-'Knows no heal for others; they will fight instead.': '他者を回復する術を知らないため、代わりに戦います。',
 'Heal below {}%': '{}%未満で回復',
 'Companion': '従者',
 'LEVEL': 'レベル',
@@ -70,7 +68,6 @@ T1 = {
 'Tank': 'タンク',
 'Holds the line. Blocks, bashes and taunts enemies off the rest of the party.': '前線を支える職。防御やシールドバッシュ、挑発で、敵を仲間から引き離します。',
 'Healer': 'ヒーラー',
-'Stays back and keeps everyone standing with healing magic.': '後方に控え、回復魔法で全員を立たせ続けます。',
 'Bruiser': 'ブルーザー',
 'Heavy hitter. Power attacks and bashes to stagger the big ones.': '重い一撃を狙う職。強攻撃とシールドバッシュで、大型の敵をひるませます。',
 'Archer': 'アーチャー',
@@ -121,7 +118,6 @@ T1 = {
 'Carries no melee weapon.': '近接武器を持っていません。',
 'Carries no bow or crossbow.': '弓もクロスボウも持っていません。',
 'Knows no attack spell and carries no staff.': '攻撃魔法を知らず、杖も持っていません。',
-'Knows no spell that heals others.': '他者を回復する魔法を知りません。',
 # 技能名 (Battle.cpp; 公式用語)
 'One-Handed': '片手武器',
 'Two-Handed': '両手武器',
@@ -151,8 +147,6 @@ T1 = {
 ' {} shrugs it off.': ' {}には効かなかった。',
 'themselves': '自分自身',
 'you': 'あなた',
-'{} heals {}.': '{}が{}を回復した。',
-'{} runs to {}.': '{}が{}のもとへ走る。',
 '{} has no arrows for {}.': '{}は{}用の矢を持っていない。',
 '{} cannot be a {}: {} Now a {}.': '{}は{}になれません：{} 今は{}です。',
 }

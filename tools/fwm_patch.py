@@ -21,10 +21,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fwm_trans1 import T1
 from fwm_trans2 import T2
 from fwm_trans3 import T3
+from fwm_trans4 import T4
 import fwm_cfg as C
 
 SRC, OUT, REP = sys.argv[1:4]
-T = {**T1, **T2, **T3}
+T = {**T1, **T2, **T3, **T4}
 
 # ---- 表示可能な漢字の検査 ----------------------------------------------------------------
 # SKSE Menu Framework 3 (ImGui) は GetGlyphRangesJapanese の漢字2999字しか描画できず、範囲外は「?」になる。
@@ -210,6 +211,7 @@ for s in (rd, dt):
             slot_recs.append(dict(en=en, ja=ja, va=va, slot=rva, file=base + o, has_len=(nxt == len(en.encode()))))
 
 print('lea sites:', len(sites), ' slots:', len(slot_recs), ' inline-candidates:', len(inline_sites))
+json.dump([dict(en=r['en'], addr=hex(r['addr']), len_at=(hex(r['len_at']) if r.get('len_at') else None)) for r in sites], open(REP + '.sites', 'w'), ensure_ascii=False, indent=0)
 json.dump(dict(inline=[{**i, 'addr': hex(i['addr'])} for i in inline_sites]), open(REP + '.pre', 'w'), ensure_ascii=False, indent=1)
 
 # ---- 手動指定の長さ即値 ----------------------------------------------------
@@ -241,6 +243,7 @@ for r in sites:
     data[o + 3:o + 7] = struct.pack('<i', disp); changes.append((o + 3, 4, 'lea@%x' % a)); n_lea += 1
     if r.get('len_at'): patch_len_imm32(r['len_at'], len(en.encode()), JL, 'len')
 
+assert len(T['right hand'].encode()) == len(T['left hand'].encode()) + 1, '右手/左手の長さ関係'
 for en, a, kind in C.EXTRA_LEN:
     ja = T[en]; L = len(en.encode()); JL = len(ja.encode('utf-8'))
     if kind == 'imm32':
@@ -250,8 +253,8 @@ for en, a, kind in C.EXTRA_LEN:
         o = off(a); ins = next(md.disasm(raw[o:o + 15], IB + a))
         pos = [i for i in range(ins.size) if raw[o + i] == L]
         assert len(pos) >= 1, (hex(a), ins.op_str)
-        p = pos[-1] if ins.mnemonic == 'cmp' else pos[0]
-        assert ins.mnemonic in ('cmp', 'lea', 'mov')
+        p = pos[-1] if ins.mnemonic in ('cmp', 'add') else pos[0]
+        assert ins.mnemonic in ('cmp', 'lea', 'mov', 'add')
         data[o + p] = JL; changes.append((o + p, 1, 'xlen8@%x' % a))
 
 # ---- ポインタ表スロット --------------------------------------------------------
@@ -279,6 +282,20 @@ def enc_lea_rcx(base, disp):
     if (b & 7) == 4: code += b'\x24'                          # SIB (rsp/r12)
     return code + (struct.pack('<b', disp) if d8 else struct.pack('<i', disp))
 
+def _modrm_mem(reg, base, disp):
+    b = REGS.index(base); d8 = -128 <= disp <= 127
+    out = bytes([(0x40 if d8 else 0x80) | ((reg & 7) << 3) | (b & 7)])
+    if (b & 7) == 4: out += b'\x24'
+    return out + (struct.pack('<b', disp) if d8 else struct.pack('<i', disp))
+def enc_movabs(reg, imm):
+    r = REGS.index(reg)
+    return bytes([0x48 | (1 if r >= 8 else 0), 0xb8 + (r & 7)]) + struct.pack('<Q', imm)
+def enc_mov_mem_reg(base, disp, reg):
+    r, b = REGS.index(reg), REGS.index(base)
+    return bytes([0x48 | (4 if r >= 8 else 0) | (1 if b >= 8 else 0), 0x89]) + _modrm_mem(r, base, disp)
+def enc_mov_mem_imm32(base, disp, imm):
+    b = REGS.index(base)
+    return bytes([0x48 | (1 if b >= 8 else 0), 0xc7]) + _modrm_mem(0, base, disp) + struct.pack('<i', imm)
 FAM = {}
 for n, fam_ in {'rax': ['rax', 'eax', 'ax', 'al', 'ah'], 'rcx': ['rcx', 'ecx', 'cx', 'cl', 'ch'], 'rdx': ['rdx', 'edx', 'dx', 'dl', 'dh'],
                 'r8': ['r8', 'r8d', 'r8w', 'r8b'], 'r9': ['r9', 'r9d', 'r9w', 'r9b'], 'r10': ['r10', 'r10d', 'r10w', 'r10b'], 'r11': ['r11', 'r11d', 'r11w', 'r11b']}.items():
@@ -464,7 +481,7 @@ for (en, va), ss in regions.items():
             assert not any(rs < t < re_ for t in bt), ('領域内へ分岐', hex(rs))
             vec = {}
             for x in ins[idx[rs]:idx[re_]]:
-                ok = x.mnemonic in ('movups', 'movaps', 'movdqu', 'movdqa', 'movzx', 'mov', 'xorps', 'movsd', 'xor', 'movss', 'movq', 'movd') or (x.mnemonic == 'call' and x.op_str == '0x%x' % (IB + C.ALLOC))
+                ok = x.mnemonic in ('movups', 'movaps', 'movdqu', 'movdqa', 'movzx', 'mov', 'xorps', 'movsd', 'xor', 'movss', 'movq', 'movd', 'lea') or (x.mnemonic == 'call' and x.op_str == '0x%x' % (IB + C.ALLOC))
                 assert ok, ('ヒープ領域内に想定外の命令', hex(x.address - IB), x.mnemonic, x.op_str)
                 if x.mnemonic == 'movdqa' and ripref(x) is not None:
                     vec[md.reg_name(x.operands[0].reg)] = struct.unpack_from('<QQ', raw, off(ripref(x)))
@@ -496,12 +513,30 @@ for en_, rs_, re__, base_, d0_ in C.EXTRA_HEAP:
 if UNRESOLVED:
     for u in UNRESOLVED: print('  UNRESOLVED', u)
     raise SystemExit('未解決のインライン領域: %d' % len(UNRESOLVED))
+def postfix_list(rs):
+    """POSTFIX[rs] は (機械語, 想定する元命令, 元アドレス) 1件、またはそのリスト(0.2.0: rcx/rdx/r8 を順に戻す箇所がある)"""
+    v = C.POSTFIX[rs]
+    return [v] if isinstance(v, tuple) else list(v)
+def postfix_regs(rs):
+    out = set()
+    for pb, text, src in postfix_list(rs):
+        o_ = off(src); x_ = next(md.disasm(raw[o_:o_ + 15], IB + src))
+        _, w_ = rw(x_); out |= w_
+    return out
 # ---- 領域置換コードの生成 -----------------------------------------------------------
 n_reg = 0
 for g in REG_LIST:
     en, ja, rs, re_, base, d0 = g['en'], g['ja'], g['rs'], g['re'], g['base'], g['d0']
     jb = ja.encode('utf-8'); po = add(jb + b'\0')
     lo = live_out(g['f'], re_, sorted(CLOB))
+    unrestorable = []
+    ptr_regs = []     # 領域内で ALLOC の戻り値(rax)を写している退避レジスタ(後続が std::string のデータポインタとして使う)
+    if g.get('heap'):
+        _i, _x = decode(g['f'])
+        for x in _i[_x[rs]:_x[re_]]:
+            if x.mnemonic == 'mov' and len(x.operands) == 2 and x.operands[0].type == X86_OP_REG and x.operands[1].type == X86_OP_REG \
+               and x.operands[1].reg == X86_REG_RAX and md.reg_name(x.operands[0].reg) in ('r12', 'r13', 'r14', 'r15', 'rbx', 'rsi', 'rdi'):
+                ptr_regs.append(md.reg_name(x.operands[0].reg))
     code = enc_lea_rcx(base, d0)
     code += b'\x48\x8d\x15' + struct.pack('<i', jva(po) - (rs + len(code) + 7))
     code += b'\x41\xb8' + struct.pack('<I', len(jb))
@@ -516,21 +551,56 @@ for g in REG_LIST:
             # movups xmmN,[rcx+0x10]  (rcx は領域置換直後は壊れているので dest から再計算)
             code += enc_lea_rcx(base, d0 + 0x10) + bytes([0x0f, 0x10, (n << 3) | 1])
             log.append(('restore', R, hex(rs)))
-        elif rs in C.POSTFIX and R == 'rcx':
+        elif rs in C.POSTFIX and R in postfix_regs(rs):
             pass
+        elif R == 'rax' and g.get('heap') and ptr_regs:
+            pass          # 下で rax = 新しい std::string のデータポインタ に直す
         else:
-            raise SystemExit('領域後に生きているレジスタ %s (%s) を復元できない: %r @%x' % (R, why, en, rs))
-    if rs in C.POSTFIX:
-        pb, text, src = C.POSTFIX[rs]
-        o_ = off(src); x_ = next(md.disasm(raw[o_:o_ + 15], IB + src))
-        assert x_.mnemonic + ' ' + x_.op_str == text and bytes(x_.bytes) == pb, ('POSTFIX元命令が一致しない', hex(src))
-        code += pb
+            unrestorable.append((R, why))
+    if unrestorable:
+        # 0.2.0: 呼び出しで壊れる xmm 等が領域の後でも生きている → 呼び出しを使わず、15バイト以下の訳文をその場で直接書き込む
+        if len(jb) > 15:
+            raise SystemExit('領域後に生きているレジスタ %s (%s) を復元できない: %r @%x' % (unrestorable[0][0], unrestorable[0][1], en, rs))
+        print('  direct:', en, hex(rs), unrestorable)
+        scratch = next((r_ for r_ in ('rax', 'rcx', 'rdx', 'r8', 'r9', 'r10', 'r11') if r_ not in lo), None)
+        assert scratch, ('作業レジスタが無い', en)
+        code = b''
+        pad = jb + b'\0' * (16 - len(jb))
+        # 領域の直前が「xorps xmm0,xmm0; movups [base+d0],xmm0」(先頭16バイトのゼロ詰め)なら、0 の qword は書かなくてよい
+        _i, _x = decode(g['f']); k0 = _x[rs]; zero_pre = False
+        if k0 >= 2:
+            p1, p2 = _i[k0 - 1], _i[k0 - 2]
+            if p1.mnemonic == 'movups' and p1.operands[0].type == X86_OP_MEM and md.reg_name(p1.operands[0].mem.base) == base and p1.operands[0].mem.disp == d0 \
+               and p1.operands[1].type == X86_OP_REG and p1.operands[1].reg == X86_REG_XMM0 and p2.mnemonic == 'xorps' and p2.operands[0].reg == p2.operands[1].reg == X86_REG_XMM0:
+                zero_pre = True
+        for k_ in (0, 8):
+            q_ = struct.unpack_from('<Q', pad, k_)[0]
+            if q_ == 0 and zero_pre: continue
+            code += enc_movabs(scratch, q_) + enc_mov_mem_reg(base, d0 + k_, scratch)
+        code += enc_mov_mem_imm32(base, d0 + 0x10, len(jb)) + enc_mov_mem_imm32(base, d0 + 0x18, 15)
+        for R, why in sorted(lo.items()):       # 領域内の movdqa で作った size/cap 定数のレジスタは読み直す
+            if R in g['vec'] and R.startswith('xmm'):
+                code += bytes([0x0f, 0x10]) + _modrm_mem(int(R[3:]), base, d0 + 0x10)
+        log.append(('direct', en, hex(rs), scratch, 'live-out=' + ','.join(sorted(lo))))
+    elif rs in C.POSTFIX:
+        for pb, text, src in postfix_list(rs):
+            o_ = off(src); x_ = next(md.disasm(raw[o_:o_ + 15], IB + src))
+            assert x_.mnemonic + ' ' + x_.op_str == text and bytes(x_.bytes) == pb, ('POSTFIX元命令が一致しない', hex(src))
+            code += pb
+    if ptr_regs and not unrestorable:
+        # std::string のデータポインタ: 訳文が16バイト以上ならヒープ上([オブジェクト]の先頭8バイト)、以下ならオブジェクト自身
+        op_ = 0x8b if len(jb) > 15 else 0x8d
+        for R_ in (['rax'] if 'rax' in lo else []) + ptr_regs:
+            r_ = REGS.index(R_); b_ = REGS.index(base)
+            code += bytes([0x48 | (4 if r_ >= 8 else 0) | (1 if b_ >= 8 else 0), op_]) + _modrm_mem(r_, base, d0)
+        log.append(('ptrregs', en, hex(rs), ','.join(ptr_regs), 'rax' if 'rax' in lo else '-'))
     # 領域内で退避レジスタ(rbx/rsi/rdi/r12-r15)へ書かれた値(xor r,r / mov r,imm)は領域後も使われうるので、そのまま書き直す
     ins_, idx_ = decode(g['f'])
     for x in ins_[idx_[rs]:idx_[re_]]:
         if x.mnemonic not in ('xor', 'mov') or any(op.type == X86_OP_MEM for op in x.operands): continue
         _, w_ = x.regs_access()
         if {md.reg_name(q) for q in w_} & CALLEE:
+            if ptr_regs and x.mnemonic == 'mov' and x.operands[1].type == X86_OP_REG and md.reg_name(x.operands[0].reg) in ptr_regs: continue
             assert x.mnemonic == 'xor' and x.operands[0].reg == x.operands[1].reg or x.operands[1].type == X86_OP_IMM, ('退避レジスタ書き込みが単純でない', hex(x.address - IB))
             code += bytes(x.bytes); log.append(('reemit', hex(x.address - IB), x.mnemonic + ' ' + x.op_str))
     size = re_ - rs
