@@ -10,7 +10,8 @@ from fwm_trans1 import T1
 from fwm_trans2 import T2
 from fwm_trans3 import T3
 from fwm_trans4 import T4
-T = {**T1, **T2, **T3, **T4}
+# 訳文中の「Walk With Me」は、折り返しで「Walk With」と「Me」に分かれないよう、空白を NBSP(U+00A0) にする
+T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4}.items()}
 O, N = sys.argv[1:3]
 a, b = open(O, 'rb').read(), open(N, 'rb').read()
 pe = pefile.PE(N); IB = pe.OPTIONAL_HEADER.ImageBase

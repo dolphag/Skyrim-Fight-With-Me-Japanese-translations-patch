@@ -25,7 +25,8 @@ from fwm_trans4 import T4
 import fwm_cfg as C
 
 SRC, OUT, REP = sys.argv[1:4]
-T = {**T1, **T2, **T3, **T4}
+# 訳文中の「Walk With Me」は、折り返しで「Walk With」と「Me」に分かれないよう、空白を NBSP(U+00A0) にする
+T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4}.items()}
 
 # ---- 表示可能な漢字の検査 ----------------------------------------------------------------
 # SKSE Menu Framework 3 (ImGui) は GetGlyphRangesJapanese の漢字2999字しか描画できず、範囲外は「?」になる。
@@ -708,7 +709,20 @@ st_label_s = make_stub(LOAD_STACK5, T_(C.LABEL), ('jmp', T_(C.TEXT)), 3)
 st_lw_plain = make_stub(LOAD_RDX, T_(C.LABELWIDTH), ('ts',))
 st_lw_s = make_stub(LOAD_RDX, T_(C.LABELWIDTH), ('ts',), 0)
 st_text_s = make_stub(LOAD_STACK5, T_(C.TEXT), ('jmp', T_(C.TEXT)), 3)
-st_para_s = 0
+st_para_s = make_stub(LOAD_STACK5, T_(C.PARAGRAPH), ('jmp', T_(C.PARAGRAPH)), 3)   # Paragraph: 日本語のときだけ拡大 (PARA_SCALE_CALLS の呼び出しのみ)
+# 内容に関係なく常に拡大する中継(英字だけでも拡大。測定の TextSize と描画の Text を必ず同じ倍率にする): (呼び出し先, 倍率) -> スタブ
+force_stubs = {}
+def force_stub(target, factor):
+    k = (target, factor)
+    if k not in force_stubs:
+        while len(sb) % 16: sb.append(0xcc)
+        k_va = sva(); sb.extend(struct.pack('<f', factor))
+        while len(sb) % 16: sb.append(0xcc)
+        st = sva(); xm = {C.TEXT: 0x1d, C.TEXTSIZE: 0x05}[target]    # Text は xmm3、TextSize は xmm0 を拡大
+        sb.extend(bytes([0xf3, 0x0f, 0x59, xm])); sb.extend(rel32(sva() + 4, k_va))   # mulss xmmN, [rip+k]
+        sb.extend(b'\xe9' + rel32(sva() + 5, target))                                  # jmp 原関数
+        force_stubs[k] = st
+    return force_stubs[k]
 st_ts_s = make_stub(LOAD_RDX, T_(C.TEXTSIZE), ('jmp', T_(C.TEXTSIZE)), 0)
 # 世界座標ラベル(TextOnWorld)の y を size*係数 だけ上へずらす中継スタブ: rdx=pos(x低32bit,y高32bit), xmm3=size。rsp は変えず jmp で原関数へ。
 world_stubs = {}
@@ -729,6 +743,8 @@ for call_a, lift in C.WORLD_LABEL_LIFT:
     sb += b'\x48\x09\xc2'                       # or rdx, rax
     sb += b'\xe9' + rel32(sva() + 5, C.TEXTONWORLD)   # jmp TextOnWorld
     world_stubs[call_a] = st
+for f_ in sorted(set(C.FORCE_SCALE.values())):      # 強制拡大スタブは pool に入れる前に作っておく
+    force_stub(C.TEXT, f_); force_stub(C.TEXTSIZE, f_)
 pool.extend(sb)
 
 # 題字(YOUR PARTY / BATTLE PLAN)を描く Label/LabelWidth 呼び出しは拡大しない。題字を持つ関数であることを確認する。
@@ -745,6 +761,9 @@ def retarget_calls(target, plain, scaled, label):
             if x.mnemonic == 'call' and x.operands[0].type == X86_OP_IMM and x.operands[0].imm - IB == target:
                 a_ = x.address - IB
                 dst = plain if (a_ in C.TITLE_CALLS and plain) else scaled
+                if a_ in C.FORCE_SCALE:
+                    assert target in (C.TEXT, C.TEXTSIZE), ('FORCE_SCALE は Text/TextSize のみ', hex(a_))
+                    dst = force_stub(target, C.FORCE_SCALE[a_])
                 o = off(a_)
                 assert raw[o] == 0xe8
                 data[o + 1:o + 5] = rel32(a_ + 5, dst); changes.append((o + 1, 4, label + '@%x' % a_)); n += 1
@@ -758,7 +777,11 @@ for call_a, st in world_stubs.items():
     tgt_ = call_a + 5 + struct.unpack_from('<i', raw, o + 1)[0]
     assert tgt_ == C.TEXTONWORLD, ('TextOnWorld呼び出しでない', hex(call_a), hex(tgt_))
     data[o + 1:o + 5] = rel32(call_a + 5, st); changes.append((o + 1, 4, 'callWorldLabel@%x' % call_a))
-n_cp = 0   # Paragraph は DrawTip からのみ呼ばれ、DrawTip の係数側で拡大済み
+n_cp = 0   # Paragraph: DrawTip(af071)は係数側で拡大済み。それ以外のうち PARA_SCALE_CALLS だけ、日本語のとき拡大する中継へ向ける
+for a_ in sorted(C.PARA_SCALE_CALLS):
+    o = off(a_); assert raw[o] == 0xe8, hex(a_)
+    assert a_ + 5 + struct.unpack_from('<i', raw, o + 1)[0] == C.PARAGRAPH, ('Paragraph呼び出しでない', hex(a_))
+    data[o + 1:o + 5] = rel32(a_ + 5, st_para_s); changes.append((o + 1, 4, 'callParagraph@%x' % a_)); n_cp += 1
 print('calls retargeted: Label %d LabelWidth %d Text %d TextSize %d Paragraph %d' % (n_cl, n_cw, n_ct, n_cs, n_cp))
 stub_label_va, stub_lw_va = st_label_plain, st_lw_plain
 
