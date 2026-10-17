@@ -10,8 +10,9 @@ from fwm_trans1 import T1
 from fwm_trans2 import T2
 from fwm_trans3 import T3
 from fwm_trans4 import T4
+from fwm_trans5 import T5
 # 訳文中の「Walk With Me」は、折り返しで「Walk With」と「Me」に分かれないよう、空白を NBSP(U+00A0) にする
-T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4}.items()}
+T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4, **T5}.items()}
 O, N = sys.argv[1:3]
 a, b = open(O, 'rb').read(), open(N, 'rb').read()
 pe = pefile.PE(N); IB = pe.OPTIONAL_HEADER.ImageBase
@@ -78,7 +79,8 @@ for s in (S['.rdata'], S['.data']):
         if j.VirtualAddress <= v < j.VirtualAddress + len(jb) and (s.VirtualAddress + o) not in reloc:
             fail('再配置なしのスロット', hex(s.VirtualAddress + o))
 # 全訳語が.jpnに存在するか
-miss = [en for en, ja in T.items() if ja.encode() + b'\0' not in jb]
+_gone = lambda en: en in getattr(C, 'GONE_KEYS', ()) or any(en.startswith(g) for g in getattr(C, 'GONE_PREFIX', ()))
+miss = [en for en, ja in T.items() if ja.encode() + b'\0' not in jb and not _gone(en)]
 miss += [en for en, _a, ja in C.SITE_STR if ja.encode() + b'\0' not in jb]
 print('翻訳表に対し.jpnに無い語:', len(miss), miss[:5])
 print('結果:', 'OK' if ok else 'NG')

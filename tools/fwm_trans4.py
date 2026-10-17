@@ -38,7 +38,7 @@ T4 = {
 'Master': '達人',
 'Other': 'その他',
 # 魔法選択 (バトルプランの「魔法」欄)
-'RIGHT HAND': '右手',
+'RIGHT HAND': '右手 ',   # 末尾の空白: 長さを『左手より1バイト長い』にして、元コードの add reg,9 (+右なら1) の計算に合わせる
 'LEFT HAND': '左手',
 'A Mage holds any spell but a heal.': 'メイジは、回復以外のどんな魔法でも手に持てます。',
 'A Healer holds any spell (Healers settings).': 'ヒーラーは、どんな魔法でも手に持てます（ヒーラーの設定）。',
@@ -94,7 +94,7 @@ T4 = {
 'Armor': '防御力',
 'Armor added for each level of the tank.': 'タンクのレベル1ごとに加わる防御力。',
 'More per level': 'レベルごとの加算',
-'A taunt never adds more than this.': '挑発が加える防御力は、これを超えません。',
+'A taunt never adds more than this.': '挑発が加える防御力はこれを超えません。',
 'Most armor': '防御力の上限',
 'A taunt braces a level 10 tank with +{:.0f} armor for {:.0f} s, level 30 with +{:.0f} for {:.0f} s, level 60 with +{:.0f} for {:.0f} s.': '挑発により、レベル10のタンクは防御力+{:.0f}を{:.0f}秒間、レベル30は+{:.0f}を{:.0f}秒間、レベル60は+{:.0f}を{:.0f}秒間得ます。',
 'Seconds an enemy stays on the tank, whatever else their own AI would rather do.': '敵が自身のAIの意向にかかわらず、タンクを狙い続ける秒数。',
@@ -110,7 +110,7 @@ T4 = {
 "Health each heal gives everyone it reaches, before the healer's level.": 'ヒーラーのレベルによる加算前に、1回の回復が届いた全員に与える体力。',
 'Health': '体力',
 'Health added for each level of the healer.': 'ヒーラーのレベル1ごとに加わる体力。',
-'A heal never gives more than this.': '1回の回復量は、これを超えません。',
+'A heal never gives more than this.': '1回の回復量はこれを超えません。',
 'Most health': '回復量の上限',
 'Seconds a healer waits after each heal.': '回復のたびにヒーラーが待つ秒数。',
 'Everyone in the party this close to the healer is healed.': 'ヒーラーからこの距離以内にいるパーティ全員が回復します。',

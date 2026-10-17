@@ -6,14 +6,14 @@ Sister patch (Walk With Me): <https://www.nexusmods.com/skyrimspecialedition/mod
 [日本語は下](#日本語)
 
 Scripts and the translation table for the Japanese translation patch for
-[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.2.0** (by hashhbbrown).
+[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.3.0** (by hashhbbrown).
 The patched `FightWithMe.dll` is distributed **only on Nexus Mods** (as a translation of the original page),
 following the permissions on the original page. **This repository contains no DLL and no code of Fight With Me**:
-only the scripts that patch a DLL you own, and the English → Japanese table (609 pairs).
+only the scripts that patch a DLL you own, and the English → Japanese table (617 pairs).
 
-- Original DLL SHA-256: `009076c92bb0861e011551446e71fb48914dca5d0db21be19f5aff899771864f`
-- Expected output SHA-256: `4c760f1d7eae1ab65be13398725c0fc0ee362a766a1654562471f783fba042ee`
-- Original source (for reference): <https://github.com/fatalCMD/fight-with-me> (the published source was still 0.1.5 (commit `be5808f`) when 0.2.0 was released, so addresses were found by diffing the 0.1.5 and 0.2.0 binaries)
+- Original DLL SHA-256: `a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86`
+- Expected output SHA-256: `1afd255af236799177c504af916cdcdd84c78c069fde803c6066b56173486492`
+- Original source (for reference): <https://github.com/fatalCMD/fight-with-me> (the 0.3.0 DLL matches commit `6a5f5ce`, one commit after `f7f6e93` "Fight With Me 0.3.0"; addresses were re-derived from the 0.3.0 binary, using signature search against the 0.2.0 addresses)
 
 ## How it works (short)
 A new section (`.jpn`, read+execute) holds the Japanese strings and a few stubs. `lea reg,[rip+disp]` references,
@@ -33,8 +33,9 @@ python3 -I tools/fwm_emu_stub.py out.dll report.json                # dispatch/s
 ```
 
 ## Notes
-- For 0.2.0 only (addresses are fixed). The scripts for 0.1.5 are in the git history (up to commit `0ab3065`); the 0.1.0 scripts are in tag `v0.1.0`.
-- Translations were produced with AI assistance (Claude, Anthropic) and checked in game (parts added in 0.2.0 are not fully checked in game yet).
+- For 0.3.0 only (addresses are fixed). The 0.2.0 scripts are in the git history (commit `6069193`, tag `v.0.2.0`); the 0.1.5 scripts are in the history up to commit `0ab3065`; the 0.1.0 scripts are in tag `v0.1.0`.
+- The Paths perk-tree text (Paths / Arts / path-bonus parts of the 0.3.0 DLL) and log lines are intentionally left in English in this release; Paths is planned to be handled separately.
+- Translations were produced with AI assistance (Claude, Anthropic) and checked in game (parts added in 0.3.0 are not fully checked in game yet).
 - The scripts and the Japanese column of the table are mine and are provided under GPL-3.0-or-later, as stated in [`LICENSE`](LICENSE).
   The English column reproduces strings of Fight With Me, which belong to its author (the original ships without a license file); it is included only so that the patch can be reproduced, and is not covered by that license.
 - This repository was split off from the Walk With Me patch repository (where the first release, tag `fwm-0.1.0`, still lives under `fwm/`); the two patches are maintained independently.
@@ -45,6 +46,6 @@ Nexus Mods のページ: <https://www.nexusmods.com/skyrimspecialedition/mods/19
 
 [Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.2.0** の日本語化パッチのスクリプトと翻訳表です。
 パッチ済みの `FightWithMe.dll` は、原MODページの権限表示に従い、**Nexus Mods(原MODの翻訳ページ)でのみ**配布します。
-**このリポジトリには、DLLも Fight With Me のコードも含みません**。手元のDLLにパッチを当てるスクリプトと、英日対応表(609組)だけです。
-再現手順は上の英語の節を参照してください。元DLLの SHA-256 は `009076c92bb0861e011551446e71fb48914dca5d0db21be19f5aff899771864f`、
-出力DLLは `4c760f1d7eae1ab65be13398725c0fc0ee362a766a1654562471f783fba042ee` になります。
+**このリポジトリには、DLLも Fight With Me のコードも含みません**。手元のDLLにパッチを当てるスクリプトと、英日対応表(617組)だけです。
+再現手順は上の英語の節を参照してください。元DLLの SHA-256 は `a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86`、
+出力DLLは `1afd255af236799177c504af916cdcdd84c78c069fde803c6066b56173486492` になります。

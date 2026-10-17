@@ -13,7 +13,7 @@ SC = r['font_scale']
 def f32(x): return struct.unpack('<I', struct.pack('<f', x))[0]
 def run(stub, kind, sv):
     u = Uc(UC_ARCH_X86, UC_MODE_64)
-    u.mem_map(IB, 0x200000)
+    u.mem_map(IB, 0x300000)
     for s in pe.sections:
         u.mem_write(IB + s.VirtualAddress, raw[s.PointerToRawData:s.PointerToRawData + s.SizeOfRawData])
     u.mem_map(0x10000000, 0x10000); sp = 0x10008000; ret = 0x10009000

@@ -43,6 +43,7 @@ ARMOR,防御力
 DAMAGE,ダメージ
 IN HAND,手持ち
 Empty,なし
+No arrows,矢がない
 BEST AT,得意分野
 "{}{}
 Replaces every companion's own orders.","{}{}
@@ -112,7 +113,6 @@ Stay behind and fight only what comes close.,後ろに下がり、近づいて�
 Front line,最前線
 Meet the enemies furthest forward first.,最も前に出ている敵から迎え撃ちます。
 With me,随伴
-"Stay at your side, weapons out, and fight there: whatever comes near you, and whoever is on them.",武器を構えてあなたのそばに留まり、近づく敵と、あなたの従者に迫る敵を迎え撃ちます。
 Everyone back to what their role suggests.,全員を役割に応じた状態に戻します。
 Attack!,攻撃！
 Everyone goes all out for your target.,全員があなたの標的に総攻撃をかけます。
@@ -187,7 +187,6 @@ Stand down when no enemy is left,敵がいなくなったら戦闘を解く
 "With weapons out and nobody left to fight, companions leave combat and fall back into Walk With Me's formation instead of searching.",武器を抜いたまま戦う相手がいなくなったとき、従者は敵を探し続けず、戦闘を抜けてWalk With Meの隊列に戻ります。
 After,待機時間
 How long the fight must have nobody in it.,敵がいない状態がこの時間続くと、戦闘を解きます。
-"Role strength, role guessing and standing down back to their defaults. Companions' orders are not touched.",役割の強さ、役割の推定、戦闘解除を初期値に戻します。従者への命令は変更されません。
 TANKS,タンク
 Taunt,挑発
 Allow taunts,挑発を許可
@@ -225,7 +224,7 @@ Enemies this far below the tank stay held longer.,タンクよりこれだけレ
 Cowed hold,ひるんだ敵の拘束
 How much longer a cowed enemy stays held.,ひるんだ敵が引きつけられている時間が、どれだけ長くなるか。
 Hold time,拘束時間
-Example tank level,例のタンクレベル
+Example tank level,試算用のタンクレベル
 Only for the example below; nothing is saved.,下の例にだけ使われます。保存はされません。
 "A level {} tank holds anything up to level {} for certain, {:.0f}% of level {}, and nothing from level {}. Bosses and dragons count {} higher. An enemy stays on them for {:.1f} s; the next taunt is ready after {:.1f} s.",レベル{0}のタンクは、レベル{1}までの敵を確実に、レベル{3}の敵を{2:.0f}%の確率で引きつけ、レベル{4}以上の敵は引きつけられません。ボスとドラゴンは{5}レベル高いものとして扱われます。敵は{6:.1f}秒間タンクを狙い続け、次の挑発は{7:.1f}秒後に使えます。
 Reach,射程
@@ -264,7 +263,6 @@ Guard you within,護衛の範囲
 Hold back within,後方待機の範囲
 Hold back: melee companions only meet enemies this close to themselves. Ranged ones keep shooting from where they stand.,後方待機：近接の従者は、自分からこの距離以内に来た敵とだけ戦います。遠距離の従者は、その場から撃ち続けます。
 With me within,随伴の範囲
-"With me (what To me! gives everyone): they keep this close to you and fight there, against anything that comes near you.",随伴（「集合！」で全員に与えられる位置取り）：あなたからこの距離以内に留まり、そこで近づく敵と戦います。
 Fight back within,反撃の範囲
 "An enemy attacking a companion from this close is dealt with first, whatever their focus. Your target and a marked enemy are orders and still come first.",従者をこの距離から攻撃している敵は、注目対象にかかわらず最初に対処されます。あなたの標的と印をつけた敵は命令なので、それでも最優先です。
 Keep them near you,従者をそばに留める
@@ -276,7 +274,7 @@ Time,時間
 Stop time,時間を止める
 Pause the game while planning instead of slowing it.,プラン中は、ゲームを遅くする代わりに停止させます。
 Slow motion,スローモーション
-How fast the world runs while the plan is open.,プランを開いている間の、世界の進む速さ。
+How fast the world runs while the plan is open.,プランを開いている間の世界の進む速さ。
 Ease in and out,緩急の時間
 Seconds for time to slow down and speed back up.,時間が遅くなり、元の速さに戻るまでの秒数。
 Slow Time screen effect,時間減速の画面効果
@@ -393,21 +391,10 @@ Ready again {:.0f} s after use.{}","今すぐ{}
 "AUTO on: {}
 Off: only when you press {}.","自動オン：{}、自分で発動します。
 オフ：「{}」を押したときだけ発動します。"
-Potions,ポーション
 healing,体力回復
-magicka,マジカ
-stamina,スタミナ
 other,その他
 on,オン
 off,オフ
-OFF,オフ
-"They drink their own in a fight when hurt or drained (a fortify against a boss, a resist against a caster), and at rest brew what they are short of, better grades and rarer kinds as they rise in level.",戦闘中、傷つくか消耗すると自分のポーションを飲みます（ボス相手なら強化系、術者相手なら耐性系）。休息中は足りないものを調合し、レベルが上がるほど高品質で希少な種類も作ります。
-  ·  brewing,  ·  調合中
-"Potions: {}{}
-{}
-Click to switch {}.","ポーション：{}{}
-{}
-クリックで{}に切り替えます。"
 {} heard you...,{}が聞き入れました...
 COMPANION,従者
 OVERHEAD,上空
@@ -436,15 +423,8 @@ Overhead tilt,上空視点の角度
 Cut the ceiling away overhead,頭上の天井を取り除く
 How far above the tallest head the cut goes. Raise it to keep more of the walls; lower it if a low ceiling still shows.,最も高い頭からどれだけ上で切り取るか。上げると壁が多く残り、低い天井がまだ映り込むときは下げます。
 Cut above heads,切り取る高さ
-Abilities and potions,スキルとポーション
 "Bodyguard (tank), Volley (archer), War cry (bruiser), Ward (mage, healer) and Disarm (fighter): a button in the plan, and on their own where each companion's switch allows.",ボディガード（タンク）、一斉射撃（アーチャー）、ウォークライ（ブルーザー）、防護（メイジ、ヒーラー）、武装解除（ファイター）：プラン内のボタンで使えるほか、従者ごとのスイッチが許す範囲で自動でも使います。
 Role specials,役割ごとの特技
-Drink potions in a fight,戦闘中にポーションを飲む
-"Standing about out of a fight, a companion short of potions now and then brews some: better grades and rarer kinds as they rise in level.",戦闘外で手持ちぶさたなとき、ポーションが足りない従者は時々調合します。レベルが上がるほど、高品質で希少な種類も作ります。
-Brew potions at rest,休息中にポーションを調合する
-Mix them by hand,手で調合する
-Their health when they reach for a healing potion.,回復ポーションに手を伸ばす体力の基準。
-Drink a healing potion below,回復ポーションを飲む基準
 Right-stick click,右スティック押し込み
 Left-stick click,左スティック押し込み
 "Held with the key. A key with no modifier works whatever else is held, so sprinting does not get in the way.",キーと同時に押します。修飾キーなしの割り当ては、他のキーを押していても反応するため、ダッシュ中でも邪魔になりません。
@@ -460,18 +440,13 @@ Modifier,修飾キー
 Overhead view (in the plan),上空視点（プラン内）
 {} and {} are both on {}; only {} will happen.,{}と{}は両方とも{}に割り当てられています。実行されるのは{}だけです。
 Switches between the companion and the whole fight seen from above while the plan is open. The right stick turns the view either way.,プランを開いている間、従者の視点と戦闘全体の上空視点を切り替えます。どちらでも右スティックで視点を回せます。
-{} drinks {}.,{}が{}を飲んだ。
-{} brewed {}{},{}が{}{}を調合した
  and {},（ほかに{}）
-{} ,{}本の
 Too hurt to stand in front of you.,傷が深く、あなたの前に立てません。
 {} rushes to your side.,{}があなたのそばへ駆けつけた。
 On the way to you.,あなたのもとへ向かっています。
 At your side; nobody is on you yet.,あなたのそばにいます。まだ誰もあなたに迫っていません。
 Nobody to fire at.,撃つ相手がいません。
 Nothing to shoot with.,撃つ手段がありません。
-Volley! {} looses five arrows at {}.,一斉射撃！{}が{}に矢を5本放った。
-Volley: five arrows at {}.,一斉射撃：{}に矢を5本。
 Nobody close enough to stagger.,ひるませられる近さの相手がいません。
 {}'s war cry staggers {}.,{}のウォークライが{}をひるませた。
 War cry: {} staggered.,ウォークライ：{}をひるませた。
@@ -479,7 +454,6 @@ War cry: {} staggered.,ウォークライ：{}をひるませた。
 Your ward is still up ({:.0f} s).,防護はまだ続いています（{:.0f}秒）。
 No ward spell found in Skyrim.esm.,Skyrim.esmに防護の魔法が見つかりません。
 Not enough magicka for {} ({:.0f}).,{}に必要なマジカが足りません（{:.0f}）。
-Could not cast on you.,あなたに魔法をかけられませんでした。
 {} did not take on you.,{}はあなたにかかりませんでした。
 {} wards you: {}.,{}があなたを守った：{}。
 {} on you.,あなたに{}がかかっています。
@@ -497,9 +471,7 @@ Nothing to do right now.,今は使う場面がありません。
  Braced: +{:.0f} armor.,身構え：防御力+{:.0f}。
 {} of the party,パーティの{}人
 the party,パーティ全員
-{} heals {}: +{:.0f} health.,{}が{}を回復した：体力+{:.0f}。
 ", as ordered",（指示による）
-Healed {}: +{:.0f} health each.,{}を回復：体力+{:.0f}ずつ。
 Rejuvenate is switched off (Healers settings).,マジカ回復強化は無効です（ヒーラーの設定）。
 Everyone's magicka is full.,全員のマジカが満タンです。
 {} rejuvenates you and the party: magicka {:.0f}% faster for {:.0f} s.,{}があなたとパーティのマジカ回復を強化：{:.0f}%速くなります（{:.0f}秒間）。
@@ -527,11 +499,10 @@ Adept,精鋭
 Expert,熟練者
 Master,達人
 Other,その他
-RIGHT HAND,右手
+RIGHT HAND,右手 
 LEFT HAND,左手
 A Mage holds any spell but a heal.,メイジは、回復以外のどんな魔法でも手に持てます。
 A Healer holds any spell (Healers settings).,ヒーラーは、どんな魔法でも手に持てます（ヒーラーの設定）。
-"A Healer holds any heal, and other spells up to {}",ヒーラーは、すべての回復魔法と、{}までのその他の魔法を手に持てます
  (Apprentice from level 10),（レベル10から見習い）
  (Adept from level 25),（レベル25から精鋭）
 "
@@ -610,7 +581,7 @@ Armor a taunt adds before the tank's level.,タンクのレベルによる加算
 Armor,防御力
 Armor added for each level of the tank.,タンクのレベル1ごとに加わる防御力。
 More per level,レベルごとの加算
-A taunt never adds more than this.,挑発が加える防御力は、これを超えません。
+A taunt never adds more than this.,挑発が加える防御力はこれを超えません。
 Most armor,防御力の上限
 "A taunt braces a level 10 tank with +{:.0f} armor for {:.0f} s, level 30 with +{:.0f} for {:.0f} s, level 60 with +{:.0f} for {:.0f} s.",挑発により、レベル10のタンクは防御力+{:.0f}を{:.0f}秒間、レベル30は+{:.0f}を{:.0f}秒間、レベル60は+{:.0f}を{:.0f}秒間得ます。
 "Seconds an enemy stays on the tank, whatever else their own AI would rather do.",敵が自身のAIの意向にかかわらず、タンクを狙い続ける秒数。
@@ -620,12 +591,11 @@ The hold once the tank reaches level 60.,タンクがレベル60に達したと�
 From level 60,レベル60以降
 The sound and animations are forms named in FightWithMe.ini.,音とアニメーションは、FightWithMe.ini に「プラグイン名|0x番号」の形式で書いたものが使われます。
 "A healer's own gift, not a spell: you and everyone in the party within reach healed at once, no magicka spent. Anyone can be a Healer.",ヒーラー固有の力であり、魔法ではありません。射程内のあなたとパーティ全員を一度に回復し、マジカは消費しません。誰でもヒーラーになれます。
-"The spells you can give a healer's hands on their sheet: every heal, and other spells up to Novice, then Apprentice from level 10 and Adept from 25, never Expert or Master. On: any spell at all.",ヒーラーの手に持たせられる魔法：すべての回復魔法と、素人までのその他の魔法（レベル10から見習い、25から精鋭）。熟練者と達人は不可。オンにすると、どんな魔法でも持たせられます。
 Any spell in their hands,手にどんな魔法でも
 "Health each heal gives everyone it reaches, before the healer's level.",ヒーラーのレベルによる加算前に、1回の回復が届いた全員に与える体力。
 Health,体力
 Health added for each level of the healer.,ヒーラーのレベル1ごとに加わる体力。
-A heal never gives more than this.,1回の回復量は、これを超えません。
+A heal never gives more than this.,1回の回復量はこれを超えません。
 Most health,回復量の上限
 Seconds a healer waits after each heal.,回復のたびにヒーラーが待つ秒数。
 Everyone in the party this close to the healer is healed.,ヒーラーからこの距離以内にいるパーティ全員が回復します。
@@ -641,10 +611,7 @@ How long it lasts once the healer reaches level 60.,ヒーラーがレベル60�
 "Lasts {:.0f} s (ready again after {:.0f} s), {:.0f} s from level 30 ({:.0f} s), {:.0f} s from level 60 ({:.0f} s).",効果は{:.0f}秒間（{:.0f}秒後に再使用可）。レベル30以降は{:.0f}秒間（{:.0f}秒後）、レベル60以降は{:.0f}秒間（{:.0f}秒後）。
 "Each healer's line for the party, and whether they heal and rejuvenate on their own, is set per companion in the battle plan.",パーティに対する各ヒーラーの回復基準と、自動で回復・マジカ回復強化を行うかどうかは、バトルプランで従者ごとに設定します。
 Every healer setting on this page back to its default.,このページのヒーラーに関する設定をすべて初期値に戻します。
-"What each ability looks like in the world: a red glow on the enemies a taunt holds and gold on the tank while braced, the healing light of a heal and the pale blue of Rejuvenate, and a short flash for a volley and its target, a war cry, a ward, a disarm and a bodyguard.",ゲーム内での各スキルの見た目：挑発が引きつけた敵への赤い光、身構え中のタンクへの金色の光、回復の癒やしの光、マジカ回復強化の淡い青、そして一斉射撃とその標的、ウォークライ、防護、武装解除、ボディガードの短い閃光。
 Ability effects,スキルの演出効果
-"Companions drink their own potions when hurt or drained, the smallest that will do; a fortify they can use against a boss, and a resist against the element a caster throws at them. Each companion's Potions switch can still turn it off.",従者は、傷ついたり消耗したりすると、足りる範囲で最も小さいポーションを自分で飲みます。ボス戦では強化ポーション、術者が放つ属性には耐性ポーションを使うこともあります。各従者の「ポーション」スイッチで無効にもできます。
-"They look over the mix in their hands while they brew, when no alchemy table is to hand.",近くに錬金台がないとき、調合中に手元の調合物を見つめます。
 "Staggers their opponent and knocks the weapon out of their hands, as the Disarm shout does, up to ten levels above their own.",相手をよろめかせ、武装解除の叫びのように武器を手から払い落とします。自分より10レベル上の相手まで有効です。
 Could not disarm right now.,今は武装解除できません。
 {} kept their feet and the {}.,{}は踏みとどまり、{}も手放さなかった。
@@ -662,3 +629,52 @@ hands,両手
 Taught {}; it is in their {} now.,{}を教えました。今は本人の{}にあります。
 {} in their {}.,{0}（本人の{1}）
 a spell,魔法
+"Stay at your side, weapons out, and fight from there: melee takes whatever comes near you, ranged shoots the nearest enemy.",武器を構えてあなたのそばに留まり、そこから戦います。近接の従者はあなたに近づく敵を、遠距離の従者は最も近い敵を迎え撃ちます。
+"A Healer holds any spell, with attack spells up to {}",ヒーラーは、どんな魔法でも手に持てます（攻撃魔法は{}まで）
+"Role strength, role guessing, what happens before a fight and standing down back to their defaults. Companions' orders are not touched.",役割の強さ、役割の推定、戦闘前の動作、戦闘解除を初期値に戻します。従者への命令は変更されません。
+"The spells you can give a healer's hands on their sheet: any heal, ward, armor, cloak or summons, and attack spells up to Novice, then Apprentice from level 10 and Adept from 25, never Expert or Master. On: attack spells of any strength too.",ヒーラーの手に持たせられる魔法：回復・防護・鎧・マント・召喚の各魔法と、素人までの攻撃魔法（レベル10から見習い、25から精鋭）。熟練者と達人は不可。オンにすると、どんな強さの攻撃魔法でも持たせられます。
+"With me (what To me! gives everyone): they keep this close to you and fight from there. Melee companions take anything that comes near you; archers and casters shoot the nearest enemy, however far.",随伴（「集合！」で全員に与えられる位置取り）：あなたからこの距離以内に留まり、そこから戦います。近接の従者はあなたに近づく敵を、アーチャーと術者は距離を問わず最も近い敵を迎え撃ちます。
+"Healing auras, protective barriers, wind and earth bursts, and weapon particles for abilities. Red marks enemies held by a taunt. Requires Triumvirate, Elemental Destruction Magic Redux and Vibrant Weapons (Fire Frost Shock); missing sources use simpler vanilla effects.",回復のオーラ、防護の障壁、風と大地の衝撃波、武器のパーティクルなど、スキルの演出効果です。挑発で引きつけた敵は赤くなります。Triumvirate、Elemental Destruction Magic Redux、Vibrant Weapons - Fire Frost Shock が必要です。足りないものは、より簡素なバニラの効果になります。
+Abilities,スキル
+Volley! {} looses {} arrows at {}.,一斉射撃！{0}が{2}に矢を{1}本放った。
+Volley: {} arrows at {}.,一斉射撃：{1}に矢を{0}本。
+{} heals {}: {}.,{}が{}を回復した：{}。
+Healed {}: {} each.,{}を回復：{}ずつ。
++{:.0f} health,体力+{:.0f}
+Could not cast it.,魔法を使えませんでした。
+{} wards you and {} more: {}.,{}があなたと他{}人を護った：{}。
+They carry no special ability right now.,今は使えるスキルがありません。
+"
+Holds level {} and below  ·  {:.0f} reach  ·  {:.0f} stamina","
+レベル{}以下を確実に引きつける  ·  射程{:.0f}  ·  スタミナ{:.0f}"
+"{}
+{}
+Roles are set out of a fight: open the plan with nobody fighting to change it.","{}
+{}
+役割は戦闘外で設定します：誰も戦っていないときにプランを開いて変更してください。"
+SET OUT OF A FIGHT,戦闘外で設定
+Roles are set out of a fight.,役割は戦闘外で設定します。
+AUTO BATTLE,オートバトル
+Auto battle,オートバトル
+they start the fight,自分から戦闘を始める
+they wait to be attacked,攻撃されるまで待つ
+"
+Either way, weapons come out when an enemy is in view.","
+どちらの場合も、敵が視界に入ると武器を構えます。"
+"Auto battle: {}
+On: a companion who sees an enemy starts the fight. Those on Hold back wait, and nobody starts one while you sneak.
+Off: they wait until an enemy attacks, or you do.{}","オートバトル：{}
+オン：敵を見つけた従者が戦闘を始めます。後方待機の従者は待機し、あなたが隠密中は誰も始めません。
+オフ：敵に攻撃されるか、あなたが攻撃するまで待ちます。{}"
+on: a companion who sees an enemy starts the fight,オン：敵を見つけた従者が戦闘を始める
+off: they wait for the fight to come to them,オフ：戦闘が向こうから来るのを待つ
+Auto battle on: whoever sees an enemy starts the fight.,オートバトル オン：敵を見つけた従者が戦闘を始めます。
+Auto battle off: they wait for the fight to come to them.,オートバトル オフ：戦闘が向こうから来るのを待ちます。
+Before a fight,戦闘前
+"Out of a fight, an enemy that a companion or you can see brings their weapons out. They put them away a few seconds after the last one is out of view, unless yours are out.",戦闘外でも、従者かあなたが敵を視認すると、武器を構えます。最後の敵が視界から消えて数秒後に武器をしまいます。ただし、あなたが武器を出している間はしまいません。
+Weapons out when an enemy is in view,敵が視界にいる間は武器を構える
+"A companion who sees an enemy starts the fight instead of waiting to be attacked. Companions on Hold back wait, and nobody starts one while you sneak. Also a switch at the top right of the battle plan.",敵を見つけた従者は、攻撃されるのを待たずに戦闘を始めます。後方待機の従者は待機し、あなたが隠密中は誰も始めません。バトルプラン右上のスイッチでも切り替えられます。
+How far away an enemy can be and still count as in view. 2500 is about a long bowshot.,視界にいるとみなす敵の最大距離。2500は弓の長射程くらいです。
+Sight range,視認距離
+Theme,テーマ
+"Vanilla: charcoal and silver. Oxblood: the original red. Nordic: engraved stone, beveled metal and inset highlights. All use the same windows and controls. Applies to the battle plan, Paths, notices and these settings.",Vanilla：チャコールとシルバー。Oxblood：従来の赤。Nordic：彫刻を施した石、面取りした金属、はめ込みの強調。どれも同じウィンドウと操作です。バトルプラン、Paths、通知、これらの設定に反映されます。

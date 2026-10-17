@@ -22,11 +22,12 @@ from fwm_trans1 import T1
 from fwm_trans2 import T2
 from fwm_trans3 import T3
 from fwm_trans4 import T4
+from fwm_trans5 import T5
 import fwm_cfg as C
 
 SRC, OUT, REP = sys.argv[1:4]
 # 訳文中の「Walk With Me」は、折り返しで「Walk With」と「Me」に分かれないよう、空白を NBSP(U+00A0) にする
-T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4}.items()}
+T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4, **T5}.items()}
 
 # ---- 表示可能な漢字の検査 ----------------------------------------------------------------
 # SKSE Menu Framework 3 (ImGui) は GetGlyphRangesJapanese の漢字2999字しか描画できず、範囲外は「?」になる。
@@ -88,6 +89,29 @@ for va, b in strs.items(): rev[b].append(va)
 pdraw = raw[pd.PointerToRawData:pd.PointerToRawData + pd.Misc_VirtualSize]
 funcs = sorted((b, e) for b, e, u in (struct.unpack_from('<III', pdraw, k) for k in range(0, len(pdraw) - 11, 12))
                if tx.VirtualAddress <= b < tx.VirtualAddress + tx.Misc_VirtualSize and e > b)
+# .pdata に無い関数(スタックを使わないリーフ関数)も、0xCC 詰めで区切って擬似関数として扱う (0.3.0: 難易度名を返す関数など)
+def _leaf_funcs():
+    out = []; cov = []; txb, txe = tx.VirtualAddress, tx.VirtualAddress + tx.Misc_VirtualSize
+    for b_, e_ in funcs: cov.append((b_, e_))
+    cov.sort(); pos = txb
+    gaps = []
+    for b_, e_ in cov:
+        if b_ > pos: gaps.append((pos, b_))
+        pos = max(pos, e_)
+    if pos < txe: gaps.append((pos, txe))
+    for g0, g1 in gaps:
+        blob = raw[tx.PointerToRawData + g0 - txb:tx.PointerToRawData + g1 - txb]
+        i = 0
+        while i < len(blob):
+            if blob[i] in (0xcc, 0x00): i += 1; continue
+            j = i
+            while j < len(blob) and not (blob[j] == 0xcc and blob[j:j + 2] == b'\xcc\xcc'): j += 1
+            if j - i >= 8: out.append((g0 + i, g0 + j))
+            i = j
+    return out
+_lf = _leaf_funcs()
+funcs = sorted(funcs + _lf)
+print('leaf funcs added:', len(_lf))
 fins = {}   # func -> (insn list, addr->index)
 def decode(f):
     if f not in fins:
@@ -151,13 +175,17 @@ def find_len(f, k, L):
 
 # ---- 翻訳対象の VA を決める -----------------------------------------------
 targets = []   # (en, ja, va)
+MISSING = []
 for en, ja in T.items():
     if en in C.SKIP_KEYS: continue
     vas = rev.get(en.encode('utf-8'))
     if not vas:
-        raise SystemExit('rdataに無いキー: %r' % en[:60])
+        if en in getattr(C, 'GONE_KEYS', ()) or any(en.startswith(g) for g in getattr(C, 'GONE_PREFIX', ())): continue
+        MISSING.append(en); continue
     for va in vas: targets.append((en, ja, va))
 
+if MISSING:
+    raise SystemExit('rdataに無いキー(%d件): %s' % (len(MISSING), '\n'.join(repr(m[:70]) for m in MISSING)))
 claimed = {}          # 長さ即値アドレス -> lea アドレス
 sites = []            # dict
 slotsl = []
@@ -228,7 +256,7 @@ def patch_len_imm32(la, L, JL, label):
     ins = next(md.disasm(raw[o:o + 15], IB + la))
     assert imm32_form(ins, L), (hex(la), ins.op_str)
     fo = o + ins.size - 4
-    assert u32(fo) == L
+    assert u32(fo) == L, (hex(la), label, L, u32(fo), ins.op_str)
     data[fo:fo + 4] = struct.pack('<I', JL); changes.append((fo, 4, label + '@%x' % la))
 
 n_lea = 0
@@ -245,6 +273,7 @@ for r in sites:
     if r.get('len_at'): patch_len_imm32(r['len_at'], len(en.encode()), JL, 'len')
 
 assert len(T['right hand'].encode()) == len(T['left hand'].encode()) + 1, '右手/左手の長さ関係'
+assert len(T['RIGHT HAND'].encode()) == len(T['LEFT HAND'].encode()) + 1, 'RIGHT/LEFT HAND の長さ関係'
 for en, a, kind in C.EXTRA_LEN:
     ja = T[en]; L = len(en.encode()); JL = len(ja.encode('utf-8'))
     if kind == 'imm32':
@@ -297,6 +326,11 @@ def enc_mov_mem_reg(base, disp, reg):
 def enc_mov_mem_imm32(base, disp, imm):
     b = REGS.index(base)
     return bytes([0x48 | (1 if b >= 8 else 0), 0xc7]) + _modrm_mem(0, base, disp) + struct.pack('<i', imm)
+def enc_store_imm(base, disp, val, width):
+    b = REGS.index(base); rex = bytes([0x41]) if b >= 8 else b''
+    if width == 4: return rex + b'\xc7' + _modrm_mem(0, base, disp) + struct.pack('<I', val)
+    if width == 2: return b'\x66' + rex + b'\xc7' + _modrm_mem(0, base, disp) + struct.pack('<H', val)
+    return rex + b'\xc6' + _modrm_mem(0, base, disp) + bytes([val])
 FAM = {}
 for n, fam_ in {'rax': ['rax', 'eax', 'ax', 'al', 'ah'], 'rcx': ['rcx', 'ecx', 'cx', 'cl', 'ch'], 'rdx': ['rdx', 'edx', 'dx', 'dl', 'dh'],
                 'r8': ['r8', 'r8d', 'r8w', 'r8b'], 'r9': ['r9', 'r9d', 'r9w', 'r9b'], 'r10': ['r10', 'r10d', 'r10w', 'r10b'], 'r11': ['r11', 'r11d', 'r11w', 'r11b']}.items():
@@ -600,6 +634,14 @@ for g in REG_LIST:
         for R, why in sorted(lo.items()):       # 領域内の movdqa で作った size/cap 定数のレジスタは読み直す
             if R in g['vec'] and R.startswith('xmm'):
                 code += bytes([0x0f, 0x10]) + _modrm_mem(int(R[3:]), base, d0 + 0x10)
+        if len(code) > re_ - rs:
+            # 領域が小さい: 即値ストア(dword/word/byte)で本文+NULだけを書く。先頭16バイトのゼロ詰めは領域内に残っている前提で、本文の後ろの残りは不問(NUL終端済み)
+            code = b''; pos = 0; nb = len(jb) + 1; buf = jb + b'\0'
+            while pos < nb:
+                w = 4 if nb - pos >= 4 else (2 if nb - pos >= 2 else 1)
+                code += enc_store_imm(base, d0 + pos, int.from_bytes(buf[pos:pos + w], 'little'), w); pos += w
+            code += enc_mov_mem_imm32(base, d0 + 0x10, len(jb)) + enc_mov_mem_imm32(base, d0 + 0x18, 15)
+            log.append(('direct-imm', en, hex(rs)))
         log.append(('direct', en, hex(rs), scratch, 'live-out=' + ','.join(sorted(lo))))
     elif rs in C.POSTFIX:
         for pb, text, src in postfix_list(rs):
