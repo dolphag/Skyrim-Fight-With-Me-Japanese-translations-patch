@@ -2,7 +2,7 @@
 
 Nexus Mods pages:
 - Fight With Me Japanese patch: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
-- Paths Japanese patch: *(page not yet created; link will be added here)*
+- Paths Japanese patch (version 0.1.0-1, for Paths 0.1.0): *(page not yet created; link will be added here)*
 
 Sister patch (Walk With Me): <https://www.nexusmods.com/skyrimspecialedition/mods/194872>, tools in <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>
 
@@ -11,7 +11,7 @@ Sister patch (Walk With Me): <https://www.nexusmods.com/skyrimspecialedition/mod
 Scripts and the translation table for the Japanese translation patch for
 [Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.3.0** and its add-on
 [Paths](https://www.nexusmods.com/skyrimspecialedition/mods/195610), both by **hashhbbrown** (GitHub: fatalCMD).
-Paths' text lives inside `FightWithMe.dll`, so one patched DLL covers both mods.
+Paths looks like a separate mod, but its screen text lives inside Fight With Me's `FightWithMe.dll`, so one patched DLL covers both mods.
 The patched `FightWithMe.dll` is distributed **only on Nexus Mods** (as a translation page of each original),
 following the permissions on the original pages. **This repository is source code only: it contains no DLL and no code of Fight With Me or Paths**:
 only the scripts that patch a DLL you own, and the English → Japanese table (745 pairs).
@@ -28,11 +28,14 @@ only the scripts that patch a DLL you own, and the English → Japanese table (7
 - `tools/`: patcher, verifier, translation sources (`fwm_trans1..6.py`, `fwm_names6.py`) and helpers.
 
 ## Versions
+Patch versions follow the original mods: Fight With Me patch **0.3.0-2** (for Fight With Me 0.3.0), Paths patch **0.1.0-1** (for Paths 0.1.0). Both Nexus files contain the same DLL.
+
 - Original DLL SHA-256: `a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86`
 - Expected output SHA-256 (patch 0.3.0-2): `203d62f403a8d86eb0ab82d99a43bd5daa25c9a3523ec8ce3b6f5177b3accd1d`
 - Original source (for reference): <https://github.com/fatalCMD/fight-with-me> (the 0.3.0 DLL matches commit `6a5f5ce`, one commit after `f7f6e93` "Fight With Me 0.3.0"; addresses were re-derived from the 0.3.0 binary, using signature search against the 0.2.0 addresses)
 
 Load order for users: Fight With Me → Paths → Japanese patch (the patched `FightWithMe.dll` must win).
+Recommended for users: `EnableChinese = true` under `[Fonts]` in `SKSEMenuFramework.ini` (SMF v3.18+), so that kanji outside the Japanese glyph range in game-supplied strings (spell names etc.) do not show as "?".
 
 ## How it works (short)
 A new section (`.jpn`, read+execute) holds the Japanese strings and a few stubs. `lea reg,[rip+disp]` references,
@@ -69,13 +72,13 @@ python3 -I tools/paths_table.py <FWM include/FWM/Paths.h> > PATHS_TABLE.md
 ## 日本語
 Nexus Mods のページ:
 - Fight With Me 日本語化パッチ: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
-- Paths 日本語化パッチ: (ページ作成後にリンクを追記します)
+- Paths 日本語化パッチ(0.1.0-1、Paths 0.1.0 用): (ページ作成後にリンクを追記します)
 
 姉妹MOD(Walk With Me)のパッチ: <https://www.nexusmods.com/skyrimspecialedition/mods/194872>、ツールは <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>
 
 [Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.3.0** と、そのアドオン
 [Paths](https://www.nexusmods.com/skyrimspecialedition/mods/195610) の日本語化パッチのスクリプトと翻訳表です。
-原作者はどちらも **hashhbbrown**(GitHub: fatalCMD)です。Paths の文字列は `FightWithMe.dll` の中にあるため、パッチ済みDLL 1つで両方に対応します。
+原作者はどちらも **hashhbbrown**(GitHub: fatalCMD)です。Paths は別MODに見えますが、画面の文字列は Fight With Me の `FightWithMe.dll` の中にあるため、パッチ済みDLL 1つで両方に対応します。
 パッチ済みの `FightWithMe.dll` は、原MODページの権限表示に従い、**Nexus Mods(各原MODの翻訳ページ)でのみ**配布します。
 **このリポジトリはソースコードのみで、DLLも Fight With Me / Paths のコードも含みません**。手元のDLLにパッチを当てるスクリプトと、英日対応表(745組)だけです。
 
@@ -90,5 +93,7 @@ Nexus Mods のページ:
 - `translations_en_ja.csv`: 全745組の英日対応表。
 - 再現手順は上の英語の節を参照してください(janome が必要です)。元DLLの SHA-256 は `a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86`、
   出力DLL(パッチ 0.3.0-2)は `203d62f403a8d86eb0ab82d99a43bd5daa25c9a3523ec8ce3b6f5177b3accd1d` になります。
+- バージョン: 原MODにあわせています。Fight With Me パッチ **0.3.0-2**(FWM 0.3.0 用)、Paths パッチ **0.1.0-1**(Paths 0.1.0 用)。中身のDLLは同一です。
 - ロード順: Fight With Me → Paths → 日本語化パッチ(パッチ済み `FightWithMe.dll` が勝つ順)。
+- 推奨: `SKSEMenuFramework.ini` の `[Fonts]` で `EnableChinese = true`(SMF v3.18 以降)。ゲーム由来の魔法名などで、日本語グリフ範囲外の漢字が「?」になるのを防ぎます。
 - 用語: 「skill」は、バニラのスキルとの混同を避けるため、Fight With Me 本体のUIも含めて「アビリティ」に統一しました(0.3.0-1 から変更)。
