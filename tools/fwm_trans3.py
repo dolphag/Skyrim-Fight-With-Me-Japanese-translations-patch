@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Fight With Me 0.1.5 日本語訳 (0.1.5 で追加・変更された表示文字列: スキル/ポーション/上空視点/通知)
+# Fight With Me 0.1.5 日本語訳 (0.1.5 で追加・変更された表示文字列: アビリティ/ポーション/上空視点/通知)
 T3 = {
 # 挑発・回復の結果通知
 'Taunts are switched off (Tanks settings).': '挑発は無効です（タンクの設定）。',
@@ -16,7 +16,7 @@ T3 = {
 "{} can't reach {}.": '{}は{}に届きません。',
 'shooting': '射撃で攻撃',
 'casting': '魔法で攻撃',
-# 固有スキル(名前・説明・自動で使う条件)
+# 固有アビリティ(名前・説明・自動で使う条件)
 'Bodyguard': 'ボディガード',
 'Runs to your side and taunts everything that is on you.': 'あなたのそばへ駆けつけ、あなたに向かう敵をすべて挑発します。',
 'When your health drops below 40% with enemies on you.': '敵に攻撃されてあなたの体力が40%を下回ったとき',
@@ -33,7 +33,7 @@ T3 = {
 'When they meet a boss, a two-handed weapon, or someone at or above their level.': 'ボス、両手武器の相手、または自分以上のレベルの相手に遭遇したとき',
 'None': 'なし',
 'AUTO': '自動',
-'ABILITIES': 'スキル',
+'ABILITIES': 'アビリティ',
 'Heal': '回復',
 'Taunt now\nHolds level {} and below  ·  {:.0f} reach  ·  {:.0f} s  ·  {:.0f} stamina': '今すぐ挑発\nレベル{}以下を確実に引きつける  ·  射程{:.0f}  ·  {:.0f}秒  ·  スタミナ{:.0f}',
 '\nIn a fight only.': '\n戦闘中のみ。',
@@ -82,7 +82,7 @@ T3 = {
 'How far above the tallest head the cut goes. Raise it to keep more of the walls; lower it if a low ceiling still shows.': '最も高い頭からどれだけ上で切り取るか。上げると壁が多く残り、低い天井がまだ映り込むときは下げます。',
 'Cut above heads': '切り取る高さ',
 # 設定ページ
-'Abilities and potions': 'スキルとポーション',
+'Abilities and potions': 'アビリティとポーション',
 "Bodyguard (tank), Volley (archer), War cry (bruiser), Ward (mage, healer) and Disarm (fighter): a button in the plan, and on their own where each companion's switch allows.": 'ボディガード（タンク）、一斉射撃（アーチャー）、ウォークライ（ブルーザー）、防護（メイジ、ヒーラー）、武装解除（ファイター）：プラン内のボタンで使えるほか、従者ごとのスイッチが許す範囲で自動でも使います。',
 'Role specials': '役割ごとの特技',
 'Drink potions in a fight': '戦闘中にポーションを飲む',
@@ -107,7 +107,7 @@ T3 = {
 'Overhead view (in the plan)': '上空視点（プラン内）',
 '{} and {} are both on {}; only {} will happen.': '{}と{}は両方とも{}に割り当てられています。実行されるのは{}だけです。',
 'Switches between the companion and the whole fight seen from above while the plan is open. The right stick turns the view either way.': 'プランを開いている間、従者の視点と戦闘全体の上空視点を切り替えます。どちらでも右スティックで視点を回せます。',
-# ポーション・スキルの通知
+# ポーション・アビリティの通知
 '{} drinks {}.': '{}が{}を飲んだ。',
 '{} brewed {}{}': '{}が{}{}を調合した',
 ' and {}': '（ほかに{}）',

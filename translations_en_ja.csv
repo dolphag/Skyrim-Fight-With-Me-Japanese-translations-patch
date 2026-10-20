@@ -8,7 +8,6 @@ boss,ボス
 caster,術者
 healer,ヒーラー
 archer,弓兵
-warrior,戦士
 "{}, level {}
 {}, {} for {}.","{}　Lv{}
 {}、{}（{}にとって）"
@@ -19,7 +18,6 @@ Held by {}'s taunt.","
 Click to send someone after them.","
 クリックで誰かを差し向けます。"
 "No companions in reach. Followers nearby, Walk With Me's party and summons appear here.",範囲内に従者がいません。近くの従者、Walk With Meのパーティ、召喚獣がここに表示されます。
-Unbound,未設定
 Key {},キー{}
   ·  down,  ·  倒れている
   ·  no arrows,  ·  矢がない
@@ -41,26 +39,19 @@ STAMINA,スタミナ
 RESISTANCE,耐性
 ARMOR,防御力
 DAMAGE,ダメージ
-IN HAND,手持ち
+IN HAND,武器
 Empty,なし
-No arrows,矢がない
 BEST AT,得意分野
 "{}{}
 Replaces every companion's own orders.","{}{}
 全従者それぞれの命令を上書きします。"
 Call {} off,{}の指示を解除
 Send {},{}を差し向ける
-Send everyone,全員を差し向ける
-Call everyone off,全員の指示を解除
 {}  /  level {},{}  /  レベル{}
 D-pad,十字キー
 Move,移動
 Choose,決定
-Ability now,スキル発動
-Close,閉じる
 Click,クリック
-Send at an enemy,敵に差し向ける
-Arrows,矢印キー
 Gathering the party...,パーティを集めています...
 YOUR PARTY,パーティ
 BATTLE PLAN,バトルプラン
@@ -69,79 +60,13 @@ Time slowed,時間減速中
 companion,人の従者
 companions,人の従者
 enemies,体の敵
-Fighter,ファイター
-Balanced melee. Flanks and presses whoever the fight puts in front of them.,バランス型の近接職。目の前に現れた相手を側面から攻め立てます。
-Tank,タンク
-"Holds the line. Blocks, bashes and taunts enemies off the rest of the party.",前線を支える職。防御やシールドバッシュ、挑発で、敵を仲間から引き離します。
-Healer,ヒーラー
-Bruiser,ブルーザー
-Heavy hitter. Power attacks and bashes to stagger the big ones.,重い一撃を狙う職。強攻撃とシールドバッシュで、大型の敵をひるませます。
-Archer,アーチャー
-Keeps range and picks off casters and other archers first.,距離を保ち、術者や他の弓兵から優先して仕留めます。
-Mage,メイジ
-Spell pressure from range. Finishes off whoever is weakest.,遠距離から魔法で圧をかけます。最も弱った相手にとどめを刺します。
-Their choice,各自の判断
-Whoever the combat AI would pick anyway.,戦闘AIが本来選ぶ相手を狙います。
-Casters,術者
-Enemies with offensive spells or a staff.,攻撃魔法や杖を持つ敵。
-Healers,ヒーラー
-Enemies who can heal their allies.,味方を回復できる敵。
-Archers,弓兵
-Enemies with a bow or crossbow out.,弓やクロスボウを構えている敵。
-Strongest,最強の敵
-"The most dangerous enemy: level, health, armor and weapon.",最も危険な敵。レベル、体力、防具、武器から判断します。
-Weakest,最弱の敵
-Whoever has the least health left. Finish them.,残り体力が最も少ない相手。とどめを刺します。
-Attacking you,あなたへの攻撃者
-Whoever is fighting you.,あなたと戦っている相手。
-Attacking the party,パーティへの攻撃者
-Whoever is fighting you or another companion.,あなた、または他の従者と戦っている相手。
-Your target,あなたの標的
-The enemy you are fighting or aiming at.,あなたが戦っている、または狙っている敵。
-Marked enemy,印をつけた敵
-One enemy you mark on the battlefield.,戦場で印をつけた敵1体。
-Casters and archers,術者と弓兵
-"Enemies who fight from behind their line: spells, a staff, healing or a bow.",戦列の後ろから戦う敵。魔法、杖、回復、弓を使う者です。
-Formation,隊列
-Take the position from Walk With Me's formation.,Walk With Meの隊列から位置を決めます。
-Free,自由
-Go wherever the fight takes them.,戦いの流れに任せて動きます。
-Guard you,護衛
-Only fight enemies near you or attacking you.,あなたの近くにいる敵、またはあなたを攻撃する敵とだけ戦います。
 Hold back,後方待機
-Stay behind and fight only what comes close.,後ろに下がり、近づいてきた敵とだけ戦います。
-Front line,最前線
-Meet the enemies furthest forward first.,最も前に出ている敵から迎え撃ちます。
-With me,随伴
-Everyone back to what their role suggests.,全員を役割に応じた状態に戻します。
 Attack!,攻撃！
-Everyone goes all out for your target.,全員があなたの標的に総攻撃をかけます。
 To me!,集合！
-Everyone comes back to your side and fights there.,全員があなたのそばに戻り、そこで戦います。
-Everyone stays back and meets only what comes for the party.,全員が後方に留まり、パーティに向かってくる敵だけを迎え撃ちます。
 As you were,通常行動
 Carries no melee weapon.,近接武器を持っていません。
 Carries no bow or crossbow.,弓もクロスボウも持っていません。
 Knows no attack spell and carries no staff.,攻撃魔法を知らず、杖も持っていません。
-One-Handed,片手武器
-Two-Handed,両手武器
-Archery,弓術
-Block,防御
-Heavy Armor,重装
-Light Armor,軽装
-Sneak,隠密
-Destruction,破壊
-Restoration,回復
-Conjuration,召喚
-Alteration,変性
-Illusion,幻惑
-no enemy,敵0体
-one enemy,敵1体
-two enemies,敵2体
-three enemies,敵3体
-four enemies,敵4体
-five enemies,敵5体
-six enemies,敵6体
 {} enemies,敵{}体
 {} taunts: {} {}.,{}の挑発：{}{}。
 {} draws the fire: {} {}.,{}が攻撃を引きつけた：{}{}。
@@ -164,7 +89,7 @@ Position,位置取り
 Auto,自動
 Taunt without being told.,指示なしで挑発します。
 Heal without being told.,指示なしで回復します。
-Only tanks and healers have an ability of their own.,固有のスキルを持つのは、タンクとヒーラーだけです。
+Only tanks and healers have an ability of their own.,固有のアビリティを持つのは、タンクとヒーラーだけです。
 "Also with you: %s. Summons are protected and healed, not commanded.",同行者：%s。召喚獣は守られ回復されますが、命令は受けません。
 PARTY,パーティ
 Enable Fight With Me,Fight With Meを有効にする
@@ -301,14 +226,10 @@ Troubleshooting,問題の調査
 Log target decisions,標的の判断をログに記録
 Write every target change and role style to FightWithMe.log.,標的の変更と役割ごとの戦い方をすべてFightWithMe.logに書き出します。
 Every setting on this page back to its default.,このページの設定をすべて初期値に戻します。
-LB + D-pad down,LB + 十字キー下
-LB + D-pad up,LB + 十字キー上
-LB + Right-stick click,LB + 右スティック押し込み
 CONTROLS,操作
 KEY BINDINGS,キー割り当て
 Action,動作
 Key,キー
-Press a key...,キーを押してください...
 Clear,解除
 Attack! (everyone on your target),攻撃！（全員があなたの標的を攻撃）
 To me! (everyone guards you),集合！（全員があなたを護衛）
@@ -318,61 +239,24 @@ Gamepad,ゲームパッド
 In the battle plan,バトルプラン内
 What,操作内容
 Keyboard and mouse,キーボードとマウス
-Choose a companion,従者を選ぶ
-"Click a crest, Tab",紋章をクリック、Tab
-Move between rows,行を移動
 Up / Down,上 / 下
-D-pad up / down,十字キー上 / 下
-Pick or step a value,値を選ぶ・増減
-"Click, Left / Right",クリック、左 / 右
-D-pad left / right,十字キー左 / 右
-Give a party order,パーティ命令を出す
-"Click it, or its key",クリック、または対応するキー
-"Party orders row, A",パーティ命令の行でA
-Send someone after an enemy,敵に誰かを差し向ける
-Click the enemy,敵をクリック
-"Battlefield row, A",戦場の行でA
-Ability now / switch,スキル発動 / 切り替え
-Esc or the hotkey,Escまたはホットキー
 Commands pause in game menus. Avoid keys used by other mods or by quicksave and quickload.,ゲーム内メニューを開いている間、コマンドは無効になります。他のMODやクイックセーブ／クイックロードで使うキーは避けてください。
 The hotkey and the gamepad button back to their defaults.,ホットキーとゲームパッドのボタンを初期値に戻します。
-Party,パーティ
-Tanks,タンク
-Targeting,ターゲット
-Battle plan,バトルプラン
-Controls,操作
 Fight With Me: the battle plan needs SKSE Menu Framework 3.,Fight With Me：バトルプランにはSKSE Menu Framework 3が必要です。
-Taunts are switched off (Tanks settings).,挑発は無効です（タンクの設定）。
 Not yet: ready in {:.0f} s.,まだ使えません：あと{:.0f}秒。
-Could not break off to taunt.,戦闘の手を止められず、挑発できませんでした。
 Too tired: a taunt takes {:.0f} stamina.,疲労で挑発できません：スタミナを{:.0f}消費します。
 No enemy in sight within {:.0f}.,{:.0f}以内に敵が見当たりません。
 Taunted: {} turned on them.,挑発しました：{}が向かってきます。
 "Taunted, but {} shrugged it off.",挑発しましたが、{}には効きませんでした。
-Healing is switched off (Healers settings).,回復は無効です（ヒーラーの設定）。
-Down themselves.,本人が倒れています。
 Nobody within {:.0f} needs healing.,{:.0f}以内に回復が必要な者はいません。
 {} can't reach {}: {} instead.,{}は{}に届きません：代わりに{}。
 {} can't reach {}.,{}は{}に届きません。
 shooting,射撃で攻撃
 casting,魔法で攻撃
-Bodyguard,ボディガード
-Runs to your side and taunts everything that is on you.,あなたのそばへ駆けつけ、あなたに向かう敵をすべて挑発します。
-When your health drops below 40% with enemies on you.,敵に攻撃されてあなたの体力が40%を下回ったとき
-Volley,一斉射撃
-Looses five arrows in quick succession at their target; every other archer and mage turns on it too.,標的に矢を5本続けざまに放ちます。他のアーチャーとメイジも同じ標的を狙います。
-When a boss or an enemy well above their level joins the fight.,ボス、または自分よりレベルがかなり高い敵が戦闘に加わったとき
 War cry,ウォークライ
-A roar that staggers every enemy close around them.,近くにいる敵をすべてひるませる雄叫びを上げます。
-"When three or more enemies close in on them, or two when they are hurt.",敵3体以上に迫られたとき（傷ついているときは2体）
-Ward,防護
-"Hardens your skin with alteration: Oakflesh, then Stone, Iron and Ebony as they rise in level.",変性魔法であなたの肌を硬くします。オークフレッシュから始まり、レベルが上がるとストーン、アイアン、エボニーへ強化されます。
-"When enemies are on you or your health falls, and no ward of theirs is on you.",敵に迫られている、またはあなたの体力が減っていて、本人の防護がかかっていないとき
-Disarm,武装解除
-"When they meet a boss, a two-handed weapon, or someone at or above their level.",ボス、両手武器の相手、または自分以上のレベルの相手に遭遇したとき
 None,なし
 AUTO,自動
-ABILITIES,スキル
+ABILITIES,アビリティ
 Heal,回復
 "Taunt now
 Holds level {} and below  ·  {:.0f} reach  ·  {:.0f} s  ·  {:.0f} stamina","今すぐ挑発
@@ -392,25 +276,14 @@ Ready again {:.0f} s after use.{}","今すぐ{}
 Off: only when you press {}.","自動オン：{}、自分で発動します。
 オフ：「{}」を押したときだけ発動します。"
 healing,体力回復
-other,その他
 on,オン
 off,オフ
 {} heard you...,{}が聞き入れました...
-COMPANION,従者
-OVERHEAD,上空
 YOU,あなた
-"The overhead view moves the camera, so it needs Glide to the companion on (Battle plan settings, Camera).",上空視点ではカメラが動くため、「従者へカメラを寄せる」をオンにする必要があります（バトルプラン設定の「カメラ」）。
-"The whole fight from above: blue rings for the party, red for enemies, white for you. Indoors the ceiling is cut away above everyone's heads. Click an enemy to send someone after them.",戦闘全体を上空から見ます。青い輪が味方、赤が敵、白があなたです。屋内では全員の頭上にある天井を取り除きます。敵をクリックすると、誰かをその敵に向かわせます。
-The camera on the companion you are commanding.,指揮中の従者にカメラを合わせます。
-EVERYONE SENT,全員を差し向け中
  SENT, 差し向け中
  ENGAGES, 交戦
-Turn view,視点を回す
-Zoom,ズーム
-Right-drag,右ドラッグ
 Wheel,ホイール
 Mid-drag / WASD,中ボタンドラッグ / WASD
-The overhead view needs Glide to the companion (Battle plan settings).,上空視点には「従者へカメラを寄せる」が必要です（バトルプラン設定）。
 Sending someone after an enemy,敵への差し向け
 "While the battle plan is open, an enemy you send someone after is outlined, through walls. The outline goes when the plan closes.",バトルプランを開いている間、誰かを差し向けた敵に、壁越しでも見える輪郭線を表示します。プランを閉じると消えます。
 Outline marked enemies,印をつけた敵を輪郭表示
@@ -425,84 +298,44 @@ How far above the tallest head the cut goes. Raise it to keep more of the walls;
 Cut above heads,切り取る高さ
 "Bodyguard (tank), Volley (archer), War cry (bruiser), Ward (mage, healer) and Disarm (fighter): a button in the plan, and on their own where each companion's switch allows.",ボディガード（タンク）、一斉射撃（アーチャー）、ウォークライ（ブルーザー）、防護（メイジ、ヒーラー）、武装解除（ファイター）：プラン内のボタンで使えるほか、従者ごとのスイッチが許す範囲で自動でも使います。
 Role specials,役割ごとの特技
-Right-stick click,右スティック押し込み
-Left-stick click,左スティック押し込み
 "Held with the key. A key with no modifier works whatever else is held, so sprinting does not get in the way.",キーと同時に押します。修飾キーなしの割り当ては、他のキーを押していても反応するため、ダッシュ中でも邪魔になりません。
-Turn the view,視点を回す
-Drag with the right button,右ボタンでドラッグ
-Right stick,右スティック
-Mouse wheel,マウスホイール
 Overhead view,上空視点
-"Its key, or the button top left",対応するキー、または左上のボタン
-The button set above,上で設定したボタン
 "Select the binding, then press a key, holding Shift, Ctrl or Alt with it for a combination. Esc cancels; Delete clears.",割り当てを選んでからキーを押します。Shift、Ctrl、Altを押しながらでも割り当てられます。Escで取り消し、Deleteで解除します。
 Modifier,修飾キー
 Overhead view (in the plan),上空視点（プラン内）
 {} and {} are both on {}; only {} will happen.,{}と{}は両方とも{}に割り当てられています。実行されるのは{}だけです。
 Switches between the companion and the whole fight seen from above while the plan is open. The right stick turns the view either way.,プランを開いている間、従者の視点と戦闘全体の上空視点を切り替えます。どちらでも右スティックで視点を回せます。
  and {},（ほかに{}）
-Too hurt to stand in front of you.,傷が深く、あなたの前に立てません。
 {} rushes to your side.,{}があなたのそばへ駆けつけた。
 On the way to you.,あなたのもとへ向かっています。
 At your side; nobody is on you yet.,あなたのそばにいます。まだ誰もあなたに迫っていません。
-Nobody to fire at.,撃つ相手がいません。
-Nothing to shoot with.,撃つ手段がありません。
-Nobody close enough to stagger.,ひるませられる近さの相手がいません。
 {}'s war cry staggers {}.,{}のウォークライが{}をひるませた。
 War cry: {} staggered.,ウォークライ：{}をひるませた。
-"War cry, but nobody staggered.",ウォークライを放ったが、誰もひるまなかった。
 Your ward is still up ({:.0f} s).,防護はまだ続いています（{:.0f}秒）。
-No ward spell found in Skyrim.esm.,Skyrim.esmに防護の魔法が見つかりません。
 Not enough magicka for {} ({:.0f}).,{}に必要なマジカが足りません（{:.0f}）。
 {} did not take on you.,{}はあなたにかかりませんでした。
 {} wards you: {}.,{}があなたを守った：{}。
 {} on you.,あなたに{}がかかっています。
-Nobody to disarm.,武装解除する相手がいません。
 {} is too far ({:.0f} away).,{}は遠すぎます（距離{:.0f}）。
 {} holds no weapon to take.,{}は奪える武器を持っていません。
 {} is too strong to disarm (level {}).,{}は強すぎて武装解除できません（レベル{}）。
 {} held on to the {}.,{}は{}を手放さなかった。
 {} knocks the {} out of {}'s hands.,{0}が{2}の手から{1}を払い落とした。
 Disarmed {}: the {} is on the ground.,{}を武装解除：{}は地面に落ちた。
-Only in a fight.,戦闘中のみ使えます。
-Specials are switched off (Battle plan settings).,特技は無効です（バトルプランの設定）。
-Knocked about; could not.,体勢を崩されていて使えません。
-Nothing to do right now.,今は使う場面がありません。
  Braced: +{:.0f} armor.,身構え：防御力+{:.0f}。
 {} of the party,パーティの{}人
-the party,パーティ全員
 ", as ordered",（指示による）
-Rejuvenate is switched off (Healers settings).,マジカ回復強化は無効です（ヒーラーの設定）。
-Everyone's magicka is full.,全員のマジカが満タンです。
 {} rejuvenates you and the party: magicka {:.0f}% faster for {:.0f} s.,{}があなたとパーティのマジカ回復を強化：{:.0f}%速くなります（{:.0f}秒間）。
  ({} ran low),（{}が不足）
 Rejuvenated: magicka {:.0f}% faster for {:.0f} s.,マジカ回復強化：{:.0f}%速くなります（{:.0f}秒間）。
-The fight is over.,戦闘が終わったため。
-"Stays back, heals the whole party at once and quickens everyone's magicka.",後方に控え、パーティ全員を一度に回復し、全員のマジカの回復を速めます。
 {} lets {} go: {}.,{}は{}への対応をやめた：{}。
 the combat AI would not take them on,戦闘AIが相手にしなかったため
 {} is out of magicka and falls back to recover.,{}はマジカが尽き、回復のため後退します。
 they are too far away,遠すぎるため
-Only mages and healers have spells chosen for them.,魔法を選べるのは、メイジとヒーラーだけです。
-Spells can only be changed out of a fight.,魔法の変更は、戦闘外でのみ行えます。
-Braced,身構え
 +{:.0f} armor from their taunt,挑発による防御力+{:.0f}
-Rejuvenated,マジカ回復強化
 Magicka comes back {:.0f}% faster,マジカの回復が{:.0f}%速い
-Guarding you,護衛中
-"At your side, taking on whoever is on you",あなたのそばで、あなたを狙う敵を引き受けています
-Out of magicka,マジカ切れ
-Falling back until it comes back,マジカが戻るまで後退中
-Novice,素人
-Apprentice,見習い
-Adept,精鋭
-Expert,熟練者
-Master,達人
-Other,その他
 RIGHT HAND,右手 
 LEFT HAND,左手
-A Mage holds any spell but a heal.,メイジは、回復以外のどんな魔法でも手に持てます。
-A Healer holds any spell (Healers settings).,ヒーラーは、どんな魔法でも手に持てます（ヒーラーの設定）。
  (Apprentice from level 10),（レベル10から見習い）
  (Adept from level 25),（レベル25から精鋭）
 "
@@ -535,12 +368,9 @@ Ready again {:.0f} s after use.{}","今すぐマジカ回復強化
 Off: only when you press Rejuvenate.","自動オン：あなた、メイジ、ヒーラーのマジカが尽きたり尽きかけたりしたら、自分で発動します。
 オフ：「マジカ回復強化」を押したときだけ発動します。"
 SPELLS,魔法
-Their own choice,本人に任せる
   ·  both hands,  ·  両手
-Empty-handed now,今は素手
 Holding {} now,今は{}を持っています
 "They hold {} here in a fight, and no other spell.",戦闘中、この手には{}だけを持ちます。
-Left to them: they use whatever they think best.,本人任せ：最善と思う魔法を使います。
 Right hand,右手
 Left hand,左手
 "{}
@@ -548,7 +378,6 @@ Left hand,左手
 Choose to see every spell for this hand.","{}
 {}
 選ぶと、この手で使える魔法がすべて表示されます。"
-Every school,すべての系統
 spell,種
 spells,種
 {}  ·  {} {},{}  ·  {}{}
@@ -611,14 +440,11 @@ How long it lasts once the healer reaches level 60.,ヒーラーがレベル60�
 "Lasts {:.0f} s (ready again after {:.0f} s), {:.0f} s from level 30 ({:.0f} s), {:.0f} s from level 60 ({:.0f} s).",効果は{:.0f}秒間（{:.0f}秒後に再使用可）。レベル30以降は{:.0f}秒間（{:.0f}秒後）、レベル60以降は{:.0f}秒間（{:.0f}秒後）。
 "Each healer's line for the party, and whether they heal and rejuvenate on their own, is set per companion in the battle plan.",パーティに対する各ヒーラーの回復基準と、自動で回復・マジカ回復強化を行うかどうかは、バトルプランで従者ごとに設定します。
 Every healer setting on this page back to its default.,このページのヒーラーに関する設定をすべて初期値に戻します。
-Ability effects,スキルの演出効果
-"Staggers their opponent and knocks the weapon out of their hands, as the Disarm shout does, up to ten levels above their own.",相手をよろめかせ、武装解除の叫びのように武器を手から払い落とします。自分より10レベル上の相手まで有効です。
-Could not disarm right now.,今は武装解除できません。
+Ability effects,アビリティの演出効果
 {} kept their feet and the {}.,{}は踏みとどまり、{}も手放さなかった。
 right hand,右手 
 left hand,左手
 Their {} is theirs to choose again.,{}は、再び本人が選ぶようになりました。
-That is not a spell for the hands.,それは手に持つ魔法ではありません。
 A Mage leaves {} to a healer.,メイジは{}をヒーラーに任せます。
 {} is beyond a Healer of level {}.,{}は、レベル{}のヒーラーには扱えません。
 {} is cast from the {} only.,{}は{}でしか使えません。
@@ -629,21 +455,18 @@ hands,両手
 Taught {}; it is in their {} now.,{}を教えました。今は本人の{}にあります。
 {} in their {}.,{0}（本人の{1}）
 a spell,魔法
-"Stay at your side, weapons out, and fight from there: melee takes whatever comes near you, ranged shoots the nearest enemy.",武器を構えてあなたのそばに留まり、そこから戦います。近接の従者はあなたに近づく敵を、遠距離の従者は最も近い敵を迎え撃ちます。
 "A Healer holds any spell, with attack spells up to {}",ヒーラーは、どんな魔法でも手に持てます（攻撃魔法は{}まで）
 "Role strength, role guessing, what happens before a fight and standing down back to their defaults. Companions' orders are not touched.",役割の強さ、役割の推定、戦闘前の動作、戦闘解除を初期値に戻します。従者への命令は変更されません。
 "The spells you can give a healer's hands on their sheet: any heal, ward, armor, cloak or summons, and attack spells up to Novice, then Apprentice from level 10 and Adept from 25, never Expert or Master. On: attack spells of any strength too.",ヒーラーの手に持たせられる魔法：回復・防護・鎧・マント・召喚の各魔法と、素人までの攻撃魔法（レベル10から見習い、25から精鋭）。熟練者と達人は不可。オンにすると、どんな強さの攻撃魔法でも持たせられます。
 "With me (what To me! gives everyone): they keep this close to you and fight from there. Melee companions take anything that comes near you; archers and casters shoot the nearest enemy, however far.",随伴（「集合！」で全員に与えられる位置取り）：あなたからこの距離以内に留まり、そこから戦います。近接の従者はあなたに近づく敵を、アーチャーと術者は距離を問わず最も近い敵を迎え撃ちます。
-"Healing auras, protective barriers, wind and earth bursts, and weapon particles for abilities. Red marks enemies held by a taunt. Requires Triumvirate, Elemental Destruction Magic Redux and Vibrant Weapons (Fire Frost Shock); missing sources use simpler vanilla effects.",回復のオーラ、防護の障壁、風と大地の衝撃波、武器のパーティクルなど、スキルの演出効果です。挑発で引きつけた敵は赤くなります。Triumvirate、Elemental Destruction Magic Redux、Vibrant Weapons - Fire Frost Shock が必要です。足りないものは、より簡素なバニラの効果になります。
-Abilities,スキル
+"Healing auras, protective barriers, wind and earth bursts, and weapon particles for abilities. Red marks enemies held by a taunt. Requires Triumvirate, Elemental Destruction Magic Redux and Vibrant Weapons (Fire Frost Shock); missing sources use simpler vanilla effects.",回復のオーラ、防護の障壁、風と大地の衝撃波、武器のパーティクルなど、アビリティの演出効果です。挑発で引きつけた敵は赤くなります。Triumvirate、Elemental Destruction Magic Redux、Vibrant Weapons - Fire Frost Shock が必要です。足りないものは、より簡素なバニラの効果になります。
+Abilities,アビリティ
 Volley! {} looses {} arrows at {}.,一斉射撃！{0}が{2}に矢を{1}本放った。
 Volley: {} arrows at {}.,一斉射撃：{1}に矢を{0}本。
 {} heals {}: {}.,{}が{}を回復した：{}。
 Healed {}: {} each.,{}を回復：{}ずつ。
 +{:.0f} health,体力+{:.0f}
-Could not cast it.,魔法を使えませんでした。
 {} wards you and {} more: {}.,{}があなたと他{}人を護った：{}。
-They carry no special ability right now.,今は使えるスキルがありません。
 "
 Holds level {} and below  ·  {:.0f} reach  ·  {:.0f} stamina","
 レベル{}以下を確実に引きつける  ·  射程{:.0f}  ·  スタミナ{:.0f}"
@@ -678,3 +501,328 @@ How far away an enemy can be and still count as in view. 2500 is about a long bo
 Sight range,視認距離
 Theme,テーマ
 "Vanilla: charcoal and silver. Oxblood: the original red. Nordic: engraved stone, beveled metal and inset highlights. All use the same windows and controls. Applies to the battle plan, Paths, notices and these settings.",Vanilla：チャコールとシルバー。Oxblood：従来の赤。Nordic：彫刻を施した石、面取りした金属、はめ込みの強調。どれも同じウィンドウと操作です。バトルプラン、Paths、通知、これらの設定に反映されます。
+When it is needed.,必要になったとき
+"On their own, ",自動で使う場面：
+{} is too far to hear it.,{}は遠すぎて聞こえません。
+{} challenges {}: it turns on them for {:.0f} s.,{0}が{1}に挑んだ：{2:.0f}秒間、{1}の矛先が{0}に向かう。
+Challenged {}: on them for {:.0f} s.,{}に挑みました：{:.0f}秒間、自分を狙わせます。
+"{}: ""Stand fast!"" +{:.0f} armor for {} of the party.",{0}：「踏みとどまれ！」パーティの{2}人の防御力+{1:.0f}。
+Stand fast: +{:.0f} armor for {} of you.,鉄壁：{1}人に防御力+{0:.0f}。
+; {} back on their feet,、{}人が立ち上がった
+{} calls up Renewal: {:.0f}% health a second for {:.0f} s{}.,{0}が癒しの雨を発動：毎秒体力{1:.0f}%、{2:.0f}秒間{3}。
+Renewal: {:.0f}% a second for {:.0f} s.,癒しの雨：毎秒{:.0f}%、{:.0f}秒間。
+{} goes berserk: +{:.0f}% damage for {:.0f} s.,{0}がバーサーク状態になった：{2:.0f}秒間、ダメージ+{1:.0f}%。
+Berserk: +{:.0f}% damage.,バーサーク：ダメージ+{:.0f}%。
+{} is out of reach ({:.0f} away).,{}は射程外です（距離{:.0f}）。
+{} sunders {}: -{:.0f} armor for {:.0f} s.,{0}が{1}の守りを砕いた：{3:.0f}秒間、防御力-{2:.0f}。
+Sundered {}: -{:.0f} armor.,{}の守りを砕いた：防御力-{:.0f}。
+{} shakes the earth: {} within {:.0f} go down.,{0}が大地を揺らした：{2:.0f}以内の{1}が倒れた。
+Earthshaker: {} in reach.,地鳴らし：射程内に{}。
+{} gets a second wind.,{}が息を整えた。
+Second wind: {:.0f}% health back.,立て直し：体力{:.0f}%回復。
+{} sets themselves to riposte.,{}が反撃の構えをとった。
+"Riposte: every blocked blow answered, {:.0f} s.",切り返し：防いだ攻撃にすべて反撃、{:.0f}秒間。
+Cleave: {} in reach.,薙ぎ払い：射程内に{}。
+{} steadies their aim: +{:.0f}% damage for {:.0f} s.,{0}が狙いを定めた：{2:.0f}秒間、ダメージ+{1:.0f}%。
+Deadeye: +{:.0f}% damage.,狙撃：ダメージ+{:.0f}%。
+Pinning shot at {}.,{}へ影縫い。
+{} calls down a rain of {} arrows on {}.,{0}が{2}に矢を{1}本降り注がせた。
+Arrow rain: {} arrows on {}.,矢の雨：{1}に矢{0}本。
+{}'s magicka surges: {:.0f}x as fast for {:.0f} s.,{0}のマジカが急回復：{2:.0f}秒間、{1:.0f}倍の速さ。
+Arcane surge: magicka {:.0f}x as fast.,マジカ奔流：マジカ{:.0f}倍の速さ。
+{} at {}.,{0}を{1}に放った。
+Magnus is already with them ({:.0f} s).,マグナスはすでに効いています（残り{:.0f}秒）。
+{} draws on Magnus: magicka without end for {:.0f} s.,{}がマグナスの力を引き出した：{:.0f}秒間、マジカが尽きない。
+Magnus: magicka without end for {:.0f} s.,マグナス：{:.0f}秒間、マジカが尽きません。
+{} makes a last stand.,{}が最後の抵抗を見せた。
+{}'s guardian spirit pulls you back: +{:.0f}% health.,{}の守護霊があなたを引き戻した：体力+{:.0f}%。
+{} fletches more {}.,{}が{}を追加で作った。
++{:.0f} armor from a battle cry,雄叫びによる防御力+{:.0f}
++{:.0f} armor,防御力+{:.0f}
+{:.0f}% of their health,体力の{:.0f}%
+{} is not one of the abilities they carry.,{}は、持ち込んでいるアビリティではありません。
+{} {} on {}.,{0}が{2}に立ち向かう。
+ and , と 
+"{} now  ·  rank {}
+{}
+Ready again {:.0f} s after use.","現在の{}  ·  ランク{}
+{}
+使用後{:.0f}秒で再使用できます。"
+"{}  ·  rank {}
+{}
+Choose to open their path: rank it up, or carry something else.","{}  ·  ランク{}
+{}
+選ぶとツリーを開きます：ランクを上げるか、別のアビリティを持ち込めます。"
+{} of {} point{} spent,{0}/{1}ポイント使用
+{} TO SPEND,残り{}ポイント
+"Put a leftover point straight into the bonus: {} now, {} with it.",余ったポイントをそのままボーナスに入れます：現在は{}、入れると{}になります。
+Points go straight into the bonus once every node on this path is mastered: {} more rank{} to go.,このツリーのすべてのノードを習熟すると、ポイントをそのままボーナスに入れられます。あと{0}ランクです。
+The bonus is at its highest: {}.,ボーナスは最大です：{}。
+No points left. One more comes with every level.,ポイントが残っていません。レベルが上がるごとに1ポイント増えます。
+{} faster with their weapons in a fight,戦闘中の武器の攻撃速度が{}上がる
+"{} less damage from every blow, arrow and harmful spell ({} at most)",打撃・矢・有害な魔法から受けるダメージが{}減る（最大{}）
+"{} more to all the healing they do: their abilities, the spells they cast and the potions they drink",アビリティ、使う魔法、飲むポーションなど、あらゆる回復量が{}増える
+{} more damage with their weapons in a fight,戦闘中の武器ダメージが{}増える
+{} more chance that an arrow they shoot is not used up ({} at most),放った矢が消費されない確率が{}上がる（最大{}）
+{} less magicka for every spell they cast ({} off at most),魔法を使うときのマジカ消費が{}減る（最大{}減）
+"Path bonus. Every point spent on the {}: {}.
+{} spent here: {}.","ツリーボーナス。{}に使うポイント1つごとに、{}。
+ここに{}ポイント使用：{}。"
+"
+{} of them put straight into the bonus.","
+そのうち{}ポイントはボーナスに直接入れています。"
+"
+At its highest: more points change nothing.","
+最大です：これ以上ポイントを入れても変わりません。"
+"
+Every node is mastered: leftover points can go straight into it.","
+すべてのノードを習熟しました：余ったポイントをそのままボーナスに入れられます。"
+"
+Once every node here is mastered, leftover points can go straight into it.","
+ここのすべてのノードを習熟すると、余ったポイントをそのままボーナスに入れられます。"
+"
+Only while they are a {}; they are a {} now.","
+役割が{}のときだけ有効です。現在は{}です。"
+"Unlimited points are on. Press again to put them back exactly as they were before: every rank bought since is given back, and anything they carry that they no longer know is swapped for a default.",ポイント無制限がオンです。もう一度押すと元の状態にそのまま戻ります：その後に買ったランクはすべて返却され、習得していないアビリティを持ち込んでいた場合は初期のものに差し替えられます。
+UNLIMITED: ON,無制限：オン
+UNLIMITED,無制限
+CHEATER,チート
+Cheater,チート使用中
+TRAIT  /  ALWAYS ON,特性  /  常時有効
+ABILITY  /  EVERYONE STARTS WITH IT,アビリティ  /  全員が最初から習得
+Branch of {},{}の分岐
+Rank {} of {},ランク{}/{}
+Not learned yet,未習得
+Ready again in {:.0f} s,再使用まで{:.0f}秒
+Branches {} / {},分岐 {} / {}
+{} at rank {},{}（ランク{}）
+Needs {} first,まず{}が必要です
+"In every fight, never pressed",毎回の戦闘で有効（押す必要なし）
+"Opens with {} points spent on this path, below it. {} so far.",このツリーのこれより下の段に{}ポイント使うと開きます。現在{}ポイントです。
+Opens once every other node on this path is mastered: {} more rank{} to go.,このツリーの他のすべてのノードを習熟すると開きます。あと{0}ランクです。
+A branch never outranks its ability: {} rank {} first.,分岐は、元のアビリティのランクを超えられません。まず{}をランク{}にしてください。
+"Needs {} points, and {} are left to spend.",{}ポイントが必要ですが、使えるのは残り{}ポイントです。
+No points yet: the first comes at level {}.,まだポイントがありません：最初の1ポイントはレベル{}で得られます。
+INTO THE BONUS,ボーナスへ
+"Every node here is mastered: put a leftover point straight into the path bonus, {} now, {} with it.",ここのすべてのノードを習熟しました：余ったポイントをそのままツリーボーナスに入れられます（現在{}、入れると{}）。
+RANK UP,ランクアップ
+LEARN,習得
+MASTERED,習熟
+Mastered,習熟済み
+CAPSTONE,最上位
+ABILITY,アビリティ
+Give back a rank.,ランクを1つ戻します。
+INTO A FIGHT,戦闘に持ち込む
+CARRIED ON THIS PATH,このツリーで持ち込み中
+Carrying waits for the fight to end,持ち込みの変更は戦闘後に行えます
+Choose a slot for {},{}を入れるスロットを選んでください
+AGAIN: ALL {} BACK,もう一度：{}ポイントすべて返却
+{}  /  LEVEL {},{}  /  レベル{}
+PERK POINTS,パークポイント
+Available to spend,使えるポイント
+{}: their role now. What they learn here they use in a fight.,{}：現在の役割です。ここで習得したものは戦闘で使われます。
+{}: these perks and their bonus apply when they take the {} role.,{}：このパークとボーナスは、{}の役割に就いたときに適用されます。
+STARTING ABILITY,初期アビリティ
+FINAL TIER,最終段階
+SECOND TIER,第2段階
+5 POINTS TO OPEN,5ポイントで解放
+Other perk ranks mastered: {} / {},他のパークのランク習熟：{} / {}
+INNATE TRAITS  /  ALWAYS ACTIVE,固有の特性  /  常時有効
+Rank {} / {},ランク {} / {}
+CARRIED INTO BATTLE,戦闘に持ち込み中
+Two abilities for this path,このツリー用のアビリティ
+Rank {},ランク{}
+Click outside to return to the tree,外側をクリックするとツリーに戻ります
+Select a perk to inspect,パークを選ぶと詳細を確認できます
+Enter to learn   /   1 or 2 to equip,Enterで習得   /   1か2で装備
+"Explore abilities, upgrades and traits",アビリティ、強化、特性を確認
+"{} earns a point for every level past {}, counted from the highest level they have reached, so someone met late arrives with points to spend. The same points serve all six paths.",{0}は、{1}を超えるレベルごとに1ポイントを得ます（到達した最高レベルで数えるので、後から出会った従者も最初からポイントを持っています）。同じポイントを6つのツリーすべてに使えます。
+"One for each role. Points can go into any of them, but only the path of the role {} has now counts in a fight. Q and E, the triggers or the tabs turn between them.",役割ごとに1つあります。ポイントはどのツリーにも使えますが、戦闘で有効なのは{}の現在の役割のツリーだけです。QキーとEキー、トリガー、タブで切り替えます。
+"Spend points here, or with Enter (A on a pad). Out of a fight a rank comes back for free: the small button beside this one, or a right-click on the node.",ここ、またはEnterキー（パッドではAボタン）でポイントを使います。戦闘外なら、ランクは無料で戻せます：このボタンの隣の小さなボタン、またはノードの右クリックです。
+"Spend points here, or with Enter (A on a pad). Giving points back is switched off in this game, so choose with care.",ここ、またはEnterキー（パッドではAボタン）でポイントを使います。このゲームではポイントを戻す機能がオフなので、慎重に選んでください。
+GUIDE,ガイド
+GUIDE  /  {} OF {},ガイド  /  {} / {}
+used in a fight,戦闘で使う
+adds to its ability,アビリティを強化
+always on,常時有効
+Back / Next,戻る / 次へ
+Close guide,ガイドを閉じる
+Give back,戻す
+BRANCH,分岐
+TRAIT,特性
+BEGIN,はじめる
+DONE,完了
+NEXT,次へ
+Next,次へ
+Learn,習得
+Carry,持ち込み
+Path,役割
+Guide,ガイド
+Right-click,右クリック
+PATHS - FOLLOWER ABILITY SKILLTREE,PATHS - 従者専用ツリー
+Your Followers Are Guided by Their Path,従者の能力は、ツリーで決まる
+"A companion's path opens from their card in the battle plan: the Path tile, or one of the two abilities they carry.",従者のツリーは、バトルプランの従者カードから開きます：「ツリー」タイル、または持ち込んでいる2つのアビリティのどちらかです。
+Values are only modifiable via INI or by removing Paths,値の変更は、INIファイルで行うか、Pathsを外したときだけ可能です。
+Paths is installed: the Tanks and Healers settings follow FightWithMe.ini{}.,Pathsが導入されています：タンクとヒーラーの設定は FightWithMe.ini の値に従います{}。
+; your {} change(s) there are kept for when it is removed,（Pathsを外したときのために、そこでの変更{}件は保持されます）
+Already at its highest rank.,すでに最高ランクです。
+No perk points left to spend.,使えるパークポイントが残っていません。
+Needs more points spent on this path first.,まず、このツリーにもっとポイントを使う必要があります。
+A branch cannot be ranked above its ability.,分岐のランクは、元のアビリティのランクを超えられません。
+Every companion keeps the first rank of this ability.,このアビリティの最初のランクは、全従者が最初から持っています。
+Other ranks on this path depend on it.,このツリーの他のランクが、これに依存しています。
+Not learned yet.,まだ習得していません。
+No rank bought here.,ここにはランクを買っていません。
+Not on this path.,このツリーにはありません。
+Giving points back is switched off (FightWithMePaths.ini).,ポイントを戻す機能はオフです（FightWithMePaths.ini）。
+"Every other node on this path must be mastered first, every rank of it.",まず、このツリーの他のすべてのノードを、全ランク習熟する必要があります。
+Unlimited points are switched off (FightWithMePaths.ini).,ポイント無制限はオフです（FightWithMePaths.ini）。
+Points go into the path bonus once every node on this path is mastered.,ツリーボーナスへのポイントは、このツリーのすべてのノードを習熟すると入れられます。
+The path bonus is at its highest.,ツリーボーナスは最大です。
++{} armor,防御力+{}
+-{} armor,防御力-{}
+-{}% damage,ダメージ-{}%
+{} s,{}秒
++{} s,+{}秒
+-{} s,-{}秒
+{}% health,体力{}%
+-{}% undead,アンデッド体力-{}%
+{}% magicka,マジカ{}%
+{}% stamina,スタミナ{}%
++{}% stamina,スタミナ+{}%
++{}% magicka,マジカ+{}%
+{} more,他{}人
++{}% resist,耐性+{}%
+{}% a second,毎秒{}%
+{} reach,範囲{}
++{} reach,範囲+{}
+light stagger,軽いひるみ
+firm stagger,中程度のひるみ
+heavy stagger,強いひるみ
+-{}% resists,耐性-{}%
+{}x as often,頻度{}倍
++{} levels,レベル+{}
+{}x damage,ダメージ{}倍
+{} a second,毎秒{}
+"{} arrows, {} s",矢{}本・{}秒
+{} arrows,矢{}本
++{} arrows,矢+{}本
+{}x magicka,マジカ{}倍
+{} s  ·  +{}%,{}秒  ·  +{}%
+{} s  ·  +{}%  ·  ward,{}秒  ·  +{}%  ·  防護
+back up,立ち上がる
+a second tremor,2度目の衝撃
+knocked down,転倒
+all around,全周囲
+a second arrow,2本目の矢
+everyone,全員
+staggers,ひるませる
+disarms,武器を奪う
+twice,2回
+lightly,軽く
+firmly,しっかりと
+attack speed,攻撃速度
+damage taken,被ダメージ
+arrows kept,矢の温存率
+magicka cost,マジカ消費
+damage,ダメージ
+Challenges every enemy in reach. Those it holds turn on them for {} s.,射程内の敵すべてを挑発します。挑発された敵は{}秒間、自分に襲いかかります。
+Each taunt braces them with +{} armor for as long as it holds.,挑発するたび、その効果が続く間、防御力+{}。
+Enemies a taunt holds deal {}% less damage.,挑発で引きつけた敵が与えるダメージが{}%減ります。
+"Runs to your side when you are in trouble and takes on whoever is on you, for {} s.",あなたが危うくなると駆けつけ、あなたを襲っている敵を{}秒間引き受けます。
+"While they guard you, you have +{} armor.",護衛している間、あなたの防御力が+{}されます。
+"Arriving at your side, they stagger every enemy within {:.0f} of you.",あなたのそばに駆けつけたとき、あなたの{:.0f}以内にいる敵をすべてひるませます。
+"One enemy, any level, bosses too: it turns on them and stays on them for {} s.",敵1体を対象に（レベル不問、ボスも可）、{}秒間、自分を狙わせ続けます。
+The challenged enemy deals {}% less damage while it holds.,挑発された敵は、引きつけられている間、与えるダメージが{}%減ります。
+"While their challenge holds, they deal {}% more damage.",挑発が続いている間、自分の与えるダメージが{}%増えます。
+A battle cry that steels the party: everyone within {:.0f} has +{} armor for {:.0f} s.,仲間を奮い立たせる雄叫び：{0:.0f}以内の全員の防御力が{2:.0f}秒間+{1}されます。
+Stand Fast also gives {}% resistance to magic.,鉄壁の効果に、魔法耐性+{}%が加わります。
+Stand Fast also gives back {}% of everyone's stamina.,鉄壁の効果で、全員のスタミナが{}%回復します。
++{} armor while they fight.,戦っている間、防御力+{}。
+They bash {}x as often and raise the shield sooner.,シールドバッシュの頻度が{}倍になり、盾を構えるのも早くなります。
+"Once a fight, falling below a quarter of their health, they recover {}% of it and gain +{:.0f} armor for {:.0f} s.",戦闘中に1度、体力が4分の1を下回ると、体力の{}%を回復し、防御力+{:.0f}を{:.0f}秒間得ます。
+"Heals you, every companion and their summons within reach by {}% of each one's health. Not a spell: no magicka.",射程内のあなた、全従者、その召喚物を、それぞれの体力の{}%ぶん回復します。魔法ではないので、マジカは不要です。
+Heal is ready {} s sooner.,回復の再使用までの時間が{}秒短くなります。
+Undead within reach of a heal lose {}% of their health to it (a boss half that).,回復の射程内にいるアンデッドは、体力の{}%を失います（ボスはその半分）。
+Your magicka and every companion's comes back twice as fast for {} s.,あなたと全従者のマジカが{}秒間、2倍の速さで回復します。
+Rejuvenate also restores {}% of everyone's magicka at once.,マジカ回復強化は、全員のマジカを即座に{}%回復させます。
+"While Rejuvenate lasts, stamina comes back {}% faster too.",マジカ回復強化の効果中は、スタミナの回復も{}%速くなります。
+Hardens your skin with {} for {:.0f} s.,{}で、{:.0f}秒間あなたの肌を硬くします。
+Every companion is warded too.,全従者にも防護がかかります。
+"{} other {} warded too, the most hurt first.",他の従者{0}人にも防護がかかります（負傷の重い順）。
+Whoever is warded resists magic by {}% while it lasts.,防護を受けた者は、効果中、魔法耐性が{}%上がります。
+Whoever is warded is also wrapped in Flame Cloak for {:.0f} s.,防護を受けた者は、{:.0f}秒間 フレイム・クロークもまといます。
+Everyone within reach regains {}% of their health every second for {:.0f} s.,射程内の全員が、毎秒体力の{}%ずつを{:.0f}秒間回復します。
+Renewal lasts {} s longer.,癒しの雨の持続時間が{}秒延びます。
+Anyone down within reach when Renewal starts gets straight back up with a third of their health.,癒しの雨の開始時に射程内で倒れている者は、体力の3分の1で即座に立ち上がります。
+Heal and Renewal give {}% more to anyone below a third of their health.,体力が3分の1を下回っている者への、回復と癒しの雨の効果が{}%増えます。
+Their own magicka comes back {}% faster while they fight.,戦っている間、自分のマジカの回復が{}%速くなります。
+"Once a fight, when your health falls below {:.0f}%, they heal you for {}% of it at once, wherever they are.",戦闘中に1度、あなたの体力が{:.0f}%を下回ると、どこにいてもあなたの体力の{}%を即座に回復します。
+A roar that staggers every enemy within {} {}.,{0}以内の敵すべてを{1}ひるませる雄叫び。
+The roar gives allies within {:.0f} back {}% of their stamina.,雄叫びで、{:.0f}以内の味方のスタミナが{}%回復します。
+Enemies it staggers deal {}% less damage for {:.0f} s.,ひるんだ敵は{1:.0f}秒間、与えるダメージが{0}%減ります。
+"{:.0f} s of fury: {}% more damage, and a power attack at every chance.",{:.0f}秒間の猛威：ダメージ{}%増加、チャンスのたびに強攻撃を繰り出します。
+Each kill while berserk heals {}% of their health and adds 3 s.,バーサーク中に敵を倒すたび、体力が{}%回復し、持続時間が3秒延びます。
++{} armor while berserk.,バーサーク中、防御力+{}。
+"A blow that breaks their target's guard: {} less armor for {:.0f} s, so everyone hits it harder.",標的の守りを砕く一撃：{1:.0f}秒間、標的の防御力が{0}下がり、全員の攻撃が通りやすくなります。
+The blow also staggers them {}.,この一撃は標的を{}ひるませます。
+"Sunder also strips {}% of its resistance to magic, fire, frost and shock.",鎧砕きは、標的の魔法・炎・冷気・電撃への耐性も{}%奪います。
+Slams the ground: every enemy within {} is knocked off their feet and takes {}x their weapon's damage.,地面を打ちつけ、{}以内の敵すべてを転倒させて、武器ダメージの{}倍を与えます。
+A second tremor 1.5 s later staggers everyone still standing.,1.5秒後に2度目の衝撃が走り、まだ立っている敵をすべてひるませます。
+Earthshaker reaches {} further.,地鳴らしの範囲が{}広がります。
+They power attack {}x as often.,強攻撃の頻度が{}倍になります。
+Each kill heals {}% of their health.,敵を倒すたび、体力が{}%回復します。
+{}% more damage against enemies below {:.0f}% health.,体力{1:.0f}%未満の敵へのダメージが{0}%増えます。
+"Knocks the weapon out of their opponent's hands, up to {} levels above their own.",相手の手から武器を打ち落とします（自分よりレベルが{}高い相手まで）。
+A disarmed enemy has {} less armor for {:.0f} s.,武器を失った敵は、{1:.0f}秒間、防御力が{0}下がります。
+Disarm also sweeps them off their feet.,武器を打ち落とすとき、足も払って転倒させます。
+Catches their breath mid-fight: {}% of their health and {}% of their stamina back.,戦いの最中に息を整えます：体力が{}%、スタミナが{}%回復します。
++{} armor for {:.0f} s after.,その後{1:.0f}秒間、防御力+{0}。
+Second Wind is ready {} s sooner.,立て直しの再使用までの時間が{}秒短くなります。
+"For {} s, every blow they block staggers whoever struck it.",{}秒間、防いだ攻撃はすべて、攻撃してきた相手をひるませます。
+Each riposte also deals {}x their weapon's damage.,反撃のたびに、武器ダメージの{}倍も与えます。
+"The first blow they turn aside also disarms the attacker, if the weapon can be taken.",最初にいなした攻撃の相手は、武器を奪える場合、武器を失います。
+A sweeping power attack: every enemy within {:.0f} in front of them takes {}x their weapon's damage and staggers.,薙ぎ払う強攻撃：正面{:.0f}以内の敵すべてに、武器ダメージの{}倍を与えてひるませます。
+"Cleave hits all around them, not only in front.",薙ぎ払いが正面だけでなく、周囲すべてに当たります。
+Everyone Cleave hits bleeds {} health a second for {:.0f} s.,薙ぎ払いが当たった敵は、{1:.0f}秒間、毎秒体力を{0}失います。
+"They work round to their opponent's side, and deal {}% more damage.",相手の側面に回り込み、ダメージが{}%増えます。
+Stamina comes back {}% faster while they fight.,戦っている間、スタミナの回復が{}%速くなります。
+{}% more damage against an opponent who is staggered or disarmed.,ひるんでいる、または武器を失った相手へのダメージが{}%増えます。
+Looses {} arrows in quick succession at their target; every archer and mage turns on it for {} s.,標的に矢を{}本、立て続けに放ちます。アーチャーとメイジ全員が{}秒間、その標的を狙います。
+You and the party deal {}% more weapon damage while a volley lasts.,一斉射撃の間、あなたとパーティの武器ダメージが{}%増えます。
+The volley's target has {} less armor while it lasts.,一斉射撃の間、標的の防御力が{}下がります。
+"{:.0f} s of steady aim: {}% more damage, and they hold their ground.",{:.0f}秒間の精密射撃：ダメージ{}%増加、その場を動かず射撃します。
+"While Deadeye lasts, {}% more on top against casters and archers.",狙撃の間、術者とアーチャーへのダメージがさらに{}%増えます。
+Deadeye lasts {} s longer.,狙撃の持続時間が{}秒延びます。
+"An arrow that pins their target in place, staggering it again and again for {} s. A boss shrugs it off.",標的を釘付けにする矢。{}秒間、ひるませ続けます。ボスには効きません。
+"The pin lasts {} s longer, and holds a boss {}% of the time.",釘付けが{}秒長くなり、ボスも{}%の時間は押さえ込めます。
+A second arrow pins the nearest enemy beside the first.,2本目の矢が、最初の標的の隣にいる最も近い敵も釘付けにします。
+"{} arrows fall around their target over {:.0f} s, within {:.0f}. Conjured: none leave the quiver.",標的の周囲{2:.0f}以内に、{1:.0f}秒かけて矢が{0}本降り注ぎます。魔力で生み出した矢なので、矢筒の矢は減りません。
+{} more arrows fall.,降り注ぐ矢が{}本増えます。
+Every enemy under the rain staggers.,矢の雨の下にいる敵はすべてひるみます。
+"Out of a fight, they make arrows of the kind they shoot until they carry {}.",戦闘外では、使っている種類の矢を、{}本持つまで自作します。
+"They step back from melee to keep shooting, {}x as readily.",接近戦から後退して射撃を続ける頻度が{}倍になります。
+{}% more weapon damage while they fight.,戦っている間、武器ダメージが{}%増えます。
+{:.0f} s of arcane surge: their magicka flows back {}x as fast.,{:.0f}秒間のマジカ奔流：マジカの回復が{}倍の速さになります。
+Arcane Surge also restores {}% of their magicka at once.,マジカ奔流は、自分のマジカも即座に{}%回復させます。
+"While it lasts, your magicka and the party's flows back {}% faster too.",効果中は、あなたとパーティのマジカの回復も{}%速くなります。
+"Hurls a free {} destruction spell of their element at their target: fire, frost or shock.",{}の破壊魔法を、得意な属性（炎・冷気・電撃）で標的に放ちます。マジカは不要です。
+"The enemy it strikes loses {}% of its fire, frost and shock resistance for {:.0f} s.",命中した敵は、{1:.0f}秒間、炎・冷気・電撃への耐性を{0}%失います。
+"Casts it twice, the second at another enemy if one is near.",2回放ちます。近くに別の敵がいれば、2発目はそちらを狙います。
+The power of Magnus: for {} s their magicka never runs dry.,マグナスの力：{}秒間、マジカが尽きません。
+"For {} s their magicka never runs dry, and their destruction spells strike {}% harder.",{}秒間、マジカが尽きず、破壊魔法の威力が{}%増えます。
+"For {} s their magicka never runs dry, their destruction spells strike {}% harder, and they resist magic by {}%.",{}秒間、マジカが尽きず、破壊魔法の威力が{}%増え、魔法耐性が{}%上がります。
+Magicka comes back {}% faster while they fight.,戦っている間、マジカの回復が{}%速くなります。
+"Resists magic by {}%, and absorbs {}% of the spells cast at them.",魔法耐性が{}%上がり、自分に向けられた魔法の{}%を吸収します。
+"Whoever they fight loses {}% of its fire, frost and shock resistance while they do.",戦っている相手は、炎・冷気・電撃への耐性が{}%下がります。
+"{} has {} perk point{} to spend: Battle plan, Path.",{0}に使えるパークポイントが{1}あります：バトルプランのツリーから使えます。
+"{} companions have perk points to spend: Battle plan, Path.",{}人の従者に、使えるパークポイントがあります：バトルプランのツリーから使えます。
+{} learns {}.,{}が{}を習得した。
+{}: {} rank {}.,{0}：{1}のランクが{2}になりました。
+{} gives back a rank of {}.,{}が{}のランクを1つ戻した。
+{} starts the {} over: {} point{} back.,{0}が{1}をやり直した：{2}ポイントが戻りました。
+{} carries {} into a fight.,{}が{}を戦闘に持ち込む。
+{}: a point into the {}'s bonus ({} there).,{0}：{1}のボーナスに1ポイント（合計{2}）。
+{} takes a point back out of the {}'s bonus.,{0}が{1}のボーナスからポイントを1つ戻した。
+{} has unlimited points. Cheater.,{}はポイント無制限です。チート使用中。
+{} is back to the points they earned.,{}は、獲得したポイントの状態に戻った。

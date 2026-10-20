@@ -23,11 +23,12 @@ from fwm_trans2 import T2
 from fwm_trans3 import T3
 from fwm_trans4 import T4
 from fwm_trans5 import T5
+from fwm_trans6 import T6
 import fwm_cfg as C
 
 SRC, OUT, REP = sys.argv[1:4]
 # 訳文中の「Walk With Me」は、折り返しで「Walk With」と「Me」に分かれないよう、空白を NBSP(U+00A0) にする
-T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4, **T5}.items()}
+T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4, **T5, **T6}.items()}
 
 # ---- 表示可能な漢字の検査 ----------------------------------------------------------------
 # SKSE Menu Framework 3 (ImGui) は GetGlyphRangesJapanese の漢字2999字しか描画できず、範囲外は「?」になる。
@@ -65,6 +66,7 @@ def off(va):
 def u32(o): return struct.unpack_from('<I', data, o)[0]
 
 pool = bytearray(); cache = {}
+INLINE_JMP = []
 def add(b):
     if b in cache: return cache[b]
     o = len(pool); pool.extend(b); cache[b] = o; return o
@@ -187,6 +189,7 @@ for en, ja in T.items():
 if MISSING:
     raise SystemExit('rdataに無いキー(%d件): %s' % (len(MISSING), '\n'.join(repr(m[:70]) for m in MISSING)))
 claimed = {}          # 長さ即値アドレス -> lea アドレス
+NOLEN_FAIL = []
 sites = []            # dict
 slotsl = []
 inline_sites = []
@@ -204,12 +207,13 @@ for en, ja, va in targets:
                 claimed[la] = a; rec['len_at'] = la; rec['len_d'] = d
                 if lx.operands[0].type == X86_OP_REG and lx.operands[0].reg in (X86_REG_EBX, X86_REG_ESI, X86_REG_EDI, X86_REG_R12D, X86_REG_R13D, X86_REG_R14D, X86_REG_R15D):
                     log.append(('calleesaved-len', hex(la), hex(a), en[:40]))
-            elif '{' in en:
-                raise SystemExit('書式文字列なのに長さ即値が無い: %r @%x' % (en[:40], a))
+            elif '{' in en and not any(m_[0] == en and m_[1] == a for m_ in C.MANUAL_LEN + C.JOIN_LEN):
+                NOLEN_FAIL.append('書式文字列なのに長さ即値が無い: %r @%x' % (en[:60], a))
             sites.append(rec)
         else:
             inline_sites.append(dict(en=en, ja=ja, va=va, addr=a, mn=x.mnemonic))
 
+if NOLEN_FAIL: raise SystemExit('\n'.join(NOLEN_FAIL))
 # 特定の参照箇所だけを訳す文字列(同じ文字列が他の用途でも共有されているもの)
 for en, a_, ja in C.SITE_STR:
     L_ = len(en.encode('utf-8'))
@@ -218,7 +222,11 @@ for en, a_, ja in C.SITE_STR:
     va_ = vas_[0]; r_ = next(r_ for r_ in refs[va_] if r_[0] == a_); x_, f_ = r_[1], r_[2]
     assert x_.mnemonic == 'lea' and x_.size == 7 and x_.disp_offset == 3
     hit_ = find_len(f_, decode(f_)[1][a_], L_)
-    assert hit_, ('SITE_STRの長さ即値が無い', en, hex(a_))
+    if hit_ is None:
+        assert '{' not in en, ('SITE_STRの長さ即値が無い', en, hex(a_))   # 長さを strlen で求める箇所(ポインタ差し替えだけでよい)
+        sites.append(dict(kind='lea', en=en, ja=ja, va=va_, addr=a_, len_at=None))
+        log.append(('site-str-nolen', en, hex(a_), ja))
+        continue
     la_ = hit_[1].address - IB
     assert la_ not in claimed, ('長さ即値の二重取り', hex(la_))
     claimed[la_] = a_
@@ -266,7 +274,7 @@ for r in sites:
     assert ins.mnemonic == 'lea' and ins.size == 7 and ins.disp_offset == 3
     tgt = a + 7 + [op for op in ins.operands if op.type == X86_OP_MEM][0].mem.disp
     assert tgt == r['va'] and strs[tgt] == en.encode('utf-8'), (hex(a), en)
-    po = add(ja.encode('utf-8') + b'\0')
+    po = add(ja.encode('utf-8') + b'\0'); r['po'] = po
     disp = jva(po) - (a + 7)
     assert -2**31 <= disp < 2**31
     data[o + 3:o + 7] = struct.pack('<i', disp); changes.append((o + 3, 4, 'lea@%x' % a)); n_lea += 1
@@ -286,6 +294,17 @@ for en, a, kind in C.EXTRA_LEN:
         p = pos[-1] if ins.mnemonic in ('cmp', 'add') else pos[0]
         assert ins.mnemonic in ('cmp', 'lea', 'mov', 'add')
         data[o + p] = JL; changes.append((o + p, 1, 'xlen8@%x' % a))
+
+# ---- rdata の短い定数をその場で書き換える(Refused(...) の SSO 形) --------------------------------------
+for en, ja in C.INPLACE_RDATA.items():
+    eb, jb_ = en.encode('utf-8'), ja.encode('utf-8')
+    assert len(jb_) <= len(eb), ('訳文が原文より長い', en)
+    vas_ = rev.get(eb); assert vas_ and len(vas_) == 1, ('rdataの原文が1か所でない', en)
+    rs_ = refs.get(vas_[0], []); assert len(rs_) == 1 and rs_[0][1].mnemonic == 'movsd', ('参照が想定と違う', en, [hex(r[0]) for r in rs_])
+    buf_ = jb_ + b' ' * (len(eb) - len(jb_))
+    fo_ = off(vas_[0]); assert bytes(data[fo_:fo_ + len(eb) + 1]) == eb + b'\0'
+    data[fo_:fo_ + len(eb)] = buf_; changes.append((fo_, len(eb), 'inplace'))
+    log.append(('inplace', en, ja, hex(rs_[0][0])))
 
 # ---- ポインタ表スロット --------------------------------------------------------
 n_slot = 0
@@ -665,6 +684,12 @@ for g in REG_LIST:
             assert x.mnemonic == 'xor' and x.operands[0].reg == x.operands[1].reg or x.operands[1].type == X86_OP_IMM, ('退避レジスタ書き込みが単純でない', hex(x.address - IB))
             code += bytes(x.bytes); log.append(('reemit', hex(x.address - IB), x.mnemonic + ' ' + x.op_str))
     size = re_ - rs
+    if len(code) > size and size >= 5:
+        # 領域に収まらない: 領域先頭を jmp rel32 にして、.jpn 内のスタブ(置換コード + 元の続きへ jmp)で実行する。
+        # スタブのアドレスは後で確定する(INLINE_JMP)。置換コードは位置独立(レジスタ/メモリ即値のみ)。
+        INLINE_JMP.append((rs, re_, bytes(code)))
+        code = b'\xe9\0\0\0\0'
+        log.append(('inline-jmp', en, hex(rs), len(code), size))
     assert len(code) <= size, ('置換コードが領域に収まらない', en, len(code), size)
     code += b'\x90' * (size - len(code))
     fo = off(rs); data[fo:fo + size] = code; changes.append((fo, size, 'inline@%x' % rs)); n_reg += 1
@@ -685,12 +710,13 @@ for a_, v_ in C.TIP_CONSTS:
 # ---- 文字拡大で重なる箇所の間隔(mulss xmm,[rip+定数]) ---------------------------------------
 for a_, v_, nv_ in C.SPACING_CONSTS:
     o_ = off(a_); x_ = next(md.disasm(raw[o_:o_ + 15], IB + a_))
-    assert x_.mnemonic == 'mulss' and x_.size == 9 and x_.disp_offset == 5, (hex(a_), x_.op_str)
-    t_ = a_ + 9 + [op for op in x_.operands if op.type == X86_OP_MEM][0].mem.disp
-    assert struct.unpack_from('<f', raw, off(t_))[0] == v_, ('間隔の係数が想定と違う', hex(a_))
+    assert x_.mnemonic in ('mulss', 'addss', 'subss', 'movss') and x_.disp_size == 4 and x_.disp_offset == x_.size - 4, (hex(a_), x_.op_str)
+    assert any(op.type == X86_OP_MEM and op.mem.base == X86_REG_RIP for op in x_.operands), (hex(a_), x_.op_str)
+    t_ = a_ + x_.size + [op for op in x_.operands if op.type == X86_OP_MEM][0].mem.disp
+    assert abs(struct.unpack_from('<f', raw, off(t_))[0] - v_) < 1e-3, ('間隔の係数が想定と違う', hex(a_))
     assert sec_of(a_) is tx and func_of(a_) is not None
     po_ = add(struct.pack('<f', nv_))
-    data[o_ + 5:o_ + 9] = struct.pack('<i', jva(po_) - (a_ + 9)); changes.append((o_ + 5, 4, 'space@%x' % a_))
+    data[o_ + x_.disp_offset:o_ + x_.size] = struct.pack('<i', jva(po_) - (a_ + x_.size)); changes.append((o_ + x_.disp_offset, 4, 'space@%x' % a_))
     log.append(('space', hex(a_), v_, nv_))
 
 # ---- Label / LabelWidth / Text / TextSize / Paragraph スタブ ---------------------------------
@@ -785,8 +811,56 @@ for call_a, lift in C.WORLD_LABEL_LIFT:
     sb += b'\x48\x09\xc2'                       # or rdx, rax
     sb += b'\xe9' + rel32(sva() + 5, C.TEXTONWORLD)   # jmp TextOnWorld
     world_stubs[call_a] = st
+# Label / Text 呼び出しの y を size(拡大前)*係数 だけ上へずらす中継: 日本語を拡大すると文字は上端基準で下へ伸びるため、アイコンや帯に対して下寄りになる箇所を持ち上げる。
+# 行き先は拡大版スタブ(st_label_s / st_text_s)。呼び出しは後で retarget_calls の後に差し替える。 {呼び出しアドレス: (中継スタブ, 元の呼び出し先)}
+label_lift_stubs = {}
+for _lifts, _dst, _orig in ((C.LABEL_LIFT, st_label_s, C.LABEL), (C.TEXT_LIFT, st_text_s, C.TEXT)):
+  for call_a, lift in _lifts:
+    while len(sb) % 16: sb.append(0xcc)
+    k_va = sva(); sb += struct.pack('<f', lift)
+    while len(sb) % 16: sb.append(0xcc)
+    st = sva()
+    sb += b'\x48\x89\xd0\x48\xc1\xe8\x20\x66\x0f\x6e\xe0\x0f\x28\xeb'
+    sb += b'\xf3\x0f\x59\x2d' + rel32(sva() + 8, k_va)
+    sb += b'\xf3\x0f\x5c\xe5\x66\x0f\x7e\xe0\x48\xc1\xe0\x20\x89\xd2\x48\x09\xc2'
+    sb += b'\xe9' + rel32(sva() + 5, _dst)
+    label_lift_stubs[call_a] = (st, _orig)
 for f_ in sorted(set(C.FORCE_SCALE.values())):      # 強制拡大スタブは pool に入れる前に作っておく
     force_stub(C.TEXT, f_); force_stub(C.TEXTSIZE, f_)
+# ---- 長さが「合流先」の mov で書かれている書式文字列(同じ長さの別文字列と共有) -------------------------------------------
+# lea の後ろの jmp を、自分専用のスタブ(新しい長さを書いて合流先の次へ飛ぶ)へ向ける。(キー, lea アドレス, jmp アドレス)
+n_join = 0
+for en, la_, jm_ in C.JOIN_LEN:
+    r_ = next(s for s in sites if s['en'] == en and s['addr'] == la_)
+    JL_ = len(r_['ja'].encode('utf-8')); L_ = len(en.encode())
+    jo_ = off(jm_); ji_ = next(md.disasm(raw[jo_:jo_ + 15], IB + jm_))
+    assert ji_.mnemonic == 'jmp' and ji_.size in (2, 5), (hex(jm_), ji_.op_str)
+    tgt_ = ji_.operands[0].imm - IB
+    to_ = off(tgt_); ti_ = next(md.disasm(raw[to_:to_ + 15], IB + tgt_))
+    assert ti_.mnemonic == 'mov' and ti_.size == 9 and raw[to_:to_ + 4] == b'\x48\xc7\x44\x24' and int.from_bytes(raw[to_ + 5:to_ + 9], 'little') == L_, (hex(tgt_), ti_.op_str, L_, raw[to_:to_+9].hex())
+    while len(sb) % 16: sb.append(0xcc)
+    st_va_ = sva()
+    if ji_.size == 5:
+        assert jm_ > la_ and jm_ - la_ < 40
+        site_o_, site_n_ = jo_, 5
+    else:
+        assert jm_ == la_ + 7                      # lea の直後の短い jmp: lea ごと作り直す
+        lo_ = off(la_)
+        sb += raw[lo_:lo_ + 3]                     # 48 8d 05 (lea rax,[rip+disp32])
+        sb += struct.pack('<i', jva(r_['po']) - (sva() + 4))
+        site_o_, site_n_ = lo_, 9
+    sb += raw[to_:to_ + 5] + struct.pack('<I', JL_)
+    sb += b'\xe9' + rel32(sva() + 5, tgt_ + ti_.size)
+    data[site_o_:site_o_ + 5] = b'\xe9' + rel32(0, 0)   # 後で書く
+    site_va_ = (jm_ if ji_.size == 5 else la_)
+    data[site_o_ + 1:site_o_ + 5] = struct.pack('<i', st_va_ - (site_va_ + 5))
+    for k_ in range(5, site_n_): data[site_o_ + k_] = 0x90
+    changes.append((site_o_, site_n_, 'join@%x' % jm_)); n_join += 1
+    log.append(('join-len', en, hex(la_), hex(jm_), hex(tgt_), JL_))
+for rs_, re2_, code_ in INLINE_JMP:                 # 収まらなかったインライン置換のスタブ
+    sv_ = sva(); sb += code_; sb += b'\xe9' + rel32(sva() + 5, re2_)
+    o_ = off(rs_); data[o_ + 1:o_ + 5] = rel32(rs_ + 5, sv_)
+    changes.append((o_ + 1, 4, 'inline-jmp@%x' % rs_))
 pool.extend(sb)
 
 # 題字(YOUR PARTY / BATTLE PLAN)を描く Label/LabelWidth 呼び出しは拡大しない。題字を持つ関数であることを確認する。
@@ -819,6 +893,11 @@ for call_a, st in world_stubs.items():
     tgt_ = call_a + 5 + struct.unpack_from('<i', raw, o + 1)[0]
     assert tgt_ == C.TEXTONWORLD, ('TextOnWorld呼び出しでない', hex(call_a), hex(tgt_))
     data[o + 1:o + 5] = rel32(call_a + 5, st); changes.append((o + 1, 4, 'callWorldLabel@%x' % call_a))
+for call_a, (st, orig_) in label_lift_stubs.items():
+    o = off(call_a); assert raw[o] == 0xe8, hex(call_a)
+    assert call_a + 5 + struct.unpack_from('<i', raw, o + 1)[0] == orig_, ('呼び出し先が想定と違う', hex(call_a))
+    assert call_a not in C.TITLE_CALLS and call_a not in C.FORCE_SCALE
+    data[o + 1:o + 5] = rel32(call_a + 5, st); changes.append((o + 1, 4, 'callLift@%x' % call_a))
 n_cp = 0   # Paragraph: DrawTip(af071)は係数側で拡大済み。それ以外のうち PARA_SCALE_CALLS だけ、日本語のとき拡大する中継へ向ける
 for a_ in sorted(C.PARA_SCALE_CALLS):
     o = off(a_); assert raw[o] == 0xe8, hex(a_)

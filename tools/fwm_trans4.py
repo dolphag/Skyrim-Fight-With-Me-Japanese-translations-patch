@@ -127,8 +127,8 @@ T4 = {
 "Each healer's line for the party, and whether they heal and rejuvenate on their own, is set per companion in the battle plan.": 'パーティに対する各ヒーラーの回復基準と、自動で回復・マジカ回復強化を行うかどうかは、バトルプランで従者ごとに設定します。',
 'Every healer setting on this page back to its default.': 'このページのヒーラーに関する設定をすべて初期値に戻します。',
 # 設定画面: 演出・ポーション
-'What each ability looks like in the world: a red glow on the enemies a taunt holds and gold on the tank while braced, the healing light of a heal and the pale blue of Rejuvenate, and a short flash for a volley and its target, a war cry, a ward, a disarm and a bodyguard.': 'ゲーム内での各スキルの見た目：挑発が引きつけた敵への赤い光、身構え中のタンクへの金色の光、回復の癒やしの光、マジカ回復強化の淡い青、そして一斉射撃とその標的、ウォークライ、防護、武装解除、ボディガードの短い閃光。',
-'Ability effects': 'スキルの演出効果',
+'What each ability looks like in the world: a red glow on the enemies a taunt holds and gold on the tank while braced, the healing light of a heal and the pale blue of Rejuvenate, and a short flash for a volley and its target, a war cry, a ward, a disarm and a bodyguard.': 'ゲーム内での各アビリティの見た目：挑発が引きつけた敵への赤い光、身構え中のタンクへの金色の光、回復の癒やしの光、マジカ回復強化の淡い青、そして一斉射撃とその標的、ウォークライ、防護、武装解除、ボディガードの短い閃光。',
+'Ability effects': 'アビリティの演出効果',
 "Companions drink their own potions when hurt or drained, the smallest that will do; a fortify they can use against a boss, and a resist against the element a caster throws at them. Each companion's Potions switch can still turn it off.": '従者は、傷ついたり消耗したりすると、足りる範囲で最も小さいポーションを自分で飲みます。ボス戦では強化ポーション、術者が放つ属性には耐性ポーションを使うこともあります。各従者の「ポーション」スイッチで無効にもできます。',
 'They look over the mix in their hands while they brew, when no alchemy table is to hand.': '近くに錬金台がないとき、調合中に手元の調合物を見つめます。',
 # 武装解除・魔法の指定・通知

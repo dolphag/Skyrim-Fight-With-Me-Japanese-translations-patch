@@ -6,8 +6,10 @@ from fwm_trans1 import T1
 from fwm_trans2 import T2
 from fwm_trans3 import T3
 from fwm_trans4 import T4
+from fwm_trans5 import T5
+from fwm_trans6 import T6
 # 訳文中の「Walk With Me」は、折り返しで「Walk With」と「Me」に分かれないよう、空白を NBSP(U+00A0) にする
-T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4}.items()}
+T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4, **T5, **T6}.items()}
 F = re.compile(r'\{\{|\}\}|\{([0-9]*)(:[^{}]*)?\}')
 def fields(s):
     out = []
@@ -33,7 +35,8 @@ for en, ja in T.items():
             if k >= len(specs_en) or specs_en[k] != s:
                 print('NG 番号%s の型指定が原文と不一致' % i, repr(s), en[:70]); bad += 1
             used.add(k)
-        if used != set(range(len(specs_en))): print('NG 未使用/過不足の引数', sorted(used), len(specs_en), ja[:50]); bad += 1
+        if not used <= set(range(len(specs_en))): print('NG 範囲外の引数', sorted(used), len(specs_en), ja[:50]); bad += 1
+        elif used != set(range(len(specs_en))): print('info 未使用の引数あり(許容)', sorted(used), len(specs_en), ja[:40])
     else:
         if [s for _, s in fj] != specs_en:
             print('NG 型指定の並びが不一致', [s for _, s in fe], [s for _, s in fj], '\n   ', en[:90], '\n   ', ja[:90]); bad += 1

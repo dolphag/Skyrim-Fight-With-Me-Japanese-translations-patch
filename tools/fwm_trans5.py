@@ -13,8 +13,8 @@ T5 = {
     "With me (what To me! gives everyone): they keep this close to you and fight from there. Melee companions take anything that comes near you; archers and casters shoot the nearest enemy, however far.":
         "随伴（「集合！」で全員に与えられる位置取り）：あなたからこの距離以内に留まり、そこから戦います。近接の従者はあなたに近づく敵を、アーチャーと術者は距離を問わず最も近い敵を迎え撃ちます。",
     "Healing auras, protective barriers, wind and earth bursts, and weapon particles for abilities. Red marks enemies held by a taunt. Requires Triumvirate, Elemental Destruction Magic Redux and Vibrant Weapons (Fire Frost Shock); missing sources use simpler vanilla effects.":
-        "回復のオーラ、防護の障壁、風と大地の衝撃波、武器のパーティクルなど、スキルの演出効果です。挑発で引きつけた敵は赤くなります。Triumvirate、Elemental Destruction Magic Redux、Vibrant Weapons - Fire Frost Shock が必要です。足りないものは、より簡素なバニラの効果になります。",
-    "Abilities": "スキル",
+        "回復のオーラ、防護の障壁、風と大地の衝撃波、武器のパーティクルなど、アビリティの演出効果です。挑発で引きつけた敵は赤くなります。Triumvirate、Elemental Destruction Magic Redux、Vibrant Weapons - Fire Frost Shock が必要です。足りないものは、より簡素なバニラの効果になります。",
+    "Abilities": "アビリティ",
     "Volley! {} looses {} arrows at {}.": "一斉射撃！{0}が{2}に矢を{1}本放った。",
     "Volley: {} arrows at {}.": "一斉射撃：{1}に矢を{0}本。",
     "{} heals {}: {}.": "{}が{}を回復した：{}。",
@@ -22,7 +22,7 @@ T5 = {
     "+{:.0f} health": "体力+{:.0f}",
     "Could not cast it.": "魔法を使えませんでした。",
     "{} wards you and {} more: {}.": "{}があなたと他{}人を護った：{}。",
-    "They carry no special ability right now.": "今は使えるスキルがありません。",
+    "They carry no special ability right now.": "今は使えるアビリティがありません。",
     "\nHolds level {} and below  ·  {:.0f} reach  ·  {:.0f} stamina":
         "\nレベル{}以下を確実に引きつける  ·  射程{:.0f}  ·  スタミナ{:.0f}",
     # --- 役割 ---
