@@ -18,7 +18,7 @@ description: FightWithMe.dll の日本語化パッチを作る・直す・検証
 4. 検証(全部通す):
    - `python3 -I tools/fwm_verify.py <元> <出力>`(変更バイトがすべて記録され、参照が新セクションに届くか)
    - `python3 -I tools/fwm_emu_stub.py <出力> <json>`(スタブの振り分け・拡大率。unicorn)
-   - `python3 -I tools/fwm_scan_flag.py <元> <出力>`(レジスタを長さとフラグの両用にしている箇所の検出)。**既知の誤検出以外が出たら止めて調べる**。既知: 0x10305b(ecx の値がアドレスで変わる)。
+   - `python3 -I tools/fwm_scan_flag.py <元> <出力>`(レジスタを長さとフラグの両用にしている箇所の検出)。**既知の誤検出以外が出たら止めて調べる**。0.3.0 では指摘が 19 件出るが全て無害と確認済み(`docs/scan_flag-0.3.0.md`)。それ以外のアドレスが増えたら止めて調べる。
 5. 翻訳表の更新: `python3 -I tools/fwm_export_csv.py <json>.sites > translations_en_ja.csv`、Paths 対照表: `python3 -I tools/paths_table.py <FWM の include/FWM/Paths.h> > PATHS_TABLE.md`。
 6. テスト版をユーザーに渡す(経路は CLAUDE.md の「最初のセッションで確認すること」)。ユーザーのスクリーンショットと所見で直す。
 
