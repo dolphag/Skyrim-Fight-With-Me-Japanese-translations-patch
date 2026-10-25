@@ -36,7 +36,7 @@ FWM(Nexus 194766)と、そのアドオン Paths(Nexus 195610)の日本語化パ�
 - 利用者は Paths の文字列が FWM の DLL にあることを知らない前提で説明を書く。特定の外部作品(MTG 等)を強調しない。
 
 ## 作業の進め方
-- 手順の詳細は skill `pe-patch-workflow`(ビルド・検証)、`release-package`(リリース)。
+- 手順の詳細は skill `pe-patch-workflow`(ビルド・検証・テスト版 zip)、`release-package`(README・Changelog・配布 zip・Nexus 文面・タグ)。雛形は `release/`、zip 作成は `tools/make_zip.py`。
 - **実機(ゲーム内)確認なしにリリースしない**。テスト版は `out/` に `test<N>` で作り(git 管理外)、ユーザーのスクリーンショットと所見で直す。
 - 逆アセンブル・アドレス調査の結果は必ずファイルに残す(`docs/` またはコード内コメント)。会話には残らない前提で作業する。
 - 大きいファイルは全文を読まず、必要な範囲だけ読む。

@@ -20,7 +20,10 @@ description: FightWithMe.dll の日本語化パッチを作る・直す・検証
    - `python3 -I tools/fwm_emu_stub.py <出力> <json>`(スタブの振り分け・拡大率。unicorn)
    - `python3 -I tools/fwm_scan_flag.py <元> <出力>`(レジスタを長さとフラグの両用にしている箇所の検出)。**既知の誤検出以外が出たら止めて調べる**。既知: 0x10305b(ecx の値がアドレスで変わる)。
 5. 翻訳表の更新: `python3 -I tools/fwm_export_csv.py <json>.sites > translations_en_ja.csv`、Paths 対照表: `python3 -I tools/paths_table.py <FWM の include/FWM/Paths.h> > PATHS_TABLE.md`。
-6. テスト版をユーザーに渡す(経路は CLAUDE.md の「最初のセッションで確認すること」)。ユーザーのスクリーンショットと所見で直す。
+6. テスト版 zip を作ってユーザーに渡す(経路は CLAUDE.md の「最初のセッションで確認すること」)。
+   - メモを `release/TEST_MEMO_TEMPLATE.txt` の形で書く(前回からの変更、確認してほしい点、補足)。
+   - `python3 -I tools/make_zip.py test out/test<N>.dll <N> --memo <メモ>` → `out/FWM_Paths_test<N>.zip`(DLL + テスト用メモ.txt)。
+   - ユーザーのスクリーンショットと所見で直す。
 
 ## 表示位置の調整(`tools/fwm_cfg.py`)
 - 日本語は `FONT_SCALE`(1.4)で拡大され、**上端基準で下に伸びる** → アイコン・帯に対して低く見える。
