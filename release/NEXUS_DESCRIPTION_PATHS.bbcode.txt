@@ -1,0 +1,64 @@
+[url=https://www.nexusmods.com/skyrimspecialedition/mods/195610]Paths - Custom Follower Abilities[/url] ([url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] のアドオン) を日本語化するパッチです。
+
+[b]必須[/b]
+[list]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/195610?tab=files]Paths[/url][/*]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url][/*]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/120352]SKSE Menu Framework[/url] (要日本語フォント設定) [/*]
+[/list]
+[b]推奨 (一部のテキストが?になるときは)[/b]
+[list]
+[*]SKSEMenuFramework.ini の [Fonts] で
+EnableChinese = true
+としてください。(SMF v3.18 以降で対応)[/*]
+[*]EnableJapanese = true だけでは表示できる日本語の範囲がかなり限定的で、範囲外の漢字が「?」になります。
+これまでは用語を置き換えるなどで対応してきましたが、Paths ではテキスト量が増えたため、表示できない漢字が多く出ると見込まれます。[/*]
+[/list]
+[b]日本語になるもの[/b]
+[list]
+[*]Paths のツリー画面(6つのパス、全88ノードのアビリティ・特性・ランク・ボーナス)[/*]
+[*]ガイド、設定画面、通知メッセージ[/*]
+[*]Fight With Me 本体の画面 (Paths導入後に一部表記が変更になる部分)[/*]
+[/list]
+[b]導入[/b]
+[list=1]
+[*]Fight With Me 0.3.0以降 と Paths を導入[/*]
+[*]SKSE Menu Framework 3 に日本語フォントを設定(既にSMFが日本語対応環境なら設定不要)[/*]
+[*]本パッチを Fight With Me や Path の後に導入 … ロード順: Fight With Me → Paths → 本パッチ[/*]
+[/list]
+[list]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194874]Fight With Me の日本語化パッチ[/url]と中身は同じDLLです。どちらか一方だけ[u]Fight With MeとPathsの後に[/u]入れてください。[/*]
+[*][i]間違って 「Fight With Me日本語化パッチ」と「Paths日本語パッチ」の両方を入れても FightWithMe.dll は同じものなので支障はありませんが、Fight With MeとPathsでバージョン番号が異なるのでバージョンダウンしないようご注意ください。2026/10/21現在、Fight With Me 0.3.0 = Paths 0.1.0 で、それぞれの日本語化パッチは元となるMODのバージョン表記に合わせています。同じバージョンで改変があった場合は 0.1.0-1 のような枝番にします。日本語パッチでいえば、Fight With Me - JP 0.3.0-2 = Paths 0.1.0-1 が同一DLLになります。[/i][/*]
+[/list]
+[b]注意[/b]
+[list]
+[*]訳語は「スキル」ではなく「アビリティ」で統一しています。[/*]
+[*]各パス・アビリティ名は、意訳を含み一部は暫定です。 [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch/blob/main/PATHS_TABLE.md]対照表[/url]を用意しましたのでご意見をお寄せください。[/*]
+[*]本体を更新するときは、先に本パッチを無効化してください。[/*]
+[*]訳文と説明文の作成にAI(Claude)を使用しています。ゲーム内で確認していますが、誤訳や表示崩れがあればコメントでお知らせください。[/*]
+[*]非公式の翻訳です。原作者に不具合を問い合わせないでください。[/*]
+[/list]
+[b]ソース[/b]
+[list]
+[*][url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch[/url][/*]
+[/list]
+[b]謝辞[/b]
+[list]
+[*]原作者 hashhbbrown さんに感謝します。[/*]
+[/list]
+[line]
+English
+
+An unofficial Japanese translation of [url=https://www.nexusmods.com/skyrimspecialedition/mods/195610]Paths[/url] by hashhbbrown (tree screens, all 88 nodes, ranks, bonuses, guide, settings, notices). 
+
+[b]Note: [/b]
+Paths' screen text is not inside Paths but inside Fight With Me's FightWithMe.dll, so this patch replaces that DLL (and translates Fight With Me's own screens too). 
+
+[b]Install order: [/b]
+Fight With Me -> Paths -> this patch (last). Recommended: EnableChinese = true under [Fonts] in SKSEMenuFramework.ini (SMF v3.18+). 
+The DLL is identical to the one in the Fight With Me Japanese patch ([url=https://www.nexusmods.com/skyrimspecialedition/mods/194874]https://www.nexusmods.com/skyrimspecialedition/mods/194874[/url]); install only one of them. 
+
+Source scripts only on GitHub: [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch[/url] . 
+
+AI-assisted translation (Claude). 
+Unofficial; do not ask the original author for support. 
