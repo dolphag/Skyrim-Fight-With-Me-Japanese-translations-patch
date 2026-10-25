@@ -27,6 +27,12 @@ from fwm_trans6 import T6
 import fwm_cfg as C
 
 SRC, OUT, REP = sys.argv[1:4]
+# 元DLLの SHA-256 が違えば作らない(アドレス固定のパッチなので、別版への誤適用を防ぐ)
+import hashlib
+ORIG_SHA256 = 'a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86'   # FightWithMe.dll 0.3.0
+_sha = hashlib.sha256(open(SRC, 'rb').read()).hexdigest()
+if _sha != ORIG_SHA256:
+    raise SystemExit('元DLLの SHA-256 が想定と違います(FWM 0.3.0 用): %s' % _sha)
 # 訳文中の「Walk With Me」は、折り返しで「Walk With」と「Me」に分かれないよう、空白を NBSP(U+00A0) にする
 T = {k: v.replace('Walk With Me', 'Walk\u00a0With\u00a0Me') for k, v in {**T1, **T2, **T3, **T4, **T5, **T6}.items()}
 

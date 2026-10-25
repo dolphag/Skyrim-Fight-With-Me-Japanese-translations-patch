@@ -8,7 +8,7 @@ description: FightWithMe.dll の日本語化パッチを作る・直す・検証
 対象: `FightWithMe.dll`(FWM 0.3.0。Paths の文字列も同じ DLL にある)。静的な PE パッチ。アドレスは版固定。
 
 ## 前提
-- 元 DLL はユーザーが添付する。SHA-256 が `tools/fwm_patch.py` の期待値と一致しなければ失敗する(別版に適用しない)。
+- 元 DLL はユーザーが添付する。SHA-256 が `tools/fwm_patch.py` の `ORIG_SHA256` と一致しなければ失敗する(0.3.0-2 の作業後に追加。別版への誤適用を防ぐ)。
 - 作業ディレクトリは `x/SKSE/Plugins/FightWithMe.dll`(元)と `out/`(出力、git 管理外)。依存は `pip install -r requirements-dev.txt`。実行は `python3 -I`。
 
 ## 通常の変更(翻訳・表示の調整)
