@@ -21,3 +21,25 @@ Not urgent. Thank you for the mod!
 1. パーティ設定ページのドロップダウン(役割・注目対象・位置取り)だけ翻訳が当たらない(`Tr` を通していない)。
 2. 翻訳テンプレートの一部の鍵が文字化け(「·」の二重エンコード)している。
 3. テーマ用フォントがラテン文字のみで、日本語が「?」になる(同名の日本語対応フォントを置くと直る)。
+
+---
+
+## コメント 2: 名称の確認(上の報告とは別のコメントとして送る。送るかはユーザーの判断)
+
+不具合の報告に混ぜると埋もれるので、短い別コメントにする。事実と質問だけにし、「混乱している」といった推測は書かない。
+
+### 英語(貼り付け用)
+
+One small question about naming, so that I can name the Japanese translation correctly. The mod appears under a few spellings:
+
+- The Nexus page title is "Paths of the Companion".
+- The file names are "Path Of The Companions - Main File" and "Path of the Companions - Effects".
+- The in-game text says "Path of the Companions".
+
+Which one is the official name (singular or plural "Path", singular or plural "Companion")? And is "Paths" the short form you would like people to use? I will follow whatever you prefer. Thank you!
+
+### 日本語(ユーザー向けの要約)
+- 質問: 正式名はどれか(Path/Paths、Companion/Companions)。略称は Paths でよいか。
+- 確認できた事実(2026-10-26、Nexus API と原作 zip・英日対応表): ページ名は `Paths of the Companion`、原作者のファイル名は `Path Of The Companions - …` / `Path of the Companions - Effects`、ゲーム内の文言(対応表 6 行)は `Path of the Companions`。
+- 背景(ユーザーの説明。私は未確認): 前身の MOD が Paths という名前で、それを引き継ごうとしたが、続く文字の関係で Path の方が通りがよくなった、という経緯だと思われる。
+- 回答が来るまでの暫定の正は、ページ名の `Paths of the Companion`(`docs/NAMES.md` を作る場合はそこに書く)。
