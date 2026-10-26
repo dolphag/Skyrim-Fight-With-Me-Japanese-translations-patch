@@ -3,7 +3,7 @@
 
 方式は houseCARL(Avick3110/houseCARL、GPL-3.0)の NexusClient.cs を参考にした(自分の言葉で書き直したもの)。
 エンドポイント https://api.nexusmods.com/v2/graphql に {query, variables} を POST するだけ。
-クエリは houseCARL が使っているフィールドに限る。ここでの実機確認の状況は docs/nexus-api-notes.md を参照。
+`mod` は 2026-10-26 に実接続で確認済み(匿名で可)。確認した範囲とできないことは docs/nexus-api-notes.md を参照。
 
 使い方(リポジトリのルートから):
   python3 -I tools/nexus_query.py mod 194766              # 概要+ファイル一覧(版・更新日・changelog)
@@ -23,7 +23,7 @@ MOD_QUERY = """query ModDetail($modId: ID!, $gameId: ID!) {
     updatedAt createdAt adultContent status
   }
   modFiles(modId: $modId, gameId: $gameId) {
-    fileId name version category date description changelogText
+    fileId name version category date description changelogText sizeInBytes primary
   }
 }"""
 
