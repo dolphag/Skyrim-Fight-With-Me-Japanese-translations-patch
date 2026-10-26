@@ -1,5 +1,8 @@
 # Fight With Me / Paths - Japanese Translations Patch (tools and translation table)
 
+> **Status (2026-10): switching to Fight With Me 0.5.0 / Path of the Companions 1.0.** These versions ship the author's own translation-file mechanism, so the patch is now plain text files (`*_JAPANESE.txt`), not a patched DLL. The text below describes the 0.3.0 DLL patch (history); the current workflow is in `docs/FWM-0.5.0_Paths-1.0-findings.md` and `tools/lang_build.py`. Test build only; not released.
+> 2026-10: Fight With Me 0.5.0 / Path of the Companions 1.0 に対応中です。原作に翻訳ファイルの仕組みができたため、DLL パッチをやめ、`*_JAPANESE.txt` を渡す方式に変わります。以下の説明は 0.3.0 の DLL パッチ(履歴)のものです。テスト段階で、未リリースです。
+
 Nexus Mods pages:
 - Fight With Me Japanese patch: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
 - Paths Japanese patch (version 0.1.0-1, for Paths 0.1.0): *(page not yet created; link will be added here)*

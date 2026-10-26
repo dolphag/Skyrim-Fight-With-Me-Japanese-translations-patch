@@ -3,7 +3,9 @@ name: pe-patch-workflow
 description: FightWithMe.dll の日本語化パッチを作る・直す・検証するときの手順。翻訳表の変更、表示位置の調整、新しい版への移行(アドレスの再導出)、ビルドと検証の流れ、既知の落とし穴。
 ---
 
-# FWM / Paths DLL パッチの作業手順
+# FWM / Paths DLL パッチの作業手順(0.3.0 まで・履歴扱い)
+
+**FWM 0.5.0 / Paths 1.0 以降は使わない**(翻訳ファイル方式に変わった。skill `lang-text-workflow`)。0.3.0 のバイナリを直すときだけ読む。`tools/make_zip.py` は 0.5.0 向けに書き換えたため、この手順の「テスト版 zip」は旧版のコミットで行う。
 
 対象: `FightWithMe.dll`(FWM 0.3.0。Paths の文字列も同じ DLL にある)。静的な PE パッチ。アドレスは版固定。
 
