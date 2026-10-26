@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
-"""テスト版 zip と、Nexus 配布用 zip を作る(FWM 0.5.0 / Paths 1.0 以降: 翻訳テキストのみ。DLL は含まない)。
-先に tools/lang_build.py で <dir>/SKSE/Plugins/FightWithMe/Translations/*_JAPANESE.txt を作っておく。
+"""テスト版 zip と、Nexus 配布用 zip(翻訳パッチ・日本語フォント)を作る。Fight With Me 用。DLL は含まない。
+先に tools/lang_build.py で <dir>/SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt を作っておく。
 
 使い方(リポジトリのルートから):
-  python3 -I tools/make_zip.py test    out/ja <N> --memo memo.txt            -> out/FWM_Paths_ja_test<N>.zip
-  python3 -I tools/make_zip.py release fwm   out/ja --version 0.5.0-1
-  python3 -I tools/make_zip.py release paths out/ja --version 1.0.0-1
-  python3 -I tools/make_zip.py font    fwm   out/font --version 0.5.0-1     (日本語フォントの別ファイル。README_Font_* の雛形が要る)
+  python3 -I tools/make_zip.py test    out/ja <N> --memo memo.txt [--font-dir out/font]   -> out/FWM_ja_test<N>.zip
+  python3 -I tools/make_zip.py release out/ja --version 0.5.0-1
+  python3 -I tools/make_zip.py font    out/font --version 0.5.0-1      (日本語フォントの別ファイル)
 
 zip の中身:
-  fwm   : FightWithMe_JAPANESE.txt                              + README_Japanese.txt / README_English.txt
-  paths : FightWithMe_JAPANESE.txt + FightWithMePaths_JAPANESE.txt + README_Japanese.txt / README_English.txt
-  test  : 上の paths と同じ + テスト用メモ.txt(README なし)
-release は release/README_{Japanese,English}.{fwm,paths}.txt を雛形に使い、{SHA_FWM_JA} / {SHA_PATHS_JA}(訳文ファイルの SHA-256)を埋める。
-README の 1 行目に --version が含まれていなければ失敗する(Nexus の版と README の版の食い違いを防ぐ)。"""
+  release : FightWithMe_JAPANESE.txt + README_Japanese.txt / README_English.txt
+  font    : SKSE/Plugins/Fonts/*.ttf + FONT-LICENSE.txt + README_*.txt
+release / font は release/README_{Japanese,English}.txt と release/README_Font_{Japanese,English}.txt を雛形に使う。
+{SHA_JA} は訳文ファイルの SHA-256 で埋まる。README の 1 行目に --version が含まれていなければ失敗する
+(Nexus の版と README の版の食い違いを防ぐ)。"""
 import argparse, hashlib, os, re, sys, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TPL = 'SKSE/Plugins/FightWithMe/Translations/'
-FILES = {'fwm': ['FightWithMe_JAPANESE.txt'], 'paths': ['FightWithMe_JAPANESE.txt', 'FightWithMePaths_JAPANESE.txt']}
-NAMES = {'fwm': 'Fight With Me - Japanese Translations Patch', 'paths': 'Path of the Companions - Japanese Translations Patch'}
+OUT_FILE = 'FightWithMe_JAPANESE.txt'
+NAME = 'Fight With Me'
+PREFIX = 'FWM'
+FONT_FILES = ['Lora-SemiBold.ttf', 'Spectral-SemiBold.ttf', 'BarlowSemiCondensed-SemiBold.ttf']
 
 
 def sha(b): return hashlib.sha256(b).hexdigest()
@@ -30,16 +31,10 @@ def put(z, arcname, data):
     z.writestr(zi, data)
 
 
-def load(d, names):
-    out = []
-    for n in names:
-        p = os.path.join(d, TPL, n)
-        if not os.path.isfile(p): raise SystemExit('見つかりません: %s(先に tools/lang_build.py を実行)' % p)
-        out.append((TPL + n, open(p, 'rb').read()))
-    return out
-
-
-FONT_FILES = ['Lora-SemiBold.ttf', 'Spectral-SemiBold.ttf', 'BarlowSemiCondensed-SemiBold.ttf']
+def load_text(d):
+    p = os.path.join(d, TPL, OUT_FILE)
+    if not os.path.isfile(p): raise SystemExit('見つかりません: %s(先に tools/lang_build.py を実行)' % p)
+    return [(TPL + OUT_FILE, open(p, 'rb').read())]
 
 
 def load_fonts(d):
@@ -54,58 +49,46 @@ def load_fonts(d):
     return out
 
 
+def readmes(stem, version, subs):
+    out = []
+    for lang in ('Japanese', 'English'):
+        s = open(os.path.join(ROOT, 'release', 'README_%s%s.txt' % (stem, lang)), encoding='utf-8').read()
+        for k, v in subs.items(): s = s.replace(k, v)
+        left = re.findall(r'\{[A-Z_]+\}', s)
+        if left: raise SystemExit('未解決のプレースホルダ: %s' % left)
+        first = s.split('\n', 1)[0]
+        if version not in first: raise SystemExit('README(%s)の1行目に版 %s がありません(雛形を直してください): %s' % (lang, version, first))
+        out.append(('README_%s.txt' % lang, s.replace('\r\n', '\n').encode('utf-8')))
+    return out
+
+
+def write(path, entries):
+    with zipfile.ZipFile(path, 'w') as z:    # すべての検査が済んでから書く(失敗時に中途半端な zip を残さない)
+        for name, data in entries: put(z, name, data)
+    print(path)
+    for name, data in entries: print('  ', name, len(data), sha(data)[:12])
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='mode', required=True)
     t = sub.add_parser('test'); t.add_argument('dir'); t.add_argument('n'); t.add_argument('--memo', required=True); t.add_argument('--out', default='out')
     t.add_argument('--font-dir', help='tools/make_font_pack.py の出力。あれば SKSE/Plugins/Fonts/ に入れる')
-    t.add_argument('--english-alias', action='store_true', help='診断用: 同じ訳を *_JA_ENGLISH.txt の名前でも入れる(sLanguage が ENGLISH でも読まれる)')
-    r = sub.add_parser('release'); r.add_argument('page', choices=['fwm', 'paths']); r.add_argument('dir'); r.add_argument('--version', required=True); r.add_argument('--out', default='out')
-    f = sub.add_parser('font'); f.add_argument('page', choices=['fwm', 'paths']); f.add_argument('dir'); f.add_argument('--version', required=True); f.add_argument('--out', default='out')
+    r = sub.add_parser('release'); r.add_argument('dir'); r.add_argument('--version', required=True); r.add_argument('--out', default='out')
+    f = sub.add_parser('font'); f.add_argument('dir'); f.add_argument('--version', required=True); f.add_argument('--out', default='out')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     if a.mode == 'font':
-        entries = load_fonts(a.dir)
-        path = os.path.join(a.out, '%s - Japanese UI Font %s.zip' % ('Fight With Me' if a.page == 'fwm' else 'Path of the Companions', a.version))
-        for lang in ('Japanese', 'English'):
-            s = open(os.path.join(ROOT, 'release', 'README_Font_%s.%s.txt' % (lang, a.page)), encoding='utf-8').read()
-            first = s.split('\n', 1)[0]
-            if a.version not in first: raise SystemExit('README(%s)の1行目に版 %s がありません: %s' % (lang, a.version, first))
-            entries.append(('README_%s.txt' % lang, s.replace('\r\n', '\n').encode('utf-8')))
-        with zipfile.ZipFile(path, 'w') as z:
-            for name, data in entries: put(z, name, data)
-        print(path)
-        for name, data in entries: print('  ', name, len(data), sha(data)[:12])
-        return
-    if a.mode == 'test':
+        entries = load_fonts(a.dir) + readmes('Font_', a.version, {})
+        write(os.path.join(a.out, '%s - Japanese UI Font %s.zip' % (NAME, a.version)), entries)
+    elif a.mode == 'test':
         memo = open(a.memo, encoding='utf-8').read().replace('\r\n', '\n')
-        path = os.path.join(a.out, 'FWM_Paths_ja_test%s.zip' % a.n)
-        entries = load(a.dir, FILES['paths'])
-        if a.english_alias:
-            entries += [(n.replace('_JAPANESE.txt', '_JA_ENGLISH.txt'), d) for n, d in entries]
-        if a.font_dir: entries += load_fonts(a.font_dir)
-        entries += [('テスト用メモ.txt', memo.encode('utf-8'))]
-        with zipfile.ZipFile(path, 'w') as z:
-            for name, data in entries: put(z, name, data)
-        print(path)
-        for name, data in entries: print('  ', name, len(data), sha(data)[:12])
-        return
-    files = load(a.dir, FILES['paths'])
-    shas = {'{SHA_FWM_JA}': sha(files[0][1]), '{SHA_PATHS_JA}': sha(files[1][1])}
-    entries = load(a.dir, FILES[a.page])
-    path = os.path.join(a.out, '%s %s.zip' % (NAMES[a.page], a.version))
-    for lang in ('Japanese', 'English'):
-        s = open(os.path.join(ROOT, 'release', 'README_%s.%s.txt' % (lang, a.page)), encoding='utf-8').read()
-        for k, v in shas.items(): s = s.replace(k, v)
-        left = re.findall(r'\{[A-Z_]+\}', s)
-        if left: raise SystemExit('未解決のプレースホルダ: %s' % left)
-        first = s.split('\n', 1)[0]
-        if a.version not in first: raise SystemExit('README(%s)の1行目に版 %s がありません(雛形を直してください): %s' % (lang, a.version, first))
-        entries.append(('README_%s.txt' % lang, s.replace('\r\n', '\n').encode('utf-8')))
-    with zipfile.ZipFile(path, 'w') as z:    # すべての検査が済んでから書く(失敗時に中途半端な zip を残さない)
-        for name, data in entries: put(z, name, data)
-    print(path)
-    for name, data in entries: print('  ', name, len(data), sha(data)[:12])
+        entries = load_text(a.dir) + (load_fonts(a.font_dir) if a.font_dir else []) + [('テスト用メモ.txt', memo.encode('utf-8'))]
+        write(os.path.join(a.out, '%s_ja_test%s.zip' % (PREFIX, a.n)), entries)
+    else:
+        text = load_text(a.dir)
+        entries = text + readmes('', a.version, {'{SHA_JA}': sha(text[0][1])})
+        write(os.path.join(a.out, '%s - Japanese Translations Patch %s.zip' % (NAME, a.version)), entries)
 
 
 if __name__ == '__main__':

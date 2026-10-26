@@ -4,7 +4,7 @@ A Japanese translation for Fight With Me 0.5.0. The original keeps its messages 
 This is different from the old patch (0.3.0-2 and earlier), which replaced a DLL. If you used the old one, remove it first.
 Original mods:
 - Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
-- Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
+- Path of the Companions (Paths, optional companion)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
 Original author: hashhbbrown (GitHub: fatalCMD)
 
 Requirements
@@ -13,7 +13,7 @@ Requirements
 - The separate file "Japanese UI Font". **Without it Japanese shows as "?".** The original draws its screens with theme fonts (Lora / Spectral / BarlowSemiCondensed) that have no Japanese glyphs; the font file has the same names with Japanese glyphs (based on Noto Sans JP, SIL OFL).
   Mod order: original -> this patch -> Japanese UI Font, so the font wins over the original's fonts.
 If you also use Path of the Companions (Paths)
-Paths is a separate mod that works without Fight With Me (Fight With Me is an optional companion). For Paths, install the Path of the Companions Japanese Translations Patch. It contains the same FightWithMe_JAPANESE.txt as this patch, so having both is fine.
+Paths is a separate mod that works without Fight With Me (Fight With Me is an optional companion). If you use Paths, install the Path of the Companions Japanese Translations Patch (a separate page) too. Its translation already contains most of this mod's screen texts; having both is fine (for shared texts this patch is read later and wins).
 
 Recommended: [Fonts] EnableChinese = true (SMF v3.18+), so kanji outside the Japanese glyph range in game-supplied strings (spell and companion names) do not show as "?".
 
@@ -30,7 +30,7 @@ No DLL, INI or save is touched; disable it to go back to English.
 When the original updates you do not have to remove the patch, but new texts stay in English until the patch is updated. Keep versions matched: the version follows the original, with a suffix (x.x.x-1) for patch-only fixes.
 
 SHA-256 of the text files:
-  FightWithMe_JAPANESE.txt       {SHA_FWM_JA}
+  FightWithMe_JAPANESE.txt       {SHA_JA}
 
 What is not in Japanese
 - The role / focus / position dropdowns on the Party settings page (the choices and their hover tooltips): the original does not read their text from its external message files, so they stay English until it is fixed upstream.
@@ -41,9 +41,7 @@ What is not in Japanese
 
 Rights, source and credits
 Original author: hashhbbrown (GitHub: fatalCMD). All original strings, trees and game design belong to the author.
-This unofficial translation follows the permissions shown on the original pages (checked by the user on 2026-10-26):
-- Fight With Me: modification and asset use allowed with credit; re-uploading the file elsewhere is not allowed.
-- Path of the Companions: modification, asset use and uploading to other sites allowed with credit.
+This unofficial translation follows the permissions shown on the Fight With Me page (checked by the user on 2026-10-26: modification and asset use allowed with credit; re-uploading the file elsewhere is not allowed).
 This patch contains no file of the originals (no DLL, images or fonts), only the original's English strings (the left column of the message files) and the Japanese translation.
 Distributed on Nexus Mods only, as a translation page. Please do not re-upload it. GitHub holds only the source (scripts and the translation table), not these files or the font.
 Please do not contact the original author about problems with this patch. It will be removed promptly if the author asks. No warranty.

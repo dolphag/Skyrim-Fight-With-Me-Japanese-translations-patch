@@ -1,5 +1,7 @@
 # FWM 0.5.0 / Path of the Companions 1.0 の調査結果(2026-10-26)
 
+> **リポジトリの分離(2026-10-26 決定)**: Paths 用パッチは `dolphag/Skyrim-POTC-JP-Patch` に移した(そこにこの文書のコピーがある)。このリポジトリは FWM 用(`FightWithMe_JAPANESE.txt`、822 項目)のみ。Paths の zip に `FightWithMe_ENGLISH.txt` が付いているのは**原作の意図**(原作の `BuildPathsPackage.ps1` がコピーする。README にも記載。Paths の DLL に 833 件中 824 件の文字列が実在)で、同梱ミスではない。Paths 側のパッチはその一覧を含めた和集合を `FightWithMePaths_JAPANESE.txt` 1 本にする。
+
 会話には残らないので、ここに書く。確認していないことは「未確認」と明記する。
 
 ## 結論: 方式が変わった(DLL パッチ → 翻訳テキスト)
