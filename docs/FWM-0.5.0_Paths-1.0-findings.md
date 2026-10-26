@@ -42,3 +42,7 @@
 - POTC Effects(ユーザーが分割で添付、003 欠け。zip 末尾の一覧は読めた): 360 エントリ = NIF 316 / DDS 22 / PNG 18(`interface/FightWithMe/backdrops`)/ readme・credits・manifest。テキスト資産は無く、翻訳対象なし。PNG に文字が無いかの目視は未実施。
 - 新アビリティ名(ケイオスダウン、最後の砦、風渡り、爆裂矢、カイナレスの顎 など)は暫定。「カイナレス」の表記は未確認。
 - 旧 DLL ツールは `legacy/0.3.0/` に退避済み。手順は skill `lang-text-workflow`。
+
+## テスト経過
+- test1/test2(2026-10-26): ユーザー環境で全部英語。ログは `Fight With Me 0.3.0.0 loading.`、`[Text]` 行なし、旧 Paths(内蔵)が接続 → **0.5.0 が読み込まれていなかった**(訳の問題ではない)。Skyrim.ini は `sLanguage=JAPANESE`(音声は英語 `Voices_en0.bsa`)。
+  最初に言語名の不一致を疑ったのは、DLL の版を確認する前の推測で、誤りだった。

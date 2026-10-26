@@ -27,6 +27,7 @@ DLL は触らない。原作の翻訳ファイル機構に `*_JAPANESE.txt` を�
 3. 版ごとの調査は `docs/` に残す。新しいセッションで始める。
 
 ## 落とし穴
+- **テストの前に、ユーザーの SKSE ログ(FightWithMe 系 .log)の 1 行目で版を確認する**。`Fight With Me 0.3.0.0 loading.` なら、0.5.0 が入っていない(test1/test2 は旧版のまま試されて無効だった)。`[Text] JAPANESE: N lines from ...` が出れば読み込み成功。テスト版メモには、最初にログの該当行を送ってもらうよう書く。
 - 鍵は 1 文字でも違えば当たらない(英語のまま表示される)。文字化けした鍵(`Â·`)もそのまま一致させる。
 - 言語が JAPANESE でないと読まれない。各 DLL が自分の INI(`_user.ini` 含む)の `sLanguage` を見る。ログの `[Text] JAPANESE: N lines` で確認する。
 - 折り返しは ASCII スペースのみ。`lang_build.py` が 19 文字以上の行に janome で入れる(`--no-wrap` で無効化)。
