@@ -4,7 +4,9 @@
 
 ## 英語(貼り付け用)
 
-Thanks for adding the translation files; Japanese works well with them. Three small things I ran into while making a Japanese translation:
+Thank you for Fight With Me 0.5.0 and Paths 1.0. The external translation files, the per-character UTF-8 text drawing and the `std::format` placeholders (including positional ones) are close to what I suggested earlier, and I am very grateful you took it on: the Japanese version is now a plain data file instead of a binary patch that I had to redo for every release, and Japanese works well with it.
+
+While making the translation I ran into three small things:
 
 1. **The role / focus / position dropdowns on the Party settings page are not translated.** `RoleName`, `FocusName` and `PositionName` in `src/Menu.cpp` (the `a_name` callbacks of `RosterCombo`) return `roles[i].name.data()` etc. without going through `Tr`. The same names are translated everywhere else (battle plan, HUD), so only these combos stay in English. The hover tooltips of the same combos (`Help(roles[..].summary.data())`, `focuses[..].summary`, `positions[..].summary`, same function) have the same omission. Wrapping them, e.g. `return Trc(roles[...].name.data());`, should be enough (the names are literals).
 
@@ -15,6 +17,7 @@ Thanks for adding the translation files; Japanese works well with them. Three sm
 Not urgent. Thank you for the mod!
 
 ## 日本語(ユーザー向けの要約)
+0. 前置きの感謝: 以前お願いした内容(翻訳ファイル化、UTF-8 の 1 文字ずつの描画、`std::format` の位置指定つき書式)が 0.5.0 / 1.0 に入っていた。パッチを毎回作り直さずに済むようになった。(確認したのは配布版・原作ソースの挙動。依頼が理由かどうかは断定していない)
 1. パーティ設定ページのドロップダウン(役割・注目対象・位置取り)だけ翻訳が当たらない(`Tr` を通していない)。
 2. 翻訳テンプレートの一部の鍵が文字化け(「·」の二重エンコード)している。
 3. テーマ用フォントがラテン文字のみで、日本語が「?」になる(同名の日本語対応フォントを置くと直る)。
