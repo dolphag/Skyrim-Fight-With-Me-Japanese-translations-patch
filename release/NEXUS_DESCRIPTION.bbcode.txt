@@ -32,11 +32,12 @@ DLL・INI・セーブには影響せず、無効化すれば元に戻ります�
 本体を更新するときは、本パッチを外す必要はありません。ただし、新しく増えた文言は英語のまま表示されます(パッチの更新をお待ちください)。
 
 [b]日本語にならないとき[/b]
-言語はゲームの設定(Skyrim.ini の sLanguage)に従い、JAPANESE のときに日本語になります。
-英語版ゲームなどで JAPANESE でない場合は、[b]SKSE/Plugins/FightWithMe_user.ini[/b] に次を書いてください(無ければ新規作成。ゲームの再起動後に反映されます)。
+言語はゲームの設定(Skyrim.ini の sLanguage)に従います。JAPANESE のときは FightWithMe_JAPANESE.txt、ENGLISH のとき(英語版ゲームのまま日本語化している環境など)は、同じ内容の FightWithMe_JA_ENGLISH.txt が読まれます。どちらも、ファイルを置くだけで日本語になります。
+それ以外の言語名(FRENCH など)のときは、[b]SKSE/Plugins/FightWithMe_user.ini[/b] に次を書いてください(無ければ新規作成。ゲームの再起動後に反映されます)。
 [code][Interface]
 sLanguage = JAPANESE[/code]
-SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、日本語のファイルは読まれています。
+この設定が効くのは、Fight With Me の画面の文言だけです。SKSE Menu Framework 全体や、ゲーム本体の言語、魔法名などのゲーム由来の文字列には影響しません。
+SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」(ENGLISH のときは「[Text] ENGLISH: ...」)と出ていれば、日本語のファイルは読まれています。
 
 [b][color=#ff0000]魔法名などが「?」になるときは？[/color]
 [/b]魔法名などに？が入って表示されないことがあります。
@@ -105,11 +106,12 @@ No DLL, INI or save is touched; disabling the patch restores the original.
 When Fight With Me updates you do not have to remove this patch, but new texts stay in English until the patch is updated.
 
 [b]If it stays English[/b]
-The language follows the game (sLanguage in Skyrim.ini); the files are read when it is JAPANESE.
-If your game is not set to JAPANESE (an English game, for example), add this to [b]SKSE/Plugins/FightWithMe_user.ini[/b] (create it if missing; restart the game):
+The language follows the game (sLanguage in Skyrim.ini). FightWithMe_JAPANESE.txt is read when it is JAPANESE; FightWithMe_JA_ENGLISH.txt, a copy of the same content, is read when it is ENGLISH (an English game that was Japanized, for example). Either way, just placing the files is enough.
+For any other language name (FRENCH, ...), add this to [b]SKSE/Plugins/FightWithMe_user.ini[/b] (create it if missing; restart the game):
 [code][Interface]
 sLanguage = JAPANESE[/code]
-The SKSE log should show "[Text] JAPANESE: N lines from ..." if the files were read.
+This setting only affects the texts of Fight With Me's own screens. It does not affect SKSE Menu Framework as a whole, the game's language, or strings that come from the game (spell names, ...).
+The SKSE log should show "[Text] JAPANESE: N lines from ..." (or "[Text] ENGLISH: ..." in an English setup) if the files were read.
 
 [b][color=#ff0000]Question marks in spell names?[/color][/b]
 Spell names and other strings that come from the game can show "?" for kanji outside the Japanese glyph range of SKSE Menu Framework. If it bothers you, set [code]EnableChinese = true[/code] under [Fonts] in SKSEMenuFramework.ini (SMF v3.18+), keeping EnableJapanese = true. With a NotoSansJP font this does not give a Chinese-looking face.

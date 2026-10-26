@@ -1,4 +1,4 @@
-Fight With Me - Japanese Translations Patch 0.5.0-1 (for Fight With Me 0.5.0)
+Fight With Me - Japanese Translations Patch 0.5.0-2 (for Fight With Me 0.5.0)
 =====================================================================
 A Japanese translation for Fight With Me 0.5.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
 This is different from the old patch (0.3.0-2 and earlier), which replaced a DLL. If you used the old one, remove it first.
@@ -24,14 +24,17 @@ The Path of the Companions Japanese patch contains the same font (identical file
 Recommended: [Fonts] EnableChinese = true (SMF v3.18+), so kanji outside the Japanese glyph range in game-supplied strings (spell and companion names) do not show as "?".
 
 If it stays English
-The language follows the game (sLanguage in Skyrim.ini); the files are read when it is JAPANESE. If your game is not set to JAPANESE, add this to SKSE/Plugins/FightWithMe_user.ini (create them if missing; restart the game):
+The language follows the game (sLanguage in Skyrim.ini). FightWithMe_JAPANESE.txt is read when it is JAPANESE; FightWithMe_JA_ENGLISH.txt, a copy of the same content, is read when it is ENGLISH (an English game that was Japanized, for example). Either way, just placing the files is enough.
+For any other language name (FRENCH, ...), add this to SKSE/Plugins/FightWithMe_user.ini (create it if missing; restart the game):
     [Interface]
     sLanguage = JAPANESE
-The SKSE log should show "[Text] JAPANESE: N lines from ..." if the files were read.
+This setting only affects the texts of Fight With Me's own screens. It does not affect SKSE Menu Framework as a whole, the game's language, or strings that come from the game (spell names, ...).
+The SKSE log should show "[Text] JAPANESE: N lines from ..." (or "[Text] ENGLISH: ..." in an English setup) if the files were read.
 
 Install
 Install as a mod (MO2, Vortex, ...). Files placed:
 SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt    Fight With Me's screens (battle plan, settings, notices)
+SKSE/Plugins/FightWithMe/Translations/FightWithMe_JA_ENGLISH.txt    the same content, read when the language is ENGLISH
 SKSE/Plugins/Fonts/Lora-SemiBold.ttf, Spectral-SemiBold.ttf, BarlowSemiCondensed-SemiBold.ttf    a Japanese-capable font (replaces the original fonts of the same names)
 FONT-LICENSE.txt    the font's license (SIL OFL)
 No DLL, INI or save is touched; disable it to go back to English.
@@ -62,6 +65,7 @@ AI disclosure
 The translation and this text were made with AI assistance (Claude, Anthropic). Checked in game, but mistakes may remain; please report them in the Nexus comments.
 
 Changelog
+0.5.0-2: Works in a game set to English (sLanguage=ENGLISH) too: just place the files (added a copy of the same content that is read when the language is ENGLISH).
 0.5.0-1: For Fight With Me 0.5.0 (battle plan, settings and notices translated). Unlike the old patch (0.3.0-2 and earlier) it does not replace a DLL; remove the old one first.
 0.3.0-2: Paths 0.1.0 translated (tree screens, all 88 nodes, ranks, bonuses, guide, settings, notices). "Skill" unified as "アビリティ". Text position and wrapping adjusted on the Paths screens.
 0.3.0-1: Updated for Fight With Me 0.3.0 (auto battle, the abilities section, reworded role/position tooltips, healer heal notices, Volley notices, sight range and theme are translated). Paths is not translated yet.

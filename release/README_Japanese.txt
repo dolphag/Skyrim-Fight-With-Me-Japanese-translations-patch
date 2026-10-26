@@ -1,4 +1,4 @@
-Fight With Me - Japanese Translations Patch 0.5.0-1 (対象: Fight With Me 0.5.0)
+Fight With Me - Japanese Translations Patch 0.5.0-2 (対象: Fight With Me 0.5.0)
 =====================================================================
 Fight With Me 0.5.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLL は変更しません(ファイルを置くだけです)。
 0.3.0-2 以前の日本語化パッチ(DLL を差し替える版)とは別のものです。旧版を使っていた場合は、先に外してください。
@@ -31,17 +31,19 @@ Paths 用パッチの訳にも、この MOD の画面の文言の大部分が含
 - 姉妹MODの日本語化パッチ: Walk With Me - Japanese Translations Patch  https://www.nexusmods.com/skyrimspecialedition/mods/194872
 
 ■ 日本語にならないとき
-言語はゲームの設定(Skyrim.ini の sLanguage)に従います。sLanguage=JAPANESE のときに読まれます。
-英語版ゲームなどで、sLanguage が JAPANESE でない場合は、次のファイルに書いてください(無ければ新規作成。反映はゲームの再起動後)。
+言語は、ゲームの設定(Skyrim.ini の sLanguage)に従います。JAPANESE のときは FightWithMe_JAPANESE.txt、ENGLISH のとき(英語版ゲームのまま日本語化している環境など)は、同じ内容の FightWithMe_JA_ENGLISH.txt が読まれます。どちらも、ファイルを置くだけで日本語になります。
+それ以外の言語名(FRENCH など)のときは、次のファイルに書いてください(無ければ新規作成。反映はゲームの再起動後)。
   SKSE/Plugins/FightWithMe_user.ini
       [Interface]
       sLanguage = JAPANESE
-SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、日本語のファイルは読まれています。
+この設定が効くのは、Fight With Me の画面の文言だけです。SKSE Menu Framework 全体や、ゲーム本体の言語、魔法名などのゲーム由来の文字列には影響しません。
+SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」(ENGLISH のときは「[Text] ENGLISH: ...」)と出ていれば、日本語のファイルは読まれています。
 この行が無い、または「no translation files, so English」なら、ファイルの置き場所を確認してください。
 
 ■ 導入
 MOD として入れてください(MO2・Vortex など)。置かれるファイルは次のとおりです。
 SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt    Fight With Me の画面(バトルプラン・設定・通知)
+SKSE/Plugins/FightWithMe/Translations/FightWithMe_JA_ENGLISH.txt    上と同じ内容(言語名が ENGLISH のときに読まれる)
 SKSE/Plugins/Fonts/Lora-SemiBold.ttf, Spectral-SemiBold.ttf, BarlowSemiCondensed-SemiBold.ttf    日本語対応フォント(原作の同名のフォントを置き換えます)
 FONT-LICENSE.txt    フォントのライセンス(SIL OFL)
 ファイルを置くだけで、DLL・INI・セーブには影響しません。無効にすれば元に戻ります。
@@ -82,6 +84,7 @@ GitHub にはソースコード(生成スクリプトと翻訳表)のみを置�
 日本語でも楽しめるようにと、感謝を込めて作った非公式の翻訳です。
 
 ■ 更新履歴
+0.5.0-2: 英語設定(sLanguage=ENGLISH)のまま日本語化している環境でも、ファイルを置くだけで日本語になるようにした(言語名が ENGLISH のときに読まれる、同じ内容のファイルを追加)。
 0.5.0-1: Fight With Me 0.5.0 に対応(バトルプラン・設定・通知を日本語化)。DLL を差し替える旧版(0.3.0-2 以前)とは別の方式です。旧版は外してください。
 0.3.0-2: Paths 0.1.0 を日本語化(ツリー画面、全88ノード、ランク、ボーナス、ガイド、設定、通知)。「スキル」を「アビリティ」に統一。Paths 画面の文字位置・折り返しを調整。
 0.3.0-1: Fight With Me 0.3.0 に対応(オートバトル、スキル欄、役割・配置の説明の変更、ヒーラーの回復表示、Volley の通知、視認距離、テーマなどを日本語化)。Paths 関連は未対応。

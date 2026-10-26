@@ -7,7 +7,7 @@
   python3 -I tools/make_zip.py release out/ja --font-dir out/font --version 0.5.0-1
 
 zip の中身:
-  release : SKSE/Plugins/Fonts/*.ttf + FONT-LICENSE.txt + FightWithMe_JAPANESE.txt + README_Japanese.txt / README_English.txt
+  release : FightWithMe_JA_ENGLISH.txt + SKSE/Plugins/Fonts/*.ttf + FONT-LICENSE.txt + FightWithMe_JAPANESE.txt + README_Japanese.txt / README_English.txt
 release は release/README_{Japanese,English}.txt を雛形に使う。日本語フォントは同じ zip に入れる(Nexus で 2 ファイルに分けると、同じページ名の MOD として入れるときに「一つにまとめる/置き換える」のダイアログが出て混乱するため)。
 {SHA_JA} は訳文ファイルの SHA-256 で埋まる。README の 1 行目に --version が含まれていなければ失敗する
 (Nexus の版と README の版の食い違いを防ぐ)。"""
@@ -16,6 +16,7 @@ import argparse, hashlib, os, re, sys, zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TPL = 'SKSE/Plugins/FightWithMe/Translations/'
 OUT_FILE = 'FightWithMe_JAPANESE.txt'
+ALIAS_FILE = 'FightWithMe_JA_ENGLISH.txt'   # 言語名が ENGLISH のときに読まれる同じ内容の写し(英語設定のまま日本語化している環境向け)
 NAME = 'Fight With Me'
 PREFIX = 'FWM'
 FONT_FILES = ['Lora-SemiBold.ttf', 'Spectral-SemiBold.ttf', 'BarlowSemiCondensed-SemiBold.ttf']
@@ -30,9 +31,12 @@ def put(z, arcname, data):
 
 
 def load_text(d):
-    p = os.path.join(d, TPL, OUT_FILE)
-    if not os.path.isfile(p): raise SystemExit('見つかりません: %s(先に tools/lang_build.py を実行)' % p)
-    return [(TPL + OUT_FILE, open(p, 'rb').read())]
+    out = []
+    for n in (OUT_FILE, ALIAS_FILE):
+        p = os.path.join(d, TPL, n)
+        if not os.path.isfile(p): raise SystemExit('見つかりません: %s(先に tools/lang_build.py を実行)' % p)
+        out.append((TPL + n, open(p, 'rb').read()))
+    return out
 
 
 def load_fonts(d):

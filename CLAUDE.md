@@ -37,7 +37,7 @@ Fight With Me(FWM。Nexus 194766)の日本語化パッチ。原作者は hashhbb
 - 折り返しは ASCII スペースでしか起きない。長文は文節区切りにスペースを入れる(`lang_build.py` が janome で自動)。
 - 0.5.0 では表示倍率・位置の補正はできない(DLL を触らない)。窮屈な場所は訳を短くする。
 - **利用者向けの文面(README・Nexus)では、原作に「翻訳機能」があるように書かない**。原作はメッセージを外部ファイルに出しているだけ(翻訳のためではあるが、機能として謳われているわけではない)。旧 DLL 版(0.3.0-2 以前)との違いは、旧版を使っていた人への注意に絞る。Paths は別 MOD の任意の連携先として書く。
-- 言語は `sLanguage`(ゲームか各 INI)。英語版ゲームの利用者には、`FightWithMe_user.ini` への設定を README で案内する。日本語フォントが必須: 原作のテーマ用フォントは日本語を含まない。**翻訳と同じ zip に同梱する**(別ファイルにすると、同じページ名の MOD として MO2 に入れるとき「一つにまとめる/置き換える」のダイアログが出て混乱するため。2026-10-26 に統合)。`tools/make_font_pack.py`(ユーザーが添付する OFL のフォントから作る。フォントは GitHub に置かない。出力は決定的)。特定の外部作品(MTG 等)を強調しない。
+- 言語は `sLanguage`(ゲームか各 INI)。JAPANESE のときは `FightWithMe_JAPANESE.txt`、ENGLISH のときは同じ内容の `FightWithMe_JA_ENGLISH.txt`(英語設定のまま日本語化している環境向け。名前は原作の英語ファイルより後に並ぶものにする)が読まれる。`_user.ini` は配らない(個人設定を消すため)。英語版ゲームの利用者には、`FightWithMe_user.ini` への設定を README で案内する。日本語フォントが必須: 原作のテーマ用フォントは日本語を含まない。**翻訳と同じ zip に同梱する**(別ファイルにすると、同じページ名の MOD として MO2 に入れるとき「一つにまとめる/置き換える」のダイアログが出て混乱するため。2026-10-26 に統合)。`tools/make_font_pack.py`(ユーザーが添付する OFL のフォントから作る。フォントは GitHub に置かない。出力は決定的)。特定の外部作品(MTG 等)を強調しない。
 
 ## 作業の進め方
 - 手順の詳細は skill `lang-text-workflow`(生成・検査・テスト版 zip)、`release-package`(README・Changelog・配布 zip・Nexus 文面・タグ)。`pe-patch-workflow` は 0.3.0 まで。zip 作成は `tools/make_zip.py`。テストの前に、ユーザーの SKSE ログの 1 行目の版と `[Text] JAPANESE: N lines` を確認する。

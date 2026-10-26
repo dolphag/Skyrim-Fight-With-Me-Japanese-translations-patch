@@ -63,3 +63,11 @@
 - test3(2026-10-26): 日本語フォントを別ファイル化(Noto Sans JP、OFL。内部名 `FWM Japanese UI`、全グリフ)。ユーザーの実機で FWM / Paths とも正常。テーマ名は原文(Vanilla/Oxblood/Nordic)に統一(ドロップダウンとツールチップの不統一をユーザーが指摘)。
 - パーティ画面のホバー表示(役割・注目対象・位置取りの説明)も未翻訳。`Help(roles[..].summary.data())` が `Tr` を通していないため(原作側)。
 - 2026-10-26(配布形の変更): 翻訳とフォントを別ファイルにすると、Nexus の同じページの 2 ファイルが MO2 で同じ MOD 名として提案され、「一つにまとめる/置き換える/名前を変更/キャンセル」のダイアログが出て混乱する(ユーザーが指摘)。フォントは日本語表示に必須なので別ファイルにする利点が無く、**翻訳と同じ 1 つの zip に統合**。FWM 用と Paths 用の zip に同じフォントが入るため、`make_font_pack.py` の出力を決定的にした(`recalcTimestamp=False`)。zip は約 9.5MB になる(訳の更新のたびにそれをダウンロードしてもらう代償)。
+
+## 英語設定(sLanguage=ENGLISH)のまま日本語化している環境への対応(0.5.0-2、2026-10-26)
+- FightWithMe_JAPANESE.txt は言語名が JAPANESE のときだけ読まれる。英語設定のままの環境向けに、言語名が ENGLISH のときに読まれる同じ内容の写し `FightWithMe_JA_ENGLISH.txt` を同梱する(INI は触らない)。
+- ローダは `*_<言語名>.txt` を**ファイル名の昇順**(序数比較)に読み、後のものが勝つ。原作の `FightWithMe_ENGLISH.txt`(Paths の zip にも付く)は英語→英語の行を持ち、訳より後に読まれると**訳を英語に戻す**。そのため写しの名前は、原作の `FightWithMe_ENGLISH.txt` より後に並ぶものにする: FWM 用 `FightWithMe_JA_ENGLISH.txt`、Paths 用 `FightWithMe_JA_Paths_ENGLISH.txt`(名前順: `FightWithMePaths_ENGLISH` → `FightWithMe_ENGLISH`(原作)→ `FightWithMe_JA_ENGLISH` → `FightWithMe_JA_Paths_ENGLISH`)。
+- 名前の検証: ローダ(`Text::Load`/`Add`)の規則を模したシミュレーション(原作の zip のファイルと、本パッチの出力を使用)で、FWM のみ・Paths のみ・両方、各々 ENGLISH/JAPANESE のすべてで全キーが日本語になった(未訳 0)。対照として、原作より前に並ぶ名前(`FightWithMePaths_JA_ENGLISH.txt`)だと 1099 件中 813 件が英語のままだった(test2 の命名は、この欠陥があった)。実機での確認はユーザーが行う(INI の `sLanguage = ENGLISH` で再現できる)。
+- `FightWithMe_user.ini`(`sLanguage` だけ)を配る案は**不採用**: `_user.ini` はプレイヤー自身の設定(キー割り当てなど)を保存する、**配布しない前提**のファイル(原作のコメント: Never shipped, so an update cannot reset it)。手動導入・Vortex では丸ごと上書きして個人設定を消し、MO2 では Overwrite 側が優先されて新規の人にしか届かない。`FightWithMe.ini` も、原作の更新で置き換えられる。
+- `sLanguage` が効く範囲: その DLL が自分の訳文テーブルを読む言語だけ(FWM は `FightWithMe(_user).ini`、Paths は `FightWithMePaths(_user).ini`)。SMF 全体・ゲーム本体の言語・ゲーム由来の文字列には効かない。値は大文字にそろえて使う(`Japanese` でも可)。
+- 他の言語名(FRENCH など)のときは、INI の `sLanguage = JAPANESE` が必要(README に記載)。

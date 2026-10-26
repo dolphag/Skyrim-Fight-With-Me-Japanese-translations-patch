@@ -23,7 +23,7 @@ only the scripts that build the Japanese message file, and the English → Japan
 
 ## Files
 - `translations_en_ja.csv`: all string pairs (822). The English column is the original author's and is not covered by the license of this repository.
-- `tools/lang_build.py`: builds `FightWithMe_JAPANESE.txt` from the original zip and the table, with checks (missing translations, format fields, kanji range).
+- `tools/lang_build.py`: builds `FightWithMe_JAPANESE.txt` (and `FightWithMe_JA_ENGLISH.txt`, a copy read when the language is ENGLISH) from the original zip and the table, with checks (missing translations, format fields, kanji range).
 - `tools/make_zip.py`: test and distribution zips (the distribution zip bundles the font). `tools/make_font_pack.py`: renames and copies an OFL Japanese font under the three theme font names (the font itself is supplied by the user and not committed).
 - `release/`: README templates and the Nexus text. `docs/`: findings about the original (format, fonts, packaging), glossary, a draft report for the original author (not sent).
 - `legacy/0.3.0/`: the tools of the old method (patching `FightWithMe.dll` 0.3.0), kept for reference. They do not work with 0.5.0.
@@ -70,7 +70,7 @@ Fight With Me 0.5.0 は、メッセージを外部のテキストファイル(`S
 
 ### ファイル
 - `translations_en_ja.csv`: 英日の全組(822)。英語の列は原作者のもので、このリポジトリのライセンスの対象外です。
-- `tools/lang_build.py`: 原作の zip と対応表から `FightWithMe_JAPANESE.txt` を作ります(未訳・書式欄・漢字範囲の検査つき)。
+- `tools/lang_build.py`: 原作の zip と対応表から `FightWithMe_JAPANESE.txt`(と、言語名が ENGLISH のときに読まれる写し `FightWithMe_JA_ENGLISH.txt`)を作ります(未訳・書式欄・漢字範囲の検査つき)。
 - `tools/make_zip.py`: テスト版と配布用の zip(配布用にはフォントを同梱)。`tools/make_font_pack.py`: OFL の日本語フォントを、テーマ用フォントの 3 つの名前で書き出します(フォント本体は利用者が用意し、コミットしません)。
 - `release/`: README の雛形と Nexus 用文面。`docs/`: 原作の調査(形式・フォント・同梱)、用語集、原作者向け報告の文案(未送信)。
 - `legacy/0.3.0/`: 旧方式(`FightWithMe.dll` 0.3.0 を書き換える)のツール。参照用に残しています。0.5.0 には使えません。
