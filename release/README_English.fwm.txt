@@ -1,7 +1,7 @@
 Fight With Me - Japanese Translations Patch 0.5.0-1 (for Fight With Me 0.5.0)
 =====================================================================
-A Japanese translation for Fight With Me 0.5.0. It uses the original's own translation-file feature, so no DLL is changed (just files to place).
-Versions up to 0.3.0 replaced a DLL. The original added translation files in 0.5.0 / 1.0, so the method changed. Do not use this together with the old (0.3.0-2 or earlier) patch.
+A Japanese translation for Fight With Me 0.5.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
+This is different from the old patch (0.3.0-2 and earlier), which replaced a DLL. If you used the old one, remove it first.
 Original mods:
 - Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
 - Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
@@ -29,11 +29,11 @@ SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt    Fight With Me'
 No DLL, INI or save is touched; disable it to go back to English.
 When the original updates you do not have to remove the patch, but new texts stay in English until the patch is updated. Keep versions matched: the version follows the original, with a suffix (x.x.x-1) for patch-only fixes.
 
-SHA-256 of the translation files:
+SHA-256 of the text files:
   FightWithMe_JAPANESE.txt       {SHA_FWM_JA}
 
 What is not in Japanese
-- The role / focus / position dropdowns on the Party settings page (the choices and their hover tooltips): the original does not pass them through its translation feature, so they stay English until it is fixed upstream.
+- The role / focus / position dropdowns on the Party settings page (the choices and their hover tooltips): the original does not read their text from its external message files, so they stay English until it is fixed upstream.
 - Theme names (Vanilla / Oxblood / Nordic) are kept as in the original.
 - Key names and button labels (Tab, Esc, ...), logs, INI comments.
 - Strings that come from the game or other mods (spell and companion names).
@@ -44,7 +44,7 @@ Original author: hashhbbrown (GitHub: fatalCMD). All original strings, trees and
 This unofficial translation follows the permissions shown on the original pages (checked by the user on 2026-10-26):
 - Fight With Me: modification and asset use allowed with credit; re-uploading the file elsewhere is not allowed.
 - Path of the Companions: modification, asset use and uploading to other sites allowed with credit.
-This patch contains no file of the originals (no DLL, images or fonts), only the original's English strings (the left column of the translation files) and the Japanese translation.
+This patch contains no file of the originals (no DLL, images or fonts), only the original's English strings (the left column of the message files) and the Japanese translation.
 Distributed on Nexus Mods only, as a translation page. Please do not re-upload it. GitHub holds only the source (scripts and the translation table), not these files or the font.
 Please do not contact the original author about problems with this patch. It will be removed promptly if the author asks. No warranty.
 Original source (declared GPL-3.0-or-later): https://github.com/fatalCMD/potc
@@ -56,8 +56,7 @@ AI disclosure
 The translation and this text were made with AI assistance (Claude, Anthropic). Checked in game, but mistakes may remain; please report them in the Nexus comments.
 
 Changelog
-0.5.0-1: For Fight With Me 0.5.0. The original now has translation files, so the method changed: no DLL replacement any more. The battle plan, settings and notices are translated.
-(0.3.0-2 and earlier replaced a DLL in the old way.)
+0.5.0-1: For Fight With Me 0.5.0 (battle plan, settings and notices translated). Unlike the old patch (0.3.0-2 and earlier) it does not replace a DLL; remove the old one first.
 0.3.0-2: Paths 0.1.0 translated (tree screens, all 88 nodes, ranks, bonuses, guide, settings, notices). "Skill" unified as "アビリティ". Text position and wrapping adjusted on the Paths screens.
 0.3.0-1: Updated for Fight With Me 0.3.0 (auto battle, the abilities section, reworded role/position tooltips, healer heal notices, Volley notices, sight range and theme are translated). Paths is not translated yet.
 0.2.0-1: Updated for Fight With Me 0.2.0 (healer rework, magicka rejuvenation, spell picker and bracing states are translated).

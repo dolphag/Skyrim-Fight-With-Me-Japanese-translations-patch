@@ -1,7 +1,6 @@
 Path of the Companions - Japanese Translations Patch 1.0.0-1 (対象: Path of the Companions 1.0.0)
 =====================================================================
-Path of the Companions 1.0.0 を日本語化するパッチです。原作の「翻訳ファイル」の機能を使うため、DLL は変更しません(ファイルを置くだけです)。
-0.3.0 までの旧版は DLL を差し替える方式でした。原作の 0.5.0 / 1.0 で翻訳の機能ができたため、方式が変わっています。旧版(0.3.0-2 以前)と一緒には使わないでください。
+Path of the Companions 1.0.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLL は変更しません(ファイルを置くだけです)。
 原MOD:
 - Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
 - Fight With Me(任意の連携先)  https://www.nexusmods.com/skyrimspecialedition/mods/194766
@@ -33,7 +32,7 @@ Paths は Fight With Me(0.5.0)がなくても動きます。併用すると、Fi
   Fight With Me も使う場合は、SKSE/Plugins/FightWithMe_user.ini にも同じ内容を書いてください(DLL ごとに別々に読みます)。
       [Interface]
       sLanguage = JAPANESE
-SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、翻訳ファイルは読まれています。
+SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、日本語のファイルは読まれています。
 この行が無い、または「no translation files, so English」なら、ファイルの置き場所を確認してください。
 
 ■ 導入
@@ -63,7 +62,7 @@ SKSE/Plugins/FightWithMe/Translations/FightWithMePaths_JAPANESE.txt    Paths の
 本パッチは、原MODの Nexus ページの権限表示(2026-10-26 にユーザーが確認)に従って作った非公式の翻訳です。
 - Fight With Me: 改変・素材の利用は作者のクレジット表記で可。他サイトへの再アップロードは不可。
 - Path of the Companions: 改変・素材の利用・他サイトへの転載は作者のクレジット表記で可。
-本パッチに、原作のファイル(DLL・画像・フォントなど)は含まれません。含まれるのは、原作の英語の文言(翻訳ファイルの左側)と、日本語訳です。
+本パッチに、原作のファイル(DLL・画像・フォントなど)は含まれません。含まれるのは、原作の英語の文言(メッセージのファイルの左側)と、日本語訳です。
 本パッチは Nexus Mods の翻訳ページでのみ配布します。他サイトへの転載はご遠慮ください。
 GitHub にはソースコード(生成スクリプトと翻訳表)のみを置き、配布用のファイルやフォントは置いていません。
 原作者に本パッチの不具合を問い合わせないでください。作者から削除の依頼があれば速やかに対応します。無保証です。
@@ -81,7 +80,4 @@ GitHub にはソースコード(生成スクリプトと翻訳表)のみを置�
 日本語でも楽しめるようにと、感謝を込めて作った非公式の翻訳です。
 
 ■ 更新履歴
-1.0.0-1: Path of the Companions 1.0.0 に対応。Paths が Fight With Me から独立した MOD になったため、方式を変更(DLL の差し替えをやめ、原作の翻訳ファイルに日本語訳を置く方式)。全ノード・ガイド・設定・通知を日本語化。
-(0.1.0-1 以前は、Fight With Me の DLL を差し替える旧方式です。)
-0.1.0-1: 初版。Paths 0.1.0 を日本語化(ツリー画面、全88ノード、ランク、ボーナス、ガイド、設定、通知)。DLLは Fight With Me 日本語化パッチ 0.3.0-2 と同じです。
-(Fight With Me 側の履歴は、Fight With Me 日本語化パッチのページを参照してください。)
+1.0.0-1: 初版。Path of the Companions 1.0.0 用。ツリー・アビリティ・特性・ガイド・設定・通知を日本語化。

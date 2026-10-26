@@ -10,22 +10,22 @@
 | Paths 日本語化(**新規**。原 MOD は 196635) | `Path of the Companions - Japanese Translations Patch 1.0.0-1.zip` | 1.0.0-1 | Main |
 | 同上 | `Path of the Companions - Japanese UI Font 1.0.0-1.zip` | 1.0.0-1 | Optional(同上) |
 
-旧 Paths 用ページ(196104、Paths 0.1.0 用)は、説明の先頭に「Paths 1.0 用の新ページ(リンク)へ移行。旧版用」と追記する(ユーザー判断)。
+旧 Paths 用ページ(196104)の扱いはユーザー判断(Paths は別 MOD になったので、新ページで足りる。旧ページに案内を足すかは任意。変更点を強調しない)。
 
 ## File credits 欄(各ファイル。空にしない)
 - hashhbbrown(Fight With Me / Path of the Companions の作者)。GitHub: fatalCMD
 - フォントのファイルには、Noto Sans JP(Adobe)も入れる。
 
 ## ファイル説明(Main、短く)
-FWM: `Fight With Me 0.5.0 の日本語訳です。翻訳ファイル(FightWithMe_JAPANESE.txt)を置くだけで、DLLは変更しません。日本語表示には、別ファイル「Japanese UI Font」とSKSE Menu Framework の日本語設定が必要です。詳細は同梱のREADME。`
+FWM: `Fight With Me 0.5.0 の日本語訳です。原作が外部のテキストファイルに分けているメッセージの日本語版(FightWithMe_JAPANESE.txt)を置くだけで、DLLは変更しません。日本語表示には、別ファイル「Japanese UI Font」とSKSE Menu Framework の日本語設定が必要です。詳細は同梱のREADME。`
 Paths: `Path of the Companions 1.0.0 の日本語訳です。(以下同じ。Fight With Me は任意の連携先で、併用する場合も、この zip だけで FWM の画面まで日本語になります。FWM 用のパッチを別に入れる必要はありません)`
 
 ## ファイル説明(Japanese UI Font)
 `日本語化パッチ用の日本語フォントです。入れないと日本語が「?」になります。原作と同名のフォントを置き換えるので、MODの優先順位は 原作 → 日本語化パッチ → このファイル にしてください。Noto Sans JP(SIL OFL)を元にしています。`
 
 ## 更新履歴(アップロード時の「Changelog」欄)
-FWM 0.5.0-1: Fight With Me 0.5.0 に対応。DLL を差し替える方式をやめ、原作の翻訳ファイルに日本語訳を置く方式に変更。旧版(0.3.0-2 以前)は外してください。
-Paths 1.0.0-1: 初版(1.0 用)。Paths が独立した MOD になったため、新ページで公開。
+FWM 0.5.0-1: Fight With Me 0.5.0 に対応。DLL を差し替える旧版(0.3.0-2 以前)とは別の方式です。旧版は外してください。
+Paths 1.0.0-1: 初版(Path of the Companions 1.0.0 用)。
 
 ## ページの説明(注意書きの要点。bbcode に整形して使う)
 1. 原作へのリンクとクレジット(hashhbbrown / fatalCMD)。非公式の翻訳で、原作者に問い合わせないこと。

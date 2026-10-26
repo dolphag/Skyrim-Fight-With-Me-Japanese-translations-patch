@@ -1,7 +1,7 @@
 # Fight With Me / Paths 日本語化パッチ(このリポジトリ)
 
 FWM(Nexus 194766)と Path of the Companions(Paths。Nexus で新 MOD、ID 196635)の日本語化パッチ。原作者は hashhbbrown(GitHub: fatalCMD)。
-**0.5.0 / 1.0 から方式が変わった**: DLL パッチをやめ、原作の翻訳ファイル機構に `*_JAPANESE.txt` を渡す(経緯と仕様は `docs/FWM-0.5.0_Paths-1.0-findings.md`)。FWM 0.3.0 / Paths 0.1.0 までの DLL パッチのツールは `legacy/0.3.0/`、手順は skill `pe-patch-workflow`(履歴扱い)。
+**0.5.0 / 1.0 から方式が変わった**: DLL パッチをやめ、原作が外部ファイルに分けたメッセージ(`Translations` フォルダ)の日本語版 `*_JAPANESE.txt` を置く(経緯と仕様は `docs/FWM-0.5.0_Paths-1.0-findings.md`)。FWM 0.3.0 / Paths 0.1.0 までの DLL パッチのツールは `legacy/0.3.0/`、手順は skill `pe-patch-workflow`(履歴扱い)。
 配布は Nexus の 2 ページ(FWM 用 194874、Paths 用は新 MOD 向けに新規作成の見込み。旧 196104 は旧 Paths 用)。
 常時読み込まれるので短く保つ。手順は `.claude/skills/`、用語は `docs/GLOSSARY.md`、版ごとの調査は `docs/` に置く。
 
@@ -36,6 +36,7 @@ FWM(Nexus 194766)と Path of the Companions(Paths。Nexus で新 MOD、ID 196635
 - HUD 通知のフォントに `→`(U+2192)が無い(0.3.0 での観察。0.5.0 は未確認)。ASCII 記号・矢印に頼らない。
 - 折り返しは ASCII スペースでしか起きない。長文は文節区切りにスペースを入れる(`lang_build.py` が janome で自動)。
 - 0.5.0 では表示倍率・位置の補正はできない(DLL を触らない)。窮屈な場所は訳を短くする。
+- **利用者向けの文面(README・Nexus)では、原作に「翻訳機能」があるように書かない**。原作はメッセージを外部ファイルに出しているだけ(翻訳のためではあるが、機能として謳われているわけではない)。Paths は別 MOD で、変更点を強調しない(0.3.0 は FWM の版。Paths の旧版は 0.1.0)。
 - 言語は `sLanguage`(ゲームか各 INI)。英語版ゲームの利用者には、両 DLL の `_user.ini` への設定を README で案内する。特定の外部作品(MTG 等)を強調しない。
 
 ## 作業の進め方

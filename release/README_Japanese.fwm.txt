@@ -1,7 +1,7 @@
 Fight With Me - Japanese Translations Patch 0.5.0-1 (対象: Fight With Me 0.5.0)
 =====================================================================
-Fight With Me 0.5.0 を日本語化するパッチです。原作の「翻訳ファイル」の機能を使うため、DLL は変更しません(ファイルを置くだけです)。
-0.3.0 までの旧版は DLL を差し替える方式でした。原作の 0.5.0 / 1.0 で翻訳の機能ができたため、方式が変わっています。旧版(0.3.0-2 以前)と一緒には使わないでください。
+Fight With Me 0.5.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLL は変更しません(ファイルを置くだけです)。
+0.3.0-2 以前の日本語化パッチ(DLL を差し替える版)とは別のものです。旧版を使っていた場合は、先に外してください。
 原MOD:
 - Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
 - Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
@@ -32,7 +32,7 @@ Paths 用の zip にも、この MOD と同じ FightWithMe_JAPANESE.txt が入�
   SKSE/Plugins/FightWithMe_user.ini
       [Interface]
       sLanguage = JAPANESE
-SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、翻訳ファイルは読まれています。
+SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、日本語のファイルは読まれています。
 この行が無い、または「no translation files, so English」なら、ファイルの置き場所を確認してください。
 
 ■ 導入
@@ -60,7 +60,7 @@ SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt    Fight With Me 
 本パッチは、原MODの Nexus ページの権限表示(2026-10-26 にユーザーが確認)に従って作った非公式の翻訳です。
 - Fight With Me: 改変・素材の利用は作者のクレジット表記で可。他サイトへの再アップロードは不可。
 - Path of the Companions: 改変・素材の利用・他サイトへの転載は作者のクレジット表記で可。
-本パッチに、原作のファイル(DLL・画像・フォントなど)は含まれません。含まれるのは、原作の英語の文言(翻訳ファイルの左側)と、日本語訳です。
+本パッチに、原作のファイル(DLL・画像・フォントなど)は含まれません。含まれるのは、原作の英語の文言(メッセージのファイルの左側)と、日本語訳です。
 本パッチは Nexus Mods の翻訳ページでのみ配布します。他サイトへの転載はご遠慮ください。
 GitHub にはソースコード(生成スクリプトと翻訳表)のみを置き、配布用のファイルやフォントは置いていません。
 原作者に本パッチの不具合を問い合わせないでください。作者から削除の依頼があれば速やかに対応します。無保証です。
@@ -78,8 +78,7 @@ GitHub にはソースコード(生成スクリプトと翻訳表)のみを置�
 日本語でも楽しめるようにと、感謝を込めて作った非公式の翻訳です。
 
 ■ 更新履歴
-0.5.0-1: Fight With Me 0.5.0 に対応。原作に翻訳ファイルの機能ができたため、方式を変更(DLL の差し替えをやめ、翻訳ファイルを置く方式)。バトルプラン・設定・通知を日本語化。
-(0.3.0-2 以前は、DLL を差し替える旧方式です。)
+0.5.0-1: Fight With Me 0.5.0 に対応(バトルプラン・設定・通知を日本語化)。DLL を差し替える旧版(0.3.0-2 以前)とは別の方式です。旧版は外してください。
 0.3.0-2: Paths 0.1.0 を日本語化(ツリー画面、全88ノード、ランク、ボーナス、ガイド、設定、通知)。「スキル」を「アビリティ」に統一。Paths 画面の文字位置・折り返しを調整。
 0.3.0-1: Fight With Me 0.3.0 に対応(オートバトル、スキル欄、役割・配置の説明の変更、ヒーラーの回復表示、Volley の通知、視認距離、テーマなどを日本語化)。Paths 関連は未対応。
 0.2.0-1: Fight With Me 0.2.0 に対応(ヒーラーの仕様変更・マジカ活性・魔法選択画面・身構えなどの新表示を日本語化)。
