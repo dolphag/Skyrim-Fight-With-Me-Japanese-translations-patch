@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Nexus Mods の公開 v2 GraphQL API を読み取り専用で引く。標準ライブラリのみ。API キーは使わない。
+"""Nexus Mods の公開 v2 GraphQL API を読み取り専用で引く。標準ライブラリのみ。API キーは使わない(v2 は匿名で読める。配布 zip のダウンロードは非プレミアムで 403 のため扱わない)。
 
 方式は houseCARL(Avick3110/houseCARL、GPL-3.0)の NexusClient.cs を参考にした(自分の言葉で書き直したもの)。
 エンドポイント https://api.nexusmods.com/v2/graphql に {query, variables} を POST するだけ。
@@ -11,7 +11,7 @@
   python3 -I tools/nexus_query.py raw 'query{ game(domainName:"skyrimspecialedition"){ id name } }'
 
 mutation / subscription は送らない。失敗は終了コード 1 とメッセージで返す(例外のまま落とさない)。"""
-import argparse, json, re, sys, urllib.request, urllib.error
+import argparse, datetime, json, re, sys, urllib.request, urllib.error
 
 ENDPOINT = 'https://api.nexusmods.com/v2/graphql'
 GAMES = {'skyrimspecialedition': 1704}   # houseCARL の固定表のうち、このリポジトリで使うもの
@@ -20,10 +20,11 @@ UA = 'fwm-ja-patch-tools (read-only)'
 MOD_QUERY = """query ModDetail($modId: ID!, $gameId: ID!) {
   mod(modId: $modId, gameId: $gameId) {
     modId name version summary author category endorsements downloads
-    updatedAt createdAt adultContent status
+    updatedAt createdAt adultContent status fileSize
   }
   modFiles(modId: $modId, gameId: $gameId) {
     fileId name version category date description changelogText
+    size sizeInBytes primary uri
   }
 }"""
 
@@ -82,6 +83,9 @@ def main():
 
     if a.cmd == 'mod':
         data, err = post(MOD_QUERY, {'modId': a.mod_id, 'gameId': game_id(a.game)})
+        for f in (data or {}).get('modFiles') or []:   # 読みやすいよう公開時刻を ISO にする
+            if isinstance(f.get('date'), int):
+                f['date_iso'] = datetime.datetime.fromtimestamp(f['date'], datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     else:
         data, err = post(a.query, json.loads(a.vars))
     if err:

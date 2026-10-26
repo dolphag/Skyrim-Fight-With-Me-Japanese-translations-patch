@@ -24,6 +24,11 @@
 - 匿名で読める(houseCARL の主張どおり)。`tools/nexus_query.py mod 194766` は動作した。
 - `Mod` 型のフィールド: `description, summary, version, updatedAt, createdAt, downloads, endorsements, fileSize, modRequirements, tags, uploader, status` など。**権限・ライセンスに当たるフィールドは無い**。`Permission` 型は `Collection` 用のみ。
 
+### v2 の型の詳細(introspection、2026-10-26)
+- `ModFile` のフィールド: `fileId` `name` `version` `category` `date`(UNIX 秒)`description` `changelogText` `size`(KB)`sizeInBytes` `primary`(MAIN なら 1)`uri`(CDN 内パスで、ダウンロード URL ではない)`totalDownloads` `uniqueDownloads` `scannedV2` ほか。`category` の値: MAIN / UPDATE / OPTIONAL / OLD_VERSION / MISCELLANEOUS / REMOVED / ARCHIVED。
+- GraphQL にダウンロード URL を返すクエリは無い(mutation にも `updateModDirectDownloadEnabled` のみ)。
+- `modFileContents`(zip 内のファイル一覧)は動くが、FWM 0.5.0 MAIN(fileId 825644)では 0 件だった。索引されていないのか、フィルタの指定(`fileId`/`modId`/`gameId` は `{value: Int, op: EQUALS}` の配列)が違うのかは不明。
+
 ## 結論
 - **原 MOD の Nexus 権限(Permissions and credits)は API で取れない**。リリース前の権限確認は、従来どおりブラウザかユーザー確認。
 - API で確認できる: 原 MOD の版・更新時刻・changelog、自分のページの版・ファイル一覧(Nexus の版と zip 内 README の版の一致確認)。
