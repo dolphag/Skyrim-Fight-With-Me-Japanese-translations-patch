@@ -17,5 +17,6 @@ description: Nexus Mods の mod ページ(FWM 194766、パッチ 194874 など)�
 
 ## 限界(必ず守る)
 - **権限(Permissions and credits)がこの API で取れるかは未確認**。取れなければ従来どおりブラウザかユーザー確認(CLAUDE.md「Nexus の確認」)。API で取れた値だけを事実として書き、確認日を README に書く。
-- このクラウド環境は `api.nexusmods.com` への CONNECT がプロキシに 403 で拒否される(2026-10-26)。使うには、ユーザーが環境の Network access で許可ドメインに追加する必要がある。拒否されたら回避せず報告する。
+- 2026-10-26: `api.nexusmods.com` に接続できた。**v2 はキーなしで足りる**(自分の MOD の説明文・ファイル一覧・changelog も取れる)。v1 REST はキー必須で、追加で得られるものは少ない。**権限は v1/v2 とも取れないことを確認済み**(`docs/nexus-api-notes.md`)。接続が拒否されたら回避せず報告する。
+- 配布 zip のダウンロード(`download_link`)は非プレミアムで 403。
 - API が応答しても、スキーマ(フィールド名)は houseCARL の使用分に限る。足すときは introspection で確認し、結果を `docs/nexus-api-notes.md` に書く。
