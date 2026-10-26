@@ -11,11 +11,11 @@ description: Fight With Me 日本語化パッチのリリース準備(配布 zip
 1. 実機確認が済んでいること(ユーザーの「OK」)。
 2. **原 MOD の Nexus ページの権限(Permissions and credits)をその時点で確認**(ユーザーが貼り付ける)。確認日を README に書く。変更があれば止めてユーザーに報告。
 3. 版番号を決める: FWM に連動(FWM 0.5.0 → 0.5.0-N)。**Nexus の版と zip 内 README の版を一致させる**。
-4. README 雛形(`release/README_{Japanese,English}.txt`、`release/README_Font_{Japanese,English}.txt`)を更新する: 1 行目の版、変更点、**更新履歴(最新を先頭に追記)**、確認日。`{SHA_JA}` はそのまま(zip 作成時に埋まる)。リポジトリの README と `translations_en_ja.csv` も更新する。
-5. zip を作る(2 本: 翻訳パッチ、日本語フォント):
+4. README 雛形(`release/README_{Japanese,English}.txt`)を更新する: 1 行目の版、変更点、**更新履歴(最新を先頭に追記)**、確認日。`{SHA_JA}` はそのまま(zip 作成時に埋まる)。リポジトリの README と `translations_en_ja.csv` も更新する。
+5. zip を作る(1 本。翻訳と日本語フォントを同梱する):
    - 翻訳: `python3 -I tools/lang_build.py --fwm <FWM zip> --out out/ja`(検査つき)
    - フォント: `python3 -I tools/make_font_pack.py --font NotoSansJP-Medium.ttf --license OFL.txt --out out/font`(ユーザーがフォントと OFL を添付。内部名を付け替える。GitHub にはコミットしない)
-   - `python3 -I tools/make_zip.py release out/ja --version <版>` / `python3 -I tools/make_zip.py font out/font --version <版>`
+   - `python3 -I tools/make_zip.py release out/ja --font-dir out/font --version <版>`
    - README の 1 行目に版がなければ失敗する。
 6. Nexus 用テキストを作る: 前回の文面 `release/NEXUS_TEXT_<前回の版>.md` を複製して更新(ファイル説明・更新履歴・ページの説明文・File credits 欄の指示)。
 7. **main へ統合 → main の HEAD を確認 → ユーザーがそのコミットにタグ**(`v<版>`、例 `v0.5.0-1`)。タグはこのクラウド環境から push できない(403)。GitHub の Release でユーザーが付ける。main 更新後に docs だけの commit を足すと HEAD が動くので注意。
@@ -23,11 +23,12 @@ description: Fight With Me 日本語化パッチのリリース準備(配布 zip
 
 ## zip の構成(`tools/make_zip.py` が作る)
 ```
-翻訳パッチ: SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt + README_Japanese.txt / README_English.txt
-フォント  : SKSE/Plugins/Fonts/{Lora,Spectral,BarlowSemiCondensed}-SemiBold.ttf + FONT-LICENSE.txt + README_*.txt
+SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt
+SKSE/Plugins/Fonts/{Lora,Spectral,BarlowSemiCondensed}-SemiBold.ttf + FONT-LICENSE.txt
+README_Japanese.txt / README_English.txt
 ```
 - 原作のファイル(DLL・画像・フォント)は入れない。入るのは、原作の英語の文言(左列)と日本語訳だけ。
-- 日本語フォントは、日本語の表示に必須。説明に明記する。優先順位は 原作 → 翻訳 → フォント。Path of the Companions の日本語化パッチのページにも同じフォントがあり、どちらか一方で足りる。
+- 日本語フォントは日本語の表示に必須なので、翻訳と同じ zip に入れる(別ファイルにすると、MO2 で同名 MOD のダイアログが出て混乱する)。優先順位は 原作 → 本パッチ。Path of the Companions の日本語化パッチにも同じフォントが入る(ビルドは決定的で、同一のファイル)。
 
 ## README / Nexus 文面に必ず入れること
 - 原作者クレジット(hashhbbrown / fatalCMD)、原 MOD へのリンク、権限の確認日。
@@ -38,4 +39,4 @@ description: Fight With Me 日本語化パッチのリリース準備(配布 zip
 - 「原作に翻訳機能がある」ように書かない。原作はメッセージを外部ファイルに出しているだけ。
 
 ## Nexus の File credits 欄
-- 原作者(hashhbbrown)を入れる。空のままにしない。フォントのファイルには Noto Sans JP(Adobe)も。
+- 原作者(hashhbbrown)を入れる。空のままにしない。Noto Sans JP(Adobe)も(フォントを同梱しているため)。

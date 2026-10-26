@@ -40,7 +40,7 @@ def main():
         sys.exit('fonttools が必要です: pip install fonttools')
     os.makedirs(a.out, exist_ok=True)
     opt = subset.Options(); opt.layout_features = ['*']; opt.name_IDs = ['*']; opt.notdef_outline = True; opt.glyph_names = False; opt.hinting = False
-    f = TTFont(a.font, fontNumber=0)
+    f = TTFont(a.font, fontNumber=0, recalcTimestamp=False)  # 更新日時を現在時刻にしない(同じ入力から同じバイト列を作る)
     if a.subset:
         sub = subset.Subsetter(opt); sub.populate(text=''.join(chars())); sub.subset(f)
     for rec in list(f['name'].names):

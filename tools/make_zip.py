@@ -4,13 +4,11 @@
 
 使い方(リポジトリのルートから):
   python3 -I tools/make_zip.py test    out/ja <N> --memo memo.txt [--font-dir out/font]   -> out/FWM_ja_test<N>.zip
-  python3 -I tools/make_zip.py release out/ja --version 0.5.0-1
-  python3 -I tools/make_zip.py font    out/font --version 0.5.0-1      (日本語フォントの別ファイル)
+  python3 -I tools/make_zip.py release out/ja --font-dir out/font --version 0.5.0-1
 
 zip の中身:
-  release : FightWithMe_JAPANESE.txt + README_Japanese.txt / README_English.txt
-  font    : SKSE/Plugins/Fonts/*.ttf + FONT-LICENSE.txt + README_*.txt
-release / font は release/README_{Japanese,English}.txt と release/README_Font_{Japanese,English}.txt を雛形に使う。
+  release : SKSE/Plugins/Fonts/*.ttf + FONT-LICENSE.txt + FightWithMe_JAPANESE.txt + README_Japanese.txt / README_English.txt
+release は release/README_{Japanese,English}.txt を雛形に使う。日本語フォントは同じ zip に入れる(Nexus で 2 ファイルに分けると、同じページ名の MOD として入れるときに「一つにまとめる/置き換える」のダイアログが出て混乱するため)。
 {SHA_JA} は訳文ファイルの SHA-256 で埋まる。README の 1 行目に --version が含まれていなければ失敗する
 (Nexus の版と README の版の食い違いを防ぐ)。"""
 import argparse, hashlib, os, re, sys, zipfile
@@ -74,20 +72,16 @@ def main():
     sub = ap.add_subparsers(dest='mode', required=True)
     t = sub.add_parser('test'); t.add_argument('dir'); t.add_argument('n'); t.add_argument('--memo', required=True); t.add_argument('--out', default='out')
     t.add_argument('--font-dir', help='tools/make_font_pack.py の出力。あれば SKSE/Plugins/Fonts/ に入れる')
-    r = sub.add_parser('release'); r.add_argument('dir'); r.add_argument('--version', required=True); r.add_argument('--out', default='out')
-    f = sub.add_parser('font'); f.add_argument('dir'); f.add_argument('--version', required=True); f.add_argument('--out', default='out')
+    r = sub.add_parser('release'); r.add_argument('dir'); r.add_argument('--font-dir', required=True, help='tools/make_font_pack.py の出力(日本語フォント。同梱する)'); r.add_argument('--version', required=True); r.add_argument('--out', default='out')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
-    if a.mode == 'font':
-        entries = load_fonts(a.dir) + readmes('Font_', a.version, {})
-        write(os.path.join(a.out, '%s - Japanese UI Font %s.zip' % (NAME, a.version)), entries)
-    elif a.mode == 'test':
+    if a.mode == 'test':
         memo = open(a.memo, encoding='utf-8').read().replace('\r\n', '\n')
         entries = load_text(a.dir) + (load_fonts(a.font_dir) if a.font_dir else []) + [('テスト用メモ.txt', memo.encode('utf-8'))]
         write(os.path.join(a.out, '%s_ja_test%s.zip' % (PREFIX, a.n)), entries)
     else:
         text = load_text(a.dir)
-        entries = text + readmes('', a.version, {'{SHA_JA}': sha(text[0][1])})
+        entries = text + load_fonts(a.font_dir) + readmes('', a.version, {'{SHA_JA}': sha(text[0][1])})
         write(os.path.join(a.out, '%s - Japanese Translations Patch %s.zip' % (NAME, a.version)), entries)
 
 

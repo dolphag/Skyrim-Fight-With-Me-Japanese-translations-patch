@@ -19,18 +19,18 @@ only the scripts that build the Japanese message file, and the English → Japan
   - Fight With Me: <https://www.nexusmods.com/skyrimspecialedition/mods/194766>
   - Source (declared GPL-3.0-or-later): <https://github.com/fatalCMD/potc>
 - Japanese translation, tools and layout fixes: dolphag (with AI assistance, see Notes).
-- Japanese UI font (a separate Nexus file, not in this repository): based on Noto Sans JP (Copyright 2014-2021 Adobe), SIL Open Font License 1.1, internal name changed.
+- Japanese UI font (bundled in the distribution zip, not in this repository): based on Noto Sans JP (Copyright 2014-2021 Adobe), SIL Open Font License 1.1, internal name changed.
 
 ## Files
 - `translations_en_ja.csv`: all string pairs (822). The English column is the original author's and is not covered by the license of this repository.
 - `tools/lang_build.py`: builds `FightWithMe_JAPANESE.txt` from the original zip and the table, with checks (missing translations, format fields, kanji range).
-- `tools/make_zip.py`: test and distribution zips. `tools/make_font_pack.py`: renames and copies an OFL Japanese font under the three theme font names (the font itself is supplied by the user and not committed).
+- `tools/make_zip.py`: test and distribution zips (the distribution zip bundles the font). `tools/make_font_pack.py`: renames and copies an OFL Japanese font under the three theme font names (the font itself is supplied by the user and not committed).
 - `release/`: README templates and the Nexus text. `docs/`: findings about the original (format, fonts, packaging), glossary, a draft report for the original author (not sent).
 - `legacy/0.3.0/`: the tools of the old method (patching `FightWithMe.dll` 0.3.0), kept for reference. They do not work with 0.5.0.
 
 ## Versions
 Patch versions follow Fight With Me: **0.5.0-1** is for Fight With Me 0.5.0. Earlier versions (0.1.5 to 0.3.0-2) replaced a DLL; see the tags `v0.1.0` ... `v0.3.0-2` and `legacy/0.3.0/`.
-Recommended for users: Japanese enabled in `SKSEMenuFramework.ini` (`EnableJapanese = true`), plus `EnableChinese = true` (SMF v3.18+) for kanji outside the Japanese glyph range in game-supplied strings. The separate Japanese UI font file is required (the original's theme fonts have no Japanese glyphs).
+Recommended for users: Japanese enabled in `SKSEMenuFramework.ini` (`EnableJapanese = true`), plus `EnableChinese = true` (SMF v3.18+) for kanji outside the Japanese glyph range in game-supplied strings. A Japanese UI font is bundled in the distribution zip, because the original's theme fonts have no Japanese glyphs.
 
 ## How it works (short)
 The original reads `*_<LANGUAGE>.txt` (one line per message: English, a tab, the translation) from the folder and replaces the English by the translation when the language is `JAPANESE` (`sLanguage` in Skyrim.ini, or in `FightWithMe(_user).ini`). The patch is `FightWithMe_JAPANESE.txt`.
@@ -40,8 +40,7 @@ Long Japanese lines get ASCII spaces at phrase boundaries (janome), because the 
 ```
 python3 -I tools/lang_build.py --fwm "<Fight With Me zip>" --out out/ja
 python3 -I tools/make_font_pack.py --font NotoSansJP-Medium.ttf --license OFL.txt --out out/font
-python3 -I tools/make_zip.py release out/ja --version 0.5.0-1
-python3 -I tools/make_zip.py font out/font --version 0.5.0-1
+python3 -I tools/make_zip.py release out/ja --font-dir out/font --version 0.5.0-1
 ```
 
 ## Notes
@@ -67,18 +66,18 @@ Fight With Me 0.5.0 は、メッセージを外部のテキストファイル(`S
   - Fight With Me: <https://www.nexusmods.com/skyrimspecialedition/mods/194766>
   - ソース(GPL-3.0-or-later と宣言されています): <https://github.com/fatalCMD/potc>
 - 日本語訳・ツール・表示の調整: dolphag(AI の支援あり。上の Notes を参照)。
-- 日本語フォント(Nexus の別ファイル。このリポジトリには含みません): Noto Sans JP(Copyright 2014-2021 Adobe)を元に、内部の名前を付け替えたもの。SIL Open Font License 1.1。
+- 日本語フォント(配布 zip に同梱。このリポジトリには含みません): Noto Sans JP(Copyright 2014-2021 Adobe)を元に、内部の名前を付け替えたもの。SIL Open Font License 1.1。
 
 ### ファイル
 - `translations_en_ja.csv`: 英日の全組(822)。英語の列は原作者のもので、このリポジトリのライセンスの対象外です。
 - `tools/lang_build.py`: 原作の zip と対応表から `FightWithMe_JAPANESE.txt` を作ります(未訳・書式欄・漢字範囲の検査つき)。
-- `tools/make_zip.py`: テスト版と配布用の zip。`tools/make_font_pack.py`: OFL の日本語フォントを、テーマ用フォントの 3 つの名前で書き出します(フォント本体は利用者が用意し、コミットしません)。
+- `tools/make_zip.py`: テスト版と配布用の zip(配布用にはフォントを同梱)。`tools/make_font_pack.py`: OFL の日本語フォントを、テーマ用フォントの 3 つの名前で書き出します(フォント本体は利用者が用意し、コミットしません)。
 - `release/`: README の雛形と Nexus 用文面。`docs/`: 原作の調査(形式・フォント・同梱)、用語集、原作者向け報告の文案(未送信)。
 - `legacy/0.3.0/`: 旧方式(`FightWithMe.dll` 0.3.0 を書き換える)のツール。参照用に残しています。0.5.0 には使えません。
 
 ### 版
 パッチの版は Fight With Me に連動します。**0.5.0-1** は Fight With Me 0.5.0 用です。それ以前(0.1.5〜0.3.0-2)は DLL を差し替える方式でした。タグ `v0.1.0` 〜 `v0.3.0-2` と `legacy/0.3.0/` を参照してください。
-利用者への推奨: `SKSEMenuFramework.ini` で日本語を有効にする(`EnableJapanese = true`)。ゲーム由来の文字列の、日本語範囲外の漢字には `EnableChinese = true`(SMF v3.18 以降)。別ファイルの日本語フォントが必須です(原作のテーマ用フォントは日本語を含まないため)。
+利用者への推奨: `SKSEMenuFramework.ini` で日本語を有効にする(`EnableJapanese = true`)。ゲーム由来の文字列の、日本語範囲外の漢字には `EnableChinese = true`(SMF v3.18 以降)。日本語フォントは配布 zip に同梱します(原作のテーマ用フォントは日本語を含まないため)。
 
 ### しくみ(短く)
 原作は、フォルダ内の `*_<言語名>.txt`(1 行 = 英語、タブ、訳)を読み、言語が `JAPANESE` のとき(Skyrim.ini または `FightWithMe(_user).ini` の `sLanguage`)英語を訳に置き換えます。本パッチは `FightWithMe_JAPANESE.txt` です。

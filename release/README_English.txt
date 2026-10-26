@@ -10,10 +10,16 @@ Original author: hashhbbrown (GitHub: fatalCMD)
 Requirements
 - Fight With Me 0.5.0
 - SKSE Menu Framework 3 with Japanese enabled: [Fonts] EnableJapanese = true, PrimaryFont = NotoSansJP-Medium.ttf (or similar) in SKSEMenuFramework.ini.
-- The separate file "Japanese UI Font". **Without it Japanese shows as "?".** The original draws its screens with theme fonts (Lora / Spectral / BarlowSemiCondensed) that have no Japanese glyphs; the font file has the same names with Japanese glyphs (based on Noto Sans JP, SIL OFL).
-  Mod order: original -> this patch -> Japanese UI Font, so the font wins over the original's fonts.
+- A Japanese font: included in this patch (see "Japanese font (included)" below).
 If you also use Path of the Companions (Paths)
 Paths is a separate mod that works without Fight With Me (Fight With Me is an optional companion). If you use Paths, install the Path of the Companions Japanese Translations Patch (a separate page) too. Its translation already contains most of this mod's screen texts; having both is fine (for shared texts this patch is read later and wins).
+
+Japanese font (included)
+The original draws its screens with theme fonts (Lora / Spectral / BarlowSemiCondensed) that have no Japanese glyphs, so Japanese would show as "?".
+This patch includes a Japanese-capable font under the same names (based on Noto Sans JP, SIL OFL; full text in FONT-LICENSE.txt); it replaces the original's fonts.
+Mod order: original -> this patch, so the font wins over the original's fonts. Latin letters will look different too.
+To use your own font, disable the three files in SKSE/Plugins/Fonts/ of this patch and put a Japanese-capable TTF under the same three names.
+The Path of the Companions Japanese patch contains the same font (identical files, so having both is fine; if you are asked to overwrite, either choice is the same).
 
 Recommended: [Fonts] EnableChinese = true (SMF v3.18+), so kanji outside the Japanese glyph range in game-supplied strings (spell and companion names) do not show as "?".
 
@@ -26,6 +32,8 @@ The SKSE log should show "[Text] JAPANESE: N lines from ..." if the files were r
 Install
 Install as a mod (MO2, Vortex, ...). Files placed:
 SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt    Fight With Me's screens (battle plan, settings, notices)
+SKSE/Plugins/Fonts/Lora-SemiBold.ttf, Spectral-SemiBold.ttf, BarlowSemiCondensed-SemiBold.ttf    a Japanese-capable font (replaces the original fonts of the same names)
+FONT-LICENSE.txt    the font's license (SIL OFL)
 No DLL, INI or save is touched; disable it to go back to English.
 When the original updates you do not have to remove the patch, but new texts stay in English until the patch is updated. Keep versions matched: the version follows the original, with a suffix (x.x.x-1) for patch-only fixes.
 
@@ -42,13 +50,13 @@ What is not in Japanese
 Rights, source and credits
 Original author: hashhbbrown (GitHub: fatalCMD). All original strings, trees and game design belong to the author.
 This unofficial translation follows the permissions shown on the Fight With Me page (checked by the user on 2026-10-26: modification and asset use allowed with credit; re-uploading the file elsewhere is not allowed).
-This patch contains no file of the originals (no DLL, images or fonts), only the original's English strings (the left column of the message files) and the Japanese translation.
+This patch contains no file of the originals (no DLL or images), only the original's English strings (the left column of the message files), the Japanese translation and a Japanese font.
 Distributed on Nexus Mods only, as a translation page. Please do not re-upload it. GitHub holds only the source (scripts and the translation table), not these files or the font.
 Please do not contact the original author about problems with this patch. It will be removed promptly if the author asks. No warranty.
 Original source (declared GPL-3.0-or-later): https://github.com/fatalCMD/potc
 Scripts and translation table: https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch
 The Japanese translation and scripts are GPL-3.0-or-later; the English column is the original author's and is not covered.
-The Japanese font (separate file) is based on Noto Sans JP (Copyright 2014-2021 Adobe) with its internal names changed; SIL Open Font License 1.1, full text in FONT-LICENSE.txt.
+The Japanese font (included) is based on Noto Sans JP (Copyright 2014-2021 Adobe) with its internal names changed; SIL Open Font License 1.1, full text in FONT-LICENSE.txt.
 
 AI disclosure
 The translation and this text were made with AI assistance (Claude, Anthropic). Checked in game, but mistakes may remain; please report them in the Nexus comments.

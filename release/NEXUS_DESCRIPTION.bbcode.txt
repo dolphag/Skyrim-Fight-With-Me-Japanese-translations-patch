@@ -1,0 +1,136 @@
+[url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLLは変更しません(ファイルを置くだけです)。
+
+日本語対応フォントを同梱しています(原作のテーマ用フォントを置き換えます)。詳しくは「日本語フォント(同梱)」を参照してください。
+
+[b]必須[/b]
+[list]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0 本体[/*]
+[*]SKSE Menu Framework 3 で日本語を表示するための日本語フォント設定。
+日本語環境を導入済みなら追加の設定は不要です。私は [url=https://skyrimspecialedition.2game.info/detail.php?id=120352]2game 様の日本語化ファイル[/url]で動作を確認しています。[/*]
+[/list]
+
+[b]日本語フォント(同梱)[/b]
+原作の画面は、日本語の字形を持たないテーマ用フォントで描かれるため、そのままだと日本語が「?」になります。本パッチには、同じ名前の日本語対応フォント(Noto Sans JP を元にしています)が入っていて、原作のフォントを置き換えます。英字の見た目も、このフォントに変わります。
+優先順位は 本体 → 本パッチ の順にして、フォントが原作のフォントに勝つようにしてください。
+自分のフォントを使いたい場合は、本パッチの SKSE/Plugins/Fonts/ の3つのファイルを無効にし、日本語対応の TTF を同じ3つの名前で置いてください。
+Path of the Companions の日本語化パッチにも同じフォントが入っています(同一のファイルなので、両方入れても問題ありません。上書きの確認が出たら、どちらを選んでも同じです)。
+
+[b]推奨[/b]
+[list]
+[*]姉妹MODの日本語化パッチ: [url=https://www.nexusmods.com/skyrimspecialedition/mods/194872]Walk With Me - Japanese Translations Patch[/url][/*]
+[*]Path of the Companions(Paths)も使う場合は、Paths 用の日本語化パッチ(Path of the Companions - Japanese Translations Patch、別ページ)[/*]
+[/list]
+
+[b]バージョンについて[/b]
+本体と本パッチのバージョンは必ずあわせてください。バージョン番号は原則として本体と同じです。
+同じバージョン内でパッチだけを修正したときは、x.x.x-1 のように枝番をつけます。
+
+[b]導入[/b]
+MOD として入れてください(MO2・Vortex など)。優先順位は 本体 → 本パッチ の順にして、同梱のフォントが本体のフォントに勝つようにします。
+DLL・INI・セーブには影響せず、無効化すれば元に戻ります。
+[b]0.3.0-2 以前の日本語化パッチ(DLL を差し替える旧版)とは別のものです。旧版を使っていた場合は、先に外してください。[/b]
+本体を更新するときは、本パッチを外す必要はありません。ただし、新しく増えた文言は英語のまま表示されます(パッチの更新をお待ちください)。
+
+[b]日本語にならないとき[/b]
+言語はゲームの設定(Skyrim.ini の sLanguage)に従い、JAPANESE のときに日本語になります。
+英語版ゲームなどで JAPANESE でない場合は、[b]SKSE/Plugins/FightWithMe_user.ini[/b] に次を書いてください(無ければ新規作成。ゲームの再起動後に反映されます)。
+[code][Interface]
+sLanguage = JAPANESE[/code]
+SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、日本語のファイルは読まれています。
+
+[b][color=#ff0000]魔法名などが「?」になるときは？[/color]
+[/b]魔法名などに？が入って表示されないことがあります。
+SKSE Menu Framework の日本語グリフ範囲の制限があり、この範囲外の漢字( 靭・怯・罠・痺など)があると「?」になります。(SMF側に修正依頼を投げているところです。)
+気になる場合は、SKSEMenuFramework.ini の [Fonts] で
+[code]EnableChinese = true[/code]
+を設定してみてください(SMF v3.18 以降で追加された項目)。元々の EnableJapanese = true はそのままで。
+私の環境では、日本語範囲では「?」になる漢字が、この設定では表示されることを確認しています。
+(EnableChineseを有効にしても使用するフォントがNotoSansJPであれば、いわゆる中華フォント状態にはなりません。）
+
+[b]日本語になるもの / ならないもの[/b]
+設定ページ、バトルプラン画面、戦闘中の通知メッセージが日本語になります。
+[list]
+[*]パーティ設定ページの、役割・注目対象・位置取りのドロップダウン(選択肢と、その説明のホバー表示)は、原作のこの部分がメッセージのファイルを通していないため、英語のままです(原作側の修正が必要です)。[/*]
+[*]テーマ名(Vanilla / Oxblood / Nordic)は、原文のままにしています。[/*]
+[*]キー名・ボタン表示、ログ、INIのコメント、ゲームや他のMODから取得する文字列(魔法名、従者名など)は変更できません。[/*]
+[/list]
+
+[b]権利・ソース[/b]
+本体ページの権限表示(改変は出典明記で可、他サイトへの再アップロードは不可。2026-10-26 に確認)に従い、本パッチは Nexus Mods のこのページでのみ配布します。他サイトへの転載はご遠慮ください。作者から依頼があれば速やかに削除します。
+本パッチに、本体のファイル(DLL・画像など)は含まれません。含まれるのは、原作の英語の文言と、その日本語訳、日本語フォントです。
+パッチ生成のスクリプトと翻訳表(配布用のファイルやフォントは含みません)は [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]GitHub[/url] にあります(版ごとにタグがあります)。
+日本語フォント(同梱)は、Noto Sans JP(Copyright 2014-2021 Adobe)を元に、内部の名前を付け替えたものです。SIL Open Font License 1.1。
+
+[b]AIの利用[/b]
+訳文と本説明文の作成にAI(Claude)を使用しています。誤訳や表示崩れがあればコメントでお知らせください。
+
+[b]謝辞[/b]
+素晴らしいMODを公開してくださっている原作者 hashhbbrown さんに心から感謝します。
+日本語でも楽しめるようにと、感謝を込めて作った非公式の翻訳です。
+
+――――――――――――――――――――
+[b]English[/b]
+
+An unofficial Japanese translation patch for [url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
+
+A Japanese-capable font is included (it replaces the original's theme fonts); see "Japanese font (included)" below.
+
+[b]Requirements[/b]
+[list]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0[/*]
+[*]A Japanese font set up in SKSE Menu Framework 3.
+No extra setup is needed if you already have a Japanese environment. I tested with the [url=https://skyrimspecialedition.2game.info/detail.php?id=120352]Japanese localization by 2game[/url].[/*]
+[/list]
+
+[b]Japanese font (included)[/b]
+The original draws its screens with theme fonts that have no Japanese glyphs, so Japanese would show as "?". This patch includes a Japanese-capable font under the same names (based on Noto Sans JP) that replaces the original's fonts. Latin letters will look different too.
+Mod order: original -> this patch, so the font wins over the original's fonts.
+To use your own font, disable the three files in SKSE/Plugins/Fonts/ of this patch and put a Japanese-capable TTF under the same three names.
+The Path of the Companions Japanese patch contains the same font (identical files, so having both is fine; if you are asked to overwrite, either choice is the same).
+
+[b]Recommended[/b]
+[list]
+[*]Sister patch: [url=https://www.nexusmods.com/skyrimspecialedition/mods/194872]Walk With Me - Japanese Translations Patch[/url][/*]
+[*]If you also use Path of the Companions (Paths): its Japanese patch, "Path of the Companions - Japanese Translations Patch" (a separate page).[/*]
+[/list]
+
+[b]Versions[/b]
+Use the patch version that matches your Fight With Me version. Version numbers follow the original mod.
+If the patch alone is fixed within the same version, a suffix such as x.x.x-1 is added.
+
+[b]Install[/b]
+Install as a mod (MO2, Vortex, ...). Mod order: original -> this patch, so the bundled font wins over the original's fonts.
+No DLL, INI or save is touched; disabling the patch restores the original.
+[b]This is different from the old patch (0.3.0-2 and earlier), which replaced a DLL. If you used the old one, remove it first.[/b]
+When Fight With Me updates you do not have to remove this patch, but new texts stay in English until the patch is updated.
+
+[b]If it stays English[/b]
+The language follows the game (sLanguage in Skyrim.ini); the files are read when it is JAPANESE.
+If your game is not set to JAPANESE (an English game, for example), add this to [b]SKSE/Plugins/FightWithMe_user.ini[/b] (create it if missing; restart the game):
+[code][Interface]
+sLanguage = JAPANESE[/code]
+The SKSE log should show "[Text] JAPANESE: N lines from ..." if the files were read.
+
+[b][color=#ff0000]Question marks in spell names?[/color][/b]
+Spell names and other strings that come from the game can show "?" for kanji outside the Japanese glyph range of SKSE Menu Framework. If it bothers you, set [code]EnableChinese = true[/code] under [Fonts] in SKSEMenuFramework.ini (SMF v3.18+), keeping EnableJapanese = true. With a NotoSansJP font this does not give a Chinese-looking face.
+
+[b]Translated / not translated[/b]
+Settings pages, the battle plan screen and combat notices are translated.
+[list]
+[*]The role / focus / position dropdowns on the Party settings page (the choices and their hover tooltips) stay in English: the original does not read these texts from its external message files, so this needs a fix on the original's side.[/*]
+[*]Theme names (Vanilla / Oxblood / Nordic) are kept as in the original.[/*]
+[*]Key names, button labels, logs, INI comments and strings that come from the game or other mods (spell and companion names) cannot be changed.[/*]
+[/list]
+
+[b]Rights / source[/b]
+Following the permissions on the original page (modification with credit; no re-upload elsewhere; checked on 2026-10-26), this patch is distributed only here on Nexus Mods; please do not repost it. It will be removed promptly if the author asks.
+This patch contains no file of the original (no DLL or images), only the original's English strings, the Japanese translation and a Japanese font.
+Scripts and the translation table (no distribution files or fonts): [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]GitHub[/url] (one tag per version).
+The Japanese font (included) is based on Noto Sans JP (Copyright 2014-2021 Adobe) with its internal names changed; SIL Open Font License 1.1.
+
+[b]AI disclosure[/b]
+Translations and this description were produced with AI assistance (Claude). Please report mistranslations or layout problems in the comments.
+
+[b]Thanks[/b]
+Huge thanks to hashhbbrown for creating and sharing Fight With Me.
+This is an unofficial translation made with gratitude so Japanese players can enjoy it too.
