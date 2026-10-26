@@ -1,111 +1,95 @@
-# Fight With Me / Paths - Japanese Translations Patch (tools and translation table)
+# Fight With Me - Japanese Translations Patch (tools and translation table)
 
-> **Current (2026-10): Fight With Me 0.5.0 / Path of the Companions 1.0.0.** These versions read their messages from external text files, so the patch is the Japanese version of those files (`*_JAPANESE.txt`), not a patched DLL, plus a separate Japanese UI font file (the theme fonts have no Japanese glyphs). Everything below the "Legacy" heading describes the 0.3.0 DLL patch; those tools are in `legacy/0.3.0/`.
-> - Translation table: `translations_en_ja.csv` (1100 pairs; the English column is the original author's and is not covered by the license). Build and check: `python3 -I tools/lang_build.py --fwm <FWM zip> --paths <Paths zip> --out out/ja`. Zips: `tools/make_zip.py`. Font: `tools/make_font_pack.py` (needs an OFL font you supply; no font is committed here).
-> - Notes and findings: `docs/FWM-0.5.0_Paths-1.0-findings.md`. Report draft for the original author (not sent): `docs/upstream-report-draft.md`.
-> - Status: release candidates built; the Nexus pages are not published yet. Patch versions: FWM 0.5.0-1, Paths 1.0.0-1.
->
-> **現行(2026-10): Fight With Me 0.5.0 / Path of the Companions 1.0.0。** 原作がメッセージを外部のテキストファイルに分けているため、DLL パッチをやめ、その日本語版(`*_JAPANESE.txt`)を置く方式に変わりました。日本語の字形を持つフォントは別ファイルです(原作のテーマ用フォントが日本語を含まないため)。以下の「Legacy」以降は、0.3.0 の DLL パッチの説明です(ツールは `legacy/0.3.0/`)。
-> - 翻訳表: `translations_en_ja.csv`(1100 組。英語の列は原作者のもので、ライセンスの対象外)。生成と検査: `tools/lang_build.py`、zip: `tools/make_zip.py`、フォント: `tools/make_font_pack.py`(OFL のフォントを自分で用意。フォントはコミットしません)。
-> - 調査記録: `docs/FWM-0.5.0_Paths-1.0-findings.md`。原作者向け報告の文案(未送信): `docs/upstream-report-draft.md`。
-> - 状況: 配布用 zip は作成済み、Nexus には未公開です。パッチの版は FWM 0.5.0-1、Paths 1.0.0-1。
+Nexus Mods page: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
 
-## Legacy (0.3.0 DLL patch)
-
-Nexus Mods pages:
-- Fight With Me Japanese patch: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
-- Paths Japanese patch (version 0.1.0-1, for Paths 0.1.0): *(page not yet created; link will be added here)*
-
-Sister patch (Walk With Me): <https://www.nexusmods.com/skyrimspecialedition/mods/194872>, tools in <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>
+Sister patches: Path of the Companions (Paths) <https://github.com/dolphag/Skyrim-POTC-JP-Patch> (Nexus page: not published yet), Walk With Me <https://www.nexusmods.com/skyrimspecialedition/mods/194872> (tools: <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>)
 
 [日本語は下](#日本語)
 
 Scripts and the translation table for the Japanese translation patch for
-[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.3.0** and its add-on
-[Paths](https://www.nexusmods.com/skyrimspecialedition/mods/195610), both by **hashhbbrown** (GitHub: fatalCMD).
-Paths looks like a separate mod, but its screen text lives inside Fight With Me's `FightWithMe.dll`, so one patched DLL covers both mods.
-The patched `FightWithMe.dll` is distributed **only on Nexus Mods** (as a translation page of each original),
-following the permissions on the original pages. **This repository is source code only: it contains no DLL and no code of Fight With Me or Paths**:
-only the scripts that patch a DLL you own, and the English → Japanese table (745 pairs).
+[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.5.0** by **hashhbbrown** (GitHub: fatalCMD).
+Path of the Companions (Paths) is a separate mod and an optional companion of Fight With Me; it has its own patch (repository above).
+Fight With Me 0.5.0 reads its messages from external text files (`SKSE/Plugins/FightWithMe/Translations/`); the patch is the Japanese version of that file, so no DLL is changed.
+The patch files are distributed **only on Nexus Mods**, following the permissions on the original page.
+**This repository is source code only: it contains no files of the original mod, no distribution zips and no fonts**:
+only the scripts that build the Japanese message file, and the English → Japanese table.
 
 ## Credits
-- **Fight With Me** and **Paths**: created by **hashhbbrown** (GitHub: [fatalCMD](https://github.com/fatalCMD)). All original strings, perk trees and game design belong to the author.
-  - Fight With Me: <https://www.nexusmods.com/skyrimspecialedition/mods/194766> / <https://github.com/fatalCMD/fight-with-me>
-  - Paths: <https://www.nexusmods.com/skyrimspecialedition/mods/195610> / <https://github.com/fatalCMD/paths-fwm-addon>
+- **Fight With Me**: created by **hashhbbrown** (GitHub: [fatalCMD](https://github.com/fatalCMD)). All original strings and game design belong to the author.
+  - Fight With Me: <https://www.nexusmods.com/skyrimspecialedition/mods/194766>
+  - Source (declared GPL-3.0-or-later): <https://github.com/fatalCMD/potc>
 - Japanese translation, tools and layout fixes: dolphag (with AI assistance, see Notes).
+- Japanese UI font (a separate Nexus file, not in this repository): based on Noto Sans JP (Copyright 2014-2021 Adobe), SIL Open Font License 1.1, internal name changed.
 
 ## Files
-- [`PATHS_TABLE.md`](legacy/0.3.0/PATHS_TABLE.md): comparison table of all 88 Paths perk nodes (English / Japanese / effect / unlock / cooldown), terminology and naming notes. Feedback welcome.
-- `translations_en_ja.csv`: all 745 string pairs.
-- `tools/`: patcher, verifier, translation sources (`fwm_trans1..6.py`, `fwm_names6.py`) and helpers.
+- `translations_en_ja.csv`: all string pairs (822). The English column is the original author's and is not covered by the license of this repository.
+- `tools/lang_build.py`: builds `FightWithMe_JAPANESE.txt` from the original zip and the table, with checks (missing translations, format fields, kanji range).
+- `tools/make_zip.py`: test and distribution zips. `tools/make_font_pack.py`: renames and copies an OFL Japanese font under the three theme font names (the font itself is supplied by the user and not committed).
+- `release/`: README templates and the Nexus text. `docs/`: findings about the original (format, fonts, packaging), glossary, a draft report for the original author (not sent).
+- `legacy/0.3.0/`: the tools of the old method (patching `FightWithMe.dll` 0.3.0), kept for reference. They do not work with 0.5.0.
 
 ## Versions
-Patch versions follow the original mods: Fight With Me patch **0.3.0-2** (for Fight With Me 0.3.0), Paths patch **0.1.0-1** (for Paths 0.1.0). Both Nexus files contain the same DLL.
-
-- Original DLL SHA-256: `a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86`
-- Expected output SHA-256 (patch 0.3.0-2): `203d62f403a8d86eb0ab82d99a43bd5daa25c9a3523ec8ce3b6f5177b3accd1d`
-- Original source (for reference): <https://github.com/fatalCMD/fight-with-me> (the 0.3.0 DLL matches commit `6a5f5ce`, one commit after `f7f6e93` "Fight With Me 0.3.0"; addresses were re-derived from the 0.3.0 binary, using signature search against the 0.2.0 addresses)
-
-Load order for users: Fight With Me → Paths → Japanese patch (the patched `FightWithMe.dll` must win).
-Recommended for users: `EnableChinese = true` under `[Fonts]` in `SKSEMenuFramework.ini` (SMF v3.18+), so that kanji outside the Japanese glyph range in game-supplied strings (spell names etc.) do not show as "?".
+Patch versions follow Fight With Me: **0.5.0-1** is for Fight With Me 0.5.0. Earlier versions (0.1.5 to 0.3.0-2) replaced a DLL; see the tags `v0.1.0` ... `v0.3.0-2` and `legacy/0.3.0/`.
+Recommended for users: Japanese enabled in `SKSEMenuFramework.ini` (`EnableJapanese = true`), plus `EnableChinese = true` (SMF v3.18+) for kanji outside the Japanese glyph range in game-supplied strings. The separate Japanese UI font file is required (the original's theme fonts have no Japanese glyphs).
 
 ## How it works (short)
-A new section (`.jpn`, read+execute) holds the Japanese strings and a few stubs. `lea reg,[rip+disp]` references,
-`.rdata` pointer slots (relocation-checked) and fmt length immediates are retargeted; inline-expanded
-`std::string` constructions are replaced by a call to the string constructor (register liveness is checked).
-Label/LabelWidth draw one byte at a time and break UTF-8, so calls are redirected to stubs that use Text/TextSize
-when the string contains non-ASCII bytes; Japanese text is enlarged by `FONT_SCALE` (1.4) except for the title,
-the tooltip's size/width constants are scaled together (`TIP_SCALE`, 1.2) so its box fits, and spacing constants and
-per-call-site vertical lifts (`SPACING_CONSTS`, `LABEL_LIFT`, `TEXT_LIFT`) keep text aligned with icons and bands.
-The Paths descriptions are wrapped at bunsetsu boundaries (ImGui wraps only at ASCII spaces) using janome.
-The build fails if a translation uses a kanji outside the font range (`tools/jp_kanji.txt`; such kanji would show as "?").
+The original reads `*_<LANGUAGE>.txt` (one line per message: English, a tab, the translation) from the folder and replaces the English by the translation when the language is `JAPANESE` (`sLanguage` in Skyrim.ini, or in `FightWithMe(_user).ini`). The patch is `FightWithMe_JAPANESE.txt`.
+Long Japanese lines get ASCII spaces at phrase boundaries (janome), because the UI wraps only at spaces. The build fails if a translation uses a kanji outside the glyph range (`tools/jp_kanji.txt`; such kanji would show as "?").
 
-## Reproduce (Python 3.11+, `pip install pefile capstone unicorn janome`)
+## Reproduce (Python 3.11+, `pip install -r requirements-dev.txt`)
 ```
-python3 -I legacy/0.3.0/fwm_fmtcheck.py                                  # format-string field check
-python3 -I legacy/0.3.0/fwm_patch.py FightWithMe.dll out.dll report.json   # original DLL -> patched DLL
-python3 -I legacy/0.3.0/fwm_verify.py FightWithMe.dll out.dll              # independent static verification
-python3 -I legacy/0.3.0/fwm_emu_stub.py out.dll report.json                # dispatch/scale check of the stubs (unicorn)
-python3 -I legacy/0.3.0/fwm_scan_flag.py ...                               # register-reuse hazard scan (known false positives documented)
-python3 -I legacy/0.3.0/fwm_export_csv.py ...                              # regenerate translations_en_ja.csv
-python3 -I legacy/0.3.0/paths_table.py <FWM include/FWM/Paths.h> > PATHS_TABLE.md
+python3 -I tools/lang_build.py --fwm "<Fight With Me zip>" --out out/ja
+python3 -I tools/make_font_pack.py --font NotoSansJP-Medium.ttf --license OFL.txt --out out/font
+python3 -I tools/make_zip.py release out/ja --version 0.5.0-1
+python3 -I tools/make_zip.py font out/font --version 0.5.0-1
 ```
 
 ## Notes
-- For 0.3.0 only (addresses are fixed). The 0.2.0 scripts are in the git history (commit `6069193`, tag `v.0.2.0`); the 0.1.5 scripts are in the history up to commit `0ab3065`; the 0.1.0 scripts are in tag `v0.1.0`.
-- Terminology: "skill" is rendered as アビリティ (Ability) everywhere, including Fight With Me's own UI, to avoid confusion with vanilla skills. This changes wording from patch 0.3.0-1.
-- Log lines are intentionally left in English.
+- The role / focus / position dropdowns on the Party settings page are not read from the message files by the original, so they stay English (`docs/upstream-report-draft.md`).
+- Log lines, key names and theme names are intentionally left in English.
 - Translations were produced with AI assistance (Claude, Anthropic) and checked in game.
-- The scripts and the Japanese column of the table are mine and are provided under GPL-3.0-or-later, as stated in [`LICENSE`](LICENSE).
-  The English column reproduces strings of Fight With Me and Paths, which belong to their author (neither original repository ships a license file); it is included only so that the patch can be reproduced, and is not covered by that license.
-  Paths' Nexus page permits modification and asset use with credit to the author, and forbids uploading the file elsewhere; hence no binaries here.
-- This repository was split off from the Walk With Me patch repository (where the first release, tag `fwm-0.1.0`, still lives under `fwm/`); the two patches are maintained independently.
+- The scripts and the Japanese column of the table are provided under GPL-3.0-or-later, as stated in [`LICENSE`](LICENSE). The English column reproduces strings of Fight With Me, which belong to their author; it is included only so that the patch can be reproduced.
+- This repository was split off from the Walk With Me patch repository (where the first release, tag `fwm-0.1.0`, still lives under `fwm/`); the patches are maintained independently. The Path of the Companions patch was in turn split off from this repository on 2026-10-26.
 
 ## 日本語
-Nexus Mods のページ:
-- Fight With Me 日本語化パッチ: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
-- Paths 日本語化パッチ(0.1.0-1、Paths 0.1.0 用): (ページ作成後にリンクを追記します)
+Nexus Mods のページ: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
 
-姉妹MOD(Walk With Me)のパッチ: <https://www.nexusmods.com/skyrimspecialedition/mods/194872>、ツールは <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>
+姉妹MODのパッチ: Path of the Companions(Paths)<https://github.com/dolphag/Skyrim-POTC-JP-Patch>(Nexus のページは公開前)、Walk With Me <https://www.nexusmods.com/skyrimspecialedition/mods/194872>(ツール: <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>)
 
-[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.3.0** と、そのアドオン
-[Paths](https://www.nexusmods.com/skyrimspecialedition/mods/195610) の日本語化パッチのスクリプトと翻訳表です。
-原作者はどちらも **hashhbbrown**(GitHub: fatalCMD)です。Paths は別MODに見えますが、画面の文字列は Fight With Me の `FightWithMe.dll` の中にあるため、パッチ済みDLL 1つで両方に対応します。
-パッチ済みの `FightWithMe.dll` は、原MODページの権限表示に従い、**Nexus Mods(各原MODの翻訳ページ)でのみ**配布します。
-**このリポジトリはソースコードのみで、DLLも Fight With Me / Paths のコードも含みません**。手元のDLLにパッチを当てるスクリプトと、英日対応表(745組)だけです。
+[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.5.0** の日本語化パッチのスクリプトと翻訳表です。原作者は **hashhbbrown**(GitHub: fatalCMD)。
+Path of the Companions(Paths)は別の MOD で、Fight With Me の任意の連携先です。Paths には別のパッチがあります(上のリポジトリ)。
+Fight With Me 0.5.0 は、メッセージを外部のテキストファイル(`SKSE/Plugins/FightWithMe/Translations/`)から読みます。本パッチはその日本語版で、DLL は変更しません。
+パッチのファイルは、原MODページの権限表示に従い、**Nexus Mods でのみ配布**します。
+**このリポジトリはソースコードのみです。原MODのファイル、配布用の zip、フォントは含みません**。日本語のメッセージファイルを作るスクリプトと、英日対応表だけを置いています。
 
 ### クレジット
-- **Fight With Me** / **Paths**: 作者 **hashhbbrown**(GitHub: [fatalCMD](https://github.com/fatalCMD))。原文・パークツリー・ゲームデザインはすべて作者のものです。
-  - Fight With Me: <https://www.nexusmods.com/skyrimspecialedition/mods/194766> / <https://github.com/fatalCMD/fight-with-me>
-  - Paths: <https://www.nexusmods.com/skyrimspecialedition/mods/195610> / <https://github.com/fatalCMD/paths-fwm-addon>
-- 日本語訳・ツール・表示位置の調整: dolphag(AI支援あり)
+- **Fight With Me**: **hashhbbrown**(GitHub: [fatalCMD](https://github.com/fatalCMD))作。原作のすべての文言・ゲームデザインは原作者のものです。
+  - Fight With Me: <https://www.nexusmods.com/skyrimspecialedition/mods/194766>
+  - ソース(GPL-3.0-or-later と宣言されています): <https://github.com/fatalCMD/potc>
+- 日本語訳・ツール・表示の調整: dolphag(AI の支援あり。上の Notes を参照)。
+- 日本語フォント(Nexus の別ファイル。このリポジトリには含みません): Noto Sans JP(Copyright 2014-2021 Adobe)を元に、内部の名前を付け替えたもの。SIL Open Font License 1.1。
 
-### 内容
-- [`PATHS_TABLE.md`](legacy/0.3.0/PATHS_TABLE.md): Paths 全88ノードの対照表(英語/日本語/効果/解放条件/再使用)、用語と命名の覚え書き。ご意見歓迎です。
-- `translations_en_ja.csv`: 全745組の英日対応表。
-- 再現手順は上の英語の節を参照してください(janome が必要です)。元DLLの SHA-256 は `a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86`、
-  出力DLL(パッチ 0.3.0-2)は `203d62f403a8d86eb0ab82d99a43bd5daa25c9a3523ec8ce3b6f5177b3accd1d` になります。
-- バージョン: 原MODにあわせています。Fight With Me パッチ **0.3.0-2**(FWM 0.3.0 用)、Paths パッチ **0.1.0-1**(Paths 0.1.0 用)。中身のDLLは同一です。
-- ロード順: Fight With Me → Paths → 日本語化パッチ(パッチ済み `FightWithMe.dll` が勝つ順)。
-- 推奨: `SKSEMenuFramework.ini` の `[Fonts]` で `EnableChinese = true`(SMF v3.18 以降)。ゲーム由来の魔法名などで、日本語グリフ範囲外の漢字が「?」になるのを防ぎます。
-- 用語: 「skill」は、バニラのスキルとの混同を避けるため、Fight With Me 本体のUIも含めて「アビリティ」に統一しました(0.3.0-1 から変更)。
+### ファイル
+- `translations_en_ja.csv`: 英日の全組(822)。英語の列は原作者のもので、このリポジトリのライセンスの対象外です。
+- `tools/lang_build.py`: 原作の zip と対応表から `FightWithMe_JAPANESE.txt` を作ります(未訳・書式欄・漢字範囲の検査つき)。
+- `tools/make_zip.py`: テスト版と配布用の zip。`tools/make_font_pack.py`: OFL の日本語フォントを、テーマ用フォントの 3 つの名前で書き出します(フォント本体は利用者が用意し、コミットしません)。
+- `release/`: README の雛形と Nexus 用文面。`docs/`: 原作の調査(形式・フォント・同梱)、用語集、原作者向け報告の文案(未送信)。
+- `legacy/0.3.0/`: 旧方式(`FightWithMe.dll` 0.3.0 を書き換える)のツール。参照用に残しています。0.5.0 には使えません。
+
+### 版
+パッチの版は Fight With Me に連動します。**0.5.0-1** は Fight With Me 0.5.0 用です。それ以前(0.1.5〜0.3.0-2)は DLL を差し替える方式でした。タグ `v0.1.0` 〜 `v0.3.0-2` と `legacy/0.3.0/` を参照してください。
+利用者への推奨: `SKSEMenuFramework.ini` で日本語を有効にする(`EnableJapanese = true`)。ゲーム由来の文字列の、日本語範囲外の漢字には `EnableChinese = true`(SMF v3.18 以降)。別ファイルの日本語フォントが必須です(原作のテーマ用フォントは日本語を含まないため)。
+
+### しくみ(短く)
+原作は、フォルダ内の `*_<言語名>.txt`(1 行 = 英語、タブ、訳)を読み、言語が `JAPANESE` のとき(Skyrim.ini または `FightWithMe(_user).ini` の `sLanguage`)英語を訳に置き換えます。本パッチは `FightWithMe_JAPANESE.txt` です。
+画面は半角スペースでしか折り返さないため、長い日本語には文節の切れ目に半角スペースを入れます(janome)。範囲外の漢字を使うと(「?」になるため)ビルドが失敗します(`tools/jp_kanji.txt`)。
+
+### 再現(Python 3.11+、`pip install -r requirements-dev.txt`)
+上の「Reproduce」を参照してください。
+
+### 補足
+- パーティ設定ページの、役割・注目対象・位置取りのドロップダウンは、原作がメッセージのファイルを通していないため、英語のままです(`docs/upstream-report-draft.md`)。
+- ログ・キー名・テーマ名は、意図的に英語のままにしています。
+- 訳文は AI(Claude, Anthropic)の支援で作り、ゲーム内で確認しています。
+- スクリプトと翻訳表の日本語の列は GPL-3.0-or-later です([`LICENSE`](LICENSE))。英語の列は Fight With Me の文言で、原作者のものです。パッチを再現できるようにするためだけに含めています。
+- このリポジトリは Walk With Me のパッチのリポジトリから分けたもので(初版のタグ `fwm-0.1.0` は今もそちらの `fwm/` にあります)、各パッチは独立して保守しています。Path of the Companions のパッチは、2026-10-26 にこのリポジトリから分けました。

@@ -4,7 +4,7 @@ Fight With Me 0.5.0 を日本語化するパッチです。原作がメッセー
 0.3.0-2 以前の日本語化パッチ(DLL を差し替える版)とは別のものです。旧版を使っていた場合は、先に外してください。
 原MOD:
 - Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
-- Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
+- Path of the Companions (Paths、任意の連携先)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
 原作者: hashhbbrown (GitHub: fatalCMD)
 
 ■ 必須
@@ -18,8 +18,8 @@ Fight With Me 0.5.0 を日本語化するパッチです。原作がメッセー
   MOD の優先順位は「原作 → 日本語化パッチ → Japanese UI Font」の順にして、フォントが原作のフォントに勝つようにしてください。
 
 ■ Path of the Companions(Paths)を併用する場合
-Paths は別の MOD で、Fight With Me がなくても動きます(Fight With Me は任意の連携先です)。Paths を使う場合は、Paths 用の日本語化パッチ(Path of the Companions - Japanese Translations Patch)を入れてください。
-Paths 用の zip にも、この MOD と同じ FightWithMe_JAPANESE.txt が入っています(両方入れても問題ありません)。
+Paths は別の MOD で、Fight With Me がなくても動きます(Fight With Me は任意の連携先です)。Paths を使う場合は、Paths 用の日本語化パッチ(Path of the Companions - Japanese Translations Patch、別ページ)も入れてください。
+Paths 用パッチの訳にも、この MOD の画面の文言の大部分が含まれています。両方を入れても問題ありません(共通の文言は、この MOD 用パッチが後に読まれて優先されます)。
 
 ■ 推奨
 - SKSEMenuFramework.ini の [Fonts] で EnableChinese = true を設定(SMF v3.18 以降)。
@@ -43,23 +43,21 @@ SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt    Fight With Me 
 本体とパッチのバージョンは合わせてください。バージョン番号は原則として本体と同じで、パッチだけを修正したときは x.x.x-1 のように枝番をつけます。
 
 訳文ファイルの SHA-256:
-  FightWithMe_JAPANESE.txt       {SHA_FWM_JA}
+  FightWithMe_JAPANESE.txt       {SHA_JA}
 
 ■ 日本語にならないもの
-- パーティ設定ページの、役割・注目対象・位置取りのドロップダウン(選択肢と、その説明のホバー表示)。原作のこの部分が翻訳の仕組みを通していないため、英語のままです(原作側の修正が必要です)。
+- パーティ設定ページの、役割・注目対象・位置取りのドロップダウン(選択肢と、その説明のホバー表示)。原作のこの部分がメッセージのファイルを通していないため、英語のままです(原作側の修正が必要です)。
 - テーマ名(Vanilla / Oxblood / Nordic)は、原文のままにしています。
 - キー名・ボタン表示(Tab / Esc など)、ログ、INI のコメント。
 - ゲームや他の MOD から取得する文字列(魔法名、従者名など)。
 - 原作の更新で増えた文言(パッチの更新まで英語)。
-「スキル」は、バニラのスキルと混同しないよう、Paths のものは「アビリティ」に統一しています。
-アビリティ名は公式日本語訳に合わせています(例: 武装解除)。新しいアビリティ名(ケイオスダウン、最後の砦、風渡り、爆裂矢 など)は意訳を含み、一部は暫定です。ご意見をお寄せください。
+「スキル」は、バニラのスキルと混同しないよう、Fight With Me のアビリティを指すときは「アビリティ」に統一しています。
+新しいアビリティ名(ケイオスダウン、最後の砦 など)は意訳を含み、一部は暫定です。ご意見をお寄せください。
 訳文は、SKSE Menu Framework の日本語グリフ範囲(約3000字)内の漢字だけで書いています。
 
 ■ 権利・ソース・クレジット
 原作者: hashhbbrown (GitHub: fatalCMD)。原作のすべての文言・ツリー・ゲームデザインは原作者のものです。
-本パッチは、原MODの Nexus ページの権限表示(2026-10-26 にユーザーが確認)に従って作った非公式の翻訳です。
-- Fight With Me: 改変・素材の利用は作者のクレジット表記で可。他サイトへの再アップロードは不可。
-- Path of the Companions: 改変・素材の利用・他サイトへの転載は作者のクレジット表記で可。
+本パッチは、Fight With Me の Nexus ページの権限表示(2026-10-26 にユーザーが確認: 改変・素材の利用は作者のクレジット表記で可。他サイトへの再アップロードは不可)に従って作った非公式の翻訳です。
 本パッチに、原作のファイル(DLL・画像・フォントなど)は含まれません。含まれるのは、原作の英語の文言(メッセージのファイルの左側)と、日本語訳です。
 本パッチは Nexus Mods の翻訳ページでのみ配布します。他サイトへの転載はご遠慮ください。
 GitHub にはソースコード(生成スクリプトと翻訳表)のみを置き、配布用のファイルやフォントは置いていません。
