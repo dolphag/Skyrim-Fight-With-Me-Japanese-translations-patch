@@ -18,7 +18,7 @@ Path of the Companions の日本語化パッチにも同じフォントが入っ
 [b]推奨[/b]
 [list]
 [*]姉妹MODの日本語化パッチ: [url=https://www.nexusmods.com/skyrimspecialedition/mods/194872]Walk With Me - Japanese Translations Patch[/url][/*]
-[*]Path of the Companions(Paths)も使う場合は、Paths 用の日本語化パッチ(Path of the Companions - Japanese Translations Patch、別ページ)[/*]
+[*]Path of the Companions(Paths)も使う場合は、Paths 用の日本語化パッチ([url=https://www.nexusmods.com/skyrimspecialedition/mods/196104]Path of the Companions - Japanese Translations[/url])[/*]
 [/list]
 
 [b]バージョンについて[/b]
