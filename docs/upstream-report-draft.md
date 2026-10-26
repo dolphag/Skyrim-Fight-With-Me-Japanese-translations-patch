@@ -6,7 +6,7 @@
 
 Thanks for adding the translation files; Japanese works well with them. Three small things I ran into while making a Japanese translation:
 
-1. **The role / focus / position dropdowns on the Party settings page are not translated.** `RoleName`, `FocusName` and `PositionName` in `src/Menu.cpp` (the `a_name` callbacks of `RosterCombo`) return `roles[i].name.data()` etc. without going through `Tr`. The same names are translated everywhere else (battle plan, HUD), so only these combos stay in English. Wrapping them, e.g. `return Trc(roles[...].name.data());`, should be enough (the names are literals).
+1. **The role / focus / position dropdowns on the Party settings page are not translated.** `RoleName`, `FocusName` and `PositionName` in `src/Menu.cpp` (the `a_name` callbacks of `RosterCombo`) return `roles[i].name.data()` etc. without going through `Tr`. The same names are translated everywhere else (battle plan, HUD), so only these combos stay in English. The hover tooltips of the same combos (`Help(roles[..].summary.data())`, `focuses[..].summary`, `positions[..].summary`, same function) have the same omission. Wrapping them, e.g. `return Trc(roles[...].name.data());`, should be enough (the names are literals).
 
 2. **Some template keys are mojibake** (the middle dot "·" double-encoded): for example keys starting with `  Â·  ` / `  ÃƒÆ’Ã†â€™…` in `FightWithMe_ENGLISH.txt` and `Â·` in `FightWithMePaths_ENGLISH.txt` (`{}x  Â·  {}% bleed`, `{} damage/s Â· {} reach`, ...). English players probably see garbage there too. I translated them keeping the broken key so it still matches, but fixing the source encoding (and the key) would be cleaner.
 

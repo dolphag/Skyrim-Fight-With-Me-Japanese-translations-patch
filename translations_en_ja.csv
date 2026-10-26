@@ -92,9 +92,9 @@ On hit,命中時
 Instinct,本能
 Nerve,胆力
 Strike,一撃
-Oxblood,オックスブラッド
-Nordic,ノルディック
-Vanilla,バニラ
+Oxblood,Oxblood
+Nordic,Nordic
+Vanilla,Vanilla
 Companion unavailable.,従者が使えません。
 No role selected.,役割が選ばれていません。
 Not enough {}: requires {:.0f}.,{}が足りません：{:.0f}必要です。
@@ -816,7 +816,7 @@ Panel,パネル
 Open the panel,パネルを開く
 "Select it, then press a key, holding Shift, Ctrl or Alt with it for a combination. Esc cancels; Delete clears.",選択してからキーを押します。Shift、Ctrl、Altを押しながらだと組み合わせになります。Escで取り消し、Deleteで解除します。
 Hold LB and press the chosen button.,LBを押しながら、指定したボタンを押します。
-"Vanilla: charcoal and silver. Oxblood: the original red. Nordic: engraved stone, beveled metal and inset highlights.",バニラ：チャコールとシルバー。オックスブラッド：もとの赤。ノルド：彫刻を施した石、面取りした金属、はめ込みのハイライト。
+"Vanilla: charcoal and silver. Oxblood: the original red. Nordic: engraved stone, beveled metal and inset highlights.",Vanilla：チャコールとシルバー。Oxblood：もとの赤。Nordic：彫刻を施した石、面取りした金属、はめ込みのハイライト。
 Ability effects,アビリティの演出効果
 "What the abilities look like in the world: spirit beasts, circles, bursts and weapon flames. Off keeps what they do and drops how they look.",世界でのアビリティの見た目：精霊獣、円、爆発、武器の炎。オフにすると、効果はそのままで見た目だけなくなります。
 Short lines on the left of the screen when a companion uses an ability or has points to spend.,従者がアビリティを使ったとき、または使えるポイントがあるときに、画面左に短い一行が出ます。

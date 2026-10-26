@@ -1,90 +1,62 @@
-Paths - Japanese Translations Patch 0.1.0-1 (for Paths 0.1.0 / Fight With Me 0.3.0)
+Path of the Companions - Japanese Translations Patch 1.0.0-1 (for Path of the Companions 1.0.0)
 =====================================================================
-An unofficial Japanese translation patch for Paths (an add-on for Fight With Me).
-Paths looks like a separate mod, but the text of its screens is not in Paths: it is inside Fight With Me's FightWithMe.dll.
-So this patch replaces the FightWithMe.dll of Fight With Me (it does not modify any Paths file).
-As a side effect, Fight With Me's own screens are translated too.
-The DLL is identical to the one in the Fight With Me Japanese patch 0.3.0-2; you only need one of them.
+A Japanese translation for Path of the Companions 1.0.0. It uses the original's own translation-file feature, so no DLL is changed (just files to place).
+Versions up to 0.3.0 replaced a DLL. The original added translation files in 0.5.0 / 1.0, so the method changed. Do not use this together with the old (0.3.0-2 or earlier) patch.
 Original mods:
-- Paths         https://www.nexusmods.com/skyrimspecialedition/mods/195610
-- Fight With Me https://www.nexusmods.com/skyrimspecialedition/mods/194766
+- Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
+- Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
 Original author: hashhbbrown (GitHub: fatalCMD)
 
-[Requirements]
-- Paths 0.1.0 and its requirement, Fight With Me 0.3.0
-- A Japanese font set up in SKSE Menu Framework 3.
-  No extra setup is needed if you already have a Japanese environment. The author tested with the Japanese localization by 2game:
-  https://skyrimspecialedition.2game.info/detail.php?id=120352
-  (To set it yourself: [Fonts] PrimaryFont = NotoSansJP-Medium.ttf, EnableJapanese = true in SKSEMenuFramework.ini.)
-- This patch ships no font, because Fight With Me draws with the SMF3 font.
+Requirements
+- Path of the Companions 1.0.0 and POTC Effects 1.0.21 or newer (required by the original)
+- Fight With Me 0.5.0 (optional; if you use it, install the Fight With Me Japanese patch too)
+- SKSE Menu Framework 3 with Japanese enabled: [Fonts] EnableJapanese = true, PrimaryFont = NotoSansJP-Medium.ttf (or similar) in SKSEMenuFramework.ini.
+- The separate file "Japanese UI Font". **Without it Japanese shows as "?".** The original draws its screens with theme fonts (Lora / Spectral / BarlowSemiCondensed) that have no Japanese glyphs; the font file has the same names with Japanese glyphs (based on Noto Sans JP, SIL OFL).
+  Mod order: original -> this patch -> Japanese UI Font, so the font wins over the original's fonts.
+Recommended: [Fonts] EnableChinese = true (SMF v3.18+), so kanji outside the Japanese glyph range in game-supplied strings (spell and companion names) do not show as "?".
 
-[Recommended]
-- EnableChinese = true under [Fonts] in SKSEMenuFramework.ini (SMF v3.18 or later).
-  Strings taken from the game itself (spell and shout names, etc.) cannot be changed by this patch, and kanji outside the Japanese glyph range show as "?".
-  Paths is expected to show many such strings, so setting this is recommended (see "If spell names show ?" below).
-- Sister patch: Walk With Me - Japanese Translations Patch
-  https://www.nexusmods.com/skyrimspecialedition/mods/194872
+If it stays English
+The language follows the game (sLanguage in Skyrim.ini); the files are read when it is JAPANESE. If your game is not set to JAPANESE, add this to SKSE/Plugins/FightWithMe_user.ini and SKSE/Plugins/FightWithMePaths_user.ini (both) (create them if missing; restart the game):
+    [Interface]
+    sLanguage = JAPANESE
+The SKSE log should show "[Text] JAPANESE: N lines from ..." if the files were read.
 
-[Load order]
-Fight With Me -> Paths -> this patch. This patch must come last so that the patched FightWithMe.dll wins.
+Install
+Install as a mod (MO2, Vortex, ...). Files placed:
+SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt         Fight With Me's screens (battle plan, settings, notices) and the shared part of the Paths panel
+SKSE/Plugins/FightWithMe/Translations/FightWithMePaths_JAPANESE.txt    the Paths trees, abilities and traits
+No DLL, INI or save is touched; disable it to go back to English.
+When the original updates you do not have to remove the patch, but new texts stay in English until the patch is updated. Keep versions matched: the version follows the original, with a suffix (x.x.x-1) for patch-only fixes.
 
-[Versions]
-The patch version follows the original mod, Paths (for Paths 0.1.0 -> 0.1.0-1).
-The DLL itself is for Fight With Me 0.3.0, so the Fight With Me version must match too.
-If the patch alone is fixed within the same version, a suffix such as x.x.x-1 is added.
-This file is for Fight With Me 0.3.0 only (fixed addresses). Do not use it with other versions of Paths or Fight With Me.
+SHA-256 of the translation files:
+  FightWithMe_JAPANESE.txt       {SHA_FWM_JA}
+  FightWithMePaths_JAPANESE.txt  {SHA_PATHS_JA}
 
-[Install]
-Install above the original mod(s). INI and saves are untouched; disabling the patch restores the original.
-Before updating Fight With Me, disable/remove this patch first, or its old DLL overwrites the new one and can cause errors or crashes.
+What is not in Japanese
+- The role / focus / position dropdowns on the Party settings page (the choices and their hover tooltips): the original does not pass them through its translation feature, so they stay English until it is fixed upstream.
+- Theme names (Vanilla / Oxblood / Nordic) are kept as in the original.
+- Key names and button labels (Tab, Esc, ...), logs, INI comments.
+- Strings that come from the game or other mods (spell and companion names).
+- Texts the original added after this version.
 
-Original DLL SHA-256: {ORIG_SHA}
-Patched DLL SHA-256 : {OUT_SHA}
+Rights, source and credits
+Original author: hashhbbrown (GitHub: fatalCMD). All original strings, trees and game design belong to the author.
+This unofficial translation follows the permissions shown on the original pages (checked by the user on 2026-10-26):
+- Fight With Me: modification and asset use allowed with credit; re-uploading the file elsewhere is not allowed.
+- Path of the Companions: modification, asset use and uploading to other sites allowed with credit.
+This patch contains no file of the originals (no DLL, images or fonts), only the original's English strings (the left column of the translation files) and the Japanese translation.
+Distributed on Nexus Mods only, as a translation page. Please do not re-upload it. GitHub holds only the source (scripts and the translation table), not these files or the font.
+Please do not contact the original author about problems with this patch. It will be removed promptly if the author asks. No warranty.
+Original source (declared GPL-3.0-or-later): https://github.com/fatalCMD/potc
+Scripts and translation table: https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch
+The Japanese translation and scripts are GPL-3.0-or-later; the English column is the original author's and is not covered.
+The Japanese font (separate file) is based on Noto Sans JP (Copyright 2014-2021 Adobe) with its internal names changed; SIL Open Font License 1.1, full text in FONT-LICENSE.txt.
 
-[If spell names show "?"]
-Strings taken from the game itself, such as spell names, cannot be changed by this patch. If they contain kanji outside the Japanese glyph range of SKSE Menu Framework (for example 罠 or 痺), they show as "?".
-In that case try EnableChinese = true under [Fonts] in SKSEMenuFramework.ini (added in SMF v3.18).
-On the author's setup, kanji that show as "?" with the Japanese range (靭, 怯) are displayed with the Chinese setting; 罠 and 痺 have not been checked.
-
-[Translated / not translated]
-Settings pages, the battle plan screen, the Paths tree screens (abilities, traits, ranks, bonuses and the guide of every path) and combat notices are translated.
-An English/Japanese table of all 88 Paths nodes is in PATHS_TABLE.md on GitHub.
-Key names, button labels, logs, INI comments and a few short labels stay in English (they are expanded inline in the code and cannot be replaced safely).
-"Skill" is rendered as "アビリティ" (Ability) everywhere, to avoid confusion with vanilla skills (changed from 0.3.0-1; this also changes Fight With Me's own screens).
-The Paths screen is titled "PATHS - 従者専用ツリー" (follower-only trees).
-Ability names follow the official Japanese Skyrim terms. "Slow Time" is "時間減速" and "Healing Hands" is "治癒の手".
-Names of Paths trees and abilities include free renderings, and some are provisional. Feedback is welcome.
-SKSE Menu Framework loads only about 3000 kanji, and others would show as "?", so the translations stay within that range.
-
-[Changes to the original]
-1. Strings in FightWithMe.dll are replaced with Japanese.
-2. The functions that draw text one byte at a time (Label / LabelWidth) are redirected to the normal text functions (Text / TextSize)
-   only when the string contains non-ASCII characters. ASCII-only strings behave as in the original.
-3. Japanese text is enlarged about 1.4x (Japanese looks smaller than Latin at the same size); titles are not enlarged.
-   Tooltips scale their text size and wrap width together (about 1.2x) so the box still fits.
-   On the Paths screens, text positions and spacing are adjusted per place so that text lines up with icons and bands.
-4. Long Paths descriptions get wrap spaces at phrase boundaries so Japanese text does not run off the box.
-5. The Japanese strings and the redirect code live in a section (.jpn) appended to the DLL.
-
-[Rights / source]
-The originals ship without a license file. Following the permissions on the original Nexus pages (Fight With Me checked 2026-10-11, Paths checked 2026-10-20:
-modification and asset use allowed with credit to the author, re-uploading elsewhere not allowed), this patch is distributed ONLY on Nexus Mods as a translation of each original page. Please do not repost it elsewhere.
-GitHub holds source code only (patch scripts and the translation table); no DLL.
-It is an unofficial translation made within those permissions; do not ask the original author for support. If the author asks for removal, I will comply promptly.
-THIRD-PARTY-NOTICES_FightWithMe.md is included unchanged from the original (Paths ships the same notice text).
-Fight With Me source: https://github.com/fatalCMD/fight-with-me (commit 6a5f5ce when checked; the commit that matches the 0.3.0 DLL)
-Paths source: https://github.com/fatalCMD/paths-fwm-addon
-Patch scripts and translation table (no DLL): https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch (one tag per version)
-No warranty.
-
-[AI disclosure]
-Translations and this text were produced with AI assistance (Claude, Anthropic).
-Checked in game, but something may have been missed; please report mistranslations or layout problems in the Nexus comments.
-
-[Thanks]
-Huge thanks to hashhbbrown for creating and sharing Fight With Me and Paths.
-This is an unofficial translation made with gratitude so Japanese players can enjoy it too.
+AI disclosure
+The translation and this text were made with AI assistance (Claude, Anthropic). Checked in game, but mistakes may remain; please report them in the Nexus comments.
 
 Changelog
+1.0.0-1: For Path of the Companions 1.0.0. Paths is now a mod of its own, so the method changed: no DLL replacement any more; the Japanese text goes into the original's translation file. All nodes, the guide, settings and notices are translated.
+(0.1.0-1 and earlier replaced a DLL in the old way.)
 0.1.0-1: First release. Translates Paths 0.1.0 (tree screens, all 88 nodes, ranks, bonuses, guide, settings, notices). The DLL is the same as in the Fight With Me Japanese patch 0.3.0-2.
 (For the Fight With Me side, see the changelog on the Fight With Me Japanese patch page.)
