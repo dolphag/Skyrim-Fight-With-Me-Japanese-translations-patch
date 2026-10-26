@@ -46,3 +46,9 @@
 ## テスト経過
 - test1/test2(2026-10-26): ユーザー環境で全部英語。ログは `Fight With Me 0.3.0.0 loading.`、`[Text]` 行なし、旧 Paths(内蔵)が接続 → **0.5.0 が読み込まれていなかった**(訳の問題ではない)。Skyrim.ini は `sLanguage=JAPANESE`(音声は英語 `Voices_en0.bsa`)。
   最初に言語名の不一致を疑ったのは、DLL の版を確認する前の推測で、誤りだった。
+- test2 + 旧 Paths を外して FWM 0.5.0: ログに `[Text] JAPANESE: 1125 lines`(読み込み成功)。ただし本文が「?」。
+  原因: 作者の画面は SMF 経由でテーマ別フォント `Lora-SemiBold`(Oxblood)/`Spectral-SemiBold`/`BarlowSemiCondensed-SemiBold`(Nordic)を使う(`MenuFontName()`、`src/Menu.cpp`)。同梱 TTF はラテン文字のみ。
+  確認: ユーザーが SMF の `NotoSansJP-Medium.ttf` を上の 3 名前でコピー → FWM の画面も Paths(刃の道のツリー、詳細、ガイド下のキーヒント)も日本語で表示された。**SMF は日本語の字形範囲を、これらのフォントにも当てている**(字形がフォントに有れば出る)。
+  ソース上、`*-Medium.ttf` は使われていない(名前を返すのは SemiBold のみ)。
+- パーティ画面のドロップダウン(役割・注目対象・位置取り)は英語のまま(原作側で翻訳機構を通していない可能性。ソースは未確認)。
+- 未解決: 日本語対応フォントの配布方法。PyPI に Noto Sans JP のパッケージは無い。ユーザー環境には `NotoSansJP-Medium.ttf`(OFL)がある。
