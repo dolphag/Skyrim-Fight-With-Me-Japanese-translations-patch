@@ -1,7 +1,7 @@
 # Fight With Me / Paths 日本語化パッチ(このリポジトリ)
 
 FWM(Nexus 194766)と Path of the Companions(Paths。Nexus で新 MOD、ID 196635)の日本語化パッチ。原作者は hashhbbrown(GitHub: fatalCMD)。
-**0.5.0 / 1.0 から方式が変わった**: DLL パッチをやめ、原作の翻訳ファイル機構に `*_JAPANESE.txt` を渡す(経緯と仕様は `docs/FWM-0.5.0_Paths-1.0-findings.md`)。FWM 0.3.0 / Paths 0.1.0 までの DLL パッチは skill `pe-patch-workflow`(履歴扱い)。
+**0.5.0 / 1.0 から方式が変わった**: DLL パッチをやめ、原作の翻訳ファイル機構に `*_JAPANESE.txt` を渡す(経緯と仕様は `docs/FWM-0.5.0_Paths-1.0-findings.md`)。FWM 0.3.0 / Paths 0.1.0 までの DLL パッチのツールは `legacy/0.3.0/`、手順は skill `pe-patch-workflow`(履歴扱い)。
 配布は Nexus の 2 ページ(FWM 用 194874、Paths 用は新 MOD 向けに新規作成の見込み。旧 196104 は旧 Paths 用)。
 常時読み込まれるので短く保つ。手順は `.claude/skills/`、用語は `docs/GLOSSARY.md`、版ごとの調査は `docs/` に置く。
 
@@ -17,7 +17,7 @@ FWM(Nexus 194766)と Path of the Companions(Paths。Nexus で新 MOD、ID 196635
 
 ## 権利・配布(絶対に守る)
 - **GitHub はソースのみ。DLL・zip・フォントはコミットしない**(`.gitignore` で除外)。配布物(`*_JAPANESE.txt` 入りの zip)は Nexus のみ。生成した `*_JAPANESE.txt` も `out/`(git 管理外)。
-- 逆アセンブル結果や文字列ダンプ(原 DLL の写し)も保存しない。必要なら再生成する(`tools/dev/`)。
+- 逆アセンブル結果や文字列ダンプ(原 DLL の写し)も保存しない。必要なら再生成する(`legacy/0.3.0/dev/`)。
 - 英日対応表(`translations_en_ja.csv`)の英語列は原作者のもの。0.5.0 の原作 git は GPL-3.0 を宣言しているが、Nexus ページの権限は別に確認する。README に英語列の扱いを明記し続ける。
 - リリースごとに、原 MOD の Nexus ページの権限(Permissions and credits)をその時点で確認し、確認日を README に書く。変わっていたら止めてユーザーに報告。
 - 原作者クレジット(hashhbbrown / GitHub fatalCMD)を、README・Nexus 説明・Nexus の **File credits 欄**の 3 か所に入れる。

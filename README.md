@@ -26,7 +26,7 @@ only the scripts that patch a DLL you own, and the English → Japanese table (7
 - Japanese translation, tools and layout fixes: dolphag (with AI assistance, see Notes).
 
 ## Files
-- [`PATHS_TABLE.md`](PATHS_TABLE.md): comparison table of all 88 Paths perk nodes (English / Japanese / effect / unlock / cooldown), terminology and naming notes. Feedback welcome.
+- [`PATHS_TABLE.md`](legacy/0.3.0/PATHS_TABLE.md): comparison table of all 88 Paths perk nodes (English / Japanese / effect / unlock / cooldown), terminology and naming notes. Feedback welcome.
 - `translations_en_ja.csv`: all 745 string pairs.
 - `tools/`: patcher, verifier, translation sources (`fwm_trans1..6.py`, `fwm_names6.py`) and helpers.
 
@@ -53,13 +53,13 @@ The build fails if a translation uses a kanji outside the font range (`tools/jp_
 
 ## Reproduce (Python 3.11+, `pip install pefile capstone unicorn janome`)
 ```
-python3 -I tools/fwm_fmtcheck.py                                  # format-string field check
-python3 -I tools/fwm_patch.py FightWithMe.dll out.dll report.json   # original DLL -> patched DLL
-python3 -I tools/fwm_verify.py FightWithMe.dll out.dll              # independent static verification
-python3 -I tools/fwm_emu_stub.py out.dll report.json                # dispatch/scale check of the stubs (unicorn)
-python3 -I tools/fwm_scan_flag.py ...                               # register-reuse hazard scan (known false positives documented)
-python3 -I tools/fwm_export_csv.py ...                              # regenerate translations_en_ja.csv
-python3 -I tools/paths_table.py <FWM include/FWM/Paths.h> > PATHS_TABLE.md
+python3 -I legacy/0.3.0/fwm_fmtcheck.py                                  # format-string field check
+python3 -I legacy/0.3.0/fwm_patch.py FightWithMe.dll out.dll report.json   # original DLL -> patched DLL
+python3 -I legacy/0.3.0/fwm_verify.py FightWithMe.dll out.dll              # independent static verification
+python3 -I legacy/0.3.0/fwm_emu_stub.py out.dll report.json                # dispatch/scale check of the stubs (unicorn)
+python3 -I legacy/0.3.0/fwm_scan_flag.py ...                               # register-reuse hazard scan (known false positives documented)
+python3 -I legacy/0.3.0/fwm_export_csv.py ...                              # regenerate translations_en_ja.csv
+python3 -I legacy/0.3.0/paths_table.py <FWM include/FWM/Paths.h> > PATHS_TABLE.md
 ```
 
 ## Notes
@@ -92,7 +92,7 @@ Nexus Mods のページ:
 - 日本語訳・ツール・表示位置の調整: dolphag(AI支援あり)
 
 ### 内容
-- [`PATHS_TABLE.md`](PATHS_TABLE.md): Paths 全88ノードの対照表(英語/日本語/効果/解放条件/再使用)、用語と命名の覚え書き。ご意見歓迎です。
+- [`PATHS_TABLE.md`](legacy/0.3.0/PATHS_TABLE.md): Paths 全88ノードの対照表(英語/日本語/効果/解放条件/再使用)、用語と命名の覚え書き。ご意見歓迎です。
 - `translations_en_ja.csv`: 全745組の英日対応表。
 - 再現手順は上の英語の節を参照してください(janome が必要です)。元DLLの SHA-256 は `a2ea378348e6912bc391f0a33d8340bea14ce21e24118279857cef592402ad86`、
   出力DLL(パッチ 0.3.0-2)は `203d62f403a8d86eb0ab82d99a43bd5daa25c9a3523ec8ce3b6f5177b3accd1d` になります。

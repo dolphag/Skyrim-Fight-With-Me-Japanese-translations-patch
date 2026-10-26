@@ -1,6 +1,6 @@
 # 用語集(FWM / Paths)
 
-決定済みの用語。変更するときは、ユーザーの了承を得て、`tools/fwm_trans*.py` と README・Nexus 文面を同時に直す。
+決定済みの用語。変更するときは、ユーザーの了承を得て、`legacy/0.3.0/fwm_trans*.py` と README・Nexus 文面を同時に直す。
 
 | 英語 | 日本語 | 備考 |
 |---|---|---|
@@ -8,7 +8,7 @@
 | skill tree | **ツリー** | 「スキルツリー」は使わない |
 | PATHS(画面名) | PATHS - **従者専用ツリー** | 従者ごとのツリー、の意味 |
 | IN HAND | **武器** | 「手持ち」は使わない |
-| Path of the Blade/Shield/Mender/Hammer/Arrow/Storm | `fwm_names6.py` 参照(刃の道 など) | 実際の訳は `tools/fwm_names6.py` が正。「槌の道」は暫定 |
+| Path of the Blade/Shield/Mender/Hammer/Arrow/Storm | `legacy/0.3.0/fwm_names6.py` 参照(刃の道 など) | 実際の訳は `legacy/0.3.0/fwm_names6.py` が正。「槌の道」は暫定 |
 | Magnus(Storm の最上位) | マグナス | |
 | 共通アビリティ(Taunt, Heal, Ward, War cry …) | FWM 本体側の訳に統一 | 挑発、回復 など。T6 の統合順で T6 が勝つ点に注意 |
 | 役割名 | ファイター/タンク/ヒーラー/ブルーザー/アーチャー/メイジ | FWM 本体の表記 |

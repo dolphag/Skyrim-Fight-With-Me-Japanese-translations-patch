@@ -4,7 +4,7 @@
 
 ## 結論: 方式が変わった(DLL パッチ → 翻訳テキスト)
 - 0.5.0 / 1.0 は、原作が**翻訳ファイルの仕組み**を持つ。`SKSE/Plugins/FightWithMe/Translations/<Mod>_<LANGUAGE>.txt`(1 行 = 英語 TAB 訳)。
-  DLL の書き換えは不要。0.3.0 までの PE パッチ(`tools/fwm_patch.py` など)は 0.5.0 には使えない(アドレスも文字列の持ち方も別物)。
+  DLL の書き換えは不要。0.3.0 までの PE パッチ(`legacy/0.3.0/fwm_patch.py` など)は 0.5.0 には使えない(アドレスも文字列の持ち方も別物)。
 - ローダ仕様(原作ソース `src/Text.cpp` で確認): フォルダ内の `*_<LANGUAGE>.txt` を**全部**読み、ファイル名の昇順で後勝ち。UTF-8(BOM 可)か UTF-16。
   `#` 始まりは注釈。`\n` `\t` `\\` は戻す。右側が空なら英語のまま。鍵は英語の全文(一致しなければ英語が出る)。書式は `std::format`(`{}` `{:.0f}` `{0}`)。
   書式が合わない訳は英語に戻る(落ちない)。
@@ -39,5 +39,6 @@
 
 ## 訳の作り方(0.5.0)
 - 旧訳(`translations_en_ja.csv`、745 組)を鍵(英語全文)で流用: 1100 件中 438 件。残り 662 件を新規に訳した。
+- POTC Effects(ユーザーが分割で添付、003 欠け。zip 末尾の一覧は読めた): 360 エントリ = NIF 316 / DDS 22 / PNG 18(`interface/FightWithMe/backdrops`)/ readme・credits・manifest。テキスト資産は無く、翻訳対象なし。PNG に文字が無いかの目視は未実施。
 - 新アビリティ名(ケイオスダウン、最後の砦、風渡り、爆裂矢、カイナレスの顎 など)は暫定。「カイナレス」の表記は未確認。
-- 手順は skill `lang-text-workflow`。
+- 旧 DLL ツールは `legacy/0.3.0/` に退避済み。手順は skill `lang-text-workflow`。
