@@ -39,6 +39,7 @@ One small question about naming, so that I can name the Japanese translation cor
 Which one is the official name (singular or plural "Path", singular or plural "Companion")? And is "Paths" the short form you would like people to use? I will follow whatever you prefer. Thank you!
 
 ### 日本語(ユーザー向けの要約)
+- **回答済み(2026-10-26)**: 正式名は `Paths of the Companions`。改名(Level With Me)を検討中とのこと。記録は `docs/NAMES.md`。以下は送った質問の控え。
 - 質問: 正式名はどれか(Path/Paths、Companion/Companions)。略称は Paths でよいか。
 - 確認できた事実(2026-10-26、Nexus API と原作 zip・英日対応表): ページ名は `Paths of the Companion`、原作者のファイル名は `Path Of The Companions - …` / `Path of the Companions - Effects`、ゲーム内の文言(対応表 6 行)は `Path of the Companions`。
 - 背景(ユーザーの説明。私は未確認): 前身の MOD が Paths という名前で、それを引き継ごうとしたが、続く文字の関係で Path の方が通りがよくなった、という経緯だと思われる。

@@ -3,6 +3,7 @@
 Fight With Me(FWM。Nexus 194766)の日本語化パッチ。原作者は hashhbbrown(GitHub: fatalCMD)。Path of the Companions(Paths。Nexus 196635)は別 MOD で、FWM の任意の連携先。**Paths の日本語化パッチは別リポジトリ**(dolphag/Skyrim-POTC-JP-Patch、2026-10-26 に分離)。
 **0.5.0 から方式が変わった**: DLL パッチをやめ、原作が外部ファイルに分けたメッセージ(`Translations` フォルダ)の日本語版 `FightWithMe_JAPANESE.txt` を置く(経緯と仕様は `docs/FWM-0.5.0_Paths-1.0-findings.md`)。FWM 0.3.0 までの DLL パッチのツールは `legacy/0.3.0/`、手順は skill `pe-patch-workflow`(履歴扱い)。
 配布は Nexus の FWM 用ページ(194874)。
+- 正式名は **Paths of the Companions**(原作者の返信。`docs/NAMES.md`)。この文書などに残る `Path of the Companions` は誤りで、次の版で直す。新しく書く文章では正しい名称を使う。
 常時読み込まれるので短く保つ。手順は `.claude/skills/`、用語は `docs/GLOSSARY.md`、版ごとの調査は `docs/` に置く。
 
 ## 最初のセッションで確認すること(未確認の事項)
