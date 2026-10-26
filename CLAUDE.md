@@ -7,6 +7,7 @@ FWM(Nexus 194766)と Path of the Companions(Paths。Nexus で新 MOD、ID 196635
 
 ## 最初のセッションで確認すること(未確認の事項)
 - [x] テスト版の受け渡し: SendUserFile で zip を渡せる(ユーザーが受け取って実機試験済み、2026-10-26)。
+- [x] タグの push: このクラウド環境からは **403 で拒否される**(2026-10-26、`git push origin <tag>`)。GitHub MCP にもタグ作成は無い。タグ(GitHub Release)はユーザーが、main の HEAD の commit に付ける。迂回しない。
 - [x] 公開リポジトリの追加: `add_repo` は公開リポジトリなら読み取りのみ(clone 可)。非公開の読み書きは未確認。
 - [ ] 原 MOD の zip(FWM 用・Paths 用)は毎回ユーザーが添付する。翻訳テンプレートは配布 zip を正とする(git のソースは古いことがある)。
 
