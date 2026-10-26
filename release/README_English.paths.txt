@@ -3,20 +3,22 @@ Path of the Companions - Japanese Translations Patch 1.0.0-1 (for Path of the Co
 A Japanese translation for Path of the Companions 1.0.0. It uses the original's own translation-file feature, so no DLL is changed (just files to place).
 Versions up to 0.3.0 replaced a DLL. The original added translation files in 0.5.0 / 1.0, so the method changed. Do not use this together with the old (0.3.0-2 or earlier) patch.
 Original mods:
-- Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
 - Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
+- Fight With Me (optional companion)  https://www.nexusmods.com/skyrimspecialedition/mods/194766
 Original author: hashhbbrown (GitHub: fatalCMD)
 
 Requirements
 - Path of the Companions 1.0.0 and POTC Effects 1.0.21 or newer (required by the original)
-- Fight With Me 0.5.0 (optional; if you use it, install the Fight With Me Japanese patch too)
 - SKSE Menu Framework 3 with Japanese enabled: [Fonts] EnableJapanese = true, PrimaryFont = NotoSansJP-Medium.ttf (or similar) in SKSEMenuFramework.ini.
 - The separate file "Japanese UI Font". **Without it Japanese shows as "?".** The original draws its screens with theme fonts (Lora / Spectral / BarlowSemiCondensed) that have no Japanese glyphs; the font file has the same names with Japanese glyphs (based on Noto Sans JP, SIL OFL).
   Mod order: original -> this patch -> Japanese UI Font, so the font wins over the original's fonts.
+If you also use Fight With Me (optional)
+Paths works without Fight With Me 0.5.0; with it, the battle plan and its settings are translated too. This zip already contains the Fight With Me screens' translation (FightWithMe_JAPANESE.txt), so **you do not need the separate Fight With Me patch** (it is the same file; having both is fine).
+
 Recommended: [Fonts] EnableChinese = true (SMF v3.18+), so kanji outside the Japanese glyph range in game-supplied strings (spell and companion names) do not show as "?".
 
 If it stays English
-The language follows the game (sLanguage in Skyrim.ini); the files are read when it is JAPANESE. If your game is not set to JAPANESE, add this to SKSE/Plugins/FightWithMe_user.ini and SKSE/Plugins/FightWithMePaths_user.ini (both) (create them if missing; restart the game):
+The language follows the game (sLanguage in Skyrim.ini); the files are read when it is JAPANESE. If your game is not set to JAPANESE, add this to SKSE/Plugins/FightWithMePaths_user.ini (create it if missing; restart the game). If you also use Fight With Me, put the same in SKSE/Plugins/FightWithMe_user.ini (each DLL reads its own):
     [Interface]
     sLanguage = JAPANESE
 The SKSE log should show "[Text] JAPANESE: N lines from ..." if the files were read.

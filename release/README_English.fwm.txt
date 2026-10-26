@@ -12,6 +12,9 @@ Requirements
 - SKSE Menu Framework 3 with Japanese enabled: [Fonts] EnableJapanese = true, PrimaryFont = NotoSansJP-Medium.ttf (or similar) in SKSEMenuFramework.ini.
 - The separate file "Japanese UI Font". **Without it Japanese shows as "?".** The original draws its screens with theme fonts (Lora / Spectral / BarlowSemiCondensed) that have no Japanese glyphs; the font file has the same names with Japanese glyphs (based on Noto Sans JP, SIL OFL).
   Mod order: original -> this patch -> Japanese UI Font, so the font wins over the original's fonts.
+If you also use Path of the Companions (Paths)
+Paths is a separate mod that works without Fight With Me (Fight With Me is an optional companion). For Paths, install the Path of the Companions Japanese Translations Patch. It contains the same FightWithMe_JAPANESE.txt as this patch, so having both is fine.
+
 Recommended: [Fonts] EnableChinese = true (SMF v3.18+), so kanji outside the Japanese glyph range in game-supplied strings (spell and companion names) do not show as "?".
 
 If it stays English

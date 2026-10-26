@@ -17,6 +17,10 @@ Fight With Me 0.5.0 を日本語化するパッチです。原作の「翻訳フ
   別ファイルのフォントは、同じ名前の日本語対応フォントです(Noto Sans JP を元にしています。SIL OFL)。
   MOD の優先順位は「原作 → 日本語化パッチ → Japanese UI Font」の順にして、フォントが原作のフォントに勝つようにしてください。
 
+■ Path of the Companions(Paths)を併用する場合
+Paths は別の MOD で、Fight With Me がなくても動きます(Fight With Me は任意の連携先です)。Paths を使う場合は、Paths 用の日本語化パッチ(Path of the Companions - Japanese Translations Patch)を入れてください。
+Paths 用の zip にも、この MOD と同じ FightWithMe_JAPANESE.txt が入っています(両方入れても問題ありません)。
+
 ■ 推奨
 - SKSEMenuFramework.ini の [Fonts] で EnableChinese = true を設定(SMF v3.18 以降)。
   魔法名・従者名など、ゲームや他の MOD から取得する文字列は本パッチでは変更できず、日本語グリフ範囲外の漢字が「?」になります。

@@ -3,13 +3,12 @@ Path of the Companions - Japanese Translations Patch 1.0.0-1 (対象: Path of th
 Path of the Companions 1.0.0 を日本語化するパッチです。原作の「翻訳ファイル」の機能を使うため、DLL は変更しません(ファイルを置くだけです)。
 0.3.0 までの旧版は DLL を差し替える方式でした。原作の 0.5.0 / 1.0 で翻訳の機能ができたため、方式が変わっています。旧版(0.3.0-2 以前)と一緒には使わないでください。
 原MOD:
-- Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
 - Path of the Companions (Paths)  https://www.nexusmods.com/skyrimspecialedition/mods/196635
+- Fight With Me(任意の連携先)  https://www.nexusmods.com/skyrimspecialedition/mods/194766
 原作者: hashhbbrown (GitHub: fatalCMD)
 
 ■ 必須
 - Path of the Companions 1.0.0 と、POTC Effects 1.0.21 以上(原作の必須ファイル)
-- Fight With Me 0.5.0(任意。入れるときは、日本語化パッチも Fight With Me 側を入れてください。FWM の画面の文言は、FWM 用のページの訳と同じファイルです)
 - SKSE Menu Framework 3(日本語を表示する設定を含む)。SKSEMenuFramework.ini の [Fonts] で EnableJapanese = true、PrimaryFont = NotoSansJP-Medium.ttf など。
   日本語環境を導入済みなら追加の設定は不要です。作者は 2game 様の日本語化ファイルで動作を確認しています。
   https://skyrimspecialedition.2game.info/detail.php?id=120352
@@ -17,6 +16,10 @@ Path of the Companions 1.0.0 を日本語化するパッチです。原作の「
   原作の画面は、日本語の字形を持たないテーマ用フォント(Lora / Spectral / BarlowSemiCondensed)で描かれるためです。
   別ファイルのフォントは、同じ名前の日本語対応フォントです(Noto Sans JP を元にしています。SIL OFL)。
   MOD の優先順位は「原作 → 日本語化パッチ → Japanese UI Font」の順にして、フォントが原作のフォントに勝つようにしてください。
+
+■ Fight With Me を併用する場合(任意)
+Paths は Fight With Me(0.5.0)がなくても動きます。併用すると、Fight With Me のバトルプランなども日本語になります。
+この zip には、Fight With Me の画面の訳(FightWithMe_JAPANESE.txt)も入っているので、**Fight With Me 用の日本語化パッチを別に入れる必要はありません**(Fight With Me 用のパッチと同じファイルです。両方入れても問題ありません)。
 
 ■ 推奨
 - SKSEMenuFramework.ini の [Fonts] で EnableChinese = true を設定(SMF v3.18 以降)。
@@ -26,7 +29,8 @@ Path of the Companions 1.0.0 を日本語化するパッチです。原作の「
 ■ 日本語にならないとき
 言語はゲームの設定(Skyrim.ini の sLanguage)に従います。sLanguage=JAPANESE のときに読まれます。
 英語版ゲームなどで、sLanguage が JAPANESE でない場合は、次のファイルに書いてください(無ければ新規作成。反映はゲームの再起動後)。
-  SKSE/Plugins/FightWithMe_user.ini  と  SKSE/Plugins/FightWithMePaths_user.ini(両方)
+  SKSE/Plugins/FightWithMePaths_user.ini(Paths 用)
+  Fight With Me も使う場合は、SKSE/Plugins/FightWithMe_user.ini にも同じ内容を書いてください(DLL ごとに別々に読みます)。
       [Interface]
       sLanguage = JAPANESE
 SKSE のログ(Documents/My Games/Skyrim Special Edition/SKSE)に「[Text] JAPANESE: N lines from ...」と出ていれば、翻訳ファイルは読まれています。

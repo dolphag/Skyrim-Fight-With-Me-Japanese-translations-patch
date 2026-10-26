@@ -18,7 +18,7 @@
 
 ## ファイル説明(Main、短く)
 FWM: `Fight With Me 0.5.0 の日本語訳です。翻訳ファイル(FightWithMe_JAPANESE.txt)を置くだけで、DLLは変更しません。日本語表示には、別ファイル「Japanese UI Font」とSKSE Menu Framework の日本語設定が必要です。詳細は同梱のREADME。`
-Paths: `Path of the Companions 1.0.0 の日本語訳です。(以下同じ。FWMも使う場合は、FWM用のパッチも入れてください)`
+Paths: `Path of the Companions 1.0.0 の日本語訳です。(以下同じ。Fight With Me は任意の連携先で、併用する場合も、この zip だけで FWM の画面まで日本語になります。FWM 用のパッチを別に入れる必要はありません)`
 
 ## ファイル説明(Japanese UI Font)
 `日本語化パッチ用の日本語フォントです。入れないと日本語が「?」になります。原作と同名のフォントを置き換えるので、MODの優先順位は 原作 → 日本語化パッチ → このファイル にしてください。Noto Sans JP(SIL OFL)を元にしています。`
@@ -30,7 +30,8 @@ Paths 1.0.0-1: 初版(1.0 用)。Paths が独立した MOD になったため、
 ## ページの説明(注意書きの要点。bbcode に整形して使う)
 1. 原作へのリンクとクレジット(hashhbbrown / fatalCMD)。非公式の翻訳で、原作者に問い合わせないこと。
 2. **導入に必要なもの**: 本体、SKSE Menu Framework 3 の日本語設定、**Japanese UI Font(別ファイル)**。
-3. **日本語にならないとき**: `sLanguage = JAPANESE`(英語版ゲームの場合は `FightWithMe_user.ini` と `FightWithMePaths_user.ini` の両方)。ログの `[Text] JAPANESE: N lines`。
+3. **日本語にならないとき**: `sLanguage = JAPANESE`(英語版ゲームの場合: FWM は `FightWithMe_user.ini`、Paths は `FightWithMePaths_user.ini`。併用なら両方。DLL ごとに別々に読む)。ログの `[Text] JAPANESE: N lines`。
 4. **日本語にならないもの**: パーティ設定ページの役割・注目対象・位置取りのドロップダウン(原作側が翻訳を通していないため)、テーマ名(原文のまま)、ゲーム由来の文字列。
 5. スクリーンショット(バトルプラン、設定、Paths のツリー)。AI 利用の開示。他サイトへの転載はご遠慮ください。
-6. 対応版: FWM 0.5.0 / Paths 1.0.0。原作の更新時はパッチを外さなくてよいが、新しい文言は英語のまま。
+6. Paths のページでは、Fight With Me は「任意の連携先」と書く(必須扱いにしない)。Paths の zip に FWM 側の訳も入っているので、FWM 用パッチは別に不要。FWM のページでは、Paths を使う人は Paths 用パッチを入れるよう案内する。
+7. 対応版: FWM 0.5.0 / Paths 1.0.0。原作の更新時はパッチを外さなくてよいが、新しい文言は英語のまま。
