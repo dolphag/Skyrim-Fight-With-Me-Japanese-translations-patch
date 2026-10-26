@@ -1,15 +1,17 @@
 # Nexus API メモ
 
-2026-10-26 調査。出典: houseCARL(Avick3110/houseCARL、GPL-3.0、`1037f7f`)の `src/housecarl-mcp/NexusClient.cs` と `docs/architecture/nexus.md`。コードはコピーしていない。
+出典: houseCARL(Avick3110/houseCARL、GPL-3.0、`1037f7f`)の `src/housecarl-mcp/NexusClient.cs`、`docs/architecture/nexus.md`。コードはコピーしていない。実測は 2026-10-26 のこのリポジトリのセッション(`tools/nexus_query.py`)。
 
-## 分かっていること(houseCARL の記述による。ここでは未検証)
-- v2 GraphQL の読み取りは公開・匿名。エンドポイント `https://api.nexusmods.com/v2/graphql`、POST、`{query, variables}`。認証ヘッダなし。
-- 使われているクエリ: `mods`(検索)、`mod(modId, gameId)`、`modFiles(modId, gameId)`、`game(domainName|id)`、`fileHashes(md5s)`。
-- Skyrim SE の game id は 1704(ドメイン名 `skyrimspecialedition`)。
-- 失敗は HTTP 429(レート制限)、GraphQL の `errors` 配列で返る。
+## 実測で確認済み(キーなし)
+- `POST https://api.nexusmods.com/v2/graphql` は匿名で読める。`mod 194766` で版 0.5.0、更新 2026-10-25、`modFiles` 全件(fileId・name・version・category・date・description・changelogText)が返った。
+- `ModFile` 型のフィールド: `size`(KB)、`sizeInBytes`、`primary`(MAIN なら 1)、`uri`(CDN 内パスで、ダウンロード URL ではない)、`totalDownloads`、`uniqueDownloads`、`scannedV2`(ウイルス検査)ほか。category の値: MAIN / UPDATE / OPTIONAL / OLD_VERSION / MISCELLANEOUS / REMOVED / ARCHIVED。`date` は UNIX 秒。
+- `Mod` 型にはファイルサイズ(`fileSize`)、`directDownloadEnabled`、`uploader`、`modRequirements` などがある。introspection(`__type` / `__schema`)は許可されている。
 
-## 未確認(実機で確認したら更新する)
-- このセッションでは `api.nexusmods.com` への接続がプロキシに拒否された(CONNECT 403)ため、**実際の応答は一度も見ていない**。`tools/nexus_query.py` の実接続は未試験。オフラインで確認したのは mutation 拒否と接続失敗時のメッセージのみ。
-- 匿名で本当に読めるか(houseCARL の主張が現在も正しいか)。
-- フィールド `description` / `changelogText` などの有無。**権限(Permissions and credits)に当たるフィールドがあるか**。
-- 無ければの代替: v1 REST + 個人 API キー(`apikey` ヘッダ)。houseCARL は使っていない。キーは環境の secrets に置き、リポジトリに入れない。
+## 確認した結果、無かったもの
+- **権限(Permissions and credits)に当たるフィールドは `Mod` 型に無い**(347 型の名前を `permission|credit|licen|download|link` で検索。`Permission` 型は `global`/`key` だけで、ユーザー権限の型と思われる)。権限の確認は従来どおりブラウザかユーザー確認。v1 REST にあるかは未確認。
+- **ダウンロード URL を返すクエリは GraphQL に無い**(mutation にも `download` 系は `updateModDirectDownloadEnabled` のみ)。
+
+## 未確認
+- `modFileContents`(zip 内のファイル一覧)は動くが、FWM 0.5.0 MAIN(fileId 825644)では 0 件だった。索引されていないのか、フィルタの指定が違うのか不明。
+- v1 REST の `download_link.json`(要 API キー)。`NEXUS_API_KEY` が無いので未実行。Premium 限定かどうか、CDN ホストがこの環境で許可されているかも未確認。Premium でない場合、Nexus は nxm リンク由来の `key`/`expires` を要求するはず(要確認。キー単体では取れない可能性が高い)。
+- キーを付けた GraphQL で増えるもの(`viewer*` 系フィールドなど)。
