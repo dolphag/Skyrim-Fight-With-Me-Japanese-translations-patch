@@ -3,11 +3,11 @@
 
 原作のテーマ UI(SMF 経由)は Lora-SemiBold / Spectral-SemiBold / BarlowSemiCondensed-SemiBold を使う。
 同梱の TTF はラテン文字のみで、日本語は「?」になる。同じ名前の日本語対応フォントを置くと表示される(2026-10-26 実機確認)。
-このスクリプトは、ユーザーが用意した OFL のフォントを、使う文字だけに絞って(サブセット)3 つの名前で書き出す。
+このスクリプトは、ユーザーが用意した OFL のフォントを、内部の名前を付け替えて 3 つの名前で書き出す(既定は全グリフ。--subset で絞る)。
 
   python3 -I tools/make_font_pack.py --font NotoSansJP-Medium.ttf --license OFL.txt --out out/font
 
---license には、そのフォントの OFL 全文のファイルを渡す(同梱必須)。字形は tools/jp_kanji.txt + かな + ASCII + 記号。
+--license には、そのフォントの OFL 全文のファイルを渡す(同梱必須)。--subset のときの字形は tools/jp_kanji.txt + かな + ASCII + 記号。
 内部の名前(family)は、元の名前を引き継がないよう付け替える(OFL の Reserved Font Name 対策)。
 """
 import argparse, os, sys
@@ -31,6 +31,7 @@ def main():
     ap.add_argument('--font', required=True)
     ap.add_argument('--license', required=True, help='そのフォントの OFL 全文')
     ap.add_argument('--out', required=True)
+    ap.add_argument('--subset', action='store_true', help='使う文字だけに絞る(小さいが、ゲーム由来の珍しい漢字が出ない。既定は全グリフを残す=実機で確認した状態)')
     a = ap.parse_args()
     try:
         from fontTools import subset
@@ -40,7 +41,8 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     opt = subset.Options(); opt.layout_features = ['*']; opt.name_IDs = ['*']; opt.notdef_outline = True; opt.glyph_names = False; opt.hinting = False
     f = TTFont(a.font, fontNumber=0)
-    sub = subset.Subsetter(opt); sub.populate(text=''.join(chars())); sub.subset(f)
+    if a.subset:
+        sub = subset.Subsetter(opt); sub.populate(text=''.join(chars())); sub.subset(f)
     for rec in list(f['name'].names):
         if rec.nameID in (1, 4, 16):   f['name'].setName(FAMILY, rec.nameID, rec.platformID, rec.platEncID, rec.langID)
         elif rec.nameID == 6:          f['name'].setName(FAMILY.replace(' ', '') + '-Regular', 6, rec.platformID, rec.platEncID, rec.langID)
