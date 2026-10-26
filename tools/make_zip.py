@@ -42,13 +42,17 @@ def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='mode', required=True)
     t = sub.add_parser('test'); t.add_argument('dir'); t.add_argument('n'); t.add_argument('--memo', required=True); t.add_argument('--out', default='out')
+    t.add_argument('--english-alias', action='store_true', help='診断用: 同じ訳を *_JA_ENGLISH.txt の名前でも入れる(sLanguage が ENGLISH でも読まれる)')
     r = sub.add_parser('release'); r.add_argument('page', choices=['fwm', 'paths']); r.add_argument('dir'); r.add_argument('--version', required=True); r.add_argument('--out', default='out')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     if a.mode == 'test':
         memo = open(a.memo, encoding='utf-8').read().replace('\r\n', '\n')
         path = os.path.join(a.out, 'FWM_Paths_ja_test%s.zip' % a.n)
-        entries = load(a.dir, FILES['paths']) + [('テスト用メモ.txt', memo.encode('utf-8'))]
+        entries = load(a.dir, FILES['paths'])
+        if a.english_alias:
+            entries += [(n.replace('_JAPANESE.txt', '_JA_ENGLISH.txt'), d) for n, d in entries]
+        entries += [('テスト用メモ.txt', memo.encode('utf-8'))]
         with zipfile.ZipFile(path, 'w') as z:
             for name, data in entries: put(z, name, data)
         print(path)
