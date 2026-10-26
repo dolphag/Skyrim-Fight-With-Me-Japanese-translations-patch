@@ -1,7 +1,16 @@
 # Fight With Me / Paths - Japanese Translations Patch (tools and translation table)
 
-> **Status (2026-10): switching to Fight With Me 0.5.0 / Path of the Companions 1.0.** These versions ship the author's own translation-file mechanism, so the patch is now plain text files (`*_JAPANESE.txt`), not a patched DLL. The text below describes the 0.3.0 DLL patch (history); the current workflow is in `docs/FWM-0.5.0_Paths-1.0-findings.md` and `tools/lang_build.py`. Test build only; not released.
-> 2026-10: Fight With Me 0.5.0 / Path of the Companions 1.0 に対応中です。原作に翻訳ファイルの仕組みができたため、DLL パッチをやめ、`*_JAPANESE.txt` を渡す方式に変わります。以下の説明は 0.3.0 の DLL パッチ(履歴)のものです。テスト段階で、未リリースです。
+> **Current (2026-10): Fight With Me 0.5.0 / Path of the Companions 1.0.0.** These versions have the author's own translation-file mechanism, so the patch is plain text files (`*_JAPANESE.txt`), not a patched DLL, plus a separate Japanese UI font file (the theme fonts have no Japanese glyphs). Everything below the "Legacy" heading describes the 0.3.0 DLL patch; those tools are in `legacy/0.3.0/`.
+> - Translation table: `translations_en_ja.csv` (1100 pairs; the English column is the original author's and is not covered by the license). Build and check: `python3 -I tools/lang_build.py --fwm <FWM zip> --paths <Paths zip> --out out/ja`. Zips: `tools/make_zip.py`. Font: `tools/make_font_pack.py` (needs an OFL font you supply; no font is committed here).
+> - Notes and findings: `docs/FWM-0.5.0_Paths-1.0-findings.md`. Report draft for the original author (not sent): `docs/upstream-report-draft.md`.
+> - Status: release candidates built; the Nexus pages are not published yet. Patch versions: FWM 0.5.0-1, Paths 1.0.0-1.
+>
+> **現行(2026-10): Fight With Me 0.5.0 / Path of the Companions 1.0.0。** 原作に翻訳ファイルの仕組みができたため、DLL パッチをやめ、`*_JAPANESE.txt` を置く方式に変わりました。日本語の字形を持つフォントは別ファイルです(原作のテーマ用フォントが日本語を含まないため)。以下の「Legacy」以降は、0.3.0 の DLL パッチの説明です(ツールは `legacy/0.3.0/`)。
+> - 翻訳表: `translations_en_ja.csv`(1100 組。英語の列は原作者のもので、ライセンスの対象外)。生成と検査: `tools/lang_build.py`、zip: `tools/make_zip.py`、フォント: `tools/make_font_pack.py`(OFL のフォントを自分で用意。フォントはコミットしません)。
+> - 調査記録: `docs/FWM-0.5.0_Paths-1.0-findings.md`。原作者向け報告の文案(未送信): `docs/upstream-report-draft.md`。
+> - 状況: 配布用 zip は作成済み、Nexus には未公開です。パッチの版は FWM 0.5.0-1、Paths 1.0.0-1。
+
+## Legacy (0.3.0 DLL patch)
 
 Nexus Mods pages:
 - Fight With Me Japanese patch: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
