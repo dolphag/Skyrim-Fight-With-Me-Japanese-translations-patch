@@ -33,6 +33,7 @@ Fight With Me(FWM。Nexus 194766)の日本語化パッチ。原作者は hashhbb
 
 ## 翻訳・表示のルール
 - 用語は `docs/GLOSSARY.md`。skill→**アビリティ**、手持ち→**武器**。
+- 文体・書式・下訳の使い方など訳全般の方針は `docs/TRANSLATION_POLICY.md`(下書き。【要決定】の項目は未決)。
 - 使える漢字は `tools/jp_kanji.txt` の範囲内(範囲外は `lang_build.py` が失敗)。ゲーム由来の文字列は変えられない → README で EnableChinese を推奨している。
 - HUD 通知のフォントに `→`(U+2192)が無い(0.3.0 での観察。0.5.0 は未確認)。ASCII 記号・矢印に頼らない。
 - 折り返しは ASCII スペースでしか起きない。長文は文節区切りにスペースを入れる(`lang_build.py` が janome で自動)。
