@@ -54,7 +54,7 @@ What is not in Japanese
 
 Rights, source and credits
 Original author: hashhbbrown (GitHub: fatalCMD). All original strings, trees and game design belong to the author.
-This unofficial translation follows the permissions shown on the Fight With Me page (checked by the user on 2026-10-26: modification and asset use allowed with credit; re-uploading the file elsewhere is not allowed).
+This unofficial translation follows the permissions shown on the Fight With Me page (checked by the user on 2026-11-01: modification and asset use allowed with credit; re-uploading the file elsewhere is not allowed).
 This patch contains no file of the originals (no DLL or images), only the original's English strings (the left column of the message files), the Japanese translation and a Japanese font.
 Distributed on Nexus Mods only, as a translation page. Please do not re-upload it. GitHub holds only the source (scripts and the translation table), not these files or the font.
 Please do not contact the original author about problems with this patch. It will be removed promptly if the author asks. No warranty.

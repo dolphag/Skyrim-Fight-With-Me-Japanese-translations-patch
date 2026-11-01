@@ -57,7 +57,7 @@ SKSE Menu Framework の日本語グリフ範囲の制限があり、この範囲
 [/list]
 
 [b]権利・ソース[/b]
-本体ページの権限表示(改変は出典明記で可、他サイトへの再アップロードは不可。2026-10-26 に確認)に従い、本パッチは Nexus Mods のこのページでのみ配布します。他サイトへの転載はご遠慮ください。作者から依頼があれば速やかに削除します。
+本体ページの権限表示(改変は出典明記で可、他サイトへの再アップロードは不可。2026-11-01 に確認)に従い、本パッチは Nexus Mods のこのページでのみ配布します。他サイトへの転載はご遠慮ください。作者から依頼があれば速やかに削除します。
 本パッチに、本体のファイル(DLL・画像など)は含まれません。含まれるのは、原作の英語の文言と、その日本語訳、日本語フォントです。
 パッチ生成のスクリプトと翻訳表(配布用のファイルやフォントは含みません)は [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]GitHub[/url] にあります(版ごとにタグがあります)。
 日本語フォント(同梱)は、Noto Sans JP(Copyright 2014-2021 Adobe)を元に、内部の名前を付け替えたものです。SIL Open Font License 1.1。
@@ -125,7 +125,7 @@ Settings pages, the battle plan screen and combat notices are translated.
 [/list]
 
 [b]Rights / source[/b]
-Following the permissions on the original page (modification with credit; no re-upload elsewhere; checked on 2026-10-26), this patch is distributed only here on Nexus Mods; please do not repost it. It will be removed promptly if the author asks.
+Following the permissions on the original page (modification with credit; no re-upload elsewhere; checked on 2026-11-01), this patch is distributed only here on Nexus Mods; please do not repost it. It will be removed promptly if the author asks.
 This patch contains no file of the original (no DLL or images), only the original's English strings, the Japanese translation and a Japanese font.
 Scripts and the translation table (no distribution files or fonts): [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]GitHub[/url] (one tag per version).
 The Japanese font (included) is based on Noto Sans JP (Copyright 2014-2021 Adobe) with its internal names changed; SIL Open Font License 1.1.
