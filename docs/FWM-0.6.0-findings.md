@@ -15,3 +15,9 @@
 - 役割・注目対象・位置取りのドロップダウンの項目と、その説明文(例: `Only fight enemies near you or attacking you.`)は英語のまま。鍵は一覧にあり訳もあるが表示されない → 原作が一覧を通していない(0.5.0 からの既知の制限)。DLL を触らない方針では直せない。
 - バトルプラン画面の「問題の調査」の説明 `Write every target change and role style to FightWithMe.log.` は一覧に無く(DLL 内に文字列は実在)、英語のまま。原作側の訳漏れ。
 - モッドコントロールパネルのタイトルの文字化けは SKSE Menu Framework 側(この翻訳とは無関係)。
+
+## フォントの要否(2026-11-01)
+- 原作 0.6.0 の zip のフォント(Lora/Spectral/Barlow の Medium・SemiBold、Cinzel/Pirata/Caesar)は、ひらがな・カタカナ・漢字の字形が 0 個(fontTools で実測)。
+- 原作の THIRD-PARTY-NOTICES は「メニューは Medium と SemiBold を使う(SemiBold はランク III)」と記載(0.5.0 は SemiBold のみと調べていた)。本パッチが置き換えるのは SemiBold の 3 つだけ。
+- **実機(ユーザー、同日)**: 本パッチのフォント 3 つを無効にして 0.6.0 を動かすと、設定画面から何もかも「?」になった → **フォントの同梱は必須**(0.6.0 でも)。
+- 未確認: Medium 名のフォントが実際に使われているか(フォントありの状態で「?」は出ていないので、今のところ置き換えは不要に見える)。
