@@ -25,3 +25,11 @@
 | companion | 従者 | |
 | path(一般名詞) | ツリー | 固有名は「刃/盾/癒し/槌/矢/嵐の道」 |
 | Archer(役割) / archer(敵) | アーチャー / 弓兵 | |
+
+## 0.6.0 で追加(暫定。実機確認前)
+| 英語 | 日本語 | 備考 |
+|---|---|---|
+| Skald / Ljodh / lute | スカルド / リョード / リュート | |
+| crescendo / discord / Single Note | クレッシェンド / 不協和音 / 単音 | |
+| Spectral Aegis | 幽体のイージス | spectral は「幽体」に統一 |
+| stack | スタック | |
