@@ -1,6 +1,6 @@
-Fight With Me - Japanese Translations Patch 0.5.0-2 (対象: Fight With Me 0.5.0)
+Fight With Me - Japanese Translations Patch 0.6.0-1 (対象: Fight With Me 0.6.0)
 =====================================================================
-Fight With Me 0.5.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLL は変更しません(ファイルを置くだけです)。
+Fight With Me 0.6.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLL は変更しません(ファイルを置くだけです)。
 0.3.0-2 以前の日本語化パッチ(DLL を差し替える版)とは別のものです。旧版を使っていた場合は、先に外してください。
 原MOD:
 - Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
@@ -8,7 +8,7 @@ Fight With Me 0.5.0 を日本語化するパッチです。原作がメッセー
 原作者: hashhbbrown (GitHub: fatalCMD)
 
 ■ 必須
-- Fight With Me 0.5.0
+- Fight With Me 0.6.0
 - SKSE Menu Framework 3(日本語を表示する設定を含む)。SKSEMenuFramework.ini の [Fonts] で EnableJapanese = true、PrimaryFont = NotoSansJP-Medium.ttf など。
   日本語環境を導入済みなら追加の設定は不要です。作者は 2game 様の日本語化ファイルで動作を確認しています。
   https://skyrimspecialedition.2game.info/detail.php?id=120352
@@ -24,6 +24,7 @@ Path of the Companions の日本語化パッチにも同じフォントが入っ
 ■ Path of the Companions(Paths)を併用する場合
 Paths は別の MOD で、Fight With Me がなくても動きます(Fight With Me は任意の連携先です)。Paths を使う場合は、Paths 用の日本語化パッチ(Path of the Companions - Japanese Translations Patch、別ページ)も入れてください。
 Paths 用パッチの訳にも、この MOD の画面の文言の大部分が含まれています。両方を入れても問題ありません(共通の文言は、この MOD 用パッチが後に読まれて優先されます)。
+スカルド(Paths 1.2 が必要)のツリー・詳細などの文言は、Paths 用パッチの担当です。この MOD 用パッチには、バトルプラン側の表示(解放・役割・状態表示)だけが入っています。
 
 ■ 推奨
 - SKSEMenuFramework.ini の [Fonts] で EnableChinese = true を設定(SMF v3.18 以降)。
@@ -54,7 +55,8 @@ FONT-LICENSE.txt    フォントのライセンス(SIL OFL)
   FightWithMe_JAPANESE.txt       {SHA_JA}
 
 ■ 日本語にならないもの
-- パーティ設定ページの、役割・注目対象・位置取りのドロップダウン(選択肢と、その説明のホバー表示)。原作のこの部分がメッセージのファイルを通していないため、英語のままです(原作側の修正が必要です)。
+- パーティ設定ページの、役割(スカルドを含む)・注目対象・位置取りのドロップダウン(選択肢と、その説明のホバー表示)。原作のこの部分がメッセージのファイルを通していないため、英語のままです(原作側の修正が必要です)。
+- バトルプラン設定「問題の調査」の説明の一部(原作が訳せる形にしていない文)。
 - テーマ名(Vanilla / Oxblood / Nordic)は、原文のままにしています。
 - キー名・ボタン表示(Tab / Esc など)、ログ、INI のコメント。
 - ゲームや他の MOD から取得する文字列(魔法名、従者名など)。
@@ -84,6 +86,7 @@ GitHub にはソースコード(生成スクリプトと翻訳表)のみを置�
 日本語でも楽しめるようにと、感謝を込めて作った非公式の翻訳です。
 
 ■ 更新履歴
+0.6.0-1: Fight With Me 0.6.0 に対応(スカルド役割、「役割ごとの武器」・パーティバランス・召喚物のコンパクト化などの設定、オートバトルの説明を日本語化。原作が直した文字化けに合わせて HUD の区切りを「|」に変更)。スカルド関連の訳語(スカルド・リョード・リュート など)は暫定。スカルドの画面は Paths 1.2 が必要です。
 0.5.0-2: 英語設定(sLanguage=ENGLISH)のまま日本語化している環境でも、ファイルを置くだけで日本語になるようにした(言語名が ENGLISH のときに読まれる、同じ内容のファイルを追加)。
 0.5.0-1: Fight With Me 0.5.0 に対応(バトルプラン・設定・通知を日本語化)。DLL を差し替える旧版(0.3.0-2 以前)とは別の方式です。旧版は外してください。
 0.3.0-2: Paths 0.1.0 を日本語化(ツリー画面、全88ノード、ランク、ボーナス、ガイド、設定、通知)。「スキル」を「アビリティ」に統一。Paths 画面の文字位置・折り返しを調整。

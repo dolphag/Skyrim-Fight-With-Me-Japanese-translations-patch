@@ -1,6 +1,6 @@
-Fight With Me - Japanese Translations Patch 0.5.0-2 (for Fight With Me 0.5.0)
+Fight With Me - Japanese Translations Patch 0.6.0-1 (for Fight With Me 0.6.0)
 =====================================================================
-A Japanese translation for Fight With Me 0.5.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
+A Japanese translation for Fight With Me 0.6.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
 This is different from the old patch (0.3.0-2 and earlier), which replaced a DLL. If you used the old one, remove it first.
 Original mods:
 - Fight With Me        https://www.nexusmods.com/skyrimspecialedition/mods/194766
@@ -8,11 +8,12 @@ Original mods:
 Original author: hashhbbrown (GitHub: fatalCMD)
 
 Requirements
-- Fight With Me 0.5.0
+- Fight With Me 0.6.0
 - SKSE Menu Framework 3 with Japanese enabled: [Fonts] EnableJapanese = true, PrimaryFont = NotoSansJP-Medium.ttf (or similar) in SKSEMenuFramework.ini.
 - A Japanese font: included in this patch (see "Japanese font (included)" below).
 If you also use Path of the Companions (Paths)
 Paths is a separate mod that works without Fight With Me (Fight With Me is an optional companion). If you use Paths, install the Path of the Companions Japanese Translations Patch (a separate page) too. Its translation already contains most of this mod's screen texts; having both is fine (for shared texts this patch is read later and wins).
+The texts of the Skald (needs Paths 1.2) tree and detail screens belong to the Paths patch; this patch only contains the battle-plan side (unlock, role and status texts).
 
 Japanese font (included)
 The original draws its screens with theme fonts (Lora / Spectral / BarlowSemiCondensed) that have no Japanese glyphs, so Japanese would show as "?".
@@ -44,7 +45,8 @@ SHA-256 of the text files:
   FightWithMe_JAPANESE.txt       {SHA_JA}
 
 What is not in Japanese
-- The role / focus / position dropdowns on the Party settings page (the choices and their hover tooltips): the original does not read their text from its external message files, so they stay English until it is fixed upstream.
+- The role (including Skald) / focus / position dropdowns on the Party settings page (the choices and their hover tooltips): the original does not read their text from its external message files, so they stay English until it is fixed upstream.
+- Part of the "Diagnostics" tooltip on the battle plan settings page (a sentence the original does not expose as a message).
 - Theme names (Vanilla / Oxblood / Nordic) are kept as in the original.
 - Key names and button labels (Tab, Esc, ...), logs, INI comments.
 - Strings that come from the game or other mods (spell and companion names).
@@ -65,6 +67,7 @@ AI disclosure
 The translation and this text were made with AI assistance (Claude, Anthropic). Checked in game, but mistakes may remain; please report them in the Nexus comments.
 
 Changelog
+0.6.0-1: For Fight With Me 0.6.0 (Skald role, the role weapons / party balance / compact summons settings and the reworded auto battle texts are translated; HUD separators changed to "|" to match the original's fix for garbled characters). The Skald terms (Skald, Ljodh, lute ...) are provisional. The Skald screens need Paths 1.2.
 0.5.0-2: Works in a game set to English (sLanguage=ENGLISH) too: just place the files (added a copy of the same content that is read when the language is ENGLISH).
 0.5.0-1: For Fight With Me 0.5.0 (battle plan, settings and notices translated). Unlike the old patch (0.3.0-2 and earlier) it does not replace a DLL; remove the old one first.
 0.3.0-2: Paths 0.1.0 translated (tree screens, all 88 nodes, ranks, bonuses, guide, settings, notices). "Skill" unified as "アビリティ". Text position and wrapping adjusted on the Paths screens.

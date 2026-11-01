@@ -1,10 +1,10 @@
-[url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLLは変更しません(ファイルを置くだけです)。
+[url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLLは変更しません(ファイルを置くだけです)。
 
 日本語対応フォントを同梱しています(原作のテーマ用フォントを置き換えます)。詳しくは「日本語フォント(同梱)」を参照してください。
 
 [b]必須[/b]
 [list]
-[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0 本体[/*]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0 本体[/*]
 [*]SKSE Menu Framework 3 で日本語を表示するための日本語フォント設定。
 日本語環境を導入済みなら追加の設定は不要です。私は [url=https://skyrimspecialedition.2game.info/detail.php?id=120352]2game 様の日本語化ファイル[/url]で動作を確認しています。[/*]
 [/list]
@@ -72,13 +72,13 @@ SKSE Menu Framework の日本語グリフ範囲の制限があり、この範囲
 ――――――――――――――――――――
 [b]English[/b]
 
-An unofficial Japanese translation patch for [url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
+An unofficial Japanese translation patch for [url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
 
 A Japanese-capable font is included (it replaces the original's theme fonts); see "Japanese font (included)" below.
 
 [b]Requirements[/b]
 [list]
-[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.5.0[/*]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0[/*]
 [*]A Japanese font set up in SKSE Menu Framework 3.
 No extra setup is needed if you already have a Japanese environment. I tested with the [url=https://skyrimspecialedition.2game.info/detail.php?id=120352]Japanese localization by 2game[/url].[/*]
 [/list]
