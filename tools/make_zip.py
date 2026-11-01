@@ -3,7 +3,7 @@
 先に tools/lang_build.py で <dir>/SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt を作っておく。
 
 使い方(リポジトリのルートから):
-  python3 -I tools/make_zip.py test    out/ja <N> --memo memo.txt [--font-dir out/font]   -> out/FWM_ja_test<N>.zip
+  python3 -I tools/make_zip.py test    out/ja <N> --fwm-version 0.6.0 --memo memo.txt [--font-dir out/font]   -> out/FWM_<FWM の版>_ja_test<N>.zip(版を必ずファイル名に入れる。前の版のテスト版と混ざらないため)
   python3 -I tools/make_zip.py release out/ja --font-dir out/font --version 0.5.0-1
 
 zip の中身:
@@ -74,7 +74,7 @@ def write(path, entries):
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='mode', required=True)
-    t = sub.add_parser('test'); t.add_argument('dir'); t.add_argument('n'); t.add_argument('--memo', required=True); t.add_argument('--out', default='out')
+    t = sub.add_parser('test'); t.add_argument('dir'); t.add_argument('n'); t.add_argument('--fwm-version', required=True, help='対象の FWM の版(例 0.6.0)。ファイル名に入る'); t.add_argument('--memo', required=True); t.add_argument('--out', default='out')
     t.add_argument('--font-dir', help='tools/make_font_pack.py の出力。あれば SKSE/Plugins/Fonts/ に入れる')
     r = sub.add_parser('release'); r.add_argument('dir'); r.add_argument('--font-dir', required=True, help='tools/make_font_pack.py の出力(日本語フォント。同梱する)'); r.add_argument('--version', required=True); r.add_argument('--out', default='out')
     a = ap.parse_args()
@@ -82,7 +82,7 @@ def main():
     if a.mode == 'test':
         memo = open(a.memo, encoding='utf-8').read().replace('\r\n', '\n')
         entries = load_text(a.dir) + (load_fonts(a.font_dir) if a.font_dir else []) + [('テスト用メモ.txt', memo.encode('utf-8'))]
-        write(os.path.join(a.out, '%s_ja_test%s.zip' % (PREFIX, a.n)), entries)
+        write(os.path.join(a.out, '%s_%s_ja_test%s.zip' % (PREFIX, a.fwm_version, a.n)), entries)
     else:
         text = load_text(a.dir)
         entries = text + load_fonts(a.font_dir) + readmes('', a.version, {'{SHA_JA}': sha(text[0][1])})

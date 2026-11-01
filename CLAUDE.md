@@ -42,7 +42,7 @@ Fight With Me(FWM。Nexus 194766)の日本語化パッチ。原作者は hashhbb
 
 ## 作業の進め方
 - 手順の詳細は skill `lang-text-workflow`(生成・検査・テスト版 zip)、`release-package`(README・Changelog・配布 zip・Nexus 文面・タグ)。`pe-patch-workflow` は 0.3.0 まで。zip 作成は `tools/make_zip.py`。テストの前に、ユーザーの SKSE ログの 1 行目の版と `[Text] JAPANESE: N lines` を確認する。
-- **実機(ゲーム内)確認なしにリリースしない**。テスト版は `out/` に `test<N>` で作り(git 管理外)、ユーザーのスクリーンショットと所見で直す。
+- **実機(ゲーム内)確認なしにリリースしない**。テスト版は `out/` に `FWM_<FWM の版>_ja_test<N>.zip`(版をファイル名に入れる)で作り(git 管理外)、ユーザーのスクリーンショットと所見で直す。
 - 逆アセンブル・アドレス調査の結果は必ずファイルに残す(`docs/` またはコード内コメント)。会話には残らない前提で作業する。
 - 大きいファイルは全文を読まず、必要な範囲だけ読む。
 - 開発用の依存: `pip install -r requirements-dev.txt`(`python3 -I` で実行)。

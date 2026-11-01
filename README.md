@@ -2,14 +2,14 @@
 
 Nexus Mods page: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
 
-Sister patches: Path of the Companions (Paths) <https://github.com/dolphag/Skyrim-POTC-JP-Patch> (Nexus page: not published yet), Walk With Me <https://www.nexusmods.com/skyrimspecialedition/mods/194872> (tools: <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>)
+Sister patches: Path of the Companions (Paths) <https://github.com/dolphag/Skyrim-POTC-JP-Patch> (Nexus page: <https://www.nexusmods.com/skyrimspecialedition/mods/196104>), Walk With Me <https://www.nexusmods.com/skyrimspecialedition/mods/194872> (tools: <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>)
 
 [日本語は下](#日本語)
 
 Scripts and the translation table for the Japanese translation patch for
-[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.5.0** by **hashhbbrown** (GitHub: fatalCMD).
+[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.6.0** by **hashhbbrown** (GitHub: fatalCMD).
 Path of the Companions (Paths) is a separate mod and an optional companion of Fight With Me; it has its own patch (repository above).
-Fight With Me 0.5.0 reads its messages from external text files (`SKSE/Plugins/FightWithMe/Translations/`); the patch is the Japanese version of that file, so no DLL is changed.
+Fight With Me 0.6.0 reads its messages from external text files (`SKSE/Plugins/FightWithMe/Translations/`); the patch is the Japanese version of that file, so no DLL is changed.
 The patch files are distributed **only on Nexus Mods**, following the permissions on the original page.
 **This repository is source code only: it contains no files of the original mod, no distribution zips and no fonts**:
 only the scripts that build the Japanese message file, and the English → Japanese table.
@@ -22,14 +22,14 @@ only the scripts that build the Japanese message file, and the English → Japan
 - Japanese UI font (bundled in the distribution zip, not in this repository): based on Noto Sans JP (Copyright 2014-2021 Adobe), SIL Open Font License 1.1, internal name changed.
 
 ## Files
-- `translations_en_ja.csv`: all string pairs (822). The English column is the original author's and is not covered by the license of this repository.
+- `translations_en_ja.csv`: all string pairs (873). The English column is the original author's and is not covered by the license of this repository.
 - `tools/lang_build.py`: builds `FightWithMe_JAPANESE.txt` (and `FightWithMe_JA_ENGLISH.txt`, a copy read when the language is ENGLISH) from the original zip and the table, with checks (missing translations, format fields, kanji range).
 - `tools/make_zip.py`: test and distribution zips (the distribution zip bundles the font). `tools/make_font_pack.py`: renames and copies an OFL Japanese font under the three theme font names (the font itself is supplied by the user and not committed).
 - `release/`: README templates and the Nexus text. `docs/`: findings about the original (format, fonts, packaging), glossary, a draft report for the original author (not sent).
 - `legacy/0.3.0/`: the tools of the old method (patching `FightWithMe.dll` 0.3.0), kept for reference. They do not work with 0.5.0.
 
 ## Versions
-Patch versions follow Fight With Me: **0.5.0-1** is for Fight With Me 0.5.0. Earlier versions (0.1.5 to 0.3.0-2) replaced a DLL; see the tags `v0.1.0` ... `v0.3.0-2` and `legacy/0.3.0/`.
+Patch versions follow Fight With Me: **0.6.0-1** is for Fight With Me 0.6.0 (0.5.0-1 and 0.5.0-2 were for 0.5.0). Earlier versions (0.1.5 to 0.3.0-2) replaced a DLL; see the tags `v0.1.0` ... `v0.3.0-2` and `legacy/0.3.0/`.
 Recommended for users: Japanese enabled in `SKSEMenuFramework.ini` (`EnableJapanese = true`), plus `EnableChinese = true` (SMF v3.18+) for kanji outside the Japanese glyph range in game-supplied strings. A Japanese UI font is bundled in the distribution zip, because the original's theme fonts have no Japanese glyphs.
 
 ## How it works (short)
@@ -40,7 +40,7 @@ Long Japanese lines get ASCII spaces at phrase boundaries (janome), because the 
 ```
 python3 -I tools/lang_build.py --fwm "<Fight With Me zip>" --out out/ja
 python3 -I tools/make_font_pack.py --font NotoSansJP-Medium.ttf --license OFL.txt --out out/font
-python3 -I tools/make_zip.py release out/ja --font-dir out/font --version 0.5.0-1
+python3 -I tools/make_zip.py release out/ja --font-dir out/font --version 0.6.0-1
 ```
 
 ## Notes
@@ -53,11 +53,11 @@ python3 -I tools/make_zip.py release out/ja --font-dir out/font --version 0.5.0-
 ## 日本語
 Nexus Mods のページ: <https://www.nexusmods.com/skyrimspecialedition/mods/194874>
 
-姉妹MODのパッチ: Path of the Companions(Paths)<https://github.com/dolphag/Skyrim-POTC-JP-Patch>(Nexus のページは公開前)、Walk With Me <https://www.nexusmods.com/skyrimspecialedition/mods/194872>(ツール: <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>)
+姉妹MODのパッチ: Path of the Companions(Paths)<https://github.com/dolphag/Skyrim-POTC-JP-Patch>(Nexus のページ: <https://www.nexusmods.com/skyrimspecialedition/mods/196104>)、Walk With Me <https://www.nexusmods.com/skyrimspecialedition/mods/194872>(ツール: <https://github.com/dolphag/Skyrim-Walk-With-Me-Japanese-translations-patch>)
 
-[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.5.0** の日本語化パッチのスクリプトと翻訳表です。原作者は **hashhbbrown**(GitHub: fatalCMD)。
+[Fight With Me](https://www.nexusmods.com/skyrimspecialedition/mods/194766) **0.6.0** の日本語化パッチのスクリプトと翻訳表です。原作者は **hashhbbrown**(GitHub: fatalCMD)。
 Path of the Companions(Paths)は別の MOD で、Fight With Me の任意の連携先です。Paths には別のパッチがあります(上のリポジトリ)。
-Fight With Me 0.5.0 は、メッセージを外部のテキストファイル(`SKSE/Plugins/FightWithMe/Translations/`)から読みます。本パッチはその日本語版で、DLL は変更しません。
+Fight With Me 0.6.0 は、メッセージを外部のテキストファイル(`SKSE/Plugins/FightWithMe/Translations/`)から読みます。本パッチはその日本語版で、DLL は変更しません。
 パッチのファイルは、原MODページの権限表示に従い、**Nexus Mods でのみ配布**します。
 **このリポジトリはソースコードのみです。原MODのファイル、配布用の zip、フォントは含みません**。日本語のメッセージファイルを作るスクリプトと、英日対応表だけを置いています。
 
@@ -69,14 +69,14 @@ Fight With Me 0.5.0 は、メッセージを外部のテキストファイル(`S
 - 日本語フォント(配布 zip に同梱。このリポジトリには含みません): Noto Sans JP(Copyright 2014-2021 Adobe)を元に、内部の名前を付け替えたもの。SIL Open Font License 1.1。
 
 ### ファイル
-- `translations_en_ja.csv`: 英日の全組(822)。英語の列は原作者のもので、このリポジトリのライセンスの対象外です。
+- `translations_en_ja.csv`: 英日の全組(873)。英語の列は原作者のもので、このリポジトリのライセンスの対象外です。
 - `tools/lang_build.py`: 原作の zip と対応表から `FightWithMe_JAPANESE.txt`(と、言語名が ENGLISH のときに読まれる写し `FightWithMe_JA_ENGLISH.txt`)を作ります(未訳・書式欄・漢字範囲の検査つき)。
 - `tools/make_zip.py`: テスト版と配布用の zip(配布用にはフォントを同梱)。`tools/make_font_pack.py`: OFL の日本語フォントを、テーマ用フォントの 3 つの名前で書き出します(フォント本体は利用者が用意し、コミットしません)。
 - `release/`: README の雛形と Nexus 用文面。`docs/`: 原作の調査(形式・フォント・同梱)、用語集、原作者向け報告の文案(未送信)。
 - `legacy/0.3.0/`: 旧方式(`FightWithMe.dll` 0.3.0 を書き換える)のツール。参照用に残しています。0.5.0 には使えません。
 
 ### 版
-パッチの版は Fight With Me に連動します。**0.5.0-1** は Fight With Me 0.5.0 用です。それ以前(0.1.5〜0.3.0-2)は DLL を差し替える方式でした。タグ `v0.1.0` 〜 `v0.3.0-2` と `legacy/0.3.0/` を参照してください。
+パッチの版は Fight With Me に連動します。**0.6.0-1** は Fight With Me 0.6.0 用です(0.5.0-1・0.5.0-2 は 0.5.0 用)。それ以前(0.1.5〜0.3.0-2)は DLL を差し替える方式でした。タグ `v0.1.0` 〜 `v0.3.0-2` と `legacy/0.3.0/` を参照してください。
 利用者への推奨: `SKSEMenuFramework.ini` で日本語を有効にする(`EnableJapanese = true`)。ゲーム由来の文字列の、日本語範囲外の漢字には `EnableChinese = true`(SMF v3.18 以降)。日本語フォントは配布 zip に同梱します(原作のテーマ用フォントは日本語を含まないため)。
 
 ### しくみ(短く)
