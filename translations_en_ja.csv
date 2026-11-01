@@ -937,8 +937,8 @@ Temporary unlock · Relocks when Debug Mode ends,一時的な解放・デバッ�
 10 skill points to unlock · {} available,解放にポイント10・使用可能{}
 ", and weapons come out at the sight of one",。敵を見ると武器を構えます
 Unlock,解放
-Unlock Skald · Free,スカルドを解放・無料
-Unlock Skald · 10 points,スカルドを解放・10ポイント
+Unlock Skald · Free,スカルド解放・無料
+Unlock Skald · 10 points,スカルド解放・10pt
 Role weapons,役割ごとの武器
 "Each role keeps to its own weapons: a Bruiser to a two-hander, a Mage or Healer to a staff beside its spells, and with Path of the Companions every role to its path's weapons. Off: any role may use any weapon or shield the companion carries, and nothing is greyed out in their pools. The Skald keeps its lute.",各役割は専用の武器を使います：ブルーザーは両手武器、メイジとヒーラーは魔法と併せて杖、Path of the Companions があれば全役割がそのツリーの武器です。オフ：どの役割も、従者が持つ武器や盾を自由に使え、候補がグレーアウトされなくなります。スカルドのリュートはそのままです。
 Party balance,パーティバランス
