@@ -21,6 +21,11 @@ description: Fight With Me 日本語化パッチのリリース準備(配布 zip
 7. **main へ統合 → main の HEAD を確認 → ユーザーがそのコミットにタグ**(`v<版>`、例 `v0.5.0-1`)。タグはこのクラウド環境から push できない(403)。GitHub の Release でユーザーが付ける。main 更新後に docs だけの commit を足すと HEAD が動くので注意。
 8. ユーザーが Nexus にアップロードしたら、確認を依頼する(版、ファイル名、サイズ、説明、File credits 欄)。
 
+## Nexus のページ説明(Description)は版ごとに更新しない(2026-11-01 ユーザー決定)
+- `release/NEXUS_DESCRIPTION.bbcode.txt` には、**版番号・確認日など、版ごとに変わる記述を入れない**(対応する本体の版は「ファイルの説明と Changelog を見てください」とする)。利用者に毎回全文を読み直させないため。
+- 版ごとに変わる情報(対応する本体の版、変更点、新しい制限)は、ファイルの説明と Changelog(`release/NEXUS_TEXT_<版>.md`)にだけ書く。権限の確認日は同梱 README(版ごとの zip に入る)に書く。
+- Description を変えるのは、構成や注意点そのものが変わるときだけ。変えたら、その理由を `docs/` に書く。
+
 ## zip の構成(`tools/make_zip.py` が作る)
 ```
 SKSE/Plugins/FightWithMe/Translations/FightWithMe_JAPANESE.txt

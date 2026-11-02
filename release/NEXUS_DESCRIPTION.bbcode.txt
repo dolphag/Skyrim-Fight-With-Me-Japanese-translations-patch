@@ -1,10 +1,10 @@
-[url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0 を日本語化するパッチです。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLLは変更しません(ファイルを置くだけです)。
+[url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] を日本語化するパッチです。対応する本体のバージョンは、ファイルの説明と Changelog に書いています。原作がメッセージを外部のテキストファイルに分けて読み込んでいるので、その日本語版を置きます。DLLは変更しません(ファイルを置くだけです)。
 
 日本語対応フォントを同梱しています(原作のテーマ用フォントを置き換えます)。詳しくは「日本語フォント(同梱)」を参照してください。
 
 [b]必須[/b]
 [list]
-[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0 本体[/*]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 本体(対応バージョンは、ファイルの説明と Changelog を見てください)[/*]
 [*]SKSE Menu Framework 3 で日本語を表示するための日本語フォント設定。
 日本語環境を導入済みなら追加の設定は不要です。私は [url=https://skyrimspecialedition.2game.info/detail.php?id=120352]2game 様の日本語化ファイル[/url]で動作を確認しています。[/*]
 [/list]
@@ -57,7 +57,7 @@ SKSE Menu Framework の日本語グリフ範囲の制限があり、この範囲
 [/list]
 
 [b]権利・ソース[/b]
-本体ページの権限表示(改変は出典明記で可、他サイトへの再アップロードは不可。2026-11-01 に確認)に従い、本パッチは Nexus Mods のこのページでのみ配布します。他サイトへの転載はご遠慮ください。作者から依頼があれば速やかに削除します。
+本体ページの権限表示(改変は出典明記で可、他サイトへの再アップロードは不可。確認日は同梱の README に記載)に従い、本パッチは Nexus Mods のこのページでのみ配布します。他サイトへの転載はご遠慮ください。作者から依頼があれば速やかに削除します。
 本パッチに、本体のファイル(DLL・画像など)は含まれません。含まれるのは、原作の英語の文言と、その日本語訳、日本語フォントです。
 パッチ生成のスクリプトと翻訳表(配布用のファイルやフォントは含みません)は [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]GitHub[/url] にあります(版ごとにタグがあります)。
 日本語フォント(同梱)は、Noto Sans JP(Copyright 2014-2021 Adobe)を元に、内部の名前を付け替えたものです。SIL Open Font License 1.1。
@@ -72,13 +72,13 @@ SKSE Menu Framework の日本語グリフ範囲の制限があり、この範囲
 ――――――――――――――――――――
 [b]English[/b]
 
-An unofficial Japanese translation patch for [url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
+An unofficial Japanese translation patch for [url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url]. The supported version of the original is stated in the file description and the Changelog. The original keeps its messages in external text files; this patch is the Japanese version of those files, so no DLL is changed (just files to place).
 
 A Japanese-capable font is included (it replaces the original's theme fonts); see "Japanese font (included)" below.
 
 [b]Requirements[/b]
 [list]
-[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] 0.6.0[/*]
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/194766]Fight With Me[/url] (the supported version is in the file description and the Changelog)[/*]
 [*]A Japanese font set up in SKSE Menu Framework 3.
 No extra setup is needed if you already have a Japanese environment. I tested with the [url=https://skyrimspecialedition.2game.info/detail.php?id=120352]Japanese localization by 2game[/url].[/*]
 [/list]
@@ -125,7 +125,7 @@ Settings pages, the battle plan screen and combat notices are translated.
 [/list]
 
 [b]Rights / source[/b]
-Following the permissions on the original page (modification with credit; no re-upload elsewhere; checked on 2026-11-01), this patch is distributed only here on Nexus Mods; please do not repost it. It will be removed promptly if the author asks.
+Following the permissions on the original page (modification with credit; no re-upload elsewhere; the check date is in the bundled README), this patch is distributed only here on Nexus Mods; please do not repost it. It will be removed promptly if the author asks.
 This patch contains no file of the original (no DLL or images), only the original's English strings, the Japanese translation and a Japanese font.
 Scripts and the translation table (no distribution files or fonts): [url=https://github.com/dolphag/Skyrim-Fight-With-Me-Japanese-translations-patch]GitHub[/url] (one tag per version).
 The Japanese font (included) is based on Noto Sans JP (Copyright 2014-2021 Adobe) with its internal names changed; SIL Open Font License 1.1.
