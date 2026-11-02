@@ -40,3 +40,4 @@
 ## 未確認
 - v1 に権限を返すエンドポイントがあるか(公開ドキュメントで確認していない)。
 - `description` が本文を含む MOD で、権限が本文に書かれている場合の扱い。
+- 2026-11-02 実測: `mod(modId:"194766", gameId:"1704"){ description }`(v2)は BBCode(`[center][size=3][img width=547]URL[/img]...`、改行は `<br />`)を返す。画像 11 枚(`staticdelivery.nexusmods.com` 9、giphy 2)。画像のホストへの接続は、この環境では 403(ネットワーク設定)。

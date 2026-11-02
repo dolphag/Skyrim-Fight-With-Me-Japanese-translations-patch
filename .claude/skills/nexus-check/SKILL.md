@@ -15,6 +15,10 @@ description: Nexus Mods の mod ページ(FWM 194766、パッチ 194874 など)�
 2. 自分のページは `mod 194874`。Nexus の版と zip 内 README の版の一致確認に使う。
 3. 失敗したら(終了コード 1)、出たメッセージをそのまま報告する。**推測で埋めない**。
 
+## 原作の Description を読む
+- `python3 -I tools/nexus_query.py raw 'query{ mod(modId:"194766", gameId:"1704"){ description updatedAt } }'`(2026-11-02 実測。BBCode で返る。`[img width=N]URL[/img]` の画像は 11 枚で、`staticdelivery.nexusmods.com` と giphy)。
+- **画像の中身は、この環境から取得できない**(`staticdelivery.nexusmods.com` と giphy が 403。ネットワーク設定で拒否)。画像も見る必要があるときは、ユーザーが環境の Network access で許可するか、画像を添付する。
+
 ## 限界(必ず守る)
 - **権限(Permissions and credits)は v1/v2 とも取れない**(確認済み)。リリース前の権限確認は、従来どおりブラウザかユーザー確認(CLAUDE.md「Nexus の確認」)。
 - **配布 zip のダウンロードはできない**: `download_link` は非プレミアムで 403。原作 zip は従来どおりユーザーが添付する。

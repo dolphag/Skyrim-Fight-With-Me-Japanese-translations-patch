@@ -12,6 +12,10 @@ DLL は触らない。原作が外部ファイルに分けたメッセージの�
 - zip の一覧は `FightWithMe_ENGLISH.txt` 1 つ(822 項目)。Paths の日本語化パッチは別リポジトリ(`Skyrim-POTC-JP-Patch`)で、`FightWithMePaths_JAPANESE.txt` という別名のファイルを作る(同名ファイルを 2 つのパッチに入れると、版が独立したとき後から入れた方が丸ごと上書きして訳が欠けるため)。
 - 依存: `pip install -r requirements-dev.txt`(janome、fonttools)。実行は `python3 -I`。
 
+## 新しい版の最初に(機能の理解)
+- 原作の配布 zip の `README.md` と、Nexus の Description(`python3 -I tools/nexus_query.py` の `mod.description`。skill `nexus-check`)を読み、前の版からの変更を `docs/FWM-<版>-features.md` に自分の言葉でまとめる(原文の写しは残さない)。用語は `docs/GLOSSARY.md` と突き合わせる。
+- Description は更新が遅れることがある。zip の README を正とする。
+
 ## 通常の変更(訳の修正・追加)
 1. 訳の正本は `translations_en_ja.csv`(列 `en,ja`。鍵 = 英語全文、`\n` は実改行。ja は折り返し用スペースを入れる前の文)。英語のままにする項目は ja を en と同じ値にする。
 2. 生成と検査: `python3 -I tools/lang_build.py --fwm <FWM zip> --out out/ja`
